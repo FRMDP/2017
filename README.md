@@ -10,3 +10,4 @@
 * [matirey](https://github.com/matirey) - Reynoso Matias
 * [co0per](https://github.com/co0per) - Lisandro Cooper
 * [Iampietro](https://github.com/Iampietro/2017) - Matias Iampietro
+* [rodrimaqui](https://github.com/rodrimaqui) - Rodrigo Maquirriain

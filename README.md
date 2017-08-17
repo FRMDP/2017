@@ -8,3 +8,4 @@
 * [maurogsp](https://github.com/maurogsp) - Mauro Gaspar
 * [DanielScha](https://github.com/DanielScha) - Daniel Adrian Schaerer
 * [matirey](https://github.com/matirey) - Reynoso Matias
+* [co0per](https://github.com/co0per) - Lisandro Cooper

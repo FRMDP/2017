@@ -13,3 +13,4 @@
 * [rodrimaqui](https://github.com/rodrimaqui) - Rodrigo Maquirriain
 * [CarlosAndresTambascia](https://github.com/CarlosAndresTambascia) - Carlos Andres Tambascia
 * [Favega89](https://github.com/Favega89) - Facundo Vega Puente
+* [grotatori](https://github.com/grotatori) - Gisela Rotatori

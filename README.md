@@ -12,3 +12,4 @@
 * [Iampietro](https://github.com/Iampietro/2017) - Matias Iampietro
 * [rodrimaqui](https://github.com/rodrimaqui) - Rodrigo Maquirriain
 * [CarlosAndresTambascia](https://github.com/CarlosAndresTambascia) - Carlos Andres Tambascia
+* [Favega89](https://github.com/Favega89) - Facundo Vega Puente

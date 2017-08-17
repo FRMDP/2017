@@ -7,3 +7,4 @@
 * [fedealdosivi](https://github.com/fedealdosivi) - Federico Palomero García
 * [maurogsp](https://github.com/maurogsp) - Mauro Gaspar
 * [DanielScha](https://github.com/DanielScha) - Daniel Adrian Schaerer
+* [matirey](https://github.com/matirey) - Reynoso Matias

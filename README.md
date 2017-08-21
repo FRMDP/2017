@@ -15,3 +15,4 @@
 * [Favega89](https://github.com/Favega89) - Facundo Vega Puente
 * [grotatori](https://github.com/grotatori) - Gisela Rotatori
 * [matiramos](https://github.com/matiramos) - Matias Ramos
+* [JuanAbraciano](https://github.com/JuanAbraciano) - Juan Manuel Abraciano

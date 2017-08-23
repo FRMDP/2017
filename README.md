@@ -17,3 +17,4 @@
 * [matiramos](https://github.com/matiramos) - Matias Ramos
 * [JuanAbraciano](https://github.com/JuanAbraciano) - Juan Manuel Abraciano
 * [MartinLiut](https://github.com/MartinLiut) - Martin Liut
+* [julian00](https://github.com/julian00) - Alejandro Arizaga

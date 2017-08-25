@@ -19,3 +19,4 @@
 * [MartinLiut](https://github.com/MartinLiut) - Martin Liut
 * [julian00](https://github.com/julian00) - Alejandro Arizaga
 * [RodolfoSavino](https://github.com/RodolfoSavino) - Rodolfo Savino
+* [kingrag92](https://github.com/kingrag92) - Luciano Perello

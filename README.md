@@ -21,3 +21,4 @@
 * [RodolfoSavino](https://github.com/RodolfoSavino) - Rodolfo Savino
 * [kingrag92](https://github.com/kingrag92) - Luciano Perello
 * [yasiotero](https://github.com/yasiotero) - Yasi Otero
+* [ZassoMartin](https://github.com/ZassoMartin) - Zasso Sergio Martin

@@ -18,7 +18,7 @@
 |Savino|:heavy_check_mark::heavy_check_mark:|||
 |Schaerer|:heavy_check_mark::heavy_check_mark:|||
 |Tambascia|:heavy_check_mark::heavy_check_mark:|||
-|Zasso|:heavy_minus_sign::heavy_check_mark:|||
+|Zasso|:heavy_check_mark::heavy_check_mark:|||
 
 ## Listado de tareas
 1) Agregar nombre al listado y unirse al canal slack

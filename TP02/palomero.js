@@ -1,17 +1,14 @@
 function returnSizeLanguageMoreUsed(jsonObjLanguages)
 {
 	let sizeResult=0;
-	let languageNameResult="";
 
-	for(let key in jsonObjLanguages)
+	for(let language in jsonObjLanguages)
 	{
-		if(key>sizeResult)
+		if(jsonObjLanguages[language]>sizeResult)
 		{
-		sizeResult=key;
-		languageNameResult=jsonObjLanguages[key];
+		 sizeResult=jsonObjLanguages[language];
 	    }
 	}
 
-   console.log("El lenguaje "+ languageNameResult + " pesa " + sizeResult);
-   return sizeResult;
+   return sizeResult/1000;
 }

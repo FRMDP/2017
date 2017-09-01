@@ -1,0 +1,32 @@
+<html>
+  <head>
+      <title>tp2</title>
+  </head>
+  <body>
+
+    <h1 id='title'>title</h1>
+    </br>
+    <input type='text' id='textBox'/>
+    </br>
+    <button id='button'>Send</button>
+    <script>
+        const names = ['cosme','fulanito','max','power','pechugas','laru','ala','grande','lepuse','cuca','bender','estupido','ysensual','flanders','rodri'];
+        const textBox = document.getElementById('textBox');
+        const button = document.getElementById('button');
+        const title = document.getElementById('title');
+
+        function compare(node)
+        {
+          if(node.includes(textBox.value))
+          {
+            return node;
+          }
+        }
+
+        const changeTitle = function(){
+        title.innerHTML = names.find(compare);
+        }
+        button.addEventListener('click',changeTitle);
+    </script>
+  </body>
+</html>

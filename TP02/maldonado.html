@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+	<title>TP 2</title>
+	<style>
+		.filaDeTexto{
+			margin-top: 25px;
+		}
+	</style>
+</head>
+<body>
+	<!-- Dropdown Structure -->
+	<ul id="dropdown1" class="dropdown-content">
+	  <li><a href="#">Hola Martin</a></li>
+	</ul>
+	<nav class="orange darken-4">
+		<div class="container">
+		  <div class="nav-wrapper">
+		    <a href="#" class="brand-logo white-text">Trabajo Practico 2</a>
+		    <ul class="right hide-on-med-and-down">
+		      <!-- Dropdown Trigger -->
+		      <li><a class="dropdown-button white-text" href="#!" data-activates="dropdown1">Desplegame<i class="material-icons right">arrow_drop_down</i></a></li>
+		    </ul>
+		  </div>
+	  	</div>
+	</nav>
+	<div class="parallax-container">
+	    <div class="parallax">
+	    	<img src="https://unsplash.it/1375/700?image=1069" 
+	    	style="display: block; transform: translate3d(-50%, 227px, 0px);">
+	    </div>
+	  </div>
+	  <div class="section white"">
+	    <div class="row container">
+	      <h2 class="header">Todo con Materialize</h2>
+	      <div class="row">
+	      	<div class="col s4 m4 l2">
+		   		<a class="btn-floating btn-large waves-effect waves-light red" style="left: 15px;top: 15px;">
+		   			<i class="material-icons" id="dateBtn">date_range</i>
+		   		</a>
+		   	</div>
+			<div class="col s8 m8 l10">
+			   <h5 id="texto1" class="filaDeTexto">
+			   	  Presione el boton a mi izquierda para visualizar la fecha actual.
+			   </h5>
+			</div>
+		  </div>
+		  <div class="row">
+	      	<div class="col s4 m4 l2">
+		   		<a class="btn-floating btn-large waves-effect waves-dark blue" style="left: 15px;top: 15px;">
+		   			<i class="material-icons" id="colorText">format_color_fill</i>
+		   		</a>
+		   	</div>
+			<div class="col s8 m8 l10">
+			   <h5 id="texto2" class="filaDeTexto">
+			   	Pase el mouse por encima del boton y voy a cambiar de color.
+			   </h5>
+			</div>
+		  </div>
+		  <div class="row">
+	      	<div class="col s4 m4 l2">
+		   		<a class="btn-floating btn-large waves-effect waves-light green" style="left: 15px;top: 15px;">
+		   			<i class="material-icons">live_help</i>
+		   		</a>
+		   	</div>
+			<div class="col s8 m8 l10">
+			   <h5 id="texto3" class="filaDeTexto">
+			   	 Si hace un resize de la pagina le dire que tamaño posee actualmente.
+			   </h5>
+			</div>
+		  </div>
+		  <div class="row">
+	      	<div class="col s4 m4 l2">
+		   		<a class="btn-floating btn-large waves-effect waves-light black" style="left: 15px;top: 15px;">
+		   			<i class="material-icons">sort_by_alpha</i>
+		   		</a>
+		   	</div>
+			<div class="input-field col s6">
+	          <input id="letraPresionada" type="text" onkeydown="teclaPresionada(event)">
+	          <label for="letra_Presionada">Ingrese una tecla</label>
+	        </div>
+		  </div>
+	    </div>
+	  </div>
+	<div class="parallax-container">
+	    <div class="parallax">
+	    	<img src="https://unsplash.it/1375/700?image=1072" 
+	    	style="display: block; transform: translate3d(-50%, 227px, 0px);">
+	    </div>
+	</div>
+	<footer class="page-footer orange darken-4">
+        <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Programacion Avanzada 2</h5>
+                <p class="grey-text text-lighten-4">
+                	Segundo trabajo practico de la materia.
+                </p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Contacto</h5>
+                <ul>
+                  <li>
+                  	<a class="grey-text text-lighten-3" href="#!">
+                  		<i class="material-icons left">mail</i>
+                  		example@example.com
+                  	</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright black">
+            <div class="container">
+            © 2017 Todos los derechos Reservados
+            <a class="grey-text text-lighten-4 right" href="#!">Mas trabajos proximamente</a>
+            </div>
+          </div>
+    </footer>
+	<script>
+		document.getElementById("dateBtn").addEventListener("click", function(){
+		    document.getElementById("texto1").innerHTML = Date();
+		});
+
+		document.getElementById("colorText").addEventListener("mouseover", function(){
+			document.getElementById("texto2").style.color = "violet";
+		})
+
+		window.addEventListener("resize", function(){
+		    let w = window.outerWidth;
+		    let h = window.outerHeight;
+		    let txt = "Tamaño de pagina: Ancho=" + w + ", Alto=" + h;
+		    document.getElementById("texto3").innerHTML = txt;
+		})
+
+		function teclaPresionada(event){
+			let x = event.keyCode;
+       
+		    if (x == "65") { 
+		        alert ("Apretaste la letra 'A'!");
+		    }else{
+		    	alert ("El codigo para esta tecla es " + x)
+		    }
+		}
+
+	</script>
+	<!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+		$(document).ready(function(){
+	      $('.parallax').parallax();
+	    });
+	</script>
+</body>
+</html>

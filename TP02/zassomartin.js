@@ -1,12 +1,16 @@
 const multibusqueda = new Object(); //creacion de objeto
  multibusqueda.lista = []; //se agrega un array como propiedad
- multibusqueda.ejecutar = function(){
-  for (let x = 0; x < multibusqueda.lista.length;x++)
-  console.log(multibusqueda.lista[x]())
-};  //se agrega un metodo al objeto para ejecutar las funciones y recorre el array del mismo
+ multibusqueda.ejecutar = function(array){
+  let i = (multibusqueda.lista.indexOf(array));
+  let aux = multibusqueda.lista[i];
+  for (let x = 0; x < aux.length;x++)
+ console.log(aux[x]())
+};  //Se realizo la correción sugerida, ahora el metodo ejecutar recibe por parametro el array que el usuario desea ejecutar con sus funciones almacenadas
+   //se realiza la busqueda del elemento que deberia estar dentro de la propiedad array del objeto (se podria implementar elementos de validacion) a medida que recorre el array
+   //se ejecutaran las funciones almacenadas
 
 
-function agregar_funcion(funcion) //metodo para agregar funciones al array
+function agregar_array_con_funciones(array) //metodo para agregar array con "funciones" a la propiedad array del objeto
 {
-  multibusqueda.lista.push(funcion)
+  multibusqueda.lista.push(array)
 }

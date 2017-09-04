@@ -8,9 +8,9 @@
         <input type="radio" onchange="seleccionado(this)" name= "seg" id="rb2" value="10">10<br>
         <input type="radio" onchange="seleccionado(this)" name="seg" id="rb3" value="15">15<br>
         <button id="btnBuscar">Buscar</button>
-        <div>
+        <div id="inicLista" style="visibility: hidden">
             <p>Resultado:</p>
-            <ul id="lista"></ul>
+            <ul id="lista" style="list-style: none"></ul>
         </div>
     </div>
 
@@ -19,8 +19,8 @@
         const radio1 = document.getElementById("rb1");
         const radio2 = document.getElementById("rb2");
         const radio3 = document.getElementById("rb3");
+        const lista = document.getElementById("lista");
         let valor;
-        let cumplidores;
         const users = [
         {
             "login": "octocat",
@@ -158,17 +158,25 @@
                 valor = node.value;
             }
         }      
+
+        function vaciarLista(){
+            while(lista.childElementCount>0){
+                lista.removeChild(lista.lastChild);
+            }
+        }
         
         function buscar(){
-            let div = document.getElementById("lista");
-            let pi = document.createElement("p");
-            let texto ="";
+            vaciarLista();
+            const div = document.getElementById("inicLista");
+            div.style.visibility='visible';
             users.forEach(function(node){
                 if(node.followers>=valor){
-                    texto +="<li style='list-style:none;'>Usuario: " + node.login + " - Seguidores: " + node.followers;
+                    const nodo = document.createElement('li');
+                    const texto = document.createTextNode("Usuario: " + node.login + " - Seguidores: " + node.followers);
+                    nodo.appendChild(texto);
+                    lista.appendChild(nodo);
                 }
             });
-            div.innerHTML = texto;
         }
 
         boton.addEventListener("click", buscar);

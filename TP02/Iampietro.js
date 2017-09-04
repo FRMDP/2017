@@ -1,10 +1,16 @@
 function returnNumberOfIssuesByUser(jSon){
-  const numberOfIssuesByUser = [];
-  let userName;
-  let issues;
+  const numberOfIssuesByUser = {};
+  let checkIfUserExists;
+
   jSon.forEach(function(currentValue){
-    userName = currentValue.user.login;
-    issues = Number(currentValue.open_issues) + Number(currentValue.closed_issues);
-    numberOfIssuesByUser.push({user: userName, numberOfIssues: issues});
+
+    checkIfUserExists = numberOfIssuesByUser.find(currentObject => currentObject.userName == currentValue.user.login);
+
+    if(checkIfUserExists){
+      numberOfIssuesByUser[numberOfIssuesByUser.indexOf(checkIfUserExists)].numberOfIssues++;
+    }else {
+      numberOfIssuesByUser.push({userName: currentValue.user.login, numberOfIssues: 1});
+    }
   });
+  return NumberOfIssuesByUser;
 }

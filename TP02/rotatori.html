@@ -1,0 +1,178 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div>
+        <input type="radio" onchange="seleccionado(this)" name="seg" id="rb1" checked="true" value="5">5<br>
+        <input type="radio" onchange="seleccionado(this)" name= "seg" id="rb2" value="10">10<br>
+        <input type="radio" onchange="seleccionado(this)" name="seg" id="rb3" value="15">15<br>
+        <button id="btnBuscar">Buscar</button>
+        <div>
+            <p>Resultado:</p>
+            <ul id="lista"></ul>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const boton = document.getElementById("btnBuscar");
+        const radio1 = document.getElementById("rb1");
+        const radio2 = document.getElementById("rb2");
+        const radio3 = document.getElementById("rb3");
+        let valor;
+        let cumplidores;
+        const users = [
+        {
+            "login": "octocat",
+            "id": 1,
+            "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/octocat",
+            "html_url": "https://github.com/octocat",
+            "followers_url": "https://api.github.com/users/octocat/followers",
+            "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+            "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+            "organizations_url": "https://api.github.com/users/octocat/orgs",
+            "repos_url": "https://api.github.com/users/octocat/repos",
+            "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/octocat/received_events",
+            "type": "User",
+            "site_admin": false,
+            "name": "monalisa octocat",
+            "company": "GitHub",
+            "blog": "https://github.com/blog",
+            "location": "San Francisco",
+            "email": "octocat@github.com",
+            "hireable": false,
+            "bio": "There once was...",
+            "public_repos": 2,
+            "public_gists": 1,
+            "followers": 20,
+            "following": 0,
+            "created_at": "2008-01-14T04:33:35Z",
+            "updated_at": "2008-01-14T04:33:35Z"
+          },
+          {
+            "login": "om",
+            "id": 1,
+            "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/octocat",
+            "html_url": "https://github.com/octocat",
+            "followers_url": "https://api.github.com/users/octocat/followers",
+            "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+            "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+            "organizations_url": "https://api.github.com/users/octocat/orgs",
+            "repos_url": "https://api.github.com/users/octocat/repos",
+            "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/octocat/received_events",
+            "type": "User",
+            "site_admin": false,
+            "name": "monalisa octocat",
+            "company": "GitHub",
+            "blog": "https://github.com/blog",
+            "location": "San Francisco",
+            "email": "octocat@github.com",
+            "hireable": false,
+            "bio": "There once was...",
+            "public_repos": 2,
+            "public_gists": 1,
+            "followers": 11,
+            "following": 0,
+            "created_at": "2008-01-14T04:33:35Z",
+            "updated_at": "2008-01-14T04:33:35Z"
+            },
+            {
+            "login": "aturro",
+            "id": 1,
+            "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/octocat",
+            "html_url": "https://github.com/octocat",
+            "followers_url": "https://api.github.com/users/octocat/followers",
+            "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+            "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+            "organizations_url": "https://api.github.com/users/octocat/orgs",
+            "repos_url": "https://api.github.com/users/octocat/repos",
+            "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/octocat/received_events",
+            "type": "User",
+            "site_admin": false,
+            "name": "monalisa octocat",
+            "company": "GitHub",
+            "blog": "https://github.com/blog",
+            "location": "San Francisco",
+            "email": "octocat@github.com",
+            "hireable": false,
+            "bio": "There once was...",
+            "public_repos": 2,
+            "public_gists": 1,
+            "followers": 8,
+            "following": 0,
+            "created_at": "2008-01-14T04:33:35Z",
+            "updated_at": "2008-01-14T04:33:35Z"
+            },
+            {
+            "login": "arfiel",
+            "id": 1,
+            "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/octocat",
+            "html_url": "https://github.com/octocat",
+            "followers_url": "https://api.github.com/users/octocat/followers",
+            "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+            "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+            "organizations_url": "https://api.github.com/users/octocat/orgs",
+            "repos_url": "https://api.github.com/users/octocat/repos",
+            "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/octocat/received_events",
+            "type": "User",
+            "site_admin": false,
+            "name": "monalisa octocat",
+            "company": "GitHub",
+            "blog": "https://github.com/blog",
+            "location": "San Francisco",
+            "email": "octocat@github.com",
+            "hireable": false,
+            "bio": "There once was...",
+            "public_repos": 2,
+            "public_gists": 1,
+            "followers": 3,
+            "following": 0,
+            "created_at": "2008-01-14T04:33:35Z",
+            "updated_at": "2008-01-14T04:33:35Z"
+            }
+]
+        
+        
+        function seleccionado(node) { 
+            if(node.checked){
+                valor = node.value;
+            }
+        }      
+        
+        function buscar(){
+            let div = document.getElementById("lista");
+            let pi = document.createElement("p");
+            let texto ="";
+            users.forEach(function(node){
+                if(node.followers>=valor){
+                    texto +="<li style='list-style:none;'>Usuario: " + node.login + " - Seguidores: " + node.followers;
+                }
+            });
+            div.innerHTML = texto;
+        }
+
+        boton.addEventListener("click", buscar);
+        radio1.addEventListener("change", seleccionado(radio1));
+    </script>
+</body>
+</html>

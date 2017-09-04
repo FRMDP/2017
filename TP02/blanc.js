@@ -1,6 +1,6 @@
 function listIssues (jsonResponse) {
 
-  const issues = jsonResponse.map(function (x) {
+  return jsonResponse.map(function (x) {
     return {
       "title" : x.title,
       "state" : x.state,
@@ -8,6 +8,5 @@ function listIssues (jsonResponse) {
       "closed" : x.closed_at
     };
   });
-  return issues;
 
 }

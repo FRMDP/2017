@@ -1,4 +1,4 @@
-const jSonListOfAllGists = [
+const jSonGists = [
   {
     "url": "https://api.github.com/gists/aa5a315d61ae9438b18d",
     "forks_url": "https://api.github.com/gists/aa5a315d61ae9438b18d/forks",
@@ -46,25 +46,17 @@ const jSonListOfAllGists = [
   }
 ]
 
-function checkIfUserAlreadyInArray(key){
-    return key.user == gist.user;      /* ME DIJISTE QUE COMO ESTABA ANTES NO FUNCIONABA DE LA MANERA QUE ESPERABA, 
-                                          NO SE SI ASI SI O NO, NO ESTABA SEGURO SI PODIA ACCEDER A GIST DESDE ACA    */
-	}
-}
-
-
-function returnNumberOfGistsByUser (jSonListOfAllGists){
+function returnNumberOfGistsByUser (jSonGists){
 	const arrayUserGists = [];
   let isInArray;
 
-	jsonListOfAllgists.forEach(function(gist, index){
-    isInArray = arrayUserGists.find(checkIfUserAlreadyInArray);   /* CAMBIE LO QUE HABIA HECHO ANTES, 
-                                                                  AHORA LO GUARDO EN UNA VARIABLE, PARA NO HACER EL FIN DOS VECES */
+	jSonGists.forEach(function(gist, index){
+    isInArray = arrayUserGists.find(key => key.userName == gist.owner.login);
 		if(isInArray){
 			arrayUserGists[arrayUserGists.indexOf(isInArray)].totalGists++;
 		}
 		else{
-			arrayUserGists.push({user: gist.user, totalGists: 0});
+			arrayUserGists.push({userName: gist.owner.login, totalGists: 1});
 		}
 	});
 	return arrayUserGists;

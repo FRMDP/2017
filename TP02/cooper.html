@@ -8,13 +8,6 @@
       <ul id="lista_desordenada"></ul>
 
       <script>
-         /*
-         const lista = document.getElementById('lista');
-
-         const user1 = {name:"Cacho27", followers: 5};
-         const user2 = {name:"rodolfo40", followers: 9000};
-         const user3 = {name:"hector64", followers: 1};
-*/
 
         let lista_users = 
         [
@@ -77,6 +70,9 @@
           }
         ]
 
+        const boton = document.getElementById('boton');
+        const lista_desordenada = document.getElementById('lista_desordenada');
+
         function ordenar_x_followers() {
           let lista_final = [];
           while(lista_users.length > 0) {
@@ -96,7 +92,7 @@
             }
           }
           const user = lista.splice(index, 1);
-          return user;
+          return user[0];
         }
 
          function mostrar_lista (lista_ordenada) {

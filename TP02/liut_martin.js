@@ -1,15 +1,13 @@
 function getRepositoriesByTopic(topic, repositories){
+  let countReposByTopic = 0;
 
-	let repoByTopic = [];
+  repositories.forEach(function(r){
+    r.topics.filter(function(t){
+    	if(t.toLowerCase() == topic.toLowerCase() && r.fork == false){
+    		countReposByTopic++;
+    	}
+    });
+  });
 
-	repositories.forEach(function(r){
-		const topics = r.topics;
-		topics.forEach(function(t){
-			if(t === topic){
-				repoByTopic.push(r);
-			}
-		});
-	});
-
-	return repoByTopic;
+  return countReposByTopic;
 }

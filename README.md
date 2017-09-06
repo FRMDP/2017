@@ -1,5 +1,3 @@
-# TP #2, revisar la rama tp2.
-
 ## Listado de alumnos
 
 * [zeratulmdq](https://github.com/zeratulmdq) - Martin Benvenuti

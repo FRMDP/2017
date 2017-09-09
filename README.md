@@ -1,24 +1,28 @@
+<<<<<<< HEAD
 ## Listado de alumnos
+=======
+### TP #3
 
-* [zeratulmdq](https://github.com/zeratulmdq) - Martin Benvenuti
-* [ignaciocasales](https://github.com/ignaciocasales) - Ignacio Casales
-* [SantiBlanc87](https://github.com/SantiBlanc87) - Santiago Blanc
-* [Facundo97Maldonado](https://github.com/Facundo97Maldonado) - Facundo Maldonado
-* [fedealdosivi](https://github.com/fedealdosivi) - Federico Palomero García
-* [maurogsp](https://github.com/maurogsp) - Mauro Gaspar
-* [DanielScha](https://github.com/DanielScha) - Daniel Adrian Schaerer
-* [matirey](https://github.com/matirey) - Reynoso Matias
-* [co0per](https://github.com/co0per) - Lisandro Cooper
-* [Iampietro](https://github.com/Iampietro/2017) - Matias Iampietro
-* [rodrimaqui](https://github.com/rodrimaqui) - Rodrigo Maquirriain
-* [CarlosAndresTambascia](https://github.com/CarlosAndresTambascia) - Carlos Andres Tambascia
-* [Favega89](https://github.com/Favega89) - Facundo Vega Puente
-* [grotatori](https://github.com/grotatori) - Gisela Rotatori
-* [matiramos](https://github.com/matiramos) - Matias Ramos
-* [JuanAbraciano](https://github.com/JuanAbraciano) - Juan Manuel Abraciano
-* [MartinLiut](https://github.com/MartinLiut) - Martin Liut
-* [julian00](https://github.com/julian00) - Alejandro Arizaga
-* [RodolfoSavino](https://github.com/RodolfoSavino) - Rodolfo Savino
-* [kingrag92](https://github.com/kingrag92) - Luciano Perello
-* [yasiotero](https://github.com/yasiotero) - Yasi Otero
-* [ZassoMartin](https://github.com/ZassoMartin) - Zasso Sergio Martin
+#### Lineamientos
+>>>>>>> 0038f0fb49c32b944393246a35e200a96c85815e
+
+    *  Tienen que hacer el PR contra la rama TP3, no contra master.
+    * Resuelven la historia de usuario asignada en Taiga. Deben no solo subir los cambios sino tambien manejar los estados y tiempos en el tablero. Esto es importante porque solo voy a revisar las cosas que estén con estado **READY FOR TEST**.
+    * Crean una carpeta con su apellido en minuscula. Dentro de esta carpeta agregan un archivo _index.html_, estilos (css) y scripts (js) necesarios.
+    * Tienen tiempo hasta las 18Hs del dia martes 19/9.
+#### Qué hay que hacer? Una agenda.
+
+    *   Debe utilizar un framework CSS a elección.
+    *   Deben tener una hoja de estilos propia con al menos 4 reglas que afecten su aplicación.
+    *   Deben crear por lo menos tres vistas diferentes (agregar, buscar, ....).
+    *   Deben utilizar cuatro componentes del framework (cards, navbars, alerts, etc).
+    *   Las personas ingresadas tienen que tener por lo menos cuatro datos diferentes (nombre, teléfono, sexo, etc) y debe validar el tipo de dato de la información ingresada.
+    *   Debe persistir la información utilizando alguna API del navegador.
+    *   En la vista de búsqueda se debe poder ingresar un string y que ese string este presente en cualquiera de los campos de la persona.
+    *   Se deben poder borrar las personas.
+#### Qué se evalúa?
+    *   Prolijidad del código: indentaciones, espacios innecesarios, utilización de convenciones, etc.
+    *   Nombres de variables y funciones significativas.
+    *   Utilización de las herramientas (Git, Github, Taiga).
+    *   ES6, Array#extras, String, Object, Math, Array, etc.
+    *   Markup HTML innecesario (no crear elementos de más ni elementos que no correspondan a lo que quieren representar).

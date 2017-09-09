@@ -23,6 +23,10 @@
 		<div v-show="vista == 'ingresar'">
 			<div class="row">
 				<div class="col s12 m8 l6 offset-m1 offset-l3">
+					<div class="alert" id="alerta">
+						<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+						Holy Guacamole! Contacto agregado con exito.
+					</div>
 					<form>
 						<label for="first_name">Nombre</label>
 						<input v-model="persona.nombre" type="text" id="first_name" placeholder="Ingrese Nombre">
@@ -47,7 +51,8 @@
 	     						v-model="persona.sexo"/>
 	     					<label for="mujer">Mujer</label>
 	     				</div>
-						<button class="botonIngreso" :disabled="!formOk" type="submit" @click.prevent="agregarPersona">
+						<button class="botonIngreso" :disabled="!formOk" type="submit" @click.prevent="agregarPersona" 
+							onclick="document.getElementById('alerta').style.display='block';" >
 							Finalizaste? 
 							<span class="span">Ingresa los datos</span>
 						</button>
@@ -70,9 +75,12 @@
 							<p class="card-text">Gustos: {{ persona.gustos }}</p>
 							<div class="card-action">
 								<div class="cardActionContent">
-									<a class="btn-floating btn-large waves-effect waves-dark green"
+									<a class="wrapper btn-floating pulse btn-large waves-effect waves-dark green"
 										 @click.prevent="agregarAfavoritos(index)">
 										 <i class="material-icons">favorite</i>
+										 <div class="tooltip">
+										 	Agregar a favoritos
+										 </div>
 									</a>
 									<a class="deleteBtn btn-floating btn-large waves-effect waves-light red"
 										 @click.prevent="eliminarPersona(index)">
@@ -91,7 +99,7 @@
 				<div class="col s12 m8 l6 offset-m1 offset-l3">
 					<input type="text" placeholder="Filtrar" v-model="filtro">
 					<h3 v-if="!favoritos.length">No has agregado favoritos</h3>
-					<div v-else v-for="(favorito, index) in listaFavoritos">
+					<div v-else v-for="(favorito, index) in favoritosFiltrados">
 						<div class="card cardContent">
 							<h4 class="card-title">{{ favorito.nombre }}, {{ favorito.apellido }}</h4>
 							<p class="card-text">Edad: {{ favorito.edad }}</p>

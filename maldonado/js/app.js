@@ -24,8 +24,13 @@ new Vue({
         p.sexo.indexOf(this.filtro) >= 0 ||
         p.gustos.indexOf(this.filtro) >= 0);
   	},
-    listaFavoritos() {
-      return this.favoritos; //Esto no me convence
+    favoritosFiltrados() {
+      return this.favoritos.filter(f => f.nombre.indexOf(this.filtro) >= 0 ||
+        f.apellido.indexOf(this.filtro) >= 0 ||
+        f.edad.indexOf(this.filtro) >= 0 ||
+        f.telefono.indexOf(this.filtro) >= 0 ||
+        f.sexo.indexOf(this.filtro) >= 0 ||
+        f.gustos.indexOf(this.filtro) >= 0);
     },
   	formOk() {
   		return this.persona.nombre && this.persona.apellido && this.persona.edad 
@@ -46,7 +51,8 @@ new Vue({
       this.personas.splice(index, 1);
     },
     eliminarFavorito(index) {
-      this.favoritos.splice(index, 1);
+      const vuelveAcontactos = this.favoritos.splice(index, 1);
+      this.personas.push(vuelveAcontactos[0]);
     },
   	limpiarPersona() {
   		this.persona.nombre = '';

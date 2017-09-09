@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/materialize.css">
+  <link rel="stylesheet" href="css/app.css">
+  <title>Trabajo Practico 3</title>
+</head>
+<body>
+  	<div id="app">
+  		<nav class="nav-wrapper blue darken-4" id="navbar">
+  			<div class="container">
+	  		    <a href="#" class="brand-logo">Trabajo Practico 3</a>
+	  		    <ul id="nav-mobile" class="right hide-on-med-and-down">
+	  		    	<li><a class="nav-link" href="#" @click="cambiarVista('ingresar')">Ingresar</a></li>
+			        <li><a class="nav-link" href="#" @click="cambiarVista('buscar')">Contactos</a></li>
+			        <li><a class="nav-link" href="#" @click="cambiarVista('favoritos')">Favoritos</a></li>
+			    </ul>	
+			</div>
+		</nav>
+		<!--Ingreso personas -->
+		<div v-show="vista == 'ingresar'">
+			<div class="row">
+				<div class="col s12 m8 l6 offset-m1 offset-l3">
+					<form>
+						<label for="first_name">Nombre</label>
+						<input v-model="persona.nombre" type="text" id="first_name" placeholder="Ingrese Nombre">
+						<label for="last_name">Apellido</label>
+						<input v-model="persona.apellido" type="text" id="last_name" 
+							placeholder="Ingrese Apellido">
+						<label for="age">Edad</label>
+						<input type="number" placeholder="Ingrese Edad" id="age" v-model="persona.edad">
+				        <label for="phone">Telefono</label>
+						<input type="number" placeholder="Ingrese Telefono" id="phone" 
+							v-model="persona.telefono">
+						<label for="textarea">Gustos</label>
+						<textarea id="textarea" v-model="persona.gustos" class="materialize-textarea" 
+							placeholder="Ingrese de forma breve sus gustos">
+						</textarea>
+						<label>Sexo</label>
+						<div class="row" id="sexo">
+							<input class="with-gap" name="sexo" value="Varon" type="radio" id="varon" 
+								v-model="persona.sexo"/>
+	     					<label for="varon">Varon</label>
+	     					<input class="with-gap" name="sexo" value="Mujer" type="radio" id="mujer" 
+	     						v-model="persona.sexo"/>
+	     					<label for="mujer">Mujer</label>
+	     				</div>
+						<button class="botonIngreso" :disabled="!formOk" type="submit" @click.prevent="agregarPersona">
+							Finalizaste? 
+							<span class="span">Ingresa los datos</span>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Buscar personas -->
+		<div v-show="vista == 'buscar'">
+			<div class="row">
+				<div class="col s12 m8 l6 offset-m1 offset-l3">
+					<input type="text" placeholder="Filtrar" v-model="filtro">
+					<h3 v-if="!personas.length">No hay personas</h3>
+					<div v-else v-for="(persona, index) in personasFiltradas">
+						<div class="card cardContent">
+							<h4 class="card-title">{{ persona.nombre }}, {{ persona.apellido }}</h4>
+							<p class="card-text">Edad: {{ persona.edad }}</p>
+							<p class="card-text">Sexo: {{persona.sexo }}</p>
+							<p class="card-text">Telefono: {{persona.telefono}}</p>
+							<p class="card-text">Gustos: {{ persona.gustos }}</p>
+							<div class="card-action">
+								<div class="cardActionContent">
+									<a class="btn-floating btn-large waves-effect waves-dark green"
+										 @click.prevent="agregarAfavoritos(index)">
+										 <i class="material-icons">favorite</i>
+									</a>
+									<a class="deleteBtn btn-floating btn-large waves-effect waves-light red"
+										 @click.prevent="eliminarPersona(index)">
+										 <i class="material-icons">delete</i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Lista de favoritos -->
+		<div v-show="vista == 'favoritos'">
+			<div class="row">
+				<div class="col s12 m8 l6 offset-m1 offset-l3">
+					<input type="text" placeholder="Filtrar" v-model="filtro">
+					<h3 v-if="!favoritos.length">No has agregado favoritos</h3>
+					<div v-else v-for="(favorito, index) in listaFavoritos">
+						<div class="card cardContent">
+							<h4 class="card-title">{{ favorito.nombre }}, {{ favorito.apellido }}</h4>
+							<p class="card-text">Edad: {{ favorito.edad }}</p>
+							<p class="card-text">Sexo: {{favorito.sexo }}</p>
+							<p class="card-text">Telefono: {{favorito.telefono}}</p>
+							<p class="card-text">Gustos: {{ favorito.gustos }}</p>
+							<div class="card-action">
+								<div class="cardActionContent">
+									<a class="deleteBtn btn-floating btn-large waves-effect waves-light red"
+										 @click.prevent="eliminarFavorito(index)">
+										 <i class="material-icons">delete</i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  <script src="js/vue.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

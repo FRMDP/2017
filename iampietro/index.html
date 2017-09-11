@@ -54,7 +54,8 @@
                         <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
                         <h6 class="card-subtitle mb-2 text-muted">{{ persona.edad }} años</h6>
                         <p class="card-text">Email: <strong>{{ persona.mail }}.</strong></p>
-                        <a href="#" @click="borrarPersona(persona.mail)">Borrar</a>
+                        <button data-toggle="tooltip" data-placement="top" data-html="true" title="   Borrar persona" type="button" class="btn btn-outline-success" @click="borrarPersona(persona.mail)">Borrar
+                        </button>
                     </div>
                 </div>
               </div>

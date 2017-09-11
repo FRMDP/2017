@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TP - 03</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/misEstilos.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+      <div id="app">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="nav-link navbar-brand" href="#" @click="cambiarVista('ingresar')">Ingresar</a>
+              <a class="nav-link navbar-brand" href="#" @click="cambiarVista('buscar')">Buscar</a>
+          </nav>
+          <div class="row justify-content-md-center">
+              <div class="col-md-10">
+                <div v-show="vista == 'ingresar'">
+                  <form>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Nombre</label>
+                        <input v-model="persona.nombre" type="text" placeholder="Ingrese nombre" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>Apellido</label>
+                        <input v-model="persona.apellido" type="text" placeholder="Ingrese apellido" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>Edad</label>
+                        <input type="number" placeholder="Ingrese edad" v-model="persona.edad" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>Mail</label>
+                        <input type="email" placeholder="Ingrese e-mail" v-model="persona.mail" class="form-control">
+                      </div>
+                    </div>
+                    <input value="v" id="radio1" name="radio" type="radio" v-model="persona.sexo">
+                    <span class="custom-control-description">Varon</span>
+                    <input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+                    <span class="custom-control-description">Mujer</span>
+                    <button :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Ingresar</button>
+                  </form>
+                </div>
+              </div>
+          </div>
+          <div class="row row justify-content-md-center">
+            <div class="col-md-10">
+              <div v-show="vista == 'buscar'">
+                <input type="text" placeholder="Filtrar" v-model="filtro">
+                <h3 v-if="!personas.length">No hay personas</h3>
+                <div v-else v-for="persona in personasFiltradas" class="card" id="people">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ persona.edad }} años</h6>
+                        <p class="card-text">Email: <strong>{{ persona.mail }}.</strong></p>
+                        <a href="#" @click="borrarPersona(persona.mail)">Borrar</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        persona: {
+          nombre: '',
+          apellido: '',
+          edad: '',
+          sexo: '',
+          mail: ''
+        },
+        personas: [],
+        filtro: '',
+        vista: 'ingresar',
+        mensaje: false
+      },
+      computed: {
+        personasFiltradas() {
+          return this.personas.filter(p => (p.nombre.indexOf(this.filtro) >= 0 || p.apellido.indexOf(this.filtro) >= 0));
+        },
+        formOk() {
+          return this.persona.nombre && this.persona.edad
+                 && this.persona.sexo && this.persona.apellido
+                 && this.persona.mail;
+        }
+      },
+      methods: {
+        agregarPersona() {
+          this.personas.push(Object.assign({}, this.persona));
+          this.limpiarPersona();
+          this.mensaje = true;
+        },
+        limpiarPersona() {
+          this.persona.nombre = '';
+          this.persona.apellido = '';
+          this.persona.edad = '';
+          this.persona.sexo = '';
+          this.persona.mail = '';
+        },
+        cambiarVista(vista) {
+          this.vista = vista;
+        },
+        cerrarMensaje() {
+          this.mensaje = false;
+        },
+        borrarPersona(email) {
+          this.personas.splice(this.personas.indexOf(email),1);
+        },
+
+      }
+    })
+  </script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -5,15 +5,18 @@ const vm = new Vue({
             firstName: '',
             lastName: '',
             age: '',
+            address: '',
+            telephoneNumbers: [],
             description: '',
-            gender: ''
+            gender: '',
+            birthDate: ''
         },
         people: [],
         filter: '',
-        view: 'add'
+        view: 'search'
     },
     computed: {
-        filteredPerson() {
+        filteredPeople() {
             return this.people.filter(p => p.firstName.indexOf(this.filter) >= 0);
         },
         formOk() {
@@ -28,7 +31,7 @@ const vm = new Vue({
         addPerson() {
             this.people.push(Object.assign({}, this.person));
             this.cleanPerson();
-            this.message = true;
+            /*this.message = true;*/
         },
         cleanPerson() {
             this.person.firstName = '';

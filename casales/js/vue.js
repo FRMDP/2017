@@ -1,5 +1,5 @@
 /*!
- * Vue.js v2.4.0
+ * Vue.js v2.4.2
  * (c) 2014-2017 Evan You
  * Released under the MIT License.
  */
@@ -33,7 +33,11 @@ function isFalse (v) {
  * Check if value is primitive
  */
 function isPrimitive (value) {
-  return typeof value === 'string' || typeof value === 'number'
+  return (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    typeof value === 'boolean'
+  )
 }
 
 /**
@@ -256,14 +260,30 @@ function genStaticKeys (modules) {
  * if they are plain objects, do they have the same shape?
  */
 function looseEqual (a, b) {
+  if (a === b) { return true }
   var isObjectA = isObject(a);
   var isObjectB = isObject(b);
   if (isObjectA && isObjectB) {
     try {
-      return JSON.stringify(a) === JSON.stringify(b)
+      var isArrayA = Array.isArray(a);
+      var isArrayB = Array.isArray(b);
+      if (isArrayA && isArrayB) {
+        return a.length === b.length && a.every(function (e, i) {
+          return looseEqual(e, b[i])
+        })
+      } else if (!isArrayA && !isArrayB) {
+        var keysA = Object.keys(a);
+        var keysB = Object.keys(b);
+        return keysA.length === keysB.length && keysA.every(function (key) {
+          return looseEqual(a[key], b[key])
+        })
+      } else {
+        /* istanbul ignore next */
+        return false
+      }
     } catch (e) {
-      // possible circular reference
-      return a === b
+      /* istanbul ignore next */
+      return false
     }
   } else if (!isObjectA && !isObjectB) {
     return String(a) === String(b)
@@ -385,7 +405,7 @@ var config = ({
   getTagNamespace: noop,
 
   /**
-   * Parse the real tag firstName for the specific platform.
+   * Parse the real tag name for the specific platform.
    */
   parsePlatformTagName: identity,
 
@@ -481,10 +501,10 @@ var formatComponentName = (null); // work around flow check
     var name = typeof vm === 'string'
       ? vm
       : typeof vm === 'function' && vm.options
-        ? vm.options.firstName
+        ? vm.options.name
         : vm._isVue
-          ? vm.$options.firstName || vm.$options._componentTag
-          : vm.firstName;
+          ? vm.$options.name || vm.$options._componentTag
+          : vm.name;
 
     var file = vm._isVue && vm.$options.__file;
     if (!name && file) {
@@ -1128,7 +1148,7 @@ function mergeDataOrFn (
     return function mergedDataFn () {
       return mergeData(
         typeof childVal === 'function' ? childVal.call(this) : childVal,
-        parentVal.call(this)
+        typeof parentVal === 'function' ? parentVal.call(this) : parentVal
       )
     }
   } else if (parentVal || childVal) {
@@ -1244,11 +1264,10 @@ strats.props =
 strats.methods =
 strats.inject =
 strats.computed = function (parentVal, childVal) {
-  if (!childVal) { return Object.create(parentVal || null) }
   if (!parentVal) { return childVal }
   var ret = Object.create(null);
   extend(ret, parentVal);
-  extend(ret, childVal);
+  if (childVal) { extend(ret, childVal); }
   return ret
 };
 strats.provide = mergeDataOrFn;
@@ -1558,7 +1577,7 @@ function assertType (value, type) {
 }
 
 /**
- * Use function string firstName to check built-in types,
+ * Use function string name to check built-in types,
  * because a simple equality check will fail when running
  * across different vms / iframes.
  */
@@ -1779,7 +1798,7 @@ var normalizeEvent = cached(function (name) {
   var capture = name.charAt(0) === '!';
   name = capture ? name.slice(1) : name;
   return {
-    firstName: name,
+    name: name,
     once: once$$1,
     capture: capture,
     passive: passive
@@ -1819,14 +1838,14 @@ function updateListeners (
     event = normalizeEvent(name);
     if (isUndef(cur)) {
       "development" !== 'production' && warn(
-        "Invalid handler for event \"" + (event.firstName) + "\": got " + String(cur),
+        "Invalid handler for event \"" + (event.name) + "\": got " + String(cur),
         vm
       );
     } else if (isUndef(old)) {
       if (isUndef(cur.fns)) {
         cur = on[name] = createFnInvoker(cur);
       }
-      add(event.firstName, cur, event.once, event.capture, event.passive);
+      add(event.name, cur, event.once, event.capture, event.passive);
     } else if (cur !== old) {
       old.fns = cur;
       on[name] = old;
@@ -1835,7 +1854,7 @@ function updateListeners (
   for (name in oldOn) {
     if (isUndef(on[name])) {
       event = normalizeEvent(name);
-      remove$$1(event.firstName, oldOn[name], event.capture);
+      remove$$1(event.name, oldOn[name], event.capture);
     }
   }
 }
@@ -1900,7 +1919,7 @@ function extractPropsFromVNodeData (
         ) {
           tip(
             "Prop \"" + keyInLowerCase + "\" is passed to component " +
-            (formatComponentName(tag || Ctor)) + ", but the declared prop firstName is" +
+            (formatComponentName(tag || Ctor)) + ", but the declared prop name is" +
             " \"" + key + "\". " +
             "Note that HTML attributes are case-insensitive and camelCased " +
             "props need to use their kebab-case equivalents when using in-DOM " +
@@ -3188,17 +3207,14 @@ function initComputed (vm, computed) {
   for (var key in computed) {
     var userDef = computed[key];
     var getter = typeof userDef === 'function' ? userDef : userDef.get;
-    {
-      if (getter === undefined) {
-        warn(
-          ("No getter function has been defined for computed property \"" + key + "\"."),
-          vm
-        );
-        getter = noop;
-      }
+    if ("development" !== 'production' && getter == null) {
+      warn(
+        ("Getter is missing for computed property \"" + key + "\"."),
+        vm
+      );
     }
     // create internal watcher for the computed property.
-    watchers[key] = new Watcher(vm, getter, noop, computedWatcherOptions);
+    watchers[key] = new Watcher(vm, getter || noop, noop, computedWatcherOptions);
 
     // component-defined computed properties are already defined on the
     // component prototype. We only need to define computed properties defined
@@ -3228,6 +3244,15 @@ function defineComputed (target, key, userDef) {
     sharedPropertyDefinition.set = userDef.set
       ? userDef.set
       : noop;
+  }
+  if ("development" !== 'production' &&
+      sharedPropertyDefinition.set === noop) {
+    sharedPropertyDefinition.set = function () {
+      warn(
+        ("Computed property \"" + key + "\" was assigned to but it has no setter."),
+        this
+      );
+    };
   }
   Object.defineProperty(target, key, sharedPropertyDefinition);
 }
@@ -3398,7 +3423,7 @@ function resolveInject (inject, vm) {
         }
         source = source.$parent;
       }
-      if ("development" !== 'production' && !hasOwn(result, key)) {
+      if ("development" !== 'production' && !source) {
         warn(("Injection \"" + key + "\" not found"), vm);
       }
     }
@@ -3591,8 +3616,12 @@ function createComponent (
     return createFunctionalComponent(Ctor, propsData, data, context, children)
   }
 
-  // keep listeners
+  // extract listeners, since these needs to be treated as
+  // child component listeners instead of DOM listeners
   var listeners = data.on;
+  // replace with listeners with .native modifier
+  // so it gets processed during parent component patch.
+  data.on = data.nativeOn;
 
   if (isTrue(Ctor.options.abstract)) {
     // abstract components do not keep anything
@@ -3610,7 +3639,7 @@ function createComponent (
   mergeHooks(data);
 
   // return a placeholder vnode
-  var name = Ctor.options.firstName || tag;
+  var name = Ctor.options.name || tag;
   var vnode = new VNode(
     ("vue-component-" + (Ctor.cid) + (name ? ("-" + name) : '')),
     data, undefined, undefined, undefined, context,
@@ -4055,7 +4084,7 @@ function initRender (vm) {
     defineReactive$$1(vm, '$attrs', parentData && parentData.attrs, function () {
       !isUpdatingChildComponent && warn("$attrs is readonly.", vm);
     }, true);
-    defineReactive$$1(vm, '$listeners', parentData && parentData.on, function () {
+    defineReactive$$1(vm, '$listeners', vm.$options._parentListeners, function () {
       !isUpdatingChildComponent && warn("$listeners is readonly.", vm);
     }, true);
   }
@@ -4233,8 +4262,8 @@ function resolveConstructorOptions (Ctor) {
         extend(Ctor.extendOptions, modifiedOptions);
       }
       options = Ctor.options = mergeOptions(superOptions, Ctor.extendOptions);
-      if (options.firstName) {
-        options.components[options.firstName] = Ctor;
+      if (options.name) {
+        options.components[options.name] = Ctor;
       }
     }
   }
@@ -4343,11 +4372,11 @@ function initExtend (Vue) {
       return cachedCtors[SuperId]
     }
 
-    var name = extendOptions.firstName || Super.options.firstName;
+    var name = extendOptions.name || Super.options.name;
     {
       if (!/^[a-zA-Z][\w-]*$/.test(name)) {
         warn(
-          'Invalid component firstName: "' + name + '". Component names ' +
+          'Invalid component name: "' + name + '". Component names ' +
           'can only contain alphanumeric characters and the hyphen, ' +
           'and must start with a letter.'
         );
@@ -4442,7 +4471,7 @@ function initAssetRegisters (Vue) {
           }
         }
         if (type === 'component' && isPlainObject(definition)) {
-          definition.firstName = definition.firstName || id;
+          definition.name = definition.name || id;
           definition = this.options._base.extend(definition);
         }
         if (type === 'directive' && typeof definition === 'function') {
@@ -4460,7 +4489,7 @@ function initAssetRegisters (Vue) {
 var patternTypes = [String, RegExp, Array];
 
 function getComponentName (opts) {
-  return opts && (opts.Ctor.options.firstName || opts.tag)
+  return opts && (opts.Ctor.options.name || opts.tag)
 }
 
 function matches (pattern, name) {
@@ -4497,7 +4526,7 @@ function pruneCacheEntry (vnode) {
 }
 
 var KeepAlive = {
-  firstName: 'keep-alive',
+  name: 'keep-alive',
   abstract: true,
 
   props: {
@@ -4617,7 +4646,7 @@ Object.defineProperty(Vue$3.prototype, '$ssrContext', {
   }
 });
 
-Vue$3.version = '2.4.0';
+Vue$3.version = '2.4.2';
 
 /*  */
 
@@ -5070,7 +5099,7 @@ function createPatchFunction (backend) {
           warn(
             'Unknown custom element: <' + tag + '> - did you ' +
             'register the component correctly? For recursive components, ' +
-            'make sure to provide the "firstName" option.',
+            'make sure to provide the "name" option.',
             vnode.context
           );
         }
@@ -5696,13 +5725,13 @@ function normalizeDirectives$1 (
       dir.modifiers = emptyModifiers;
     }
     res[getRawDirName(dir)] = dir;
-    dir.def = resolveAsset(vm.$options, 'directives', dir.firstName, true);
+    dir.def = resolveAsset(vm.$options, 'directives', dir.name, true);
   }
   return res
 }
 
 function getRawDirName (dir) {
-  return dir.rawName || ((dir.firstName) + "." + (Object.keys(dir.modifiers || {}).join('.')))
+  return dir.rawName || ((dir.name) + "." + (Object.keys(dir.modifiers || {}).join('.')))
 }
 
 function callHook$1 (dir, hook, vnode, oldVnode, isDestroy) {
@@ -5711,7 +5740,7 @@ function callHook$1 (dir, hook, vnode, oldVnode, isDestroy) {
     try {
       fn(vnode.elm, dir, vnode, oldVnode, isDestroy);
     } catch (e) {
-      handleError(e, vnode.context, ("directive " + (dir.firstName) + " " + hook + " hook"));
+      handleError(e, vnode.context, ("directive " + (dir.name) + " " + hook + " hook"));
     }
   }
 }
@@ -6039,7 +6068,7 @@ function getAndRemoveAttr (el, name) {
   if ((val = el.attrsMap[name]) != null) {
     var list = el.attrsList;
     for (var i = 0, l = list.length; i < l; i++) {
-      if (list[i].firstName === name) {
+      if (list[i].name === name) {
         list.splice(i, 1);
         break
       }
@@ -6277,7 +6306,7 @@ function genCheckboxModel (
     'if(Array.isArray($$a)){' +
       "var $$v=" + (number ? '_n(' + valueBinding + ')' : valueBinding) + "," +
           '$$i=_i($$a,$$v);' +
-      "if($$c){$$i<0&&(" + value + "=$$a.concat($$v))}" +
+      "if($$el.checked){$$i<0&&(" + value + "=$$a.concat($$v))}" +
       "else{$$i>-1&&(" + value + "=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}" +
     "}else{" + (genAssignmentCode(value, '$$c')) + "}",
     null, true
@@ -6413,14 +6442,11 @@ function remove$2 (
 }
 
 function updateDOMListeners (oldVnode, vnode) {
-  var isComponentRoot = isDef(vnode.componentOptions);
-  var oldOn = isComponentRoot ? oldVnode.data.nativeOn : oldVnode.data.on;
-  var on = isComponentRoot ? vnode.data.nativeOn : vnode.data.on;
-  if (isUndef(oldOn) && isUndef(on)) {
+  if (isUndef(oldVnode.data.on) && isUndef(vnode.data.on)) {
     return
   }
-  on = on || {};
-  oldOn = oldOn || {};
+  var on = vnode.data.on || {};
+  var oldOn = oldVnode.data.on || {};
   target$1 = vnode.elm;
   normalizeEvents(on);
   updateListeners(on, oldOn, add$1, remove$2, vnode.context);
@@ -6494,7 +6520,11 @@ function shouldUpdateValue (
 function isDirty (elm, checkVal) {
   // return true when textbox (.number and .trim) loses focus and its value is
   // not equal to the updated value
-  return document.activeElement !== elm && elm.value !== checkVal
+  var notInFocus = true;
+  // #6157
+  // work around IE bug when accessing document.activeElement in an iframe
+  try { notInFocus = document.activeElement !== elm; } catch (e) {}
+  return notInFocus && elm.value !== checkVal
 }
 
 function isInputChanged (elm, newVal) {
@@ -6744,7 +6774,7 @@ function resolveTransition (def$$1) {
   if (typeof def$$1 === 'object') {
     var res = {};
     if (def$$1.css !== false) {
-      extend(res, autoCssTransition(def$$1.firstName || 'v'));
+      extend(res, autoCssTransition(def$$1.name || 'v'));
     }
     extend(res, def$$1);
     return res
@@ -7274,6 +7304,7 @@ var model$1 = {
       if (isIE || isEdge) {
         setTimeout(cb, 0);
       }
+      el._vOptions = [].map.call(el.options, getValue);
     } else if (vnode.tag === 'textarea' || isTextInputType(el.type)) {
       el._vModifiers = binding.modifiers;
       if (!binding.modifiers.lazy) {
@@ -7300,10 +7331,9 @@ var model$1 = {
       // it's possible that the value is out-of-sync with the rendered options.
       // detect such cases and filter out values that no longer has a matching
       // option in the DOM.
-      var needReset = el.multiple
-        ? binding.value.some(function (v) { return hasNoMatchingOption(v, el.options); })
-        : binding.value !== binding.oldValue && hasNoMatchingOption(binding.value, el.options);
-      if (needReset) {
+      var prevOptions = el._vOptions;
+      var curOptions = el._vOptions = [].map.call(el.options, getValue);
+      if (curOptions.some(function (o, i) { return !looseEqual(o, prevOptions[i]); })) {
         trigger(el, 'change');
       }
     }
@@ -7341,15 +7371,6 @@ function setSelected (el, binding, vm) {
   if (!isMultiple) {
     el.selectedIndex = -1;
   }
-}
-
-function hasNoMatchingOption (value, options) {
-  for (var i = 0, l = options.length; i < l; i++) {
-    if (looseEqual(getValue(options[i]), value)) {
-      return false
-    }
-  }
-  return true
 }
 
 function getValue (option) {
@@ -7392,7 +7413,7 @@ var show = {
     var transition$$1 = vnode.data && vnode.data.transition;
     var originalDisplay = el.__vOriginalDisplay =
       el.style.display === 'none' ? '' : el.style.display;
-    if (value && transition$$1 && !isIE9) {
+    if (value && transition$$1) {
       vnode.data.show = true;
       enter(vnode, function () {
         el.style.display = originalDisplay;
@@ -7410,7 +7431,7 @@ var show = {
     if (value === oldValue) { return }
     vnode = locateNode(vnode);
     var transition$$1 = vnode.data && vnode.data.transition;
-    if (transition$$1 && !isIE9) {
+    if (transition$$1) {
       vnode.data.show = true;
       if (value) {
         enter(vnode, function () {
@@ -7450,7 +7471,7 @@ var platformDirectives = {
 // supports transition mode (out-in / in-out)
 
 var transitionProps = {
-  firstName: String,
+  name: String,
   appear: Boolean,
   css: Boolean,
   mode: String,
@@ -7519,7 +7540,7 @@ function isAsyncPlaceholder (node) {
 }
 
 var Transition = {
-  firstName: 'transition',
+  name: 'transition',
   props: transitionProps,
   abstract: true,
 
@@ -7597,7 +7618,7 @@ var Transition = {
 
     // mark v-show
     // so that the transition module can hand over the control to the directive
-    if (child.data.directives && child.data.directives.some(function (d) { return d.firstName === 'show'; })) {
+    if (child.data.directives && child.data.directives.some(function (d) { return d.name === 'show'; })) {
       child.data.show = true;
     }
 
@@ -7675,7 +7696,7 @@ var TransitionGroup = {
           ;(c.data || (c.data = {})).transition = transitionData;
         } else {
           var opts = c.componentOptions;
-          var name = opts ? (opts.Ctor.options.firstName || opts.tag || '') : c.tag;
+          var name = opts ? (opts.Ctor.options.name || opts.tag || '') : c.tag;
           warn(("<transition-group> children must be keyed: <" + name + ">"));
         }
       }
@@ -7922,7 +7943,7 @@ function transformNode (el, options) {
         "class=\"" + staticClass + "\": " +
         'Interpolation inside attributes has been removed. ' +
         'Use v-bind or the colon shorthand instead. For example, ' +
-        'instead of <div class="{{ val }}">, use <div :class="val">.'
+        'instead of <div class="">, use <div :class="val">.'
       );
     }
   }
@@ -7966,7 +7987,7 @@ function transformNode$1 (el, options) {
           "style=\"" + staticStyle + "\": " +
           'Interpolation inside attributes has been removed. ' +
           'Use v-bind or the colon shorthand instead. For example, ' +
-          'instead of <div style="{{ val }}">, use <div :style="val">.'
+          'instead of <div style="">, use <div :style="val">.'
         );
       }
     }
@@ -8151,9 +8172,6 @@ function parseHTML (html, options) {
     last = html;
     // Make sure we're not in a plaintext content element like script/style
     if (!lastTag || !isPlainTextElement(lastTag)) {
-      if (shouldIgnoreFirstNewline(lastTag, html)) {
-        advance(1);
-      }
       var textEnd = html.indexOf('<');
       if (textEnd === 0) {
         // Comment:
@@ -8199,6 +8217,9 @@ function parseHTML (html, options) {
         var startTagMatch = parseStartTag();
         if (startTagMatch) {
           handleStartTag(startTagMatch);
+          if (shouldIgnoreFirstNewline(lastTag, html)) {
+            advance(1);
+          }
           continue
         }
       }
@@ -8356,7 +8377,7 @@ function parseHTML (html, options) {
         }
       }
     } else {
-      // If no tag firstName is provided, clean shop
+      // If no tag name is provided, clean shop
       pos = 0;
     }
 
@@ -8675,7 +8696,7 @@ function processRawAttrs (el) {
     var attrs = el.attrs = new Array(l);
     for (var i = 0; i < l; i++) {
       attrs[i] = {
-        name: el.attrsList[i].firstName,
+        name: el.attrsList[i].name,
         value: JSON.stringify(el.attrsList[i].value)
       };
     }
@@ -8828,7 +8849,7 @@ function processAttrs (el) {
   var list = el.attrsList;
   var i, l, name, rawName, value, modifiers, isProp;
   for (i = 0, l = list.length; i < l; i++) {
-    name = rawName = list[i].firstName;
+    name = rawName = list[i].name;
     value = list[i].value;
     if (dirRE.test(name)) {
       // mark element as dynamic
@@ -8859,8 +8880,8 @@ function processAttrs (el) {
             );
           }
         }
-        if (!el.component && (
-          isProp || platformMustUseProp(el.tag, el.attrsMap.type, name)
+        if (isProp || (
+          !el.component && platformMustUseProp(el.tag, el.attrsMap.type, name)
         )) {
           addProp(el, name, value);
         } else {
@@ -8891,7 +8912,7 @@ function processAttrs (el) {
             name + "=\"" + value + "\": " +
             'Interpolation inside attributes has been removed. ' +
             'Use v-bind or the colon shorthand instead. For example, ' +
-            'instead of <div id="{{ val }}">, use <div :id="val">.'
+            'instead of <div id="">, use <div :id="val">.'
           );
         }
       }
@@ -8925,11 +8946,11 @@ function makeAttrsMap (attrs) {
   for (var i = 0, l = attrs.length; i < l; i++) {
     if (
       "development" !== 'production' &&
-      map[attrs[i].firstName] && !isIE && !isEdge
+      map[attrs[i].name] && !isIE && !isEdge
     ) {
-      warn$2('duplicate attribute: ' + attrs[i].firstName);
+      warn$2('duplicate attribute: ' + attrs[i].name);
     }
-    map[attrs[i].firstName] = attrs[i].value;
+    map[attrs[i].name] = attrs[i].value;
   }
   return map
 }
@@ -8957,8 +8978,8 @@ function guardIESVGBug (attrs) {
   var res = [];
   for (var i = 0; i < attrs.length; i++) {
     var attr = attrs[i];
-    if (!ieNSBug.test(attr.firstName)) {
-      attr.firstName = attr.firstName.replace(ieNSPrefix, '');
+    if (!ieNSBug.test(attr.name)) {
+      attr.name = attr.name.replace(ieNSPrefix, '');
       res.push(attr);
     }
   }
@@ -9441,7 +9462,7 @@ function genData$2 (el, state) {
   if (el.pre) {
     data += "pre:true,";
   }
-  // record original tag firstName for components using "is" attribute
+  // record original tag name for components using "is" attribute
   if (el.component) {
     data += "tag:\"" + (el.tag) + "\",";
   }
@@ -9504,7 +9525,7 @@ function genDirectives (el, state) {
   for (i = 0, l = dirs.length; i < l; i++) {
     dir = dirs[i];
     needRuntime = true;
-    var gen = state.directives[dir.firstName];
+    var gen = state.directives[dir.name];
     if (gen) {
       // compile-time directive that manipulates AST.
       // returns true if it also needs a runtime counterpart.
@@ -9512,7 +9533,7 @@ function genDirectives (el, state) {
     }
     if (needRuntime) {
       hasRuntime = true;
-      res += "{firstName:\"" + (dir.firstName) + "\",rawName:\"" + (dir.rawName) + "\"" + (dir.value ? (",value:(" + (dir.value) + "),expression:" + (JSON.stringify(dir.value))) : '') + (dir.arg ? (",arg:\"" + (dir.arg) + "\"") : '') + (dir.modifiers ? (",modifiers:" + (JSON.stringify(dir.modifiers))) : '') + "},";
+      res += "{name:\"" + (dir.name) + "\",rawName:\"" + (dir.rawName) + "\"" + (dir.value ? (",value:(" + (dir.value) + "),expression:" + (JSON.stringify(dir.value))) : '') + (dir.arg ? (",arg:\"" + (dir.arg) + "\"") : '') + (dir.modifiers ? (",modifiers:" + (JSON.stringify(dir.modifiers))) : '') + "},";
     }
   }
   if (hasRuntime) {
@@ -9646,14 +9667,14 @@ function genText (text) {
 }
 
 function genComment (comment) {
-  return ("_e('" + (comment.text) + "')")
+  return ("_e(" + (JSON.stringify(comment.text)) + ")")
 }
 
 function genSlot (el, state) {
   var slotName = el.slotName || '"default"';
   var children = genChildren(el, state);
   var res = "_t(" + slotName + (children ? ("," + children) : '');
-  var attrs = el.attrs && ("{" + (el.attrs.map(function (a) { return ((camelize(a.firstName)) + ":" + (a.value)); }).join(',')) + "}");
+  var attrs = el.attrs && ("{" + (el.attrs.map(function (a) { return ((camelize(a.name)) + ":" + (a.value)); }).join(',')) + "}");
   var bind$$1 = el.attrsMap['v-bind'];
   if ((attrs || bind$$1) && !children) {
     res += ",null";
@@ -9681,7 +9702,7 @@ function genProps (props) {
   var res = '';
   for (var i = 0; i < props.length; i++) {
     var prop = props[i];
-    res += "\"" + (prop.firstName) + "\":" + (transformSpecialNewlines(prop.value)) + ",";
+    res += "\"" + (prop.name) + "\":" + (transformSpecialNewlines(prop.value)) + ",";
   }
   return res.slice(0, -1)
 }
@@ -9754,7 +9775,7 @@ function checkEvent (exp, text, errors) {
   var keywordMatch = stipped.match(unaryOperatorsRE);
   if (keywordMatch && stipped.charAt(keywordMatch.index - 1) !== '$') {
     errors.push(
-      "avoid using JavaScript unary operator as property firstName: " +
+      "avoid using JavaScript unary operator as property name: " +
       "\"" + (keywordMatch[0]) + "\" in expression " + (text.trim())
     );
   }
@@ -9781,7 +9802,7 @@ function checkExpression (exp, text, errors) {
     var keywordMatch = exp.replace(stripStringRE, '').match(prohibitedKeywordRE);
     if (keywordMatch) {
       errors.push(
-        "avoid using JavaScript keyword as property firstName: " +
+        "avoid using JavaScript keyword as property name: " +
         "\"" + (keywordMatch[0]) + "\" in expression " + (text.trim())
       );
     } else {

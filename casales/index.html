@@ -1,141 +1,186 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>casales | TP3</title>
-	<link rel="stylesheet" href="./css/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="./css/bulma.css">
-	<link rel="stylesheet" href="./css/sticky-footer.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Casales | TP03</title>
+    <link rel="stylesheet" href="./css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/bulma.css">
+    <link rel="stylesheet" href="./css/sticky-footer.css">
 </head>
 <body>
 <div id="app">
-	<section class="hero is-dark">
-		<div class="hero-head">
-			<header class="nav">
-				<div class="container">
-					<div class="nav-left">
-						<a class="nav-item">
-							<span class="icon is-large is-left is-white"><i class="fa fa-address-book"></i></span>
-						</a>
-						<a class="nav-item" @click="changeView('add')">
-							<span class="icon is-small is-left is-white"><i class="fa fa-plus"></i></span>Add
-						</a>
-						<a class="nav-item" @click="changeView('search')">
-							<span class="icon is-small is-left is-white"><i class="fa fa-search"></i></span>Records
-						</a>
-					</div>
-				</div>
-			</header>
-		</div>
+    <section class="hero is-dark">
+        <div class="hero-head">
+            <header class="nav">
+                <div class="container">
+                    <div class="nav-left">
+                        <a class="nav-item" @click="changeView('search')">
+                            <span class="icon is-large is-left"><i class="fa fa-address-book"></i></span>
+                        </a>
+                        <a class="nav-item" @click="changeView('add')">
+                            <span class="icon is-small is-left"><i class="fa fa-plus"></i></span>Add
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
 
-		<div class="hero-body">
-			<div class="container has-text-centered">
-				<h1 class="title">
-					Address Book
-				</h1>
-			</div>
-		</div>
-	</section>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title">
+                    Address Book
+                </h1>
+            </div>
+        </div>
+    </section>
 
-	<section class="section" v-show="view == 'add'">
-		<div class="container">
-			<div class="columns is-mobile">
-				<div class="column is-half is-offset-one-quarter">
-					<form class="box">
-						<div class="field">
-							<label class="label">First name</label>
-							<div class="control">
-								<input v-model="person.firstName" class="input" type="text" placeholder="Insert first name">
-							</div>
-						</div>
+    <section class="section" v-show="view == 'add'">
+        <div class="container">
+            <div class="columns is-mobile">
+                <div class="column is-half is-offset-one-quarter">
+                    <form class="box">
+                        <div class="field">
+                            <label class="label">First name</label>
+                            <div class="control">
+                                <input class="input" placeholder="Insert first name" v-model="person.firstName">
+                            </div>
+                        </div>
 
-						<div class="field">
-							<label class="label">Last name</label>
-							<div class="control">
-								<input class="input" type="text" placeholder="Insert last name">
-							</div>
-						</div>
+                        <div class="field">
+                            <label class="label">Last name</label>
+                            <div class="control">
+                                <input class="input" placeholder="Insert last name" v-model="person.lastName">
+                            </div>
+                        </div>
 
-						<div class="field">
-							<label class="label">Age</label>
-							<div class="control">
-								<input v-model="person.age" class="input" type="number" placeholder="Insert age">
-							</div>
-						</div>
+                        <div class="field">
+                            <label class="label">Age</label>
+                            <div class="control">
+                                <input class="input" type="number" placeholder="Insert age" v-model="person.age">
+                            </div>
+                        </div>
 
-						<div class="field">
-							<label class="label">Description</label>
-							<div class="control">
-								<textarea class="textarea" placeholder="Add a description ..."></textarea>
-							</div>
-						</div>
+                        <div class="field">
+                            <label class="label">Description</label>
+                            <div class="control">
+                                <textarea class="textarea" placeholder="Add a description ..."
+                                          v-model="person.description"></textarea>
+                            </div>
+                        </div>
 
-						<div class="field">
-							<div class="control">
-								<label class="radio">
-									<input value="m" id="radio1" name="radio" type="radio" v-model="person.gender">
-									Male
-								</label>
-								<label class="radio">
-									<input value="f" id="radio2" name="radio" type="radio" v-model="person.gender">
-									Female
-								</label>
-							</div>
-						</div>
+                        <div class="field">
+                            <div class="control">
+                                <label class="radio">
+                                    <input value="m" id="radio1" name="radio" type="radio" v-model="person.gender">
+                                    Male
+                                </label>
+                                <label class="radio">
+                                    <input value="f" id="radio2" name="radio" type="radio" v-model="person.gender">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
 
-						<div class="field">
-							<div class="control">
-								<button class="button is-medium is-dark is-outlined" :disabled="!formOk" type="submit"
-								        @click.prevent="addPerson">Add
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+                        <div class="field">
+                            <div class="control">
+                                <button class="button is-medium is-dark is-outlined" :disabled="!formOk"
+                                        @click.prevent="addPerson">Add
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-	<section class="section" v-show="view == 'search'">
-		<div class="container">
-			<div class="columns is-mobile">
-				<div class="column is-8 is-offset-2">
-					<div class="box">
-						<div class="field">
-							<div class="control has-icons-left">
-								<input class="input" type="text" placeholder="Search...">
-								<span class="icon is-small is-left"><i class="fa fa-search"></i></span>
-							</div>
-						</div>
-					</div>
-					<h3 v-if="!people.length">There's no people on the list</h3>
-					<div v-else v-for="person in filteredPerson">
-						<h4>{{ person.firstName }} ({{ person.age }})</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore id ipsam minus
-							nobis qui ratione reiciendis ut! Consectetur eaque earum labore, nostrum numquam
-							repudiandae, sequi, sunt vero voluptates voluptatibus voluptatum.</p>
-						<a href="#">Delete</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <section class="section" v-show="view == 'search'">
+        <div class="container">
+            <div class="columns is-desktop">
+                <div class="column is-8 is-offset-2">
+                    <div class="box">
+                        <div class="field">
+                            <div class="control has-icons-left">
+                                <input class="input" placeholder="Search...">
+                                <span class="icon is-small is-left"><i class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification is-info" v-if="!people.length">
+                        There's no people on the list
+                    </div>
+                </div>
+            </div>
+            <div class="columns is-desktop is-multiline is-centered">
+                <div class="column is-4" v-if="people.length">
+                    <div v-for="person in filteredPeople">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    {{ person.firstName }} {{ person.lastName }}
+                                </p>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    {{ person.description }}<!-- <a>@bulmaio</a>.
+                                <a href="#">#css</a> <a href="#">#responsive</a>
+                                <br>
+                                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>-->
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <a href="#" class="card-footer-item">Edit</a>
+                                <a href="#" class="card-footer-item">Delete</a>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="pagination" aria-label="pagination" v-if="people.length">
+                <a class="pagination-previous">Previous</a>
+                <a class="pagination-next">Next page</a>
+                <ul class="pagination-list">
+                    <li>
+                        <a class="pagination-link" aria-label="Goto page 1">1</a>
+                    </li>
+                    <li>
+                        <span class="pagination-ellipsis">&hellip;</span>
+                    </li>
+                    <li>
+                        <a class="pagination-link" aria-label="Goto page 45">45</a>
+                    </li>
+                    <li>
+                        <a class="pagination-link is-current" aria-label="Page 46">46</a>
+                    </li>
+                    <li>
+                        <a class="pagination-link" aria-label="Goto page 47">47</a>
+                    </li>
+                    <li>
+                        <span class="pagination-ellipsis">&hellip;</span>
+                    </li>
+                    <li>
+                        <a class="pagination-link" aria-label="Goto page 86">86</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
 </div>
 
 <footer class="footer">
-	<div class="container">
-		<div class="content has-text-centered">
-			<p>
-				Made by Ignacio Casales | UTN | 2017
-			</p>
-			<p>
-				<a class="icon is-medium is-left is-white" href="https://github.com/ignaciocasales/2017">
-					<i class="fa fa-github"></i>
-				</a>
-			</p>
-		</div>
-	</div>
+    <div class="container">
+        <div class="content has-text-centered">
+            <p>
+                Made by Ignacio Casales | UTN | 2017
+            </p>
+            <p>
+                <a class="icon is-medium is-left is-white" href="https://github.com/ignaciocasales/2017">
+                    <i class="fa fa-github"></i>
+                </a>
+            </p>
+        </div>
+    </div>
 </footer>
 <script src="js/vue.js"></script>
 <script src="js/app.js"></script>

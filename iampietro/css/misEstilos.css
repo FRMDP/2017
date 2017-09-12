@@ -7,4 +7,10 @@ nav {
 	margin-bottom: 10px;
 }
 
+#alerta {
+	display: none;
+}
 
+#alertSpan {
+	float: right;
+}

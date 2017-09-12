@@ -16,6 +16,10 @@
           <div class="row justify-content-md-center">
               <div class="col-md-10">
                 <div v-show="vista == 'ingresar'">
+                    <div id="alerta" class="alert alert-success">
+                        <span aria-hidden="true" id="alertSpan" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>Holy guacamole!</strong> Persona agregada correctamente.
+                    </div>
                   <form>
                     <div class="form-row">
                       <div class="form-group col-md-6">
@@ -35,11 +39,11 @@
                         <input type="email" placeholder="Ingrese e-mail" v-model="persona.mail" class="form-control">
                       </div>
                     </div>
-                    <input value="v" id="radio1" name="radio" type="radio" v-model="persona.sexo">
-                    <span class="custom-control-description">Varon</span>
-                    <input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
-                    <span class="custom-control-description">Mujer</span>
-                    <button :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Ingresar</button>
+                      <input value="v" id="radio1" name="radio" type="radio" v-model="persona.sexo">
+                      <span class="custom-control-description">Varon</span>
+                      <input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+                      <span class="custom-control-description">Mujer</span>
+                      <button :disabled="!formOk" class="btn btn-light" type="submit" @click.prevent="agregarPersona">Ingresar</button>
                   </form>
                 </div>
               </div>
@@ -54,7 +58,7 @@
                         <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
                         <h6 class="card-subtitle mb-2 text-muted">{{ persona.edad }} años</h6>
                         <p class="card-text">Email: <strong>{{ persona.mail }}.</strong></p>
-                        <button data-toggle="tooltip" data-placement="top" data-html="true" title="   Borrar persona" type="button" class="btn btn-outline-success" @click="borrarPersona(persona.mail)">Borrar
+                        <button data-toggle="tooltip" data-placement="top" data-html="true" title="   Borrar persona" type="button" class="btn btn-outline-success" @click.prevent="borrarPersona(persona.mail)">Borrar
                         </button>
                     </div>
                 </div>
@@ -82,7 +86,10 @@
       },
       computed: {
         personasFiltradas() {
-          return this.personas.filter(p => (p.nombre.indexOf(this.filtro) >= 0 || p.apellido.indexOf(this.filtro) >= 0));
+          return this.personas.filter(p => (p.nombre.indexOf(this.filtro) >= 0 || 
+                                            p.apellido.indexOf(this.filtro) >= 0 ||
+                                            p.edad.indexOf(this.filtro) >= 0)
+          );
         },
         formOk() {
           return this.persona.nombre && this.persona.edad
@@ -94,7 +101,8 @@
         agregarPersona() {
           this.personas.push(Object.assign({}, this.persona));
           this.limpiarPersona();
-          this.mensaje = true;
+          //this.mensaje = true;
+          this.activarAlerta();
         },
         limpiarPersona() {
           this.persona.nombre = '';
@@ -106,13 +114,13 @@
         cambiarVista(vista) {
           this.vista = vista;
         },
-        cerrarMensaje() {
-          this.mensaje = false;
+        borrarPersona(mail) {
+          this.personas.splice(this.personas.indexOf(mail),1);
         },
-        borrarPersona(email) {
-          this.personas.splice(this.personas.indexOf(email),1);
+        activarAlerta() {
+          const alert = document.getElementById("alerta");
+          alert.style.display = "block";
         },
-
       }
     })
   </script>

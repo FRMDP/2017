@@ -1,7 +1,7 @@
 const vm = new Vue({
     el: '#app',
     data: {
-        person: {
+        contact: {
             firstName: '',
             lastName: '',
             age: '',
@@ -9,37 +9,50 @@ const vm = new Vue({
             telephoneNumbers: [],
             description: '',
             gender: '',
-            birthDate: ''
+            dob: ''
         },
-        people: [],
+        contacts: [],
         filter: '',
         view: 'search'
     },
+    mounted() {
+        this.getFromLocalStorage();
+    },
     computed: {
-        filteredPeople() {
-            return this.people.filter(p => p.firstName.indexOf(this.filter) >= 0);
+        filteredContacts() {
+            return this.contacts.filter(p => p.firstName.indexOf(this.filter) >= 0);
         },
         formOk() {
-            return this.person.firstName &&
-                this.person.lastName &&
-                this.person.age &&
-                this.person.description &&
-                this.person.gender;
+            return this.contact.firstName &&
+                this.contact.lastName &&
+                this.contact.age &&
+                this.contact.description &&
+                this.contact.gender;
         }
     },
     methods: {
-        addPerson() {
-            this.people.push(Object.assign({}, this.person));
+        addContact() {
+            this.contacts.push(Object.assign({}, this.contact));
             this.cleanPerson();
+            this.saveToLocalStorage(this.contacts)
             /*this.message = true;*/
         },
         cleanPerson() {
-            this.person.firstName = '';
-            this.person.age = '';
-            this.person.gender = '';
+            this.contact.firstName = '';
+            this.contact.age = '';
+            this.contact.gender = '';
         },
         changeView(view) {
             this.view = view;
+        },
+        saveToLocalStorage(contacts){
+            localStorage.setItem('contact', JSON.stringify(contacts));
+        },
+        getFromLocalStorage(){
+            this.contacts = JSON.parse(localStorage.getItem('contact'));
+        },
+        firstToUpper(string){
+            return string.charAt(0).toUpperCase() + string.slice(1);
         }
     }
 });

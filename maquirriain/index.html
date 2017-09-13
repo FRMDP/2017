@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TP3</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="css/myCss.css"/>
+</head>
+<body>
+  <div id="app">
+   <header>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="nav-link" href="#" @click="cambiarVista('ingresar')">Add</a>
+          <a class="nav-link" href="#" @click="cambiarVista('buscar')">Search</a>
+        </nav>
+      </div>
+   </header>
+    <div class='container-fluid'>
+      <div class='row justify-content-center'>
+        <div class='col-md-4 center'>
+          <div v-show="vista == 'ingresar'">
+            <div v-if='mensaje' class="alert alert-warning alert-dismissible fade show " role="alert">
+              <button @click="cerrarMensaje" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>Holy guacamole!</strong> You add a new person
+            </div>
+            <form>
+              <label>Name</label>
+              <input class="form-control" v-model="persona.nombre" type="text" placeholder="Put your name">
+      				<label>Age</label>
+      				<input class="form-control" type="number" placeholder="Put your age" v-model="persona.edad">
+              <label>Description</label>
+              <textarea  class="form-control Styletextarea" v-model="persona.descripcion"> </textarea>
+              <input value="v" id="radio1" name="radio" type="radio" v-model="persona.sexo">
+      				<span class="custom-control-description">Man</span>
+          		<input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+              <span class="custom-control-description">Woman</span>
+              <br/>
+      				<button class="btn btn-success" :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Send</button>
+            </form>
+          </div>
+          <div v-show="vista == 'buscar'">
+            <input class="form-control" type="text" placeholder="Filter" v-model="filtro">
+            <h3 v-if="!personas.length">:(</h3>
+            <div v-else v-for="(persona,index) in personasFiltradas">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">{{ persona.nombre }} ({{ persona.edad }})</h4>
+                      <p class="card-text">{{persona.descripcion}} </p>
+                      <a href="#" @click="deletePeople(index)">Delete</a>
+                      <a href="#" @click='editPeople(index)'>edit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-show="vista == 'edit'">
+          <form>
+            <label >Name</label>
+            <input type='text' v-model='index'/>
+            <input class="form-control" v-model="persona.nombre" type="text" placeholder="Put your name">
+            <label>agregarPersona</label>
+            <input class="form-control" type="number" placeholder="Put your age" v-model="persona.edad">
+            <label>Description</label>
+            <textarea  class="form-control Styletextarea" v-model="persona.descripcion"> </textarea>
+            <input value="v" id="radio1" name="radio" type="radio" v-model="persona.sexo">
+            <span class="custom-control-description">Men</span>
+            <input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+            <span class="custom-control-description">Women</span>
+            <br/>
+            <button class="btn btn-success" :disabled="!formOk" type="submit" @click.prevent="saveEditing">Edit</button>
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/vue.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

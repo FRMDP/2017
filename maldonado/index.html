@@ -22,10 +22,15 @@
 		<!--Ingreso personas -->
 		<div v-show="vista == 'ingresar'">
 			<div class="row">
-				<div class="col s12 m8 l6 offset-m1 offset-l3">
+				<div class="col s12 m10 l6 offset-m1 offset-l3">
 					<div class="alert" id="alerta">
 						<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
 						Holy Guacamole! Contacto agregado con exito.
+					</div>
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<h4 class="tituloIngreso">Agregar una persona a contactos</h4>
+						</div>
 					</div>
 					<form>
 						<label for="first_name">Nombre</label>
@@ -63,7 +68,7 @@
 		<!-- Buscar personas -->
 		<div v-show="vista == 'buscar'">
 			<div class="row">
-				<div class="col s12 m8 l6 offset-m1 offset-l3">
+				<div class="col s12 m10 l6 offset-m1 offset-l3">
 					<input type="text" placeholder="Filtrar" v-model="filtro">
 					<h3 v-if="!personas.length">No hay personas</h3>
 					<div v-else v-for="(persona, index) in personasFiltradas">
@@ -96,7 +101,7 @@
 		<!-- Lista de favoritos -->
 		<div v-show="vista == 'favoritos'">
 			<div class="row">
-				<div class="col s12 m8 l6 offset-m1 offset-l3">
+				<div class="col s12 m10 l6 offset-m1 offset-l3">
 					<input type="text" placeholder="Filtrar" v-model="filtro">
 					<h3 v-if="!favoritos.length">No has agregado favoritos</h3>
 					<div v-else v-for="(favorito, index) in favoritosFiltrados">

@@ -4,7 +4,6 @@ const vm = new Vue({
         contact: {
             firstName: '',
             lastName: '',
-            age: '',
             address: '',
             telephoneNumbers: [],
             description: '',
@@ -16,7 +15,7 @@ const vm = new Vue({
         view: 'search'
     },
     mounted() {
-        this.getFromLocalStorage();
+        this.getContactsFromLocalStorage();
     },
     computed: {
         filteredContacts() {
@@ -25,7 +24,6 @@ const vm = new Vue({
         formOk() {
             return this.contact.firstName &&
                 this.contact.lastName &&
-                this.contact.age &&
                 this.contact.description &&
                 this.contact.gender;
         }
@@ -34,24 +32,27 @@ const vm = new Vue({
         addContact() {
             this.contacts.push(Object.assign({}, this.contact));
             this.cleanPerson();
-            this.saveToLocalStorage(this.contacts)
+            this.saveContactsToLocalStorage(this.contacts)
             /*this.message = true;*/
         },
         cleanPerson() {
             this.contact.firstName = '';
-            this.contact.age = '';
+            this.contact.lastName = '';
+            this.contact.dob = '';
+            this.contact.description = '';
             this.contact.gender = '';
         },
         changeView(view) {
             this.view = view;
         },
-        saveToLocalStorage(contacts){
-            localStorage.setItem('contact', JSON.stringify(contacts));
+        saveContactsToLocalStorage(contacts) {
+            localStorage.setItem('contacts', JSON.stringify(contacts));
         },
-        getFromLocalStorage(){
-            this.contacts = JSON.parse(localStorage.getItem('contact'));
+        getContactsFromLocalStorage() {
+            list = JSON.parse(localStorage.getItem('contacts'));
+            this.contacts = list ? list : [];
         },
-        firstToUpper(string){
+        firstToUpper(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
     }

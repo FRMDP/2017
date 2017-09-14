@@ -12,6 +12,7 @@
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
               <a class="nav-link navbar-brand" href="#" @click="cambiarVista('ingresar')">Ingresar</a>
               <a class="nav-link navbar-brand" href="#" @click="cambiarVista('buscar')">Buscar</a>
+              <a class="nav-link navbar-brand" href="#" @click="cambiarVista('')"></a>
           </nav>
           <div class="row justify-content-md-center">
               <div class="col-md-10">
@@ -22,24 +23,25 @@
                     </div>
                   <form>
                     <div class="form-row">
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-6 col-sm-6 col-xs-6">
                         <label>Nombre</label>
                         <input v-model="persona.nombre" type="text" placeholder="Ingrese nombre" class="form-control">
                       </div>
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-6 col-sm-6 col-xs-6">
                         <label>Apellido</label>
                         <input v-model="persona.apellido" type="text" placeholder="Ingrese apellido" class="form-control">
                       </div>
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-6 col-sm-6 col-xs-6">
                         <label>Edad</label>
                         <input type="number" placeholder="Ingrese edad" v-model="persona.edad" class="form-control">
                       </div>
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-6 col-sm-6 col-xs-6">
                         <label>Mail</label>
                         <input type="email" placeholder="Ingrese e-mail" v-model="persona.mail" class="form-control">
                       </div>
                     </div>
-                      <input value="v" id="radio1" name="radio" type="radio" v-model="persona.sexo">
+                      <input value="v" id="radio1" name="radio" type="radio" v-model="persona.sexo"
+                      checked>
                       <span class="custom-control-description">Varon</span>
                       <input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
                       <span class="custom-control-description">Mujer</span>
@@ -48,20 +50,29 @@
                 </div>
               </div>
           </div>
-          <div class="row row justify-content-md-center">
-            <div class="col-md-10">
+          <div class="row justify-content-md-center">
+            <div class="col-md-10 col-sm-10 col-xs-10">
               <div v-show="vista == 'buscar'">
-                <input type="text" placeholder="Filtrar" v-model="filtro">
-                <h3 v-if="!personas.length">No hay personas</h3>
-                <div v-else v-for="persona in personasFiltradas" class="card" id="people">
-                    <div class="card-body">
-                        <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ persona.edad }} años</h6>
-                        <p class="card-text">Email: <strong>{{ persona.mail }}.</strong></p>
-                        <button data-toggle="tooltip" data-placement="top" data-html="true" title="   Borrar persona" type="button" class="btn btn-outline-success" @click.prevent="borrarPersona(persona.mail)">Borrar
-                        </button>
+                  <div class="row justify-content-md-center" v-show="personas.length">
+                    <span id="spanNearFilter"><strong> Buscar contacto: </strong></span>
+                    <input type="text" placeholder="Ej: Pablo 'Homero' Fino" v-model="filtro">
+                  </div>
+                  <div class="row justify-content-md-center">
+                    <div class="jumbotron" v-if="!personas.length">
+                      <h1 class="display-3">Hello there!</h1>
+                      <p class="lead">Haven't added any contact yet? Go on and attach your friends!</p>
+                      <hr class="my-4">
+                    </div>                  
+                    <div v-else v-for="(persona, index) in personasFiltradas" class="card card-inverse" id="people">
+                          <div class="card-body">
+                              <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
+                              <h6 class="card-subtitle mb-2 text-muted">{{ persona.edad }} años</h6>
+                              <p class="card-text">Email: <strong>{{ persona.mail }}.</strong></p>
+                              <button data-toggle="tooltip" data-placement="top" data-html="true" title="   Borrar persona" type="button" class="btn btn-outline-success" @click.prevent="borrarPersona(index)">Borrar
+                              </button>
+                          </div>
                     </div>
-                </div>
+                  </div>
               </div>
             </div>
           </div>
@@ -86,9 +97,9 @@
       },
       computed: {
         personasFiltradas() {
-          return this.personas.filter(p => (p.nombre.indexOf(this.filtro) >= 0 || 
-                                            p.apellido.indexOf(this.filtro) >= 0 ||
-                                            p.edad.indexOf(this.filtro) >= 0)
+          return this.personas.filter(p => (p.apellido.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+                                            p.edad.indexOf(this.filtro) >= 0 ||
+                                            p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0)
           );
         },
         formOk() {
@@ -99,10 +110,11 @@
       },
       methods: {
         agregarPersona() {
-          this.personas.push(Object.assign({}, this.persona));
+          this.personas.push(Object.assign({}, this.persona));  // a un objeto vacio, le paso todo lo q hay en persona
           this.limpiarPersona();
           //this.mensaje = true;
           this.activarAlerta();
+          this.saveContactsToStorage();
         },
         limpiarPersona() {
           this.persona.nombre = '';
@@ -114,16 +126,33 @@
         cambiarVista(vista) {
           this.vista = vista;
         },
-        borrarPersona(mail) {
-          this.personas.splice(this.personas.indexOf(mail),1);
+        borrarPersona(index) {
+          this.personas.splice(index,1);
+          this.removeFromStorage();
         },
         activarAlerta() {
           const alert = document.getElementById("alerta");
           alert.style.display = "block";
         },
+        saveContactsToStorage(){
+          localStorage.setItem('personas',JSON.stringify(this.personas));
+        },
+        getContactsFromStorage(){
+          const contactos = localStorage.getItem('personas');
+          if (contactos) {
+            this.personas = JSON.parse(contactos);
+          }
+        },
+        removeFromStorage(){
+          localStorage.removeItem('personas');
+          this.saveContactsToStorage();
+        }
+
+      },
+      mounted(){
+        this.getContactsFromStorage();
       }
     })
   </script>
-  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

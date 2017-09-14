@@ -17,7 +17,7 @@ new Vue({
   },
   computed: {
   	personasFiltradas() {
-  		return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0);
+  		return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 );
   	},
   	formOk() {
   		return this.persona.nombre && this.persona.edad && this.persona.sexo && this.persona.descripcion;
@@ -39,13 +39,14 @@ new Vue({
   	},
   	cambiarVista(vista) {
   		this.vista = vista;
-  	},
+      this.limpiarPersona();
+    },
   	cerrarMensaje() {
   		this.mensaje = false;
   	},
     deletePeople(index){
       this.personas.splice(index,1);
-      this.removeStorage();
+      this.savePeopleStorage();
     },
     savePeopleStorage()
     {
@@ -58,11 +59,6 @@ new Vue({
         this.personas = JSON.parse(people);
       }
     },
-    removeStorage()
-    {
-      localStorage.removeItem('people');
-      this.savePeopleStorage();
-    },
     saveEditing(){
       const index = this.index;
       const persona = this.personas[index];
@@ -70,9 +66,8 @@ new Vue({
       this.personas[index].edad = this.persona.edad;
       this.personas[index].descripcion = this.persona.descripcion;
       this.personas[index].sexo = this.persona.sexo;
-      this.limpiarPersona();
       this.cambiarVista('buscar');
-      this.removeStorage();
+      this.savePeopleStorage();
     },
 
     editPeople(index){

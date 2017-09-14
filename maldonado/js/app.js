@@ -13,7 +13,6 @@ new Vue({
     favoritos: [],
     filtro: '',
     vista: 'ingresar',
-    mensaje: false
   },
   computed: {
   	personasFiltradas() {

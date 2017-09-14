@@ -33,28 +33,25 @@
 						</div>
 					</div>
 					<form>
-						<label for="first_name">Nombre</label>
 						<input v-model="persona.nombre" type="text" id="first_name" placeholder="Ingrese Nombre">
-						<label for="last_name">Apellido</label>
 						<input v-model="persona.apellido" type="text" id="last_name" 
 							placeholder="Ingrese Apellido">
-						<label for="age">Edad</label>
 						<input type="number" placeholder="Ingrese Edad" id="age" v-model="persona.edad">
-				        <label for="phone">Telefono</label>
 						<input type="number" placeholder="Ingrese Telefono" id="phone" 
 							v-model="persona.telefono">
-						<label for="textarea">Gustos</label>
 						<textarea id="textarea" v-model="persona.gustos" class="materialize-textarea" 
 							placeholder="Ingrese de forma breve sus gustos">
 						</textarea>
-						<label>Sexo</label>
+						<label for="sexo">Indique sexo</label>
 						<div class="row" id="sexo">
-							<input class="with-gap" name="sexo" value="Varon" type="radio" id="varon" 
-								v-model="persona.sexo"/>
-	     					<label for="varon">Varon</label>
-	     					<input class="with-gap" name="sexo" value="Mujer" type="radio" id="mujer" 
-	     						v-model="persona.sexo"/>
-	     					<label for="mujer">Mujer</label>
+							<div class="col l4 offset-l1">
+								<input class="with-gap" name="sexo" value="Varon" type="radio" id="varon" 
+									v-model="persona.sexo"/>
+		     					<label for="varon">Varon</label>
+		     					<input class="with-gap" name="sexo" value="Mujer" type="radio" id="mujer" 
+		     						v-model="persona.sexo"/>
+		     					<label for="mujer">Mujer</label>
+		     				</div>
 	     				</div>
 						<button class="botonIngreso" :disabled="!formOk" type="submit" @click.prevent="agregarPersona" 
 							onclick="document.getElementById('alerta').style.display='block';" >
@@ -71,6 +68,7 @@
 				<div class="col s12 m10 l6 offset-m1 offset-l3">
 					<input type="text" placeholder="Filtrar" v-model="filtro">
 					<h3 v-if="!personas.length">No hay personas</h3>
+					<h3 v-if="!personasFiltradas.length">Persona no encontrada</h3>
 					<div v-else v-for="(persona, index) in personasFiltradas">
 						<div class="card cardContent">
 							<h4 class="card-title">{{ persona.nombre }}, {{ persona.apellido }}</h4>
@@ -104,6 +102,7 @@
 				<div class="col s12 m10 l6 offset-m1 offset-l3">
 					<input type="text" placeholder="Filtrar" v-model="filtro">
 					<h3 v-if="!favoritos.length">No has agregado favoritos</h3>
+					<h3 v-if="!favoritosFiltrados.length">Favorito no encontrado</h3>
 					<div v-else v-for="(favorito, index) in favoritosFiltrados">
 						<div class="card cardContent">
 							<h4 class="card-title">{{ favorito.nombre }}, {{ favorito.apellido }}</h4>

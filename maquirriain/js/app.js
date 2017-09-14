@@ -6,18 +6,16 @@ new Vue({
     	edad: '',
     	sexo: '',
       descripcion: '',
-      edit: false
     },
     personas: [],
     filtro: '',
     vista: 'ingresar',
     mensaje: false,
     index: null
-    //people:{}
   },
   computed: {
   	personasFiltradas() {
-  		return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 );
+  		return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 || p.edad.indexOf(this.filtro) >= 0);
   	},
   	formOk() {
   		return this.persona.nombre && this.persona.edad && this.persona.sexo && this.persona.descripcion;

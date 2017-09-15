@@ -11,33 +11,38 @@ const vf = new Vue({
             mail: '',
             sexo:''
         },
+        checkedBox: [],
         ultimoId: 1,
         alertaAgregado: false,
         alertaModificado: false,
         vista: 'agregar',
         filtro: '',
         estadoMenu: false
-    },
+    }, //data
     computed: {
-        personasFiltradas() {
-            return this.personas.filter(p => (p.nombre.toUpperCase().indexOf(this.filtro.toUpperCase()) >= 0) || p.apellido.toUpperCase().indexOf(this.filtro.toUpperCase()) >=0
-            || p.direccion.toUpperCase().indexOf(this.filtro.toUpperCase()) >=0 || p.mail.toUpperCase().indexOf(this.filtro.toUpperCase()) >=0
-            || p.telefono.indexOf(this.filtro) >=0);
+        personasFiltradas() { //no importa lo que se ponga en filtro, busca por cualquier campo
+            return this.personas.filter(p => (p.nombre.toUpperCase().indexOf(this.filtro.toUpperCase()) >= 0) || p.apellido.toUpperCase().indexOf(this.filtro.toUpperCase()) >= 0
+                || p.direccion.toUpperCase().indexOf(this.filtro.toUpperCase()) >=0 || p.mail.toUpperCase().indexOf(this.filtro.toUpperCase()) >= 0
+                || p.telefono.indexOf(this.filtro) >= 0 || p.sexo.toUpperCase().indexOf(this.filtro.toUpperCase()) >= 0);
         },
         cantPersonas(){
             return this.personas.length;
         },
         formOK() {
             return this.persona.nombre && this.persona.apellido && this.persona.sexo 
-            && this.persona.direccion && this.persona.mail && this.persona.telefono;
-        }
-    },
+                && this.persona.direccion && this.persona.mail && this.persona.telefono;
+        },
+        comprobarCheck(check){
+            return this.checkedBox.indexOf(check);
+        },
+    }, //computed
     methods: {
         cambiarVista(vista){
             this.vista = vista;
             if(vista!="modificar")
                 this.cambiarMenu();
-            this.estadoAlerta = false;
+            this.alertaAgregado = false;
+            this.alertaModificado = false;
             this.limpiarForm();
         },
         cambiarAlerta(tipo){
@@ -64,7 +69,7 @@ const vf = new Vue({
             personasText = JSON.stringify(this.personas);
             localStorage.setItem("contactos", personasText);
             this.limpiarForm();
-            this.cambiarAlerta(); 
+            this.cambiarAlerta("agregado"); 
         },
         cargarPersona(person){
             this.persona.indice = person.indice;
@@ -79,11 +84,14 @@ const vf = new Vue({
             this.cambiarVista('modificar');
             this.cargarPersona(person);
         },
-        modificarPersona(){
-            pos=0;
+        buscarPosicion(){
+            pos = 0;
             while(this.personas[pos].indice != this.persona.indice)
                 pos++;
-
+            return pos;
+        },
+        modificarPersona(){
+            pos = this.buscarPosicion();
             this.personas[pos].nombre = this.persona.nombre;
             this.personas[pos].apellido = this.persona.apellido;
             this.personas[pos].direccion = this.persona.direccion;
@@ -94,22 +102,24 @@ const vf = new Vue({
             this.cambiarAlerta('modificado');
         },
         borrarPersona(person){
-            this.cargarPersona(person);
-            pos=0;
-            while(this.personas[pos].indice != this.persona.indice)
-                pos++;
-            this.personas.splice(pos,1);
-            if(this.personas.length == 0)
-                localStorage.clear();
-            else{
-                personasText = JSON.stringify(this.personas);
-                localStorage.setItem("contactos", personasText);
+            if(confirm("¿Realmente desea borrar al contacto?")){
+                this.cargarPersona(person);
+                while(this.personas[this.buscarPosicion()].indice != this.persona.indice)
+                    pos++;
+                this.personas.splice(pos,1);
+                if(this.personas.length == 0)
+                    localStorage.clear();
+                else{
+                    personasText = JSON.stringify(this.personas);
+                    localStorage.setItem("contactos", personasText);
+                }
             }
         },
-    },
-    mounted(){//se ejecuta una vez al principio
-        if(localStorage.length !=0 )
+    }, //methods
+    mounted(){ //se ejecuta una vez al principio
+        if(localStorage.length != 0 ){
             this.personas = JSON.parse(localStorage.getItem("contactos"));
             this.ultimoId = this.personas[(this.personas.length-1)].indice + 1; 
+        }
     }
 });

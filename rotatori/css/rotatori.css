@@ -9,6 +9,10 @@
     margin-top: 1rem;
 }
 
+.subindice{
+    font-size:10px;
+    margin-left: 3em;
+}
 .menu{
     width: 15%; 
     height: 150px;
@@ -34,6 +38,19 @@
 .cuadroSombra {
     box-shadow: 7px 7px 20px 0 #4a4949;
     border-radius: 12px 12px 12px 0;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    width: 400px; 
+    text-align: center;
+    margin-left: 35%;
+}
+
+.over:hover{
+    background: rgba(204, 73, 73, 0.67);
 }
 
 .alert-success {
@@ -85,3 +102,15 @@ button.close {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0
 }
+
+.slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+  }

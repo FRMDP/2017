@@ -59,33 +59,30 @@
 		       <div v-if="mensaje == true" class="white-text card-panel green lighten-1 center"><i class="material-icons left">done</i>¡ Usuario registrado correctamente !</div>
 		    </form>
 		    <div v-if="vista == 'ver_todos'" class="col s12 l6 offset-l3 formulario">
-		    	<div v-if="personas.length != 0">
-			    	<h1 class="center">Lista de Contactos</h1>
-			    	<div class="input-field">
-				        <i class="material-icons prefix large">search</i>
-				        <!-- El input debería ser de tipo "search", pero se veía feo el estilo -->
-				        <input v-model="busqueda" id="icon_prefix" type="text" class="validate">
-				        <label for="icon_prefix">Buscar contacto</label>
-			    	</div>  
-			    	<div v-for="(persona, index) in personasFiltradas" class="card blue darken-2">
-			            <div class="card-content white-text">
-			              <span class="card-title">
-			              	<p><i class="material-icons left">person</i> {{persona.apellido}} {{persona.nombre}} </p>
-		              		<button class="waves-effect red btn-floating right darken-0" @click="eliminarPersona(index);">
-		              			<i class="material-icons">delete_forever</i>
-		              		</button>
-							<button class="waves-effect waves-yellow btn-floating right btnFavorito" :class="{ favoritoOn : persona.favorito}" @click="agregarOquitarFavorito(index);">
-								<i class="material-icons">star_border</i>
-							</button>
-			              </span>
-			              <ul class="descripcion_usuario">
-			              	<li>E-mail: {{persona.email}}</li>
-			              	<li>Teléfono: {{persona.telefono}}</li>
-			              </ul>
-			            </div>
-			        </div>
+			<h1 class="center">Lista de Contactos</h1>
+			<div class="input-field">
+				<i class="material-icons prefix large">search</i>
+				<!-- El input debería ser de tipo "search", pero se veía feo el estilo -->
+				<input v-model="busqueda" id="icon_prefix" type="text" class="validate">
+				<label for="icon_prefix">Buscar contacto</label>
+			</div>  
+			<div v-for="(persona, index) in personasFiltradas" class="card blue darken-2">
+			    <div class="card-content white-text">
+			      <span class="card-title">
+				<p><i class="material-icons left">person</i> {{persona.apellido}} {{persona.nombre}} </p>
+				<button class="waves-effect red btn-floating right darken-0" @click="eliminarPersona(index);">
+					<i class="material-icons">delete_forever</i>
+				</button>
+						<button class="waves-effect waves-yellow btn-floating right btnFavorito" :class="{ favoritoOn : persona.favorito}" @click="agregarOquitarFavorito(index);">
+							<i class="material-icons">star_border</i>
+						</button>
+			      </span>
+			      <ul class="descripcion_usuario">
+				<li>E-mail: {{persona.email}}</li>
+				<li>Teléfono: {{persona.telefono}}</li>
+			      </ul>
 			    </div>
-			    <h3 v-else class="center">No hay personas cargadas</h3>
+			</div>
 		    </div>
 		    <div v-if="vista == 'favoritos'" class="col s12 l6 offset-l3 formulario">
 		   		<div v-if="personasFavoritas.length > 0">

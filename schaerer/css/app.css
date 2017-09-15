@@ -1,0 +1,27 @@
+#tituloVistaAgregar{
+	color: #b71c1c ; 
+	font-family: 'Trocchi', serif; 
+	font-size: 50px; 
+	font-weight: normal; 
+	line-height: 58px;
+	padding-left: 300px; 
+}
+
+#tituloVistaEditar{
+	color: #b71c1c; 
+	font-family: 'Raleway',sans-serif; 
+	font-size: 50px; 
+	font-weight: 800; 
+	line-height: 72px; 
+	margin: 24px; 
+	text-align: center;
+}
+
+.myCard{
+	padding: 20px;
+	border: 5px #00897b;
+}
+
+.botonConLetrasRojitas{
+	color: #b71c1c;
+}

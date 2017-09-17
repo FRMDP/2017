@@ -41,7 +41,8 @@
     </div>
     <div class="row">
         <div class="mx-auto" v-show="vista == 'ingresar'">
-            <div v-if="ingresadoAlert" @click.prevent="cerrarAlert" class="alert alert-success" role="alert">
+            <div v-if="ingresadoAlert" @click.prevent="cerrarAlert" class="alert alert-success marginOfCards"
+                 role="alert">
                 Usuario ingresado con exito.
             </div>
             <h2>Ingreso de Contactos</h2>
@@ -78,7 +79,7 @@
             </form>
         </div>
         <div class="mx-auto" v-show="vista == 'buscar'">
-            <div v-if="borradoAlert" @click.prevent="cerrarAlert" class="alert alert-danger" role="alert">
+            <div v-if="borradoAlert" @click.prevent="cerrarAlert" class="alert alert-danger marginOfCards" role="alert">
                 Se ha borrado el usuario. Tranquilo! Esta en su papelera.
             </div>
             <h2>Busqueda de Contactos</h2>
@@ -93,12 +94,14 @@
                     </div>
                 </div>
             </div>
+            <h3 v-if="!personasFiltradas.length">Su busqueda no produjo resultados</h3>
         </div>
         <div class="mx-auto" v-show="vista == 'papelera'">
-            <div v-if="borradoAlert" @click.prevent="cerrarAlert" class="alert alert-danger" role="alert">
+            <div v-if="borradoAlert" @click.prevent="cerrarAlert" class="alert alert-danger marginOfCards" role="alert">
                 Se ha borrado el usuario Definitivamente.
             </div>
-            <div v-if="restauradoAlert" @click.prevent="cerrarAlert" class="alert alert-warning" role="alert">
+            <div v-if="restauradoAlert" @click.prevent="cerrarAlert" class="alert alert-warning marginOfCards"
+                 role="alert">
                 Se ha restaurado el usuario correctamente.
             </div>
             <h2>Mi papelera de reciclaje</h2>
@@ -115,6 +118,7 @@
                     </div>
                 </div>
             </div>
+            <h3 v-if="!personasFiltradas.length">Su busqueda no produjo resultados</h3>
         </div>
     </div>
     <script src="js/vue.js"></script>

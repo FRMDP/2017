@@ -18,13 +18,13 @@ new Vue({
     },
     computed: {
         personasFiltradas() {
-            return this.personas.filter(p => p.nombre.indexOf(this.filtro) >= 0 || p.edad.indexOf(this.filtro) >= 0 || p.sexo.indexOf(this.filtro) >= 0 || p.cel.indexOf(this.filtro) >= 0 || p.mail.indexOf(this.filtro) >= 0);
+            return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro) >= 0 || p.edad.indexOf(this.filtro) >= 0 || p.sexo.toLowerCase().indexOf(this.filtro) >= 0 || p.cel.indexOf(this.filtro) >= 0 || p.mail.toLowerCase().indexOf(this.filtro) >= 0);
         },
         formOk() {
             return this.persona.nombre && this.persona.edad && this.persona.sexo;
         },
         trashFiltrados() {
-            return this.trash.filter(p => p.nombre.indexOf(this.filtro) >= 0 || p.edad.indexOf(this.filtro) >= 0 || p.sexo.indexOf(this.filtro) >= 0 || p.cel.indexOf(this.filtro) >= 0 || p.mail.indexOf(this.filtro) >= 0);
+            return this.trash.filter(p => p.nombre.toLowerCase().indexOf(this.filtro) >= 0 || p.edad.indexOf(this.filtro) >= 0 || p.sexo.toLowerCase().indexOf(this.filtro) >= 0 || p.cel.indexOf(this.filtro) >= 0 || p.mail.toLowerCase().indexOf(this.filtro) >= 0);
         },
     },
     methods: {

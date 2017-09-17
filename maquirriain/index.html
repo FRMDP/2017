@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TP3</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="css/myCss.css"/>
+</head>
+<body>
+  <div id="app">
+   <header>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">Agenda</a>
+          <a class="nav-link" href="#" @click="cambiarVista('ingresar')">Add</a>
+          <a class="nav-link" href="#" @click="cambiarVista('buscar')">Search</a>
+        </nav>
+      </div>
+   </header>
+    <div class='container-fluid'>
+      <div class='row justify-content-center'>
+        <div class='col-md-4 center'>
+          <div v-show="vista == 'ingresar'">
+            <div v-if='mensaje' class="alert alert-warning alert-dismissible fade show " role="alert">
+              <button @click="cerrarMensaje" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>Holy guacamole!</strong> You add a new person
+            </div>
+            <form>
+              <label class="sizeSubTitle"><strong>Add a person</strong></label>
+              <br/>
+              <label>Name</label>
+              <input class="form-control" v-model="persona.nombre" type="text" placeholder="Put your name">
+      				<label>Age</label>
+      				<input class="form-control" type="number" placeholder="Put your age" v-model="persona.edad">
+              <label>Description</label>
+              <textarea  class="form-control Styletextarea" v-model="persona.descripcion"> </textarea>
+              <label class="custom-control custom-radio">
+                <input value="male" class="custom-control-input" id="radio1" name="radio" type="radio" v-model="persona.sexo">
+                <span class="custom-control-indicator"></span>
+        				<span class="custom-control-description">Man</span>
+              </label>
+              <label class="custom-control custom-radio">
+            		<input value="female" class="custom-control-input" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Woman</span>
+              </label>
+              <br/>
+      				<button class="btn btn-success spaceButton" :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Send</button>
+            </form>
+          </div>
+          <div v-show="vista == 'buscar'">
+            <label class="sizeSubTitle"><strong>Search people</strong></label>
+            <br/>
+            <input class="form-control" type="text" placeholder="Filter" v-model="filtro">
+            <h3 v-if="!personas.length">:(</h3>
+            <div v-else v-for="(persona,index) in personasFiltradas">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">{{persona.nombre}}</h4>
+                  <p class="card-title"><strong>Age: {{persona.edad}}</strong></p>
+                  <p class="card-title"><strong>Sex: {{persona.sexo}}</strong></p>
+                  <p class="card-text">{{persona.descripcion}} </p>
+                  <a href="#" class="spaceButton" @click="deletePeople(index)">Delete</a>
+                  <a href="#" class="spaceButton" @click='editPeople(index)'>Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-show="vista == 'edit'">
+          <form>
+            <label class="sizeSubTitle"><strong>Edit person</strong></label>
+            <br/>
+            <label>Name</label>
+            <input type='hidden' v-model='index'/>
+            <input class="form-control" v-model="persona.nombre" type="text" placeholder="Put your name">
+            <label>Age</label>
+            <input class="form-control" type="number" placeholder="Put your age" v-model="persona.edad">
+            <label>Description</label>
+            <textarea  class="form-control Styletextarea" v-model="persona.descripcion"> </textarea>
+            <label class="custom-control custom-radio">
+              <input value="male" class="custom-control-input" id="radio1" name="radio" type="radio" v-model="persona.sexo">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Man</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input value="female" class="custom-control-input" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Woman</span>
+            </label>
+            <br/>
+            <button class="btn btn-success spaceButton" :disabled="!formOk" type="submit" @click.prevent="saveEditing">Edit</button>
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/vue.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

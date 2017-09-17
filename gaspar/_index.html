@@ -152,7 +152,7 @@
             <input class="input" v-model="persona.direccion" type="text" placeholder="Ingrese Direccion">
           </div>
         </div>
-        <button class="button" :disabled="!formOk" type="submit" @click.prevent="editarPersona(indice)">Guardar</button>
+        <button class="button" :disabled="!formOk" type="submit" @click.prevent="editarPersona()">Guardar</button>
         <div v-show ="mensaje" class="modal">
           <div class="modal-content">
           <button class="delete" @click="cerrarEdicion"></button>

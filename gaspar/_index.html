@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Agenda-Gaspar</title>
+  <link rel="stylesheet" type="text/css" href="css/bulma.css">
+  <link rel="stylesheet" type="text/css" href="css/custom.css">
+</head>
+<body>
+  <div class="container" id="app">
+    <nav class="navbar ">
+      <div class="navbar-brand">
+        <a class="navbar-item-a" href="_index.html">
+          <img src="css/overlay-agenda-1015b990f3bc0f981173250f429a1c19.png" width="112" height="28">
+        </a>
+        <div id="navMenubd-example" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item-a" href="#" @click="cambiarVista('ingresar')">Agregar</a>
+            <a class="navbar-item-a" href="#" @click="cambiarVista('buscar')">Buscar</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div id="form" v-show="vista == 'ingresar'">
+      <form>
+        <div class="field">
+          <label class="label">Nombre</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" v-model="persona.nombre" type="text" placeholder="Ingrese Nombre">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Apellido</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" v-model="persona.apellido" type="text" placeholder="Ingrese Apellido">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Edad</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" v-model="persona.edad" type="number" placeholder="Ingrese Edad">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Sexo</label>
+          <div class="control">
+            <div class="select">
+              <select v-model="persona.sexo">
+                <option disabled value="">Seleccione sexo</option>
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Telefono</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" v-model="persona.telefono" type="number" placeholder="Ingrese Nro de Telefono">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Direccion</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" v-model="persona.direccion" type="text" placeholder="Ingrese Direccion">
+          </div>
+        </div>
+        <button class="button" :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Ingresar</button>
+        <div v-show ="mensaje" class="modal">
+          <div class="modal-content">
+          <button class="delete" @click="cerrarMensaje"></button>
+          <p>Contacto Agregado</p>
+        </div>
+      </div>
+      </form>
+    </div>
+    <div class ="container" id="buscar" v-show="vista == 'buscar'">
+      <h3>Filtrar por cualquier campo</h3>
+      <input type="text" placeholder="Filtrar" v-model="filtro">
+      <div width="auto" class= "grid-wrapper" id="contenedor">
+        <h3 v-if="!personas.length">No hay personas</h3>
+        <div class="grid-item" id="agenda" v-else v-for="(persona, index) in personasFiltradas">
+          <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img src="css/contacto.png" alt="Placeholder image">
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-6">Nombre: {{persona.nombre}}</p>
+                  <p class="title is-6">Apellido: {{persona.apellido}}</p>
+                  <div class="content">
+                    <p class="subtitle is-6">Edad: {{ persona.edad }}</p>
+                    <p class="subtitle is-6">Sexo: {{persona.sexo}}</p>
+                    <p class="subtitle is-6">Telefono: {{persona.telefono}}</p>
+                    <p class="subtitle is-6">Direccion: {{persona.direccion}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div  class="botones">
+            <button class="button" @click="manejarEdicion('editar',index)">Editar</button>
+            <button class="button" @click="eliminarPersona(index)">Eliminar</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="form2" v-show="vista == 'editar'">
+      <form>
+        <div class="field">
+          <label class="label">Nombre</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" v-model="persona.nombre" type="text" placeholder="Ingrese Nombre" value="hola">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Apellido</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" v-model="persona.apellido" type="text" placeholder="Ingrese Apellido">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Edad</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" v-model="persona.edad" type="number" placeholder="Ingrese Edad">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Sexo</label>
+          <div class="control">
+            <div class="select">
+              <select v-model="persona.sexo">
+                <option disabled value="">Seleccione sexo</option>
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Telefono</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" v-model="persona.telefono" type="number" placeholder="Ingrese Nro de Telefono">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Direccion</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" v-model="persona.direccion" type="text" placeholder="Ingrese Direccion">
+          </div>
+        </div>
+        <button class="button" :disabled="!formOk" type="submit" @click.prevent="editarPersona(indice)">Guardar</button>
+        <div v-show ="mensaje" class="modal">
+          <div class="modal-content">
+          <button class="delete" @click="cerrarEdicion"></button>
+          <p>Contacto Editado</p>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+  <script src="js/vue.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

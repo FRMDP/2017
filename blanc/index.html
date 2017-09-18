@@ -17,7 +17,7 @@
       <!--Navbar-->
       <nav class="dark-primary-color" role="navigation">
         <div class="nav-wrapper container">
-          <a id="logo-container" href="#" class="right brand-logo">AgendAPP</a>
+          <a id="logo-container" @click="changeView('home')" class="right brand-logo">AgendAPP</a>
           <ul class="left hide-on-med-and-down">
             <li><a class="dropdown-button" href="#!" data-activates="nav-mobile">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
           </ul>
@@ -32,13 +32,13 @@
       </nav>
 
       <!--Application Banner-->
-      <div id="index-banner" class="default-primary-color">
+      <div id="index-banner" class="default-primary-color" @click="changeView('home')">
         <div class="section">
           <div class="container">
             <br><br>
             <h1 class="header center white-text">AgendAPP</h1>
             <div class="row center">
-              <h5 class="header col m12 light white-text">Tu Agenda de Contactos por excelencia! Liviana, rápida y conveniente!</h5>
+              <h5 class="header col m12 light white-text">Your Web Address Book by excellence! Light, fast and convenient!</h5>
             </div>
             <br><br>
           </div>
@@ -46,7 +46,7 @@
       </div>
 
       <!--Main Menu-->
-      <div class="container">
+      <div class="container" v-show="view == 'home'">
         <div class="section">
 
           <!--   Icon Section   -->
@@ -75,40 +75,40 @@
           <div class="col s12">
             <div class="row">
               <div class="input-field col s6">
-                <input id="givenName" type="text" class="validate">
+                <input id="givenName" type="text" class="validate" v-model="contact.givenName">
                 <label for="givenName">First Name</label>
               </div>
               <div class="input-field col s6">
-                <input id="surName" type="text" class="validate">
+                <input id="surName" type="text" class="validate" v-model="contact.surName">
                 <label for="surName">Last Name</label>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="address" type="text" class="validate">
+                  <input id="address" type="text" class="validate" v-model="contact.address">
                   <label for="address">Address</label>
                 </div>
               </div>
               <div class="row">
-                <input class="with-gap" name="genderSelect" type="radio" id="male" />
+                <input class="with-gap" name="genderSelect" type="radio" id="male" value="m" v-model="contact.gender"/>
                 <label for="male">Male</label>
-                <input class="with-gap" name="genderSelect" type="radio" id="female" />
+                <input class="with-gap" name="genderSelect" type="radio" id="female" value="f" v-model="contact.gender"/>
                 <label for="female">Female</label>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="birthdate" type="text" class="validate">
+                  <input id="birthdate" type="text" class="validate" v-model="contact.birthdate">
                   <label for="birthdate">Date of Birth</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="numbers" type="number" class="validate">
+                  <input id="numbers" type="number" class="validate" v-model="contact.numbers">
                   <label for="numbers">Telephone</label>
                 </div>
               </div>
               <div class="row">
                 <a class="btn-floating waves-effect waves-light grey btn-large right" :disabled="!formIsCorrect"
-                   @click.prevent="addContact"><i class="material-icons">add</i></a>
+                   @click.prevent="addContact" onclick="Materialize.toast('Contact added successfully!', 2000)"><i class="material-icons">add</i></a>
               </div>
             </div>
           </div>
@@ -120,32 +120,47 @@
         <div class="row">
           <div class="col s12 m9 offset-m3">
             <div class="input-field col s8">
-              <input id="find" type="text">
+              <input id="find" type="text" v-model="filter">
               <label for="find">Search</label>
             </div>
           </div>
         </div>
         <div class="row" v-if="!contactList.length">
+          <h4>The contact book is empty</h4>
+        </div>
+        <div class="row" v-show="contactList.length" v-if="!searchedContacts.length">
           <h4>The contact you are seeking is not on the list</h4>
         </div>
-        <div v-if="contactList.length">
+        <div v-else v-for="contact in searchedContacts">
           <div class="row">
             <div class="col s12 m9 offset-m2">
               <div class="card default-primary-color">
                 <div class="card-content white-text">
-                  <span class="card-title">{{ firstToUpper(contact.givenName) }} {{ firstToUpper(contact.surName) }}</span>
+                  <span class="card-title">{{ firstCharToUpper(contact.givenName) }} {{ firstCharToUpper(contact.surName) }}</span>
                   <p>{{ contact.address }}</p>
                   <p>{{ contact.birthdate }}</p>
                   <p>{{ contact.numbers }}</p>
                 </div>
                 <div class="card-action">
-                  <a class="waves-effect waves-light btn grey white-text">Delete</a>
+                  <a class="waves-effect waves-light btn grey white-text" @click="deleteContact(contact)">Delete</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Delete Contact Confirmation Modal-->
+      <!--<div id="confirmDeleteContact" class="modal">
+        <div class="modal-content">
+          <h4>Warning!</h4>
+          <p>You are about to permanently delete {{ firstCharToUpper(contact.givenName) }} {{ firstCharToUpper(contact.surName) }}</p>
+          <p>Do you wish to continue?</p>
+        </div>
+        <div class="modal-footer">
+          <a @click="deleteContact(contact)" class="modal-action modal-close waves-effect waves-green btn-flat">Confirm</a>
+        </div>
+      </div>-->
 
       <!--Footer-->
       <footer class="footer">

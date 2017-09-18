@@ -10,7 +10,7 @@ new Vue({
     },
     personas: [],
     filtro: '',
-    vista: 'buscar',
+    vista: 'ingresar',
     mensaje: false
   },
   computed: {
@@ -59,11 +59,11 @@ new Vue({
         this.personas=JSON.parse(personasLocalStorage);
       }
     },
+  },
 
     mounted()
     {
       this.traerPersonasLocalStorage();
     },
-  }
 
 })

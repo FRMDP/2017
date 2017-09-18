@@ -51,14 +51,11 @@
         <div class="row">
          <div class="input-field col s6">
           <form action="#">
-           <p>
             <input name="group1" value="Male" type="radio" id="checkSexo1" v-model="persona.sexo"/>
-            <label for="test1">Male</label>
-           </p>
-           <p>
+            <label for="checkSexo1">Male</label>
+
             <input name="group1" value="Female" type="radio" id="checkSexo2" v-model="persona.sexo"/>
-            <label for="test2">Female</label>
-           </p>
+            <label for="checkSexo2">Female</label>
           </form>
          </div>
         </div>
@@ -71,12 +68,11 @@
 </div>
 
     <div v-show="vista == 'buscar'">
-      <input type="text" placeholder="Filtrar" v-model="filtro">
-      <h3 v-if="!personas.length">No hay personas</h3>
-      <div v-else v-for="persona in personasFiltradas">
-        <h4 class="card-title">{{ persona.nombre }} ({{ persona.edad }})</h4>
-        <p class="card-text">Parrafo con contenido sin sentido para sumar.</p>
-        <a href="#">Borrar</a>
+      <input type="text" placeholder="Filter by name" v-model="filtro">
+      <h3 v-if="!personas.length">Looks so empty</h3>
+      <div v-else v-for="(persona,index) in personasFiltradas">
+        <h4 class="card-title">{{ persona.nombre }} ({{ persona.surname }}) ({{ persona.edad }}) ({{ persona.telefono }}) </h4>
+        <a href="#" @click="eliminarPersonaLocalStorage(index);">Borrar</a>
       </div>
     </div>
 

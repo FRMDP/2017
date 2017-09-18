@@ -20,6 +20,10 @@ nav {
 	margin-top: 5px;
 }
 
+.marginTop {
+	margin-top: 7px;
+}
+
 .floatRight {
 	float: right;
 }
@@ -36,3 +40,4 @@ button {
 	cursor: pointer;
 	margin-right: 5px;
 }
+

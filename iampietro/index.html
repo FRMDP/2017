@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>TP - 03</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/misEstilos.css" rel="stylesheet">
 </head>
 <body>
@@ -48,7 +48,7 @@
                         <input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
                       </label>
                       <span class="custom-control-description">Mujer</span>
-                      <button :disabled="!formOk" class="btn btn-light" type="submit" @click.prevent="agregarPersona"> Ingresar 
+                      <button :disabled="!formOk" class="btn btn-primary" type="submit" @click.prevent="agregarPersona"> Ingresar 
                       </button>
                   </form>
                 </div>
@@ -70,7 +70,12 @@
                       <h1 class="display-3">Hello there!</h1>
                       <p class="lead">Haven't added any contact yet? Go on and attach your friends!</p>
                       <hr class="my-4">
-                    </div>                  
+                    </div>
+                    <div class="jumbotron marginTop" v-else-if="busquedaSinResultados">
+                      <h1 class="display-3">Hello there!</h1>
+                      <p class="lead">We are sorry, your search didn't have any match :(</p>
+                      <hr class="my-4">
+                    </div>
                     <div v-else v-for="(persona, index) in personasFiltradas" class="card card-inverse" id="people">
                           <div class="card-body">
                               <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
@@ -78,7 +83,7 @@
                               <p class="card-text">Email: <strong>{{ persona.mail }}.</strong></p>
                               <button data-toggle="tooltip" data-placement="top" data-html="true" title="   Borrar persona" type="button" class="btn btn-outline-danger floatRight" @click.prevent="borrarPersona(persona)">Borrar
                               </button>
-                              <button data-toggle="tooltip" data-placement="top" data-html="true" type="button" class="btn btn-outline-success floatRight" @click="editarPersona(index)">editar
+                              <button data-toggle="tooltip" data-placement="top" data-html="true" type="button" class="btn btn-outline-success floatRight" @click="editarPersona(persona)">editar
                               </button>
                           </div>
                     </div>
@@ -89,6 +94,10 @@
           <div class="row justify-content-md-center">
             <div class="col-md-10 col-sm-10 col-xs-10">
               <div v-show="vista == 'editar'">
+              <div id="editAlert" class="alert alert-info alerta">
+                  <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
+                  <strong>Contacto editado exitosamente.</strong> 
+              </div>
                   <form>
                        <input type="hidden" v-model="index">
                        <div class="form-row">
@@ -114,7 +123,7 @@
                       <span class="custom-control-description">Varon</span>
                       <input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
                       <span class="custom-control-description">Mujer</span>
-                      <button :disabled="!formOk" class="btn btn-light" type="submit" @click.prevent="guardarCambios">Editar</button>
+                      <button :disabled="!formOk" class="btn btn-primary" type="submit" @click.prevent="guardarCambios">Editar</button>
                   </form>
               </div>
             </div>

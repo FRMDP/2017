@@ -25,6 +25,11 @@ new Vue({
           return this.persona.nombre && this.persona.edad
                  && this.persona.sexo && this.persona.apellido
                  && this.persona.mail;
+        },
+        busquedaSinResultados() {
+          return this.personasFiltradas.length == 0 &&
+                 
+                 this.filtro != '';
         }
       },
       methods: {
@@ -52,12 +57,28 @@ new Vue({
           this.indexPersonaSeleccionada = '';
           this.activarAlertaBorrado();
         },
+        editarPersona(persona){
+          this.cambiarVista('editar');
+          this.indexPersonaSeleccionada = this.personas.indexOf(persona);
+          const person = this.personas[this.indexPersonaSeleccionada];
+          this.persona.nombre = person.nombre;
+          this.persona.apellido = person.apellido;
+          this.persona.edad = person.edad;
+          this.persona.sexo = person.sexo;
+          this.persona.mail = person.mail;
+          this.index = this.indexPersonaSeleccionada;
+          this.indexPersonaSeleccionada = '';
+        },
         activarAlerta() {
           const alert = document.getElementById("alerta");
           alert.style.display = "block";
         },
         activarAlertaBorrado() {
           const alert = document.getElementById("deleteAlert");
+          alert.style.display = "block";
+        },
+        activarAlertaEditado() {
+          const alert = document.getElementById("editAlert");
           alert.style.display = "block";
         },
         saveContactsToStorage(){
@@ -69,16 +90,6 @@ new Vue({
             this.personas = JSON.parse(contactos);
           }
         },
-        editarPersona(index){
-          this.cambiarVista('editar');
-          const person = this.personas[index];
-          this.persona.nombre = person.nombre;
-          this.persona.apellido = person.apellido;
-          this.persona.edad = person.edad;
-          this.persona.sexo = person.sexo;
-          this.persona.mail = person.mail;
-          this.index = index;
-        },
         guardarCambios(){
           this.personas[this.index].nombre = this.persona.nombre;
           this.personas[this.index].apellido = this.persona.apellido;
@@ -86,6 +97,7 @@ new Vue({
           this.personas[this.index].sexo = this.persona.sexo;
           this.personas[this.index].mail = this.persona.mail;
           this.limpiarPersona();
+          this.activarAlertaEditado();
           this.saveContactsToStorage();
         }
       },

@@ -82,13 +82,11 @@ new Vue({
             this.vista = vista;
         },
         cerrarAlert() {
-            debugger;
             this.borradoAlert = false;
             this.restauradoAlert = false;
             this.ingresadoAlert = false;
         },
         modificarPersona(){
-            debugger;
             this.modificar = true;
 
         }

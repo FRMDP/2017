@@ -10,12 +10,12 @@ new Vue({
     },
     personas: [],
     filtro: '',
-    vista: 'ingresar',
+    vista: 'buscar',
     mensaje: false
   },
   computed: {
   	personasFiltradas() {
-  		return this.personas.filter(p => p.nombre.toUpperCase().indexOf(this.filtro.toUpperCase()) >= 0);
+  		return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0);
   	},
   	formOk() {
   		return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.telefono && this.persona.sexo;
@@ -26,19 +26,46 @@ new Vue({
   		this.personas.push(Object.assign({}, this.persona));
   		this.limpiarPersona();
   		this.mensaje = true;
+      this.agregarPersonaLocalStorage();
   	},
   	limpiarPersona() {
   		this.persona.nombre = '';
   		this.persona.edad = '';
   		this.persona.sexo = '';
       this.persona.apellido='';
-      this.persona.telefono=';'
+      this.persona.telefono=''
   	},
   	cambiarVista(vista) {
   		this.vista = vista;
+      this.limpiarPersona()
   	},
   	cerrarMensaje() {
   		this.mensaje = false;
-  	}
+  	},
+
+    agregarPersonaLocalStorage(){
+      localStorage.setItem('personas',JSON.stringify(this.personas));
+    },
+
+    eliminarPersonaLocalStorage(posicion)
+    {
+      this.personas.splice(posicion,1);
+      this.agregarPersonaLocalStorage();
+    },
+
+    traerPersonasLocalStorage(){
+      const personasLocalStorage=localStorage.getItem('personas');
+
+      if(personasLocalStorage){
+        this.personas=JSON.parse(personasLocalStorage);
+      }
+    },
+
+    mounted()
+    {
+      this.traerPersonasLocalStorage();
+    }
+
   }
+
 })

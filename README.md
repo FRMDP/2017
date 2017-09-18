@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 ### TP #3
-=======
-# TP #3, revisar la rama tp3.
->>>>>>> master
 
 #### Lineamientos
 

@@ -15,11 +15,12 @@ nav {
 	margin-bottom: 10px;
 }
 
-#alerta {
+.alerta {
 	display: none;
+	margin-top: 5px;
 }
 
-#alertSpan {
+.floatRight {
 	float: right;
 }
 
@@ -28,5 +29,10 @@ input::-webkit-input-placeholder {
 }
 
 #spanNearFilter {
+	margin-right: 5px;
+}
+
+button {
+	cursor: pointer;
 	margin-right: 5px;
 }

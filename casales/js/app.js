@@ -37,6 +37,7 @@ new Vue({
             this.contacts.push(Object.assign({}, this.contact));
             this.cleanPerson();
             this.saveContactsToLocalStorage(this.contacts);
+            this.displayAlert('The contact has been created');
         },
         cleanPerson() {
             this.contact.firstName = '';
@@ -66,19 +67,30 @@ new Vue({
             this.saveContactsToLocalStorage(this.contacts);
             this.deletedContacts.push(trashed[0]);
             this.saveTrashedToLocalStorage(this.deletedContacts);
+            this.displayAlert('The contact has been moved to trash.');
         },
         deleteContactForever(index) {
             this.deletedContacts.splice(index, 1);
             this.saveTrashedToLocalStorage(this.deletedContacts);
+            this.displayAlert('The contact has been permanently removed.');
         },
         restoreFromTrashed(index) {
             let restored = this.deletedContacts.splice(index, 1);
             this.saveTrashedToLocalStorage(this.deletedContacts);
             this.contacts.push(restored[0]);
             this.saveContactsToLocalStorage(this.contacts);
+            this.displayAlert('The contact has been restored');
         },
         firstToUpper(string) {
             return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        },
+        displayAlert(message){
+            this.alertMessage = message;
+            this.showAlert = true;
+            setTimeout(() => {
+                this.alertMessage = '';
+                this.showAlert = false;
+            }, 1000);
         }
     }
 });

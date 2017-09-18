@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/bulma.css">
     <link rel="stylesheet" href="./css/sticky-footer.css">
-    <!--<link rel="stylesheet" href="./css/style.css">-->
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 <div id="app">
@@ -41,6 +41,12 @@
             </div>
         </div>
     </section>
+
+    <transition name="fade">
+        <div class="notification notification-alert is-info" v-if="showAlert">
+            <p>{{ alertMessage }}</p>
+        </div>
+    </transition>
 
     <section class="section" v-show="view == 'add'">
         <div class="container">
@@ -101,14 +107,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="notification is-info" v-if="!contacts.length">
+                    <div class="notification is-primary" v-if="!contacts.length">
                         There's no contacts on the list
                     </div>
                 </div>
             </div>
             <div v-if="contacts.length">
                 <div class="columns is-desktop is-multiline is-centered">
-                    <div class="notification is-info" v-if="!filteredContacts.length">
+                    <div class="notification is-primary" v-if="!filteredContacts.length">
                         Couldn't find anything !
                     </div>
                     <div class="column is-4" v-for="(contact, index) in filteredContacts">
@@ -141,7 +147,7 @@
                     <div class="box">
                         <h6 class="title is-6">Deleted contacts</h6>
                     </div>
-                    <div class="notification is-info" v-if="!deletedContacts.length">
+                    <div class="notification is-primary" v-if="!deletedContacts.length">
                         Empty !
                     </div>
                 </div>
@@ -170,7 +176,6 @@
                 </div>
             </div>
         </div>
-
     </section>
 </div>
 

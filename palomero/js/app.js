@@ -6,7 +6,8 @@ new Vue({
       apellido:'',
     	edad: '',
       telefono:'',
-    	sexo: ''
+    	sexo: '',
+      favs: false,
     },
     personas: [],
     filtro: '',
@@ -19,7 +20,13 @@ new Vue({
   	},
   	formOk() {
   		return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.telefono && this.persona.sexo;
-  	}
+  	},
+
+    returnFavs()
+    {
+      return this.personas.filter(p => p.favs=true);
+    }
+
   },
   methods: {
   	agregarPersona() {
@@ -41,6 +48,18 @@ new Vue({
   	cerrarMensaje() {
   		this.mensaje = false;
   	},
+
+    hacerFavorito(index) {
+      this.personas[index].favs=true;
+      this.agregarPersonaLocalStorage();
+    },
+
+    eliminarFav(index)
+    {
+      this.personas[index].favs=false;
+      this.agregarPersonaLocalStorage();
+
+    },
 
     agregarPersonaLocalStorage(){
       localStorage.setItem('personas',JSON.stringify(this.personas));

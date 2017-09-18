@@ -1,46 +1,48 @@
-const vm = new Vue({
+new Vue({
     el: '#app',
     data: {
         contact: {
             firstName: '',
             lastName: '',
             address: '',
-            telephoneNumbers: [],
-            description: '',
-            gender: '',
-            dob: ''
+            telephoneNumber: ''
         },
         contacts: [],
+        deletedContacts: [],
         filter: '',
-        view: 'search'
+        view: 'search',
+        alertMessage: '',
+        showAlert: false
     },
     mounted() {
         this.getContactsFromLocalStorage();
+        this.getTrashedFromLocalStorage();
     },
     computed: {
         filteredContacts() {
-            return this.contacts.filter(p => p.firstName.indexOf(this.filter) >= 0);
+            return this.contacts.filter(p => p.firstName.toLowerCase().indexOf(this.filter.toLowerCase()) >= 0 ||
+                p.lastName.toLowerCase().indexOf(this.filter.toLowerCase()) >= 0 ||
+                p.address.toLowerCase().indexOf(this.filter.toLowerCase()) >= 0
+            );
         },
         formOk() {
             return this.contact.firstName &&
                 this.contact.lastName &&
-                this.contact.description &&
-                this.contact.gender;
+                this.contact.address &&
+                this.contact.telephoneNumber;
         }
     },
     methods: {
         addContact() {
             this.contacts.push(Object.assign({}, this.contact));
             this.cleanPerson();
-            this.saveContactsToLocalStorage(this.contacts)
-            /*this.message = true;*/
+            this.saveContactsToLocalStorage(this.contacts);
         },
         cleanPerson() {
             this.contact.firstName = '';
             this.contact.lastName = '';
-            this.contact.dob = '';
-            this.contact.description = '';
-            this.contact.gender = '';
+            this.contact.address = '';
+            this.contact.telephoneNumber = '';
         },
         changeView(view) {
             this.view = view;
@@ -48,12 +50,35 @@ const vm = new Vue({
         saveContactsToLocalStorage(contacts) {
             localStorage.setItem('contacts', JSON.stringify(contacts));
         },
+        saveTrashedToLocalStorage(trashedContacts) {
+            localStorage.setItem('trashedContacts', JSON.stringify(trashedContacts))
+        },
         getContactsFromLocalStorage() {
-            list = JSON.parse(localStorage.getItem('contacts'));
+            let list = JSON.parse(localStorage.getItem('contacts'));
             this.contacts = list ? list : [];
         },
+        getTrashedFromLocalStorage() {
+            let list = JSON.parse(localStorage.getItem('trashedContacts'));
+            this.deletedContacts = list ? list : [];
+        },
+        trashContact(index) {
+            let trashed = this.contacts.splice(index, 1);
+            this.saveContactsToLocalStorage(this.contacts);
+            this.deletedContacts.push(trashed[0]);
+            this.saveTrashedToLocalStorage(this.deletedContacts);
+        },
+        deleteContactForever(index) {
+            this.deletedContacts.splice(index, 1);
+            this.saveTrashedToLocalStorage(this.deletedContacts);
+        },
+        restoreFromTrashed(index) {
+            let restored = this.deletedContacts.splice(index, 1);
+            this.saveTrashedToLocalStorage(this.deletedContacts);
+            this.contacts.push(restored[0]);
+            this.saveContactsToLocalStorage(this.contacts);
+        },
         firstToUpper(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
+            return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
         }
     }
 });

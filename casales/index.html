@@ -7,19 +7,26 @@
     <link rel="stylesheet" href="./css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/bulma.css">
     <link rel="stylesheet" href="./css/sticky-footer.css">
+    <!--<link rel="stylesheet" href="./css/style.css">-->
 </head>
 <body>
 <div id="app">
-    <section class="hero is-dark">
+    <section class="hero is-primary">
         <div class="hero-head">
             <header class="nav">
                 <div class="container">
                     <div class="nav-left">
-                        <a class="nav-item" @click="changeView('search')">
+                        <a class="nav-item">
                             <span class="icon is-large is-left"><i class="fa fa-address-book"></i></span>
                         </a>
+                        <a class="nav-item" @click="changeView('search')">
+                            Search
+                        </a>
                         <a class="nav-item" @click="changeView('add')">
-                            <span class="icon is-small is-left"><i class="fa fa-plus"></i></span>Add new contact
+                            Add
+                        </a>
+                        <a class="nav-item" @click="changeView('trash')">
+                            Trash
                         </a>
                     </div>
                 </div>
@@ -55,36 +62,23 @@
                         </div>
 
                         <div class="field">
-                            <label class="label">Age</label>
+                            <label class="label">Address</label>
                             <div class="control">
-                                <input class="input" type="number" placeholder="Insert age" v-model="contact.dob">
+                                <input class="input" placeholder="Insert Address" v-model="contact.address">
                             </div>
                         </div>
 
                         <div class="field">
-                            <label class="label">Description</label>
+                            <label class="label">Phone</label>
                             <div class="control">
-                                <textarea class="textarea" placeholder="Add a description ..."
-                                          v-model="contact.description"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <div class="control">
-                                <label class="radio">
-                                    <input value="m" id="radio1" name="radio" type="radio" v-model="contact.gender">
-                                    Male
-                                </label>
-                                <label class="radio">
-                                    <input value="f" id="radio2" name="radio" type="radio" v-model="contact.gender">
-                                    Female
-                                </label>
+                                <input class="input" type="number" placeholder="Add phone number"
+                                       v-model="contact.telephoneNumber">
                             </div>
                         </div>
 
                         <div class="field">
                             <div class="control">
-                                <button class="button is-medium is-dark is-outlined" :disabled="!formOk"
+                                <button class="button is-medium is-primary is-outlined" :disabled="!formOk"
                                         @click.prevent="addContact">Add
                                 </button>
                             </div>
@@ -102,7 +96,7 @@
                     <div class="box">
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input" placeholder="Search...">
+                                <input class="input" placeholder="Search by name ..." v-model="filter">
                                 <span class="icon is-small is-left"><i class="fa fa-search"></i></span>
                             </div>
                         </div>
@@ -114,7 +108,10 @@
             </div>
             <div v-if="contacts.length">
                 <div class="columns is-desktop is-multiline is-centered">
-                    <div class="column is-4" v-for="contact in filteredContacts">
+                    <div class="notification is-info" v-if="!filteredContacts.length">
+                        Couldn't find anything !
+                    </div>
+                    <div class="column is-4" v-for="(contact, index) in filteredContacts">
                         <div class="card">
                             <header class="card-header">
                                 <p class="card-header-title">
@@ -123,52 +120,57 @@
                             </header>
                             <div class="card-content">
                                 <div class="content">
-                                    {{ contact.description }}<!-- <a>@bulmaio</a>.
-                                <a href="#">#css</a> <a href="#">#responsive</a>
-                                <br>
-                                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>-->
+                                    <p><strong>Address: </strong>{{ firstToUpper(contact.address) }}</p>
+                                    <p><strong>Phone Number: </strong>{{ contact.telephoneNumber }}</p>
                                 </div>
                             </div>
                             <footer class="card-footer">
-                                <a href="#" class="card-footer-item">Edit</a>
-                                <a href="#" class="card-footer-item">Delete</a>
+                                <a class="card-footer-item" @click.prevent="trashContact(index)">Delete</a>
                             </footer>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--<div class="columns">
-                <div class="column">
-                    <nav class="pagination" aria-label="pagination" v-if="contacts.length">
-                        <a class="pagination-previous">Previous</a>
-                        <a class="pagination-next">Next page</a>
-                        <ul class="pagination-list">
-                            <li>
-                                <a class="pagination-link" aria-label="Goto page 1">1</a>
-                            </li>
-                            <li>
-                                <span class="pagination-ellipsis">&hellip;</span>
-                            </li>
-                            <li>
-                                <a class="pagination-link" aria-label="Goto page 45">45</a>
-                            </li>
-                            <li>
-                                <a class="pagination-link is-current" aria-label="Page 46">46</a>
-                            </li>
-                            <li>
-                                <a class="pagination-link" aria-label="Goto page 47">47</a>
-                            </li>
-                            <li>
-                                <span class="pagination-ellipsis">&hellip;</span>
-                            </li>
-                            <li>
-                                <a class="pagination-link" aria-label="Goto page 86">86</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>-->
         </div>
+    </section>
+
+    <section class="section" v-show="view == 'trash'">
+        <div class="container">
+            <div class="columns is-desktop">
+                <div class="column is-8 is-offset-2">
+                    <div class="box">
+                        <h6 class="title is-6">Deleted contacts</h6>
+                    </div>
+                    <div class="notification is-info" v-if="!deletedContacts.length">
+                        Empty !
+                    </div>
+                </div>
+            </div>
+            <div v-if="deletedContacts.length">
+                <div class="columns is-desktop is-multiline is-centered">
+                    <div class="column is-4" v-for="(contact, index) in deletedContacts">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    {{ firstToUpper(contact.firstName) }} {{ firstToUpper(contact.lastName) }}
+                                </p>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    <p><strong>Address: </strong>{{ firstToUpper(contact.address) }}</p>
+                                    <p><strong>Phone Number: </strong>{{ contact.telephoneNumber }}</p>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <a class="card-footer-item" @click.prevent="restoreFromTrashed(index)">Restore</a>
+                                <a class="card-footer-item" @click.prevent="deleteContactForever(index)">Delete Forever</a>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 </div>
 

@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-## Listado de alumnos
-=======
 ### TP #3
 
 #### Lineamientos
->>>>>>> 0038f0fb49c32b944393246a35e200a96c85815e
 
     *  Tienen que hacer el PR contra la rama TP3, no contra master.
     * Resuelven la historia de usuario asignada en Taiga. Deben no solo subir los cambios sino tambien manejar los estados y tiempos en el tablero. Esto es importante porque solo voy a revisar las cosas que estén con estado **READY FOR TEST**.

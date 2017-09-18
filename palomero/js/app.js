@@ -24,9 +24,9 @@ new Vue({
   methods: {
   	agregarPersona() {
   		this.personas.push(Object.assign({}, this.persona));
+      this.agregarPersonaLocalStorage();
   		this.limpiarPersona();
   		this.mensaje = true;
-      this.agregarPersonaLocalStorage();
   	},
   	limpiarPersona() {
   		this.persona.nombre = '';
@@ -37,7 +37,6 @@ new Vue({
   	},
   	cambiarVista(vista) {
   		this.vista = vista;
-      this.limpiarPersona()
   	},
   	cerrarMensaje() {
   		this.mensaje = false;
@@ -64,8 +63,7 @@ new Vue({
     mounted()
     {
       this.traerPersonasLocalStorage();
-    }
-
+    },
   }
 
 })

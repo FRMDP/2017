@@ -7,6 +7,7 @@
 	<title>INDEX</title>
 <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="css/myappstyles.css">
 </head>
 
 <body>
@@ -14,41 +15,64 @@
 <div id="app">
 
   <nav>
-    <div class="nav-wrapper">
+     <div class="nav-wrapper">
       <a href="#" class="brand-logo right">Contacts</a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><a href="#"@click="cambiarVista('ingresar')">New Contact</a></li>
         <li><a href="#"@click="cambiarVIsta('buscar')">Search</a></li>
         <li><a href="#"@click="cambiarVIsta('about')">About</a></li>
       </ul>
-    </div>
+     </div>
   </nav>
 
  <div v-show="vista == 'ingresar'">
   <div class="row">
-      <form>
-        <label>Name</label>
-        <input v-model="persona.nombre" type="text" placeholder="Ingrese nombre">
-        <label>Surname</label>
-        <input v-model="persona.apellido" type="text" placeholder="Ingrese nombre">
-        <label>Age</label>
-        <input type="number" placeholder="Ingrese edad" v-model="persona.edad">
-        <label>Phone number</label>
-        <input type="number" placeholder="Ingrese telefono" v-model="persona.telefono">
-          <form action="#">
-        <p>
-        <input name="group1" value="Male" type="radio" id="checkSexo1" v-model="persona.sexo"/>
-        <label for="test1">Male</label>
-        </p>
-        <p>
-        <input name="group1" value="Female" type="radio" id="checkSexo2" v-model="persona.sexo"/>
-        <label for="test2">Female</label>
-        </p>
-        </form>
-        <button :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Ingresar</button>
-      </form>
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+         <label>Name</label>
+         <input v-model="persona.nombre" type="text">
+        </div>
+        <div class="input-field col s6">
+         <label>Surname</label>
+         <input v-model="persona.apellido" type="text">
+        </div>
       </div>
-    </div>
+      <div class="row">
+       <div class="input-field col s12">
+        <label>Age</label>
+        <input type="number" v-model="persona.edad">
+       </div>
+      </div>
+      <div class="row">
+       <div class="input-field col s12">
+        <label>Phone number</label>
+        <input type="number" v-model="persona.telefono">
+       </div>
+      </div>
+
+      <div class="row">
+        <div class="row">
+         <div class="input-field col s6">
+          <form action="#">
+           <p>
+            <input name="group1" value="Male" type="radio" id="checkSexo1" v-model="persona.sexo"/>
+            <label for="test1">Male</label>
+           </p>
+           <p>
+            <input name="group1" value="Female" type="radio" id="checkSexo2" v-model="persona.sexo"/>
+            <label for="test2">Female</label>
+           </p>
+          </form>
+         </div>
+        </div>
+      </div>
+     <div class="row">
+      <button :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Add</button>
+     </div>
+   </form>
+  </div>
+</div>
 
     <div v-show="vista == 'buscar'">
       <input type="text" placeholder="Filtrar" v-model="filtro">

@@ -1,0 +1,17 @@
+.nav-wrapper{
+	background: black;
+}
+
+.formcolor{
+	background: grey;
+}
+
+body{
+	background: grey;
+	padding-right: 100px;
+	padding-left: 100px;
+}
+
+label{
+	color: white;
+}

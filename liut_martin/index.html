@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Contactos</title>
+	<link rel="stylesheet" href="css/materialize.min.css">
+	<link rel="stylesheet" href="css/estilos.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="shortcut icon" type="image/x-icon" href="img/logo.jpg">
+	<link rel="stylesheet" href="css/barra.css">
+	<link rel="stylesheet" href="css/scrollbar.css">
+</head>
+<body>
+	<div id="app">
+		<nav class="menu">
+		    <div class="nav-wrapper blue darken-3">
+		    	<div class="container">
+			        <ul id="nav-mobile" class="center hide-on-med-and-down">
+			           <li :class="{ active : vista == 'registro'}" ><a @click="cambiarVista('registro')"><i class="material-icons left">group_add</i>Registro</a></span></li>
+			           <li :class="{ active : vista == 'ver_todos'}"><a @click="cambiarVista('ver_todos')"><i class="material-icons left">storage</i>Ver todos</a></li>
+			           <li :class="{ active : vista == 'favoritos'}"><a @click="cambiarVista('favoritos')"><i class="material-icons left">star_border</i>Favoritos</a></li>
+			        </ul>
+		      	</div>
+		    </div>
+		</nav>
+		
+		<div class="row contenedor">
+		    <form @submit.prevent="registrar" class="col s12 l6 offset-l3 formulario" v-if="vista == 'registro'">
+		      <div class="row">
+		      	<h1 class="center">Registro de Contacto</h1>
+		        <div class="input-field col s12">
+		          <input v-model="persona.nombre" id="nombre" type="text" class="validate" required>
+		          <label for="nombre">Nombre</label>
+		        </div>
+		        <div class="input-field col s12">
+		          <input v-model="persona.apellido" id="apellido" type="text" class="validate" required>
+		          <label for="apellido">Apellido</label>
+		        </div>
+		        <div class="input-field col s12">
+		          <input v-model="persona.email" id="email" type="email" class="validate" required>
+		          <label for="email">E-mail</label>
+		        </div>
+		        <div class="input-field col s12">
+		          <input v-model="persona.telefono" id="telefono" type="text" class="validate" required>
+		          <label for="telefono">Teléfono celular</label>
+		        </div>
+		        <div class="col s12 contenedor_radios">
+					<p class="center">
+		        	<input name="genero" type="radio" id="m" class="with-gap" value="m" v-model="persona.genero" required />
+	     			<label for="m" class="black-text">Masculino</label>
+		        	<input name="genero" type="radio" id="f" class="with-gap" value="f" v-model="persona.genero" required />
+	     			<label for="f" class="black-text">Femenino</label>
+	     			</p>
+		        </div>
+		        <div class="input-field col s12 center">
+		          <button type="submit" class="blue waves-effect waves-light btn darken-2"><i class="material-icons left">save</i>Guardar</button>
+		        </div>
+		      </div>
+		       <div v-if="mensaje == true" class="white-text card-panel green lighten-1 center"><i class="material-icons left">done</i>¡ Usuario registrado correctamente !</div>
+		    </form>
+		    <div v-if="vista == 'ver_todos'" class="col s12 l6 offset-l3 formulario">
+			<h1 class="center">Lista de Contactos</h1>
+			<div class="input-field">
+				<i class="material-icons prefix large">search</i>
+				<!-- El input debería ser de tipo "search", pero se veía feo el estilo -->
+				<input v-model="busqueda" id="icon_prefix" type="text" class="validate">
+				<label for="icon_prefix">Buscar contacto</label>
+			</div>  
+			<div v-for="(persona, index) in personasFiltradas" class="card blue darken-2">
+			    <div class="card-content white-text">
+			      <span class="card-title">
+				<p><i class="material-icons left">person</i> {{persona.apellido}} {{persona.nombre}} </p>
+				<button class="waves-effect red btn-floating right darken-0" @click="eliminarPersona(index);">
+					<i class="material-icons">delete_forever</i>
+				</button>
+						<button class="waves-effect waves-yellow btn-floating right btnFavorito" :class="{ favoritoOn : persona.favorito}" @click="agregarOquitarFavorito(index);">
+							<i class="material-icons">star_border</i>
+						</button>
+			      </span>
+			      <ul class="descripcion_usuario">
+				<li>E-mail: {{persona.email}}</li>
+				<li>Teléfono: {{persona.telefono}}</li>
+			      </ul>
+			    </div>
+			</div>
+		    </div>
+		    <div v-if="vista == 'favoritos'" class="col s12 l6 offset-l3 formulario">
+		   		<div v-if="personasFavoritas.length > 0">
+			   		<h1 class="center">Favoritos</h1>
+			    	<div v-for="persona in personasFavoritas" class="card blue darken-2">
+			            <div class="card-content white-text">
+			              <span class="card-title">
+			              	<p><i class="material-icons left">person</i> {{persona.apellido}} {{persona.nombre}} </p>
+			              </span>
+			              <ul class="descripcion_usuario">
+			              	<li>E-mail: {{persona.email}}</li>
+			              	<li>Teléfono: {{persona.telefono}}</li>
+			              </ul>
+			            </div>
+			        </div>
+			    </div>
+			    <h3 v-esle class="center">No hay favoritos</h3>
+		    </div>
+		</div>
+	</div>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/vue.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/barra.js"></script>
+</body>
+</html>

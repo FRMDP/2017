@@ -1,0 +1,58 @@
+body{
+	background-image: url('../img/fondo.svg');
+}
+
+.menu{
+	opacity: .9;
+}
+
+.contenedor{
+	padding-top: 30px;
+}
+
+.formulario{
+	background: rgba(255, 255, 255, .4);
+	padding: 40px auto;
+	border-radius: 7px;
+	box-shadow: 2px 2px 10px 0px rgba(1, 1, 1, .7);
+}
+
+.contenedor h1:nth-child(1){
+	margin-top: 10px;
+}
+
+.contenedor_radios{ 
+	margin-bottom: 15px; 
+}
+
+h1, h3{ 
+	font-weight: 200; 
+}
+
+.card .card-content .descripcion_usuario{
+	font-weight: 300;
+	margin     : 0px;
+}
+
+.card .card-content .card-title i{
+	line-height: inherit;
+}
+
+.input-field .prefix{
+	line-height: inherit;
+	font-size: 2.7em;
+}
+
+.btnFavorito{
+	margin-right: 10px;
+	background: #ccc;
+	color: rgba(1, 1, 1, .6);
+}
+
+.favoritoOn{
+	background: yellow;
+}
+
+.favoritoOn i{
+	color: rgba(1, 1, 1, .6);
+}

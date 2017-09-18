@@ -3,7 +3,9 @@ new Vue({
   data: {
     persona: {
     	nombre: '',
+      apellido:'',
     	edad: '',
+      telefono:'',
     	sexo: ''
     },
     personas: [],
@@ -13,10 +15,10 @@ new Vue({
   },
   computed: {
   	personasFiltradas() {
-  		return this.personas.filter(p => p.nombre.indexOf(this.filtro) >= 0);
+  		return this.personas.filter(p => p.nombre.toUpperCase().indexOf(this.filtro.toUpperCase()) >= 0);
   	},
   	formOk() {
-  		return this.persona.nombre && this.persona.edad && this.persona.sexo;
+  		return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.telefono && this.persona.sexo;
   	}
   },
   methods: {
@@ -29,6 +31,8 @@ new Vue({
   		this.persona.nombre = '';
   		this.persona.edad = '';
   		this.persona.sexo = '';
+      this.persona.apellido='';
+      this.persona.telefono=';'
   	},
   	cambiarVista(vista) {
   		this.vista = vista;

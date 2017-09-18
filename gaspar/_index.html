@@ -75,10 +75,11 @@
       </form>
     </div>
     <div class ="container" id="buscar" v-show="vista == 'buscar'">
-      <h3>Filtrar por cualquier campo</h3>
-      <input type="text" placeholder="Filtrar" v-model="filtro">
+      <h3>Busqueda</h3>
+      <input class="busqueda" type="text" placeholder="Filtrar por cualquier campo" v-model="filtro">
       <div width="auto" class= "grid-wrapper" id="contenedor">
         <h3 v-if="!personas.length">No hay personas</h3>
+        <h3 v-else-if="!personasFiltradas.length ">No se encontraron personas que coincidan con los criterios de busqueda</h3>
         <div class="grid-item" id="agenda" v-else v-for="(persona, index) in personasFiltradas">
           <div class="card">
             <div class="card-content">

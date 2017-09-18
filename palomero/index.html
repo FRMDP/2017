@@ -46,22 +46,16 @@
         <input type="number" v-model="persona.telefono" placeholder="Phone number">
        </div>
       </div>
-
-      <div class="row">
-        <div class="row">
-         <div class="input-field col s6">
+      
+     <div class="row">
           <form action="#">
-            <input name="group1" value="Male" type="radio" id="checkSexo1" v-model="persona.sexo"/>
+            <input name="sexo" value="Male" type="radio" id="checkSexo1" v-model="persona.sexo"/>
             <label for="checkSexo1">Male</label>
 
-            <input name="group1" value="Female" type="radio" id="checkSexo2" v-model="persona.sexo"/>
+            <input name="sexo" value="Female" type="radio" id="checkSexo2" v-model="persona.sexo"/>
             <label for="checkSexo2">Female</label>
           </form>
-         </div>
-        </div>
-      </div>
-     <div class="row">
-      <button :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Add</button>
+      <button :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Add Contact</button>
      </div>
    </form>
   </div>

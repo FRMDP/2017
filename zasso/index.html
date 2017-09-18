@@ -65,11 +65,12 @@
       </form>
     </div>
     <div class="container" id="buscar" v-show="vista == 'buscar'">
-      <form id='form'>
+      <form>
         <input class="input" type="text" placeholder="Busqueda avanzada" v-model="filtro">
       </form>
       <div width="auto" class="grid-wrapper" id="contenedor">
         <h3 v-if="!personas.length">No hay personas</h3>
+        <h3 v-if="!personasFiltradas.length">No se encontraron resultados con los parametros ingresados</h3>
         <div class="grid-item" id="agenda" v-else v-for="(persona, index) in personasFiltradas">
           <div id='card-contactos' class="card">
             <div class="card-content">

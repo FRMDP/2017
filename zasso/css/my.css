@@ -19,7 +19,7 @@ form, .card{
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 10px;
-  width: 30%;
+  width: 100%;
 }
 
 #card-contactos{
@@ -42,6 +42,19 @@ background-color: #6ed3a1;
   background-color: #d6b73a;
 }
 
+.grid-wrapper{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(4);
+  grid-gap: 1rem;
+  grid-auto-flow: dense;
+
+}
+
+
+.grid-item{
+  display:flex;
+}
 .modal {
     display: block;
     position: fixed;
@@ -55,7 +68,7 @@ background-color: #6ed3a1;
     background-color: rgba(0,0,0,0.4);
 }
 .modal-content {
-    background-color: rgba(135, 251, 193, 0.62);
+    background-color: #23d160;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;

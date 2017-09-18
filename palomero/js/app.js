@@ -35,7 +35,7 @@ new Vue({
       this.persona.apellido='';
       this.persona.telefono=''
   	},
-  	cambiarVista(vista) {
+  	cambiarVista: function(vista) {
   		this.vista = vista;
   	},
   	cerrarMensaje() {

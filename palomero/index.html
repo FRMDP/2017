@@ -19,8 +19,8 @@
       <a href="#" class="brand-logo right">Contacts</a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><a href="#"@click="cambiarVista('ingresar')">New Contact</a></li>
-        <li><a href="#"@click="cambiarVIsta('buscar')">Search</a></li>
-        <li><a href="#"@click="cambiarVIsta('about')">About</a></li>
+        <li><a href="#"@click="cambiarVista('buscar')">Search</a></li>
+        <li><a href="#"@click="cambiarVista('about')">About</a></li>
       </ul>
      </div>
   </nav>
@@ -30,24 +30,20 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-         <label>Name</label>
-         <input v-model="persona.nombre" type="text">
+         <input v-model="persona.nombre" type="text" placeholder="Name">
         </div>
         <div class="input-field col s6">
-         <label>Surname</label>
-         <input v-model="persona.apellido" type="text">
+         <input v-model="persona.apellido" type="text" placeholder="Surname">
         </div>
       </div>
       <div class="row">
        <div class="input-field col s12">
-        <label>Age</label>
-        <input type="number" v-model="persona.edad">
+        <input type="number" v-model="persona.edad" placeholder="Age">
        </div>
       </div>
       <div class="row">
        <div class="input-field col s12">
-        <label>Phone number</label>
-        <input type="number" v-model="persona.telefono">
+        <input type="number" v-model="persona.telefono" placeholder="Phone number">
        </div>
       </div>
 

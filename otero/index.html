@@ -65,13 +65,13 @@
 
       <transition name="fade" mode="out-in">
         <div v-show="vista == 'buscar'" class="vista vbuscar">  
-          <div class="col-md-12">
-            <input class="form-control form-group" type="text" placeholder="Filtrar" v-model="filtro">
-          </div>
+          
+          <input class="form-control form-group" type="text" placeholder="Filtrar" v-model="filtro">
+          
 
           <h3 v-if="!personas.length">No hay personas</h3>
           <div v-else class="row">
-            
+            <h3 v-if="!personasFiltradas.length">Ningun contacto coincide con la busqueda</h3>
             <div  v-for="(persona,indice) in personasFiltradas" class="col-md-4 form-group">
               <div class="card">
                 <div class="card-body">
@@ -100,7 +100,7 @@
               <h5>Nombre</h5>
               <input class="form-control" v-model="persona.nombre" type="text" placeholder="Ingrese nombre">
               <transition name="slide-fade">
-                <label v-show="!nombreOK" class="aviso">El nombre debe tener 3 caracteres como minimo y al menos una letra</label>  
+                <label v-show="!nombreOK&&persona.nombre!=''" class="aviso">El nombre debe tener 3 caracteres como minimo y al menos una letra</label>  
               </transition>
               
             </div>
@@ -116,7 +116,7 @@
               <h5>Telefono</h5>
               <input class="form-control" v-model="persona.telefono" type="number" placeholder="Ingrese Telefono">
               <transition name="slide-fade">
-                <label v-show="!telefonoOk" class="aviso">El telefono es requerido</label>  
+                <label v-show="!telefonoOk&&persona.telefono!=''" class="aviso">El telefono es requerido</label>  
               </transition>
               
             </div>
@@ -125,7 +125,7 @@
               <h5>Mail</h5>
               <input class="form-control" v-model="persona.mail" type="text" placeholder="Ingrese el mail">
               <transition name="slide-fade">
-                <label v-show="!mailOk" class="aviso">Ingrese un mail valido</label>  
+                <label v-show="!mailOk&&persona.mail!=''" class="aviso">Ingrese un mail valido</label>  
               </transition>
               
             </div>

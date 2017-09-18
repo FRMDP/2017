@@ -30,7 +30,8 @@ var vm= new Vue({
       return this.persona.telefono  && !isNaN(this.persona.telefono) && this.persona.telefono>99
     },
     mailOk(){
-      return this.persona.mail && this.persona.mail.indexOf("@")>0 && this.persona.mail.indexOf(".com")>0
+      const expresion= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      return this.persona.mail && expresion.test(this.persona.mail)
     },
   	formOk() {
   		return this.nombreOK  && this.telefonoOk && this.mailOk

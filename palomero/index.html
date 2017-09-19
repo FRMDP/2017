@@ -78,7 +78,7 @@
             </div>
             <div class="card-action">
                   <button class="btn waves-effect red darken-4" @click="eliminarPersonaLocalStorage(index);">Delete</button>
-                  <button class="btn waves-effect waves-light" :disabled=persona.favs @click="hacerFavorito(index);">Favorite</a>
+                  <button class="btn waves-effect waves-light" :disabled=persona.favs @click="hacerFavorito(index);">Favorite</button>
             </div>
           </div>
         </div>
@@ -87,6 +87,37 @@
 </div>
 
 <div v-show="vista == 'about'">
+
+ <div class="card">
+    <div class="card-content">
+      <h3>About this proyect</h3>
+
+      <h4><ul>Lineamientos</ul></h4>
+       <h5><li>Tienen que hacer el PR contra la rama TP3, no contra master.</li></h5>
+       <h5><li>Resuelven la historia de usuario asignada en Taiga. Deben no solo subir los cambios sino tambien manejar los estados y tiempos en el tablero. Esto es importante porque solo voy a revisar las cosas que estén con estado **READY FOR TEST**.</li></h5>
+       <h5><li>Crean una carpeta con su apellido en minuscula. Dentro de esta carpeta agregan un archivo _index.html_, estilos (css) y scripts (js) necesarios.</li></h5>
+       <h5><li>Tienen tiempo hasta las 18Hs del dia martes 19/9.</li></h5>
+
+
+
+      <h4><ul>Qué hay que hacer? Una agenda.</ul></h4>
+       <h5><li>Debe utilizar un framework CSS a elección.</li></h4>
+       <h5><li>Deben tener una hoja de estilos propia con al menos 4 reglas que afecten su aplicación.</li></h5>
+       <h5><li>Deben crear por lo menos tres vistas diferentes (agregar, buscar, ....).</li></h5>
+       <h5><li>Deben utilizar cuatro componentes del framework (cards, navbars, alerts, etc).</li></h5>
+       <h5><li>Las personas ingresadas tienen que tener por lo menos cuatro datos diferentes (nombre, teléfono, sexo, etc) y debe validar el tipo de dato de la información ingresada.</li></h5>
+       <h5><li>Debe persistir la información utilizando alguna API del navegador.</li></h5>
+       <h5><li>En la vista de búsqueda se debe poder ingresar un string y que ese string este presente en cualquiera de los campos de la persona.</li></h5>
+       <h5><li>Se deben poder borrar las personas.</li></h5>
+
+      <h4><ul>Qué se evalúa?</ul></h4>
+       <h5><li>Prolijidad del código: indentaciones, espacios innecesarios, utilización de convenciones, etc.</li></h5>
+       <h5><li>Nombres de variables y funciones significativas.</li></h5>
+       <h5><li>Utilización de las herramientas (Git, Github, Taiga).</li></h5>
+       <h5><li>ES6, Array#extras, String, Object, Math, Array, etc.</li></h5>
+       <h5><li>Markup HTML innecesario (no crear elementos de más ni elementos que no correspondan a lo que quieren representar).</li></h5>
+    </div>
+  </div>
 
 </div>
 

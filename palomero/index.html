@@ -67,8 +67,8 @@
   <h3 v-if="!personas.length">Looks so empty</h3>
   <div v-else v-for="(persona,index) in personasFiltradas">
     <h4 class="card-title">{{ persona.nombre }} ({{ persona.apellido }}) ({{ persona.edad }}) ({{ persona.telefono }}) ({{ persona.favs }}) </h4>
-    <a href="#" @click="eliminarPersonaLocalStorage(index);">Borrar</a>
-    <a href="#" :hidden=persona.favs @click="hacerFavorito(index);">Favorite</a>
+    <button class="btn waves-effect red darken-4" @click="eliminarPersonaLocalStorage(index);">Borrar</a>
+    <button class="btn waves-effect waves-light" :disabled=persona.favs @click="hacerFavorito(index);">Favorite</a>
   </div>
 </div>
 

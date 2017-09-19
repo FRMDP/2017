@@ -1,0 +1,111 @@
+<html>
+   <head>
+      <title>tp2</title>      
+   </head>
+   <body>
+      <br>
+      <button id="boton">Ordenar</button>
+      <ul id="lista_desordenada"></ul>
+
+      <script>
+
+        let lista_users = 
+        [
+          {
+            login: "cacho",
+            id: 1,
+            avatar_url: "portada de rust in peace",
+            gravatar_id: "",
+            url: "https://api.github.com/users/cacho",
+            html_url: "https://github.com/cacho",
+            followers_url: 500,
+            following_url: "https://api.github.com/users/octocat/following{/other_user}",
+            gists_url: "https://api.github.com/users/octocat/gists{/gist_id}",
+            starred_url: "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+            subscriptions_url: "https://api.github.com/users/octocat/subscriptions",
+            organizations_url: "https://api.github.com/users/octocat/orgs",
+            repos_url: "https://api.github.com/users/octocat/repos",
+            events_url: "https://api.github.com/users/octocat/events{/privacy}",
+            received_events_url: "https://api.github.com/users/octocat/received_events",
+            type: "User",
+            site_admin: false
+          },
+          {
+            login: "nestor",
+            id: 2,
+            avatar_url: "portada de rust in peace",
+            gravatar_id: "",
+            url: "https://api.github.com/users/cacho",
+            html_url: "https://github.com/cacho",
+            followers_url: 7000,
+            following_url: "https://api.github.com/users/octocat/following{/other_user}",
+            gists_url: "https://api.github.com/users/octocat/gists{/gist_id}",
+            starred_url: "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+            subscriptions_url: "https://api.github.com/users/octocat/subscriptions",
+            organizations_url: "https://api.github.com/users/octocat/orgs",
+            repos_url: "https://api.github.com/users/octocat/repos",
+            events_url: "https://api.github.com/users/octocat/events{/privacy}",
+            received_events_url: "https://api.github.com/users/octocat/received_events",
+            type: "User",
+            site_admin: false
+          },
+          {
+            login: "la jefa",
+            id: 3,
+            avatar_url: "portada de rust in peace",
+            gravatar_id: "",
+            url: "https://api.github.com/users/cacho",
+            html_url: "https://github.com/cacho",
+            followers_url: 9,
+            following_url: "https://api.github.com/users/octocat/following{/other_user}",
+            gists_url: "https://api.github.com/users/octocat/gists{/gist_id}",
+            starred_url: "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+            subscriptions_url: "https://api.github.com/users/octocat/subscriptions",
+            organizations_url: "https://api.github.com/users/octocat/orgs",
+            repos_url: "https://api.github.com/users/octocat/repos",
+            events_url: "https://api.github.com/users/octocat/events{/privacy}",
+            received_events_url: "https://api.github.com/users/octocat/received_events",
+            type: "User",
+            site_admin: false
+          }
+        ]
+
+        const boton = document.getElementById('boton');
+        const lista_desordenada = document.getElementById('lista_desordenada');
+
+        function ordenar_x_followers() {
+          let lista_final = [];
+          while(lista_users.length > 0) {
+            lista_final.push(quitar_obtener_mayor(lista_users));
+          }
+          //console.log(lista_final);
+          mostrar_lista(lista_final);
+        }
+
+        function quitar_obtener_mayor(lista){
+          var followers = 0;
+          var index = 0;
+          for (var i = 0; i < lista.length; i++) {
+            if(lista[i].followers_url > followers) { //followers_url hice que contenga la cantidad y no una url con la lista
+              followers = lista[i].followers_url;
+              index = i;
+            }
+          }
+          const user = lista.splice(index, 1);
+          return user[0];
+        }
+
+         function mostrar_lista (lista_ordenada) {
+          lista_ordenada.forEach(function(currentValue){
+            const li = document.createElement("li");
+            const nodo = document.createTextNode("Nombre: " + currentValue.login + ", Id: " + currentValue.id + ", Followers: " + currentValue.followers_url);
+            lista_desordenada.appendChild(li);
+            li.appendChild(nodo);
+          });
+         }
+
+         boton.addEventListener('click',ordenar_x_followers);
+         
+      </script>
+   </body>
+</html>

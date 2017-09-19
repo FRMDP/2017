@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Casales | TP03</title>
+    <link rel="stylesheet" href="./css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/bulma.css">
+    <link rel="stylesheet" href="./css/sticky-footer.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div id="app">
+    <section class="hero is-primary">
+        <div class="hero-head">
+            <header class="nav">
+                <div class="container">
+                    <div class="nav-left">
+                        <a class="nav-item">
+                            <span class="icon is-large is-left"><i class="fa fa-address-book"></i></span>
+                        </a>
+                        <a class="nav-item" @click="changeView('search')">
+                            Search
+                        </a>
+                        <a class="nav-item" @click="changeView('add')">
+                            Add
+                        </a>
+                        <a class="nav-item" @click="changeView('trash')">
+                            Trash
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title">
+                    Address Book
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <transition name="fade">
+        <div class="notification notification-alert is-info" v-if="showAlert">
+            <p>{{ alertMessage }}</p>
+        </div>
+    </transition>
+
+    <section class="section" v-show="view == 'add'">
+        <div class="container">
+            <div class="columns is-mobile">
+                <div class="column is-half is-offset-one-quarter">
+                    <form class="box">
+                        <div class="field">
+                            <label class="label">First name</label>
+                            <div class="control">
+                                <input class="input" placeholder="Insert first name" v-model="contact.firstName">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Last name</label>
+                            <div class="control">
+                                <input class="input" placeholder="Insert last name" v-model="contact.lastName">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Address</label>
+                            <div class="control">
+                                <input class="input" placeholder="Insert Address" v-model="contact.address">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Phone</label>
+                            <div class="control">
+                                <input class="input" type="number" placeholder="Add phone number"
+                                       v-model="contact.telephoneNumber">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <button class="button is-medium is-primary is-outlined" :disabled="!formOk"
+                                        @click.prevent="addContact">Add
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" v-show="view == 'search'">
+        <div class="container">
+            <div class="columns is-desktop">
+                <div class="column is-8 is-offset-2">
+                    <div class="box">
+                        <div class="field">
+                            <div class="control has-icons-left">
+                                <input class="input" placeholder="Search by name ..." v-model="filter">
+                                <span class="icon is-small is-left"><i class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification is-primary" v-if="!contacts.length">
+                        There are no contacts on the list
+                    </div>
+                </div>
+            </div>
+            <div v-if="contacts.length">
+                <div class="columns is-desktop is-multiline is-centered">
+                    <div class="notification is-primary" v-if="!filteredContacts.length">
+                        Couldn't find anything !
+                    </div>
+                    <div class="column is-4" v-for="(contact, index) in filteredContacts">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    {{ firstToUpper(contact.firstName) }} {{ firstToUpper(contact.lastName) }}
+                                </p>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    <p><strong>Address: </strong>{{ firstToUpper(contact.address) }}</p>
+                                    <p><strong>Phone Number: </strong>{{ contact.telephoneNumber }}</p>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <a class="card-footer-item" @click.prevent="trashContact(index)">Delete</a>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" v-show="view == 'trash'">
+        <div class="container">
+            <div class="columns is-desktop">
+                <div class="column is-8 is-offset-2">
+                    <div class="box">
+                        <h6 class="title is-6">Deleted contacts</h6>
+                    </div>
+                    <div class="notification is-primary" v-if="!deletedContacts.length">
+                        Empty !
+                    </div>
+                </div>
+            </div>
+            <div v-if="deletedContacts.length">
+                <div class="columns is-desktop is-multiline is-centered">
+                    <div class="column is-4" v-for="(contact, index) in deletedContacts">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">
+                                    {{ firstToUpper(contact.firstName) }} {{ firstToUpper(contact.lastName) }}
+                                </p>
+                            </header>
+                            <div class="card-content">
+                                <div class="content">
+                                    <p><strong>Address: </strong>{{ firstToUpper(contact.address) }}</p>
+                                    <p><strong>Phone Number: </strong>{{ contact.telephoneNumber }}</p>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <a class="card-footer-item" @click.prevent="restoreFromTrashed(index)">Restore</a>
+                                <a class="card-footer-item" @click.prevent="deleteContactForever(index)">Delete Forever</a>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="content has-text-centered">
+            <p>
+                Made by Ignacio Casales | UTN | 2017
+            </p>
+            <p>
+                <a class="icon is-medium is-left is-white" href="https://github.com/ignaciocasales/2017">
+                    <i class="fa fa-github"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>
+<script src="js/vue.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

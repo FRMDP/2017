@@ -57,3 +57,12 @@ html {
     from {opacity :1;}
     to {opacity :0;}
 }
+/*
+table, th, td {
+    border: 1px solid black;
+}*/
+
+th, td {
+    padding: 10px;
+}
+

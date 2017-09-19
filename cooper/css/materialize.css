@@ -2919,7 +2919,7 @@ table.highlight > tbody > tr {
 }
 
 table.highlight > tbody > tr:hover {
-  background-color: #f2f2f2;
+  background-color: #00ffa1;
 }
 
 table.centered thead tr th, table.centered tbody tr td {

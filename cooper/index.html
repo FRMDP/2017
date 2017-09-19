@@ -2,9 +2,10 @@
 <html lang="en" class="no-js">
 	<head>
 
-		<title>Animated Checkboxes and Radio Buttons with SVG</title>
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-		<!--<link rel="stylesheet" type="text/css" href="css/demo.css" />-->
+		<title>TP3</title>
+    <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
     <link rel="stylesheet" type="text/css" href="css/estilo.css" />
 	</head>
@@ -21,9 +22,7 @@
           </ul>
         </div>
       </nav>
-
       <div class="container">
-    
         <div class="negrita" v-show="vista == 'ingresar'">
           <form class="ac-custom ac-radio ac-circle" autocomplete="off">
             <h2>Ingrese sus datos</h2>
@@ -43,19 +42,16 @@
                </div>
              </div>
           </form>
-
           <div v-if="mensaje" class="todo_bien_box">
             Persona cargada succesfully
           </div>
-
         </div>
-
         <div class="negrita" v-show="vista == 'buscar'">
           <div class="row">
             <h2>Listado de personas</h2>
             <input type="text" placeholder="Buscar por nombre" v-model="filtro">
             <h3 v-if="!personas.length">No hay personas</h3>
-            
+              <h4 v-else-if="!personasFiltradas.length">Los datos ingresados no concuerdan con ninguna persona</h4>
               <div v-else v-for="persona in personasFiltradas">
                 <div id="card" class="col s12 m6 l3">
                   <div class="card blue-grey darken-1">
@@ -75,25 +71,23 @@
                   </div>
                 </div>
               </div>
-
           </div>
         </div>
-
         <div v-show="vista == 'denuncias'">
           <div v-if="denunciando">
-            <form autocomplete="off">
+            <form autocomplete="off" class="normal">
               <h2>Realizar denuncia</h2>
               <h5>Usuario a denunciar: {{ persona.nombre }} {{ persona.apellido }}</h5>
               <div class="row">
                 <div class="col l5">
                   <ul>
                   <h5>El usuario...</h5>
-                    <li><input value="1" id="r3" name="r2" type="radio" v-model="denuncia.motivo">trata temas inadecuados</li>
-                    <li><input value="2" id="r4" name="r2" type="radio" v-model="denuncia.motivo">realiza denuncias absurdas</li>
-                    <li><input value="3" id="r5" name="r2" type="radio" v-model="denuncia.motivo">no me quiere</li>
-                    <li><input value="4" id="r6" name="r2" type="radio" v-model="denuncia.motivo">publica contenido ofensivo</li>
-                    <li><input value="5" id="r7" name="r2" type="radio" v-model="denuncia.motivo">es violentamente agresivo al expresarse</li>
-                    <li><input value="6" id="r8" name="r2" type="radio" v-model="denuncia.motivo">otros</li>
+                    <li><input value="1" id="r3" name="r2" type="radio" v-model="denuncia.motivo"> trata temas inadecuados</li>
+                    <li><input value="2" id="r4" name="r2" type="radio" v-model="denuncia.motivo"> realiza denuncias absurdas</li>
+                    <li><input value="3" id="r5" name="r2" type="radio" v-model="denuncia.motivo"> no me quiere</li>
+                    <li><input value="4" id="r6" name="r2" type="radio" v-model="denuncia.motivo"> publica contenido ofensivo</li>
+                    <li><input value="5" id="r7" name="r2" type="radio" v-model="denuncia.motivo">es violentamente violento al expresarse</li>
+                    <li><input value="6" id="r8" name="r2" type="radio" v-model="denuncia.motivo"> otros</li>
                   </ul>
                 </div>
                 <div class="col l7">
@@ -109,20 +103,26 @@
               <h3 v-if="!denuncias.length">No hay denuncias</h3>
               <div v-else>
                 <h2>Listado de denuncias</h2>
-                
-                    
-    
-                    
-                  <div v-for="denuncia in denuncias">
-                      
-                        {{ denuncia.id_persona }}
-                        {{ denuncia.motivo }}
-                        {{ denuncia.descripcion }}
-                      
-                  </div>
-                    
+                  <table class="highlight">
+                    <thead>
+                      <tr>
+                        <th>Denunciado</th>
+                        <th>Motivo</th> 
+                        <th>Descripcion</th>
+                      </tr>
+                    </thead>
+                    <tr v-for="denuncia in denuncias">
+                      <td> {{ getNombre(denuncia.id_persona) }} </td>
+                      <td v-if="denuncia.motivo == 1"> Trata temas inadecuados </td>
+                      <td v-else-if="denuncia.motivo == 2"> Realiza denuncias absurdas </td>
+                      <td v-else-if="denuncia.motivo == 3"> No me quiere </td>
+                      <td v-else-if="denuncia.motivo == 4"> Publica contenido ofensivo </td>
+                      <td v-else-if="denuncia.motivo == 5"> Es violentamente agresivo al expresarse </td>
+                      <td v-else> Otros </td>
+                      <td> {{ denuncia.descripcion }} </td>
+                    </tr>
+                  </table>
               </div>
-
             </div>
           </div>
         </div>
@@ -166,10 +166,13 @@
               return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.direccion &&  this.persona.sexo;
             },
             formOk2() {
-              return this.denuncia.motivo && this.denuncia.descripcion;
+              return this.denuncia.motivo;
             },
             personasFiltradas() {
-              return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0);
+              return this.personas.filter(p => (p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 || 
+                p.apellido.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+                p.edad.indexOf(this.filtro) >= 0 ||
+                p.direccion.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0));
             }
           },
           methods: {
@@ -177,6 +180,7 @@
               this.persona.id = this.personas.length;
               this.personas.push(Object.assign({}, this.persona));
               this.cleanFormulario();
+              localStorage.setItem('personas', JSON.stringify(this.personas));
               this.mensaje = true;
               setTimeout(this.mensaje_false, 4000);
             },
@@ -207,6 +211,7 @@
               while(this.personas[pos].id != persona_a_borrar.id) 
                 pos++;
               this.personas.splice(pos, 1);
+              localStorage.setItem('personas', JSON.stringify(this.personas));
             },
             contarDenuncias(personita) {
               cant = 0;
@@ -226,13 +231,28 @@
             denunciarPersonaII(){
               this.denuncias.push(Object.assign({}, this.denuncia));
               this.cleanFormulario2();
+              localStorage.setItem('denuncias', JSON.stringify(this.denuncias));
               this.denunciando = false;
-              console.log(this.denuncias);
               /*this.mensaje2 = true;
               setTimeout(this.mensaje_false2, 4000);*/
             },
-            denunciasReturn(){
-              return this.denuncias; //no se si esto es necesario
+            getNombre(id){
+              for (let i = 0; this.personas.length > i; i++) {
+                if(this.personas[i].id == id) {
+                  return this.personas[i].nombre + " " + this.personas[i].apellido;
+                }
+              }
+            },
+            mounted(){
+              const personas = localStorage.getItem('personas');
+              if(!personas){
+                this.personas = JSON.parse(personas)
+              }
+
+              const denuncias = localStorage.getItem('denuncias');
+              if(!denuncias){
+                this.denuncias = JSON.parse(denuncias)
+              }
             }
           }
         })

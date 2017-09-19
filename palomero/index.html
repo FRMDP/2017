@@ -28,7 +28,7 @@
 
   <div v-show="vista == 'ingresar'">
     <div class="row">
-      <h3>New contact</h3>
+      <h3 align="center">New contact</h3>
       <form class="col s12">
         <div class="row">
           <div class="input-field col s6">
@@ -73,11 +73,11 @@
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
               <span class="card-title">{{ persona.nombre }} {{ persona.apellido }}</span>
-              <p>Edad: {{persona.edad}}</p>
-              <p>Telefono: {{persona.telefono}}</p>
+              <p>Age: {{persona.edad}}</p>
+              <p>Phone number: {{persona.telefono}}</p>
             </div>
             <div class="card-action">
-                  <button class="btn waves-effect red darken-4" @click="eliminarPersonaLocalStorage(index);">Borrar</a>
+                  <button class="btn waves-effect red darken-4" @click="eliminarPersonaLocalStorage(index);">Delete</button>
                   <button class="btn waves-effect waves-light" :disabled=persona.favs @click="hacerFavorito(index);">Favorite</a>
             </div>
           </div>
@@ -100,15 +100,16 @@
         <div class="col s12 m6">
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
-              <span class="card-title">Card Title</span>
+              <span class="card-title">{{ persona.nombre }} {{ persona.apellido }}</span>
+              <p>Age: {{persona.edad}}</p>
+              <p>Phone number: {{persona.telefono}}</p>
+            </div>
+            <div class="card-action">
+              <button class="btn waves-effect waves-light" @click="eliminarFav(index);">Unfave</button>
             </div>
           </div>
         </div>
     </div>  
-
-      <h4 class="card-title">{{ persona.nombre }} ({{ persona.apellido }}) ({{ persona.edad }}) ({{ persona.telefono }}) ({{ persona.favs }}) </h4>
-      <button class="btn waves-effect waves-light" @click="eliminarFav(index);">Unfave</a>
-      </div>
   </div>
 </div>
 

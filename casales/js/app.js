@@ -90,7 +90,7 @@ new Vue({
             setTimeout(() => {
                 this.alertMessage = '';
                 this.showAlert = false;
-            }, 1000);
+            }, 2000);
         }
     }
 });

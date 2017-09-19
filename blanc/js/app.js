@@ -7,25 +7,32 @@ const vm = new Vue({
             address: '',
             gender: '',
             birthdate: '',
-            numbers: []
+            number: null
         },
         contactList: [],
         filter: '',
-        view: 'home'
+        view: 'home',
+        toDelete:{}
     },
     mounted() {
         this.getContactsFromStorage();
     },
     computed: {
         searchedContacts() {
-            return this.contactList.filter(c => c.givenName.indexOf(this.filter) >= 0);
+            return this.contactList.filter(c => c.givenName.toLowerCase().indexOf(this.filter) >= 0 ||
+            c.surName.toLowerCase().indexOf(this.filter) >= 0 ||
+            c.address.toLowerCase().indexOf(this.filter) >= 0 ||
+            c.gender.indexOf(this.filter) >= 0 ||
+            c.birthdate.indexOf(this.filter) >= 0 ||
+            c.number.indexOf(this.filter) >= 0);
         },
         formIsCorrect() {
-            return this.contact.givenName &&
+            return !!(this.contact.givenName &&
                 this.contact.surName &&
                 this.contact.address &&
-                this.contact.numbers &&
-                this.contact.birthdate;
+                this.contact.gender  &&
+                this.contact.birthdate &&
+                this.contact.number);
         }
     },
     methods: {
@@ -47,12 +54,18 @@ const vm = new Vue({
             this.contact.birthdate = '';
             this.contact.address = '';
             this.contact.gender = '';
-            this.contact.numbers = [];
+            this.contact.number = null;
+        },
+        setToDelete(contact){
+            this.toDelete = contact;
+        },
+        getToDelete(){
+            return this.toDelete;
         },
         deleteContact(contact){
           let index = null;
           for (let i = 0; i < this.contactList.length; i ++) {
-            if (this.contactList[i].numbers === contact.numbers) {
+            if (this.contactList[i] === contact) {
               index = i;
             }
           }

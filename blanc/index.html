@@ -2,7 +2,6 @@
 <html>
   <head>
     <!--CSS-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="css/myStyle.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -19,7 +18,7 @@
         <div class="nav-wrapper container">
           <a id="logo-container" @click="changeView('home')" class="right brand-logo">AgendAPP</a>
           <ul class="left hide-on-med-and-down">
-            <li><a class="dropdown-button" href="#!" data-activates="nav-mobile">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-button" data-activates="nav-mobile">Menu <i class="fa fa-caret-down"></i></a></li>
           </ul>
           <!--Dropdown for Mobile and Standard-->
           <ul id="nav-mobile" class="dropdown-content">
@@ -27,7 +26,7 @@
             <li class="divider"></li>
             <li><a @click="changeView('search')"><p class="default-text-primary-color">Contact List</p></a></li>
           </ul>
-          <a href="#" data-activates="nav-mobile" class="button-collapse dropdown-button"><i class="material-icons">menu</i></a>
+          <a data-activates="nav-mobile" class="button-collapse dropdown-button"><i class="fa fa-2x fa-list"></i></a>
         </div>
       </nav>
 
@@ -73,6 +72,12 @@
       <div class="container" v-show="view == 'new'">
         <div class="row">
           <div class="col s12">
+            <h3 class="left-align">Add New Contact</h3>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
             <div class="row">
               <div class="input-field col s6">
                 <input id="givenName" type="text" class="validate" v-model="contact.givenName">
@@ -89,9 +94,9 @@
                 </div>
               </div>
               <div class="row">
-                <input class="with-gap" name="genderSelect" type="radio" id="male" value="m" v-model="contact.gender"/>
+                <input class="with-gap validate" name="genderSelect" type="radio" id="male" value="male" v-model="contact.gender"/>
                 <label for="male">Male</label>
-                <input class="with-gap" name="genderSelect" type="radio" id="female" value="f" v-model="contact.gender"/>
+                <input class="with-gap validate" name="genderSelect" type="radio" id="female" value="female" v-model="contact.gender"/>
                 <label for="female">Female</label>
               </div>
               <div class="row">
@@ -102,13 +107,13 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="numbers" type="number" class="validate" v-model="contact.numbers">
-                  <label for="numbers">Telephone</label>
+                  <input id="number" type="number" class="validate" v-model="contact.number" number>
+                  <label for="number">Telephone</label>
                 </div>
               </div>
               <div class="row">
                 <a class="btn-floating waves-effect waves-light grey btn-large right" :disabled="!formIsCorrect"
-                   @click.prevent="addContact" onclick="Materialize.toast('Contact added successfully!', 2000)"><i class="material-icons">add</i></a>
+                   @click.prevent="addContact" onclick="Materialize.toast('Contact added successfully!', 2000)"><i class="fa fa-2x fa-plus"></i></a>
               </div>
             </div>
           </div>
@@ -118,9 +123,15 @@
       <!--Search Contacts Section-->
       <div class="container center" v-show="view == 'search'">
         <div class="row">
-          <div class="col s12 m9 offset-m3">
-            <div class="input-field col s8">
-              <input id="find" type="text" v-model="filter">
+          <div class="col s12 m9 offset-m2">
+            <h3 class="left-align">Search Contacts</h3>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m9 offset-m2">
+            <div class="input-field">
+              <input id="find" type="text" v-model="filter" :disabled="!contactList.length">
               <label for="find">Search</label>
             </div>
           </div>
@@ -139,10 +150,10 @@
                   <span class="card-title">{{ firstCharToUpper(contact.givenName) }} {{ firstCharToUpper(contact.surName) }}</span>
                   <p>{{ contact.address }}</p>
                   <p>{{ contact.birthdate }}</p>
-                  <p>{{ contact.numbers }}</p>
+                  <p>{{ contact.number }}</p>
                 </div>
                 <div class="card-action">
-                  <a class="waves-effect waves-light btn grey white-text" @click="deleteContact(contact)">Delete</a>
+                  <a class="waves-effect waves-light btn modal-trigger grey white-text" href="#confirmDeleteContact" @click="setToDelete(contact)">Delete</a>
                 </div>
               </div>
             </div>
@@ -151,16 +162,16 @@
       </div>
 
       <!-- Delete Contact Confirmation Modal-->
-      <!--<div id="confirmDeleteContact" class="modal">
+      <div id="confirmDeleteContact" class="modal">
         <div class="modal-content">
           <h4>Warning!</h4>
-          <p>You are about to permanently delete {{ firstCharToUpper(contact.givenName) }} {{ firstCharToUpper(contact.surName) }}</p>
+          <p>You are about to permanently delete this contact from your book!</p>
           <p>Do you wish to continue?</p>
         </div>
         <div class="modal-footer">
-          <a @click="deleteContact(contact)" class="modal-action modal-close waves-effect waves-green btn-flat">Confirm</a>
+          <a @click="deleteContact(getToDelete())" class="modal-action modal-close waves-effect waves-green btn default-primary-color">Confirm</a>
         </div>
-      </div>-->
+      </div>
 
       <!--Footer-->
       <footer class="footer">
@@ -182,6 +193,12 @@
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="js/vue.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <!--Modal Prep-->
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
 
   </body>
 </html>

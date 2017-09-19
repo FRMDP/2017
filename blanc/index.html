@@ -94,15 +94,15 @@
                 </div>
               </div>
               <div class="row">
-                <input class="with-gap validate" name="genderSelect" type="radio" id="male" value="male" v-model="contact.gender"/>
+                <input class="with-gap validate" name="genderSelect" type="radio" id="male" value="m" v-model="contact.gender"/>
                 <label for="male">Male</label>
-                <input class="with-gap validate" name="genderSelect" type="radio" id="female" value="female" v-model="contact.gender"/>
+                <input class="with-gap validate" name="genderSelect" type="radio" id="female" value="f" v-model="contact.gender"/>
                 <label for="female">Female</label>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="birthdate" type="text" class="validate" v-model="contact.birthdate">
                   <label for="birthdate">Date of Birth</label>
+                  <input id="birthdate" type="date" class="validate right-align" v-model="contact.birthdate">
                 </div>
               </div>
               <div class="row">
@@ -148,9 +148,10 @@
               <div class="card default-primary-color">
                 <div class="card-content white-text">
                   <span class="card-title">{{ firstCharToUpper(contact.givenName) }} {{ firstCharToUpper(contact.surName) }}</span>
-                  <p>{{ contact.address }}</p>
-                  <p>{{ contact.birthdate }}</p>
-                  <p>{{ contact.number }}</p>
+                  <p>Address: {{ contact.address }}</p>
+                  <p>D.O.B: {{ contact.birthdate }}</p>
+                  <p>Phone Number: {{ contact.number }}</p>
+                  <p>Gender: {{ firstCharToUpper(contact.gender) }}</p>
                 </div>
                 <div class="card-action">
                   <a class="waves-effect waves-light btn modal-trigger grey white-text" href="#confirmDeleteContact" @click="setToDelete(contact)">Delete</a>

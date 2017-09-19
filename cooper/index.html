@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+
+		<title>Animated Checkboxes and Radio Buttons with SVG</title>
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+		<!--<link rel="stylesheet" type="text/css" href="css/demo.css" />-->
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" type="text/css" href="css/estilo.css" />
+	</head>
+	
+  <body>
+  <div id="nose">
+      <nav>
+        <div class="nav-wrapper negrita">
+          <a href="#!" class="brand-logo right">TP3</a>
+          <ul class="left hide-on-med-and-down">
+            <li><a class="nav-link" href="#" @click="cambiarVista('ingresar')">Ingresar persona</a></li>
+            <li><a class="nav-link" href="#" @click="cambiarVista('buscar')">Buscar</a></li>
+            <li><a class="nav-link" href="#" @click="cambiarVista('denuncias')">Denuncias</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+    
+        <div class="negrita" v-show="vista == 'ingresar'">
+          <form class="ac-custom ac-radio ac-circle" autocomplete="off">
+            <h2>Ingrese sus datos</h2>
+            <input v-model="persona.nombre" type="text" placeholder="Ingrese nombre">
+            <input v-model="persona.apellido" type="text" placeholder="Ingrese apellido">
+            <input onchange="edad_humana(this);" type="number" placeholder="Ingrese edad" v-model="persona.edad">
+            <input type="text" placeholder="Ingrese domicilio" v-model="persona.direccion">
+            <div class="row">
+              <div class="col l5">
+                <ul>
+                  <li class="costado"><input value="v" id="r1" name="r1" type="radio" v-model="persona.sexo">Varon</li>
+                  <li class="costado"><input value="m" id="r2" name="r1" type="radio" v-model="persona.sexo">Mujer</li>
+                </ul>
+              </div>
+              <div class="col l7">
+               <button :disabled="!formOk" class="btn waves-effect waves-light right" type="submit" name="action"  @click.prevent="addPersona">Aceptar</button>
+               </div>
+             </div>
+          </form>
+
+          <div v-if="mensaje" class="todo_bien_box">
+            Persona cargada succesfully
+          </div>
+
+        </div>
+
+        <div class="negrita" v-show="vista == 'buscar'">
+          <div class="row">
+            <h2>Listado de personas</h2>
+            <input type="text" placeholder="Buscar por nombre" v-model="filtro">
+            <h3 v-if="!personas.length">No hay personas</h3>
+            
+              <div v-else v-for="persona in personasFiltradas">
+                <div id="card" class="col s12 m6 l3">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <h4 class="card-title">{{ persona.nombre }} {{ persona.apellido }}</h4>
+                      <h6>Edad: {{ persona.edad }}</h6>
+                      <h6>Direccion: {{ persona.direccion }}</h6>
+                      <h6 v-if=" persona.sexo  == 'v'">Varon</h6>
+                      <h6 v-else>Mujer</h6>
+                      <h6 v-if="contarDenuncias(persona)">Denuncias: {{ contarDenuncias(persona) }}</h6>
+                      <h6 v-else>Sin denuncias</h6>
+                    </div>
+                    <div class="card-action">
+                      <a id="borrar" @click.prevent="eliminarPersona(persona)" href="#">Borrar</a>
+                      <a @click.prevent="denunciarPersona(persona)" href="#">Denunciar</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+
+        <div v-show="vista == 'denuncias'">
+          <div v-if="denunciando">
+            <form autocomplete="off">
+              <h2>Realizar denuncia</h2>
+              <h5>Usuario a denunciar: {{ persona.nombre }} {{ persona.apellido }}</h5>
+              <div class="row">
+                <div class="col l5">
+                  <ul>
+                  <h5>El usuario...</h5>
+                    <li><input value="1" id="r3" name="r2" type="radio" v-model="denuncia.motivo">trata temas inadecuados</li>
+                    <li><input value="2" id="r4" name="r2" type="radio" v-model="denuncia.motivo">realiza denuncias absurdas</li>
+                    <li><input value="3" id="r5" name="r2" type="radio" v-model="denuncia.motivo">no me quiere</li>
+                    <li><input value="4" id="r6" name="r2" type="radio" v-model="denuncia.motivo">publica contenido ofensivo</li>
+                    <li><input value="5" id="r7" name="r2" type="radio" v-model="denuncia.motivo">es violentamente agresivo al expresarse</li>
+                    <li><input value="6" id="r8" name="r2" type="radio" v-model="denuncia.motivo">otros</li>
+                  </ul>
+                </div>
+                <div class="col l7">
+                <h6>Detalles de la denuncia (opcional)</h6>
+                <textarea name="paragraph_text" cols="50" rows="10" v-model="denuncia.descripcion"></textarea>
+                 <button :disabled="!formOk" class="btn waves-effect waves-light right" type="submit" name="action"  @click.prevent="addPersona">Aceptar</button>
+                 </div>
+               </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>    
+      <script src="js/vue.js"></script>
+      <script>
+        function edad_humana(input) { //para evitar el ingreso de edades ridiculas
+          if (input.value < 0) input.value = 0;
+          if (input.value > 150) input.value = 150;
+        }
+      </script>
+      <script>
+        new Vue({
+          el: '#nose',
+          data: {
+            persona: {
+              id: '',
+              nombre: '',
+              apellido: '',
+              edad: '',
+              direccion: '',
+              sexo: ''
+            },
+            personas: [],
+            denuncia: {
+              id_persona: '', //(a denunciar)
+              motivo: '',
+              descripcion: ''
+            },
+            denuncias: [],
+            filtro: '',
+            vista: 'ingresar',
+            mensaje: false,
+            denunciando: false
+          },
+          computed: {
+            formOk() {
+              return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.direccion &&  this.persona.sexo;
+            },
+            personasFiltradas() {
+              return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0);
+            }
+          },
+          methods: {
+            addPersona() {
+              this.persona.id = this.personas.length;
+              this.personas.push(Object.assign({}, this.persona));
+              this.cleanFormulario();
+              this.mensaje = true;
+              setTimeout(this.mensaje_false, 4000);
+            },
+            cleanFormulario() {
+              this.persona.nombre = '';
+              this.persona.apellido = '';
+              this.persona.edad = '';
+              this.persona.direccion = '';
+              this.persona.fecha_nac = '';
+              this.persona.sexo = '';
+            },
+            cambiarVista(vista) {
+              this.vista = vista;
+            },
+            mensaje_false() { 
+              this.mensaje = false; 
+            },
+            eliminarPersona(persona_a_borrar) {
+              pos = 0;
+              while(this.personas[pos].id != persona_a_borrar.id) 
+                pos++;
+              this.personas.splice(pos, 1);
+            },
+            contarDenuncias(personita) {
+              cant = 0;
+              for (let i = 0; this.denuncias.length > i; i++) {
+                if(this.denuncias[i].id_persona == personita.id) 
+                  cant++;
+              }
+              return cant;
+            },
+            denunciarPersona(persona_a_denunciar) {
+              this.denuncia.id_persona = persona_a_denunciar.id;
+              this.persona.nombre = persona_a_denunciar.nombre;
+              this.persona.apellido = persona_a_denunciar.apellido;
+              this.denunciando = true;
+              this.vista = 'denuncias';
+            }
+          }
+        })
+      </script>
+		<script src="js/svgcheckbx.js"></script>
+	</body>
+</html>

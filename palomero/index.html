@@ -28,6 +28,7 @@
 
   <div v-show="vista == 'ingresar'">
     <div class="row">
+      <h3>New contact</h3>
       <form class="col s12">
         <div class="row">
           <div class="input-field col s6">
@@ -48,7 +49,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" align="center">
       <form action="#">
         <input name="sexo" value="Male" type="radio" id="checkSexo1" v-model="persona.sexo"/>
         <label for="checkSexo1">Male</label>
@@ -56,13 +57,14 @@
         <input name="sexo" value="Female" type="radio" id="checkSexo2" v-model="persona.sexo"/>
         <label for="checkSexo2">Female</label>
       </form>
-      <button :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Add Contact</button>
+      <button class="btn waves-effect waves-light" :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Add Contact</button>
     </div>
   </form>
 </div>
 </div>
 
 <div v-show="vista == 'buscar'">
+  <h3>Search for contacts</h3>
   <input type="text" placeholder="Filter by name" v-model="filtro">
   <h3 v-if="!personas.length">Looks so empty</h3>
   <div v-else v-for="(persona,index) in personasFiltradas">
@@ -78,11 +80,12 @@
 
 
 <div v-show="vista == 'favorites'">
+  <h3>Favorite List</h3>
   <h3 v-if="!personas.length">Looks so empty</h3>
   <div v-else v-for="(persona,index) in personas">
       <div v-if="persona.favs==true">
       <h4 class="card-title">{{ persona.nombre }} ({{ persona.apellido }}) ({{ persona.edad }}) ({{ persona.telefono }}) ({{ persona.favs }}) </h4>
-      <a href="#" @click="eliminarFav(index);">Unfave</a>
+      <button class="btn waves-effect waves-light" @click="eliminarFav(index);">Unfave</a>
       </div>
   </div>
 </div>

@@ -40,6 +40,7 @@ new Vue({
       this.agregarPersonaLocalStorage();
   		this.limpiarPersona();
   		this.mensaje = true;
+      this.cambiarVista("buscar");
   	},
   	limpiarPersona() {
   		this.persona.nombre = '';

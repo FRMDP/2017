@@ -22,6 +22,12 @@ new Vue({
   		return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.telefono && this.persona.sexo;
   	},
 
+    esFav(index)
+    {
+      return this.personas[index].favs;
+    },
+
+
     returnFavs()
     {
       return this.personas.filter(p => p.favs=true);
@@ -52,6 +58,7 @@ new Vue({
     hacerFavorito(index) {
       this.personas[index].favs=true;
       this.agregarPersonaLocalStorage();
+      this.mensaje=true;
     },
 
     eliminarFav(index)

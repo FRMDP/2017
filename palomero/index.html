@@ -68,7 +68,7 @@
   <div v-else v-for="(persona,index) in personasFiltradas">
     <h4 class="card-title">{{ persona.nombre }} ({{ persona.apellido }}) ({{ persona.edad }}) ({{ persona.telefono }}) ({{ persona.favs }}) </h4>
     <a href="#" @click="eliminarPersonaLocalStorage(index);">Borrar</a>
-    <a href="#" @click="hacerFavorito(index);">Favorite</a>
+    <a href="#" :hidden=persona.favs @click="hacerFavorito(index);">Favorite</a>
   </div>
 </div>
 

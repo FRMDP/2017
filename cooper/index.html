@@ -99,10 +99,31 @@
                 <div class="col l7">
                 <h6>Detalles de la denuncia (opcional)</h6>
                 <textarea name="paragraph_text" cols="50" rows="10" v-model="denuncia.descripcion"></textarea>
-                 <button :disabled="!formOk" class="btn waves-effect waves-light right" type="submit" name="action"  @click.prevent="addPersona">Aceptar</button>
+                 <button :disabled="!formOk2" class="btn waves-effect waves-light right" type="submit" name="action"  @click.prevent="denunciarPersonaII(denuncia)">Aceptar</button>
                  </div>
                </div>
             </form>
+          </div>
+          <div v-else>
+            <div class="row">
+              <h3 v-if="!denuncias.length">No hay denuncias</h3>
+              <div v-else>
+                <h2>Listado de denuncias</h2>
+                
+                    
+    
+                    
+                  <div v-for="denuncia in denuncias">
+                      
+                        {{ denuncia.id_persona }}
+                        {{ denuncia.motivo }}
+                        {{ denuncia.descripcion }}
+                      
+                  </div>
+                    
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -137,11 +158,15 @@
             filtro: '',
             vista: 'ingresar',
             mensaje: false,
+            mensaje2: false,
             denunciando: false
           },
           computed: {
             formOk() {
               return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.direccion &&  this.persona.sexo;
+            },
+            formOk2() {
+              return this.denuncia.motivo && this.denuncia.descripcion;
             },
             personasFiltradas() {
               return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0);
@@ -163,11 +188,19 @@
               this.persona.fecha_nac = '';
               this.persona.sexo = '';
             },
+            cleanFormulario2() { //todo lo que sea 2 es para la denuncia
+              this.denuncia.id_persona = '';
+              this.denuncia.motivo = '';
+              this.denuncia.descripcion = '';
+            },
             cambiarVista(vista) {
               this.vista = vista;
             },
             mensaje_false() { 
               this.mensaje = false; 
+            },
+            mensaje_false2() { 
+              this.mensaje2 = false; 
             },
             eliminarPersona(persona_a_borrar) {
               pos = 0;
@@ -189,6 +222,17 @@
               this.persona.apellido = persona_a_denunciar.apellido;
               this.denunciando = true;
               this.vista = 'denuncias';
+            },
+            denunciarPersonaII(){
+              this.denuncias.push(Object.assign({}, this.denuncia));
+              this.cleanFormulario2();
+              this.denunciando = false;
+              console.log(this.denuncias);
+              /*this.mensaje2 = true;
+              setTimeout(this.mensaje_false2, 4000);*/
+            },
+            denunciasReturn(){
+              return this.denuncias; //no se si esto es necesario
             }
           }
         })

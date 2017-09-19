@@ -27,6 +27,8 @@
     </nav>
 
     <div v-show="vista == 'ingresar'">
+     <div class="card">
+      <div class="card-content">
       <div class="row">
         <h3 align="center">New contact</h3>
         <form class="col s12">
@@ -60,10 +62,14 @@
         <button class="btn waves-effect waves-light" :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Add Contact</button>
       </div>
     </form>
+   </div> 
   </div>
+ </div>
 </div>
 
 <div v-show="vista == 'buscar'">
+ <div class="card">
+  <div class="card-content">
   <h3>Search for contacts</h3>
   <input type="text" placeholder="Filter" v-model="filtro">
   <h3 v-if="!personas.length">Looks so empty</h3>
@@ -84,7 +90,9 @@
         </div>
       </div>
     </div>       
-  </div>
+   </div>
+  </div>       
+ </div>
 </div>
 
 <div v-show="vista == 'about'">
@@ -124,6 +132,8 @@
 
 
 <div v-show="vista == 'favorites'">
+ <div class="card">
+  <div class="card-content">
   <h3>Favorite List</h3>
   <h3 v-if="!personas.length">Looks so empty</h3>
   <div v-else v-for="(persona,index) in personas">
@@ -143,7 +153,9 @@
         </div>
       </div>
     </div>  
+   </div>
   </div>
+ </div>
 </div>
 
 </div>

@@ -77,6 +77,7 @@ var app = new Vue({
         },
 
         doneEdit: function(persona){
+          debugger;
           if(!this.editedPersona){
             return
           }
@@ -86,7 +87,8 @@ var app = new Vue({
           persona.telefono = persona.telefono.trim();
           persona.correo = persona.correo.trim();
           persona.grupo = persona.grupo;
-          if(!persona.nombre || !persona.apellido || !persona.telefono){
+          if(!persona.nombre || !persona.apellido || !persona.telefono 
+            || !persona.correo || !persona.grupo){
             this.eliminarPersona(persona);
           }
           localStorage.setItem(STORAGE_KEY, JSON.stringify(this.personas));

@@ -44,7 +44,7 @@
       <div v-show="vista == 'buscar'"  class="col-md-10 template">
         <h1>Agenda</h1>
         <h2>Lista de contactos</h2>
-        <input type="text" class="form-control" placeholder="Busca a tus contactos" v-model="filtro">
+        <input type="text" class="form-control" placeholder="Buscá a tus contactos" v-model="filtro">
         <h3 v-if="!personas.length">No hay contactos agregados.</h3>
         <div class="col-md-4 contenedor" v-else v-for="persona in personasFiltradas">
           <div class="card">
@@ -135,7 +135,7 @@
       <div v-show="vista == 'eliminar'"  class="col-md-10 template">
         <h1>Agenda</h1>
         <h2>Eliminar contacto</h2>
-        <input type="text" class="form-control" placeholder="Busca a tus contactos" v-model="filtro">
+        <input type="text" class="form-control" placeholder="Filtrá al contacto que quieras eliminar" v-model="filtro">
         <h3 v-if="!personas.length">No hay contactos agregados.</h3>
         <div class="col-md-4 contenedor" v-else v-for="persona in personasFiltradas">
           <div class="card">
@@ -149,10 +149,12 @@
               <h4 class="card-title">{{persona.apellido}}, {{persona.nombre}}</h4>
               <h6 class="card-subtitle mb-2 text-muted">{{persona.telefono}}</h6>
               <div>
-                Correo: <a v-if="persona.mail === ''" class="negativo">No asignado</a><a v-else>{{persona.mail}}</a>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <a v-if="persona.mail === ''" class="negativo" @click="cambiarVista('modificar')"> Agregar correo</a><a v-else> {{persona.mail}}</a>
               </div>
               <div>
-                Grupo: <a v-if="persona.grupo === ''" class="negativo">No asignado</a><a v-else>{{persona.grupo}}</a>
+                <i class="fa fa-users"></i>
+                <a v-if="persona.grupo === ''" class="negativo" @click="cambiarVista('modificar')"> Agregar grupo</a><a v-else> {{persona.grupo}}</a>
               </div>
               <div>
                 <hr>
@@ -167,10 +169,10 @@
       <div v-show="vista == 'modificar'"  class="col-md-10 template">
         <h1>Agenda</h1>
         <h2>Modificar contactos</h2>
-        <input type="text" class="form-control" placeholder="Busca a tus contactos" v-model="filtro">
+        <input type="text" class="form-control" placeholder="Filtrá al contacto que quieras modificar" v-model="filtro">
         <h3 v-if="!personas.length">No hay contactos agregados.</h3>
         <div class="col-md-4 contenedor" v-else v-for="persona in personasFiltradas">
-          <div :class="{editing: persona == editedPersona}">
+          <div :class="{editing:persona == editedPersona}">
             <div class="card">
               <div class="card-block">
                 <div v-if="persona.genero === 'varon'">
@@ -179,11 +181,14 @@
                 <div v-else>
                   <img src="img/mujer.png">
                 </div>
+
+
+
                 <div class="modificar">
                   <div>
                     <label>Nombre</label>
                     <input class="edit form-control" type="text" v-model="persona.nombre"
-                    @blur="doneEdit(persona)" @keyup.enter="doneEdit(persona)" @click="enabled"/>
+                    @blur="doneEdit(persona)" @keyup.enter="doneEdit(persona)"/>
                   </div>
                   <div>
                     <label>Apellido</label>
@@ -204,6 +209,9 @@
                     <label>Grupos</label>
                     <input class="edit form-control" type="text" v-model="persona.grupo"
                     @blur="doneEdit(persona)" @keyup.enter="doneEdit(persona)"/>
+                  </div>
+                  <div class="btnGuardar">
+                    <button  class="btn btn-success" @click="editPersona(Persona)"> Guardar </button>
                   </div>
                 </div>
               </div>

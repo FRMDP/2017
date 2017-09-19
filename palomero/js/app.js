@@ -16,7 +16,12 @@ new Vue({
   },
   computed: {
   	personasFiltradas() {
-  		return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0);
+  		return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+      p.apellido.toLowerCase().indexOf(this.filtro.toLowerCase()) >=0 ||
+      p.edad.toLowerCase().indexOf(this.filtro.toLowerCase()) >=0 ||
+      p.telefono.toLowerCase().indexOf(this.filtro.toLowerCase()) >=0 ||
+      p.sexo.toLowerCase().indexOf(this.filtro.toLowerCase()) >=0
+      );
   	},
   	formOk() {
   		return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.telefono && this.persona.sexo;

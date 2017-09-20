@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Agenda</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+<body>
+	<script src="js/vue.js"></script>
+
+	<div id="app">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		 	<a class="navbar-brand" href="#" @click="cambiarVista('agregar')">Agregar</a>
+		 	<a class="navbar-brand" href="#" @click="cambiarVista('buscar')">Buscar</a>
+			<a class="navbar-brand" href="#" @click="cambiarVista('listar')">Listar</a>
+		  
+		</nav>
+<!--formulario agregar-->
+		<div  class="container" v-show="vista == 'agregar'">
+			<div class="alert alert-success alert-dismissible fade show" role="alert" v-show="mensaje">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"  @click.prevent="cerrarMensaje">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  <strong>Se agrego correctamente</strong>
+			</div>
+
+			<form>
+				<div class="form-group">
+					<label style="margin: 5px" for="nombre">Nombre</label>
+					<input v-model="persona.nombre" type="text" class="form-control" id="nombre">
+				</div>
+
+				<div class="form-group">
+					<label style="margin: 5px" for="telefono">Telefono</label>
+					<input v-model="persona.telefono" type="number" class="form-control" id="telefono" >
+				</div>
+
+				<div class="form-group">
+					<label style="margin: 5px" for="direccion">Direccion</label>
+					<input v-model="persona.direccion" type="text" class="form-control" id="direccion">
+				</div>
+				<div class="form-group">
+					<label style="margin: 5px" for="email">E-mail</label>
+					<input v-model="persona.email" type="email" class="form-control" id="email">
+				</div>
+
+				<div class="form-group">
+					<label style="margin:5px">Sexo</label>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input v-model="persona.sexo" class="form-check-input" type="radio" name="exampleRadios" id="hombre" value="H" unchecked>
+					    Hombre
+					  </label>
+					  <label class="form-check-label">
+					    <input v-model="persona.sexo" class="form-check-input" type="radio" name="exampleRadios" id="mujer" value="M" unchecked>
+					    Mujer
+					  </label>
+					</div>
+				</div>
+			</form>
+			<button :enabled="!formOk()" style="margin: 10px" type="submit" class="btn btn-primary"  @click.prevent="agregarPersona">Guardar</button>			
+		</div>
+<!--formulario buscar-->
+		<div class="container" v-show="vista=='buscar'">
+
+			  <form class="form-inline" style="margin-top: 10px">
+			    <input class="form-control mr-sm-2" type="text" placeholder="buscar" v-model="filtro" aria-label="Search">
+			  </form>
+
+			<h3 v-if="!personas.length">No hay personas</h3>
+			<div v-else v-for="persona in personasFiltradas" style="margin: 10px">
+				<div class="card"  style="width: 25rem">
+					<h4 class="card-title">{{ persona.nombre }}</h4>
+					<p class="card-text">Telefono: {{persona.telefono}}</p>
+					<p class="card-text">Direccion: {{persona.direccion}}</p>
+					<p class="card-text">e-mail: {{persona.mail}}</p>
+					<p class="card-text">sexo: {{persona.sexo}}</p>
+					<button style="margin: 5px" type="submit" class="btn btn-danger"  @click.prevent="borrarPersona">Eliminar</button>
+				</div>
+			</div>
+		</div>
+<!--formulario listar-->
+		<div v-show="vista=='listar'" class="container" style="margin-top: 10px">
+			<h3 v-if="!personas.length">No hay personas</h3>
+			<div v-else v-for="persona in personas">
+				<div class="card" style="width: 25rem">
+					<h4 class="card-title">{{ persona.nombre }}</h4>
+					<p class="card-text">Telefono: {{persona.telefono}}</p>
+					<p class="card-text">Direccion: {{persona.direccion}}</p>
+					<p class="card-text">e-mail: {{persona.mail}}</p>
+					<p class="card-text">sexo: {{persona.sexo}}</p>
+					<button style="margin: 5px" type="submit" class="btn btn-danger"  @click.prevent="borrarPersona">Eliminar</button>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+
+	
+
+	<script type="text/javascript">
+		var app =new Vue(
+		{
+			el:'#app',
+			data:
+			{
+				persona:
+				{
+					nombre:'',
+					telefono:'',
+					direccion:'',
+					email:'',
+					sexo:''
+				},
+				personas:[],
+				filtro:'',
+				vista:'agregar',
+				mensaje:false
+			},
+			computed:
+			{
+				personasFiltradas()
+				{
+					return this.personas.filter(p=>p.nombre.indexOf(this.filtro)>=0);
+				},
+
+				 buscarIndice(person)
+		        {
+		        	let indice = 0;
+    	           	while(	(this.personas[indice].nombre != this.persona.nombre)&&
+    	           			(this.personas[indice].telefono != this.persona.telefono)&&
+    	           			(this.personas[indice].direccion != this.persona.direccion)&&
+    	           			(this.personas[indice].email != this.persona.email)&&
+    	           			(this.personas[indice].sexo != this.persona.sexo))
+    	               	indice++;
+    	           	return indice;
+		        },
+				
+			},
+			methods:
+			{
+				agregarPersona()
+				{
+		           	this.personas.push(Object.assign({}, this.persona));
+		           	let personasText = JSON.stringify(this.personas);
+		           	localStorage.setItem("contactos", personasText);
+		           	this.limpiarPersona(); 
+					this.mensaje=true;
+				},
+
+				cargarPersona(person)
+				{
+		            this.persona.nombre = person.nombre;
+		            this.persona.apellido = person.apellido;
+		            this.persona.direccion = person.direccion;
+		            this.persona.telefono = person.telefono;
+		            this.persona.mail = person.mail;
+		            this.persona.sexo = person.sexo;
+		        },
+
+				borrarPersona(person)
+				{
+	                let aux= this.cargarPersona(person, this.personas);
+	                while(this.personas[this.buscarIndice()])
+	                    pos++;
+	                this.personas.splice(pos,1);
+	                if(this.personas.length == 0)
+	                    localStorage.clear();
+	                else
+	                {
+	                    personasText = JSON.stringify(this.personas);
+	                    localStorage.setItem("contactos", personasText);
+	                }
+		        },
+
+				limpiarPersona()
+				{
+					this.persona.nombre='';
+					this.persona.telefono='';
+					this.persona.direccion='';
+					this.persona.email='';
+				},
+
+				cambiarVista(vista)
+				{
+					this.vista=vista;
+					this.mensaje=false;
+				},
+
+				cerrarMensaje()
+				{
+					this.mensaje=false;
+				},
+				formOk()
+				{
+					return this.persona.nombre&&this.persona.telefono&&this.persona.direccion&&this.persona.email&&this.persona.sexo;
+				},
+			},
+			mounted()
+			{ 
+        		if(localStorage.length != 0 )
+        		{
+            		this.personas = JSON.parse(localStorage.getItem("contactos"));
+            	}
+        	}
+
+
+		})
+	</script>
+	
+	
+</body>
+</html>

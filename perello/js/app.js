@@ -17,7 +17,7 @@ new Vue({
   		return this.personas.filter(p => p.nombre.toLowerCase().indexOf(this.filtro) >= 0||
                                       p.apellido.toLowerCase().indexOf(this.filtro) >= 0||
                                       p.edad.toLowerCase().indexOf(this.filtro) >= 0||
-                                      p.sexo.toLowerCase().indexOf(this.filtro) >= 0|| );
+                                      p.sexo.toLowerCase().indexOf(this.filtro) >= 0 );
   	},
   	formOk() {
   		return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.sexo;
@@ -25,7 +25,7 @@ new Vue({
   },
   methods: {
   	agregarPersona:function() {
-  		this.personas.assign(Object.push({}, this.persona));
+  		this.personas.push(Object.assign({}, this.persona));
   		this.limpiarPersona();
   		this.mensaje = true;
       this.agregarContactoLocalStorage(this.persona);

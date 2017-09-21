@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--CSS-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/myStyle.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!--Mobile-Friendly-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--Page Title-->
+    <title>AgendAPP (by S.Blanc)</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!--Navbar-->
+      <nav class="dark-primary-color" role="navigation">
+        <div class="nav-wrapper container">
+          <a id="logo-container" @click="changeView('home')" class="right brand-logo">AgendAPP</a>
+          <ul class="left hide-on-med-and-down">
+            <li><a class="dropdown-button" data-activates="nav-mobile">Menu <i class="fa fa-caret-down"></i></a></li>
+          </ul>
+          <!--Dropdown for Mobile and Standard-->
+          <ul id="nav-mobile" class="dropdown-content">
+            <li><a @click="changeView('new')"><p class="default-text-primary-color">Add Contact</p></a></li>
+            <li class="divider"></li>
+            <li><a @click="changeView('search')"><p class="default-text-primary-color">Contact List</p></a></li>
+          </ul>
+          <a data-activates="nav-mobile" class="button-collapse dropdown-button"><i class="fa fa-2x fa-list"></i></a>
+        </div>
+      </nav>
+
+      <!--Application Banner-->
+      <div id="index-banner" class="default-primary-color" @click="changeView('home')">
+        <div class="section">
+          <div class="container">
+            <br><br>
+            <h1 class="header center white-text">AgendAPP</h1>
+            <div class="row center">
+              <h5 class="header col m12 light white-text">Your Web Address Book by excellence! Light, fast and convenient!</h5>
+            </div>
+            <br><br>
+          </div>
+        </div>
+      </div>
+
+      <!--Main Menu-->
+      <div class="container" v-show="view == 'home'">
+        <div class="section">
+
+          <!--   Icon Section   -->
+          <div class="row">
+            <div class="col s12 m6">
+              <div class="icon-block">
+                <h1 class="center"><a @click="changeView('new')"><i class="fa fa-2x fa-user-plus secondary-text-color" aria-hidden="true"></i></a></h1>
+                <a @click="changeView('new')"><h5 class="center default-text-primary-color">Add Contact</h5></a>
+              </div>
+            </div>
+
+            <div class="col s12 m6">
+              <div class="icon-block">
+                <h1 class="center"><a @click="changeView('search')"><i class="fa fa-2x fa-address-card-o secondary-text-color" aria-hidden="true"></i></a></h1>
+                <a @click="changeView('search')"><h5 class="center default-text-primary-color">Contact Book</h5></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!--Add Contact Section-->
+      <div class="container" v-show="view == 'new'">
+        <div class="row">
+          <div class="col s12">
+            <h3 class="left-align">Add New Contact</h3>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="givenName" type="text" class="validate" v-model="contact.givenName">
+                <label for="givenName">First Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="surName" type="text" class="validate" v-model="contact.surName">
+                <label for="surName">Last Name</label>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="address" type="text" class="validate" v-model="contact.address">
+                  <label for="address">Address</label>
+                </div>
+              </div>
+              <div class="row">
+                <input class="with-gap validate" name="genderSelect" type="radio" id="male" value="m" v-model="contact.gender"/>
+                <label for="male">Male</label>
+                <input class="with-gap validate" name="genderSelect" type="radio" id="female" value="f" v-model="contact.gender"/>
+                <label for="female">Female</label>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <label for="birthdate">Date of Birth</label>
+                  <input id="birthdate" type="date" class="validate right-align" v-model="contact.birthdate">
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="number" type="number" class="validate" v-model="contact.number" number>
+                  <label for="number">Telephone</label>
+                </div>
+              </div>
+              <div class="row">
+                <a class="btn-floating waves-effect waves-light grey btn-large right" :disabled="!formIsCorrect"
+                   @click.prevent="addContact" onclick="Materialize.toast('Contact added successfully!', 2000)"><i class="fa fa-2x fa-plus"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Search Contacts Section-->
+      <div class="container center" v-show="view == 'search'">
+        <div class="row">
+          <div class="col s12 m9 offset-m2">
+            <h3 class="left-align">Search Contacts</h3>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m9 offset-m2">
+            <div class="input-field">
+              <input id="find" type="text" v-model="filter" :disabled="!contactList.length">
+              <label for="find">Search</label>
+            </div>
+          </div>
+        </div>
+        <div class="row" v-if="!contactList.length">
+          <h4>The contact book is empty</h4>
+        </div>
+        <div class="row" v-show="contactList.length" v-if="!searchedContacts.length">
+          <h4>The contact you are seeking is not on the list</h4>
+        </div>
+        <div v-else v-for="contact in searchedContacts">
+          <div class="row">
+            <div class="col s12 m9 offset-m2">
+              <div class="card default-primary-color">
+                <div class="card-content white-text">
+                  <span class="card-title">{{ firstCharToUpper(contact.givenName) }} {{ firstCharToUpper(contact.surName) }}</span>
+                  <p>Address: {{ contact.address }}</p>
+                  <p>D.O.B: {{ contact.birthdate }}</p>
+                  <p>Phone Number: {{ contact.number }}</p>
+                  <p>Gender: {{ firstCharToUpper(contact.gender) }}</p>
+                </div>
+                <div class="card-action">
+                  <a class="waves-effect waves-light btn modal-trigger grey white-text" href="#confirmDeleteContact" @click="setToDelete(contact)">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Contact Confirmation Modal-->
+      <div id="confirmDeleteContact" class="modal">
+        <div class="modal-content">
+          <h4>Warning!</h4>
+          <p>You are about to permanently delete this contact from your book!</p>
+          <p>Do you wish to continue?</p>
+        </div>
+        <div class="modal-footer">
+          <a @click="deleteContact(getToDelete())" class="modal-action modal-close waves-effect waves-green btn default-primary-color">Confirm</a>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <footer class="footer">
+        <div class="divider"></div>
+        <div class="container">
+          <div class="footer-copyright">
+            <p> UTN 2017 - TSSI || Designed by Santiago Blanc
+              <a class="icon primary-text-color right" target="_blank" href="https://github.com/SantiBlanc87/2017">
+                <i class="fa fa-2x fa-github"></i>
+              </a>
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!--Imported Scripts-->
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <!--Modal Prep-->
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
+
+  </body>
+</html>

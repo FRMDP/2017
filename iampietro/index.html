@@ -12,6 +12,7 @@
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
               <a class="nav-link navbar-brand" href="#" @click="cambiarVista('ingresar')">Ingresar</a>
               <a class="nav-link navbar-brand" href="#" @click="cambiarVista('buscar')">Buscar</a>
+              <a class="nav-link navbar-brand" href="#" @click="cambiarVista('favoritos')">Favoritos</a>
           </nav>
           <div class="row justify-content-md-center">
               <div class="col-md-10">
@@ -48,7 +49,7 @@
                         <input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
                       </label>
                       <span class="custom-control-description">Mujer</span>
-                      <button :disabled="!formOk" class="btn btn-primary" type="submit" @click.prevent="agregarPersona"> Ingresar 
+                      <button :disabled="!formOk" class="btn btn-primary" type="submit" @click.prevent="agregarPersona"> Ingresar
                       </button>
                   </form>
                 </div>
@@ -63,7 +64,15 @@
                   </div>
                   <div id="deleteAlert" class="alert alert-danger alerta">
                         <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
-                      <strong>Contacto eliminado exitosamente.</strong> 
+                      <strong>Contacto eliminado exitosamente.</strong>
+                  </div>
+                  <div id="favouriteAddAlert" class="alert alert-warning alerta">
+                        <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>Favorito agregado exitosamente.</strong>
+                  </div>
+                  <div id="favouriteExistente" class="alert alert-warning alerta">
+                        <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>El contacto ya se encuentra en Favoritos.</strong>
                   </div>
                   <div class="row justify-content-md-center">
                     <div class="jumbotron" v-if="!personas.length">
@@ -81,10 +90,13 @@
                               <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
                               <h6 class="card-subtitle mb-2 text-muted">{{ persona.edad }} años</h6>
                               <p class="card-text">Email: <strong>{{ persona.mail }}.</strong></p>
+                              <button data-toggle="tooltip" data-placement="top" data-html="true" type="button" class="btn btn-outline-warning floatRight" @click="agregarFavorito(persona)">Favorito
+                              </button>
                               <button data-toggle="tooltip" data-placement="top" data-html="true" title="   Borrar persona" type="button" class="btn btn-outline-danger floatRight" @click.prevent="borrarPersona(persona)">Borrar
                               </button>
                               <button data-toggle="tooltip" data-placement="top" data-html="true" type="button" class="btn btn-outline-success floatRight" @click="editarPersona(persona)">editar
                               </button>
+
                           </div>
                     </div>
                   </div>
@@ -96,7 +108,7 @@
               <div v-show="vista == 'editar'">
               <div id="editAlert" class="alert alert-info alerta">
                   <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
-                  <strong>Contacto editado exitosamente.</strong> 
+                  <strong>Contacto editado exitosamente.</strong>
               </div>
                   <form>
                        <input type="hidden" v-model="index">
@@ -125,6 +137,41 @@
                       <span class="custom-control-description">Mujer</span>
                       <button :disabled="!formOk" class="btn btn-primary" type="submit" @click.prevent="guardarCambios">Editar</button>
                   </form>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col-md-10 col-sm-10 col-xs-10">
+              <div v-show="vista == 'favoritos'">
+                  <div class="row justify-content-md-center" v-show="personas.length">
+                    <span id="spanNearFilter"><strong> Buscar favorito: </strong></span>
+                    <input type="text" placeholder="Ej: Cerveza Duff" v-model="filtro">
+                  </div>
+                  <div id="favouriteAlert" class="alert alert-danger alerta">
+                        <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>Favorito eliminado exitosamente.</strong>
+                  </div>
+                  <div class="row justify-content-md-center">
+                    <div class="jumbotron" v-if="!personas.length">
+                      <h1 class="display-3">Hello there!</h1>
+                      <p class="lead">Haven't added any favourite yet? Go on and attach your friends!</p>
+                      <hr class="my-4">
+                    </div>
+                    <div class="jumbotron marginTop" v-else-if="busquedaSinResultados">
+                      <h1 class="display-3">Hello there!</h1>
+                      <p class="lead">We are sorry, your search didn't have any match :(</p>
+                      <hr class="my-4">
+                    </div>
+                    <div v-else v-for="(persona, index) in favoritosFiltrados" class="card card-inverse" id="people">
+                          <div class="card-body">
+                              <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
+                              <h6 class="card-subtitle mb-2 text-muted">{{ persona.edad }} años</h6>
+                              <p class="card-text">Email: <strong>{{ persona.mail }}.</strong></p>
+                              <button data-toggle="tooltip" data-placement="top" data-html="true" title="   Borrar persona" type="button" class="btn btn-outline-danger floatRight" @click.prevent="quitarFavorito(persona)">Quitar de Favoritos
+                              </button>
+                          </div>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>

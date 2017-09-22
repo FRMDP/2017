@@ -13,6 +13,7 @@ new Vue({
 		vista: "ingresar",
 		alertIngreso: false, //para mostrar o no mostrar el Alert de ingreso
 		alertError: false,
+		indice: ''
 	},
 	computed: {
 		formOk(){
@@ -76,10 +77,35 @@ new Vue({
 		},
 		cambiarVista(vista) {
 			this.vista = vista;
+			this.limpiarPersona();
 		},
 		isNumeric(n) {
 			return !isNaN(parseFloat(n)) && isFinite(n);
 		},
+		cerrarEdicion() {
+      this.alertIngreso = false
+      this.cambiarVista('todos los contactos');
+
+    },
+		parametrosEditar(vista, indice) {
+      this.cambiarVista(vista);
+      this.indi = indice;
+      this.persona.nombre = this.personas[indice].nombre;
+      this.persona.edad = this.personas[indice].edad;
+			this.persona.telefono = this.personas[indice].telefono;
+      this.persona.sexo = this.personas[indice].sexo;
+    },
+    editarPersona() {
+      this.personas[this.indi].nombre = this.persona.nombre;
+      this.personas[this.indi].edad = this.persona.edad;
+			this.personas[this.indi].telefono = this.persona.telefono;
+      this.personas[this.indi].sexo = this.persona.sexo;
+      this.guardarPersonasStorage()
+      this.limpiarPersona();
+      this.mensaje = true;
+      this.indi = '';
+			this.alertIngreso = true;
+    }
 	},
 	mounted() {
 		this.traerPersonasStorage();

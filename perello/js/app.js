@@ -28,7 +28,7 @@ new Vue({
   		this.personas.push(Object.assign({}, this.persona));
   		this.limpiarPersona();
   		this.mensaje = true;
-      this.agregarContactoLocalStorage(this.persona);
+      this.agregarContactoLocalStorage(this.personas);
   	},
   	limpiarPersona:function() {
   		this.persona.nombre = '';

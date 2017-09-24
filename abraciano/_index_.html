@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Agenda</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+</head>
+<body>
+	<div id="app">
+		<div  class="navbar-fixed">
+			<nav>
+				<div class="nav-wrapper">
+					<a href="#" class="brand-logo right">Agenda</a>
+					<ul id="nav-mobile" class="left hide-on-med-and-down">
+						<li><a href="#"><a href="#" @click="cambiarVista('ingresar')">Nuevo contacto</a></li>
+						<li><a href="#" @click="cambiarVista('todos los contactos')">Todos los contactos</a></li>
+						<li><a href="#" @click="cambiarVista('favoritos')">Favoritos</a></li>
+					</ul>
+					<form>
+						<div v-show="vista != 'ingresar'" class="input-field" id="inputSearch">
+							<input v-model="filtro" :placeholder="placeholder" id="search" type="search" required>
+							<label class="label-icon" for="search"><i class="material-icons">search</i></label>
+							<i class="material-icons">close</i>
+						</div>
+					</form>
+				</div>
+			</nav>
+		</div>
+		<div v-show="vista == 'ingresar'" class="container">
+			<form class="col s12">
+				<div class="row">
+					<div class="input-field col s12">
+						<input v-model="persona.nombre" type="text" class="validate" placeholder="Nombre y apellido">
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s10">
+						<input v-model="persona.telefono" type="number" class="validate" placeholder="Teléfono">
+					</div>
+					<div class="input-field col s2">
+						<input v-model="persona.edad" type="number" class="validate" placeholder="Edad">
+						<p v-show="wrongNumber"></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s6">
+						<p>
+							<input v-model="persona.sexo" name="sex" type="radio" value="Varon" id="radioV">
+							<label for="radioV">Varón</label>
+						</p>
+						<p>
+							<input v-model="persona.sexo" name="sex" type="radio" value="Mujer" id="radioM">
+							<label for="radioM">Mujer</label>
+						</p>
+					</div>
+					<div class="col s6" id="btnGuardar">
+						<button :disabled="!formOk" @click="agregarPersona" class="btn waves-effect waves-light" type="submit">Guardar
+							<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+				<div class="row" v-if="alertIngreso">
+					<div id="card-alert" class="card horizontal green col s6">
+                      <div class="card-content white-text">
+                        <p><i class="material-icons">check</i>Contacto agregado exitosamente!</p>
+                      </div>
+                      <button id="btn-alert" @click="alertIngreso = false" type="button" class="btn-floating btn-large waves-effect waves-light">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </div>
+				</div>
+				<div class="row" v-if="alertError">
+					<div id="card-alert" class="card horizontal red col s6">
+                      <div class="card-content white-text">
+                        <p>Debe ingresar una edad válida!</p>
+                      </div>
+                    </div>
+				</div>
+			</form>
+		</div>
+		<div v-show="vista == 'todos los contactos'" class="container">
+			<h5 v-if="personas.length == 0">No hay contactos cargados aún!</h5>
+			<h5 v-else-if="personasFiltradas.length == 0">No hay contactos que coincidan con la condición de búsqueda!</h5>
+			<div v-else class="row" v-for="(persona, index) in personasFiltradas">
+				<div class="col s12">
+					<div class="card horizontal">
+						<div class="card-image">
+							<img v-if="persona.sexo == 'Mujer'" src="https://image.flaticon.com/icons/svg/20/20982.svg">
+							<img v-else src="https://image.flaticon.com/icons/svg/23/23716.svg">
+						</div>
+						<div class="card-stacked">
+							<div class="card-content">
+								<h4>{{persona.nombre}}, {{persona.edad}} años</h4>
+								<h5>{{persona.telefono}}</h5>
+							</div>	
+						</div>
+						<div class="btn-card">
+							<button @click="agregarFavorito(index)" v-if="persona.esFavorito == false" class="btn-floating btn-large waves-effect waves-light black">
+								<i class="material-icons">favorite_border</i>
+							</button>
+							<button @click="eliminarFavorito(index)" v-else class="btn-floating btn-large waves-effect waves-light black">
+								<i class="material-icons">favorite</i>
+							</button>
+						</div>
+						<div class="btn-card">
+							<button @click="borrarPersona(index)" class="btn-floating btn-large waves-effect waves-light black">
+								<i class="material-icons">clear</i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div v-show="vista == 'favoritos'" class="container">
+			<h5 v-if="personas.length == 0">No hay contactos cargados aún!</h5>
+			<h5 v-else-if="!hayFavoritos">No hay contactos en favoritos!</h5>
+			<h5 v-else-if="personasFiltradas.length == 0">No hay contactos en favoritos que coincidan con los criterios de búsqueda!</h5>
+			<div v-else class="row" v-for="(persona, index) in personasFiltradas">
+				<div v-if="persona.esFavorito" class="col s12">
+					<div class="card horizontal">
+						<div class="card-image">
+							<img v-if="persona.sexo == 'Mujer'" src="https://image.flaticon.com/icons/svg/20/20982.svg">
+							<img v-else src="https://image.flaticon.com/icons/svg/23/23716.svg">
+						</div>
+						<div class="card-stacked">
+							<div class="card-content">
+								<h4>{{persona.nombre}}, {{persona.edad}} años</h4>
+								<h5>{{persona.telefono}}</h5>
+							</div>	
+						</div>
+						<div class="btn-card">
+							<button @click="eliminarFavorito(index)" class="btn-floating btn-large waves-effect waves-light black">
+								<i class="material-icons">clear</i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script src="vue.js"></script>
+	<script src="scripts.js"></script>
+</body>
+</html>

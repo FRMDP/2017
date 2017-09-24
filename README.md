@@ -1,24 +1,16 @@
-## Listado de alumnos
+### TP #4
 
-* [zeratulmdq](https://github.com/zeratulmdq) - Martin Benvenuti
-* [ignaciocasales](https://github.com/ignaciocasales) - Ignacio Casales
-* [SantiBlanc87](https://github.com/SantiBlanc87) - Santiago Blanc
-* [Facundo97Maldonado](https://github.com/Facundo97Maldonado) - Facundo Maldonado
-* [fedealdosivi](https://github.com/fedealdosivi) - Federico Palomero García
-* [maurogsp](https://github.com/maurogsp) - Mauro Gaspar
-* [DanielScha](https://github.com/DanielScha) - Daniel Adrian Schaerer
-* [matirey](https://github.com/matirey) - Reynoso Matias
-* [co0per](https://github.com/co0per) - Lisandro Cooper
-* [Iampietro](https://github.com/Iampietro/2017) - Matias Iampietro
-* [rodrimaqui](https://github.com/rodrimaqui) - Rodrigo Maquirriain
-* [CarlosAndresTambascia](https://github.com/CarlosAndresTambascia) - Carlos Andres Tambascia
-* [Favega89](https://github.com/Favega89) - Facundo Vega Puente
-* [grotatori](https://github.com/grotatori) - Gisela Rotatori
-* [matiramos](https://github.com/matiramos) - Matias Ramos
-* [JuanAbraciano](https://github.com/JuanAbraciano) - Juan Manuel Abraciano
-* [MartinLiut](https://github.com/MartinLiut) - Martin Liut
-* [julian00](https://github.com/julian00) - Alejandro Arizaga
-* [RodolfoSavino](https://github.com/RodolfoSavino) - Rodolfo Savino
-* [kingrag92](https://github.com/kingrag92) - Luciano Perello
-* [yasiotero](https://github.com/yasiotero) - Yasi Otero
-* [ZassoMartin](https://github.com/ZassoMartin) - Zasso Sergio Martin
+#### Lineamientos
+
+    *   Tienen que hacer el PR contra la rama TP4, no contra master.
+    *   Resuelven la historia de usuario asignada en Taiga. Crean las subtareas que consideren necesarias y trabajan sobre esas tareas. El tablero lo manejan completamente uds, este sprint no toco nada yo.
+    *   Tienen tiempo hasta el miércoles 20/9 a las 22Hs para hacer un commit con un archivo que tenga por nombre su apellido en minúscula y esté dentro de la carpeta en la que van a trabajar (la de su compañero).
+    *   Tienen tiempo hasta las 18Hs del dia martes 26/9 para leer y entender el código de su compañero (el próximo a su apellido en orden alfabético) y agregar una vista con funcionalidad a ese código. Tienen que mantener la línea que empezó su compañero, esto significa utilizar el mismo framework CSS, el mismo tipo de avisos al usuario, mismos flujo de trabajo, etc.
+
+#### Qué se evalúa?
+    *   Prolijidad del código: indentaciones, espacios innecesarios, utilización de convenciones, etc.
+    *   Nombres de variables y funciones significativas.
+    *   Utilización de las herramientas (Git, Github, Taiga).
+    *   ES6, Array#extras, String, Object, Math, Array, etc.
+    *   Markup HTML innecesario (no crear elementos de más ni elementos que no correspondan a lo que quieren representar).
+    *   Sentido común.

@@ -1,0 +1,168 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+
+    <meta charset="utf-8">
+
+    <title>INDEX</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="css/myappstyles.css">
+  </head>
+
+  <body>
+
+    <div id="app">
+
+      <nav>
+       <div class="nav-wrapper">
+        <a href="#" class="brand-logo right">Contacts</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="#"@click="cambiarVista('ingresar')">New Contact</a></li>
+          <li><a href="#"@click="cambiarVista('buscar')">Search</a></li>
+          <li><a href="#"@click="cambiarVista('favorites')">favorites</a></li>
+          <li><a href="#"@click="cambiarVista('about')">About</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div v-show="vista == 'ingresar'">
+     <div class="card">
+      <div class="card-content">
+      <div class="row">
+        <h3 align="center">New contact</h3>
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+             <input v-model="persona.nombre" type="text" placeholder="Name">
+           </div>
+           <div class="input-field col s6">
+             <input v-model="persona.apellido" type="text" placeholder="Surname">
+           </div>
+         </div>
+         <div class="row">
+           <div class="input-field col s12">
+            <input type="number" v-model="persona.edad" placeholder="Age">
+          </div>
+        </div>
+        <div class="row">
+         <div class="input-field col s12">
+          <input type="number" v-model="persona.telefono" placeholder="Phone number">
+        </div>
+      </div>
+
+      <div class="row" align="center">
+        <form action="#">
+          <input name="sexo" value="Male" type="radio" id="checkSexo1" v-model="persona.sexo"/>
+          <label for="checkSexo1">Male</label>
+
+          <input name="sexo" value="Female" type="radio" id="checkSexo2" v-model="persona.sexo"/>
+          <label for="checkSexo2">Female</label>
+        </form>
+        <button class="btn waves-effect waves-light" :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Add Contact</button>
+      </div>
+    </form>
+   </div> 
+  </div>
+ </div>
+</div>
+
+<div v-show="vista == 'buscar'">
+ <div class="card">
+  <div class="card-content">
+  <h3>Search for contacts</h3>
+  <input type="text" placeholder="Filter" v-model="filtro">
+  <h3 v-if="!personas.length">Looks so empty</h3>
+  <div v-else v-for="(persona,index) in personasFiltradas">
+    <div class="row">
+      <div class="col s12 m6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">{{ persona.nombre }} {{ persona.apellido }}</span>
+            <p>Age: {{persona.edad}}</p>
+            <p>Phone number: {{persona.telefono}}</p>
+            <p>Sex: {{persona.sexo}}</p>
+          </div>
+          <div class="card-action">
+            <button class="btn waves-effect red darken-4" @click="eliminarPersonaLocalStorage(index);">Delete</button>
+            <button class="btn waves-effect waves-light" :disabled=persona.favs @click="hacerFavorito(index);">Favorite</button>
+          </div>
+        </div>
+      </div>
+    </div>       
+   </div>
+  </div>       
+ </div>
+</div>
+
+<div v-show="vista == 'about'">
+
+ <div class="card">
+  <div class="card-content">
+    <h3>About this proyect</h3>
+
+    <ul><h4>Lineamientos</h4>
+    <li><h5>Tienen que hacer el PR contra la rama TP3, no contra master.</h5></li>
+    <li><h5>Resuelven la historia de usuario asignada en Taiga. Deben no solo subir los cambios sino tambien manejar los estados y tiempos en el tablero. Esto es importante porque solo voy a revisar las cosas que estén con estado **READY FOR TEST**.</h5></li>
+    <li><h5>Crean una carpeta con su apellido en minuscula. Dentro de esta carpeta agregan un archivo _index.html_, estilos (css) y scripts (js) necesarios.</h5></li>
+    <li><h5>Tienen tiempo hasta las 18Hs del dia martes 19/9.</h5></li></ul>
+
+
+
+    <ul><h4>Qué hay que hacer? Una agenda.</h4>
+    <li><h5>Debe utilizar un framework CSS a elección.</h5></li>
+     <li><h5>Deben tener una hoja de estilos propia con al menos 4 reglas que afecten su aplicación.</h5></li>
+     <li><h5>Deben crear por lo menos tres vistas diferentes (agregar, buscar, ....).</h5></li>
+     <li><h5>Deben utilizar cuatro componentes del framework (cards, navbars, alerts, etc).</h5></li>
+     <li><h5>Las personas ingresadas tienen que tener por lo menos cuatro datos diferentes (nombre, teléfono, sexo, etc) y debe validar el tipo de dato de la información ingresada.</h5></li>
+     <li><h5>Debe persistir la información utilizando alguna API del navegador.</h5></li>
+     <li><h5>En la vista de búsqueda se debe poder ingresar un string y que ese string este presente en cualquiera de los campos de la persona.</h5></li>
+     <li><h5>Se deben poder borrar las personas.</h5></li></ul>
+
+     <ul><h4>Qué se evalúa?</h4>
+     <li><h5>Prolijidad del código: indentaciones, espacios innecesarios, utilización de convenciones, etc.</h5></li>
+     <li><h5>Nombres de variables y funciones significativas.</h5></li>
+     <li><h5>Utilización de las herramientas (Git, Github, Taiga).</h5></li>
+     <li><h5>ES6, Array#extras, String, Object, Math, Array, etc.</h5></li>
+     <li><h5>Markup HTML innecesario (no crear elementos de más ni elementos que no correspondan a lo que quieren representar).</h5></li></ul>
+   </div>
+ </div>
+
+</div>
+
+
+<div v-show="vista == 'favorites'">
+ <div class="card">
+  <div class="card-content">
+  <h3>Favorite List</h3>
+  <h3 v-if="!personas.length">Looks so empty</h3>
+  <div v-else v-for="(persona,index) in personas">
+    <div v-if="persona.favs==true">
+     <div class="row">
+      <div class="col s12 m6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">{{ persona.nombre }} {{ persona.apellido }}</span>
+            <p>Age: {{persona.edad}}</p>
+            <p>Phone number: {{persona.telefono}}</p>
+            <p>Sex: {{persona.sexo}}</p>
+          </div>
+          <div class="card-action">
+            <button class="btn waves-effect waves-light" @click="eliminarFav(index);">Unfave</button>
+          </div>
+        </div>
+      </div>
+    </div>  
+   </div>
+  </div>
+ </div>
+</div>
+
+</div>
+</div>
+
+<script src="js/vue.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

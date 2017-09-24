@@ -21,10 +21,6 @@ new Vue({
                                       p.sexo.toLowerCase().indexOf(this.filtro) >= 0 );
   	},
 
-    personasFavoritas(){
-      return this.personas.filter(p => p.favorito=true);
-    },
-
   	formOk() {
   		return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.sexo;
   	}
@@ -34,7 +30,7 @@ new Vue({
   		this.personas.push(Object.assign({}, this.persona));
   		this.limpiarPersona();
   		this.mensaje = true;
-      this.agregarContactoLocalStorage(this.personas);
+      this.agregarContactoLocalStorage();
   	},
   	limpiarPersona:function() {
   		this.persona.nombre = '';
@@ -44,11 +40,11 @@ new Vue({
   	},
     agregarFavorito:function(index) {
       this.personas[index].favorito=true;
-      this.agregarContactoLocalStorage(this.personas[index]);
+      this.agregarContactoLocalStorage();
     },
     eliminarFavorito:function(index){
       this.personas[index].favorito=false;
-      this.agregarContactoLocalStorage(this.personas[index]);
+      this.agregarContactoLocalStorage();
     },
   	cambiarVista:function(vista) {
   		this.vista = vista;
@@ -63,8 +59,8 @@ new Vue({
         this.personas = JSON.parse(agendaCompleta);
       }
     },
-    agregarContactoLocalStorage:function(persona){
-      localStorage.setItem('personas', JSON.stringify(persona));
+    agregarContactoLocalStorage:function(){
+      localStorage.setItem('personas', JSON.stringify(this.personas));
     },
     eliminarPersona:function (index){
       this.personas.splice(index,1);

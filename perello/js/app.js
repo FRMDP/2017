@@ -5,6 +5,7 @@ new Vue({
     	nombre: '',
       apellido: '',
     	edad: '',
+      favorito: false,
     	sexo: ''
     },
     personas: [],
@@ -19,6 +20,11 @@ new Vue({
                                       p.edad.toLowerCase().indexOf(this.filtro) >= 0||
                                       p.sexo.toLowerCase().indexOf(this.filtro) >= 0 );
   	},
+
+    personasFavoritas(){
+      return this.personas.filter(p => p.favorito=true);
+    },
+
   	formOk() {
   		return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.sexo;
   	}
@@ -36,6 +42,14 @@ new Vue({
   		this.persona.edad = '';
   		this.persona.sexo = '';
   	},
+    agregarFavorito:function(index) {
+      this.personas[index].favorito=true;
+      this.agregarContactoLocalStorage(this.personas[index]);
+    },
+    eliminarFavorito:function(index){
+      this.personas[index].favorito=false;
+      this.agregarContactoLocalStorage(this.personas[index]);
+    },
   	cambiarVista:function(vista) {
   		this.vista = vista;
       this.cerrarMensaje();

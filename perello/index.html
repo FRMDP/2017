@@ -59,11 +59,11 @@
         </div>
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"  v-model="persona.sexo" value="option1">Masculino
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"  v-model="persona.sexo" value="masculino">Masculino
           </div>
           <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"  v-model="persona.sexo" value="option2"> Femenino
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"  v-model="persona.sexo" value="femenino"> Femenino
               </label>
           </div>
               <div class="form-group">
@@ -100,9 +100,10 @@
   			  <div class="card" v-for="(persona,index) in personasFiltradas">
     				<h4 class="card-header">Contacto</h4>
   				  <div class="card-body">
-  				    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }}</h4>
+  				    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }} {{ persona.sexo }} {{ persona.favorito }} </h4>
   				    <p class="card-text">Si desea eliminarlo seleccione borrar.</p>
   				    <a href="#" type="submit"  class="btn btn-primary"@click.prevent="eliminarPersona(index)" >Borrar</a>
+              <a href="#" type="submit"  class="btn btn-primary"@click.prevent="agregarFavorito(index)" >Favorito</a>
   				  </div>
   			  </div>
         </div>

@@ -84,11 +84,11 @@
       		</div>
 		  <div class="container" v-show="vista == 'buscar'">
         <dir class="form-group">
-        <h1 class="card-text">Usted eligio la pestaña buscar</h1>
-      </dir>
+         <h1 class="card-text">Usted eligio la pestaña buscar</h1>
+        </dir>
         <dir class="form-group">
-        <h3 class="card-text">Encontrar la lista de los contactos guardados, ademas posee un filtro para acelerar el proceso de busqueda.</h3>
-        <h3 class="card-text">Para esta version el filtro es solo por nombre</h3>
+         <h3 class="card-text">Encontrar la lista de los contactos guardados, ademas posee un filtro para acelerar el proceso de busqueda.</h3>
+         <h3 class="card-text">Para esta version el filtro es solo por nombre</h3>
         </dir>
         <div class="form-group">
 			     <input type="text" placeholder="Filtrar" v-model="filtro">
@@ -97,7 +97,7 @@
         No hay personas ingresadas en la agenda
         </div>
         <div v-if="personasFiltradas.length > 0">
-  			  <div class="card" v-else v-for="(persona,index) in personasFiltradas">
+  			  <div class="card" v-for="(persona,index) in personasFiltradas">
     				<h4 class="card-header">Contacto</h4>
   				  <div class="card-body">
   				    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }}</h4>

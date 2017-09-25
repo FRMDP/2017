@@ -5,7 +5,8 @@ new Vue({
             firstName: '',
             lastName: '',
             address: '',
-            telephoneNumber: ''
+            telephoneNumber: '',
+            fave: false
         },
         contacts: [],
         deletedContacts: [],
@@ -30,6 +31,9 @@ new Vue({
                 this.contact.lastName &&
                 this.contact.address &&
                 this.contact.telephoneNumber;
+        },
+        filteredFavorites() {
+            return this.contacts.filter(p => p.fave == true);
         }
     },
     methods: {
@@ -91,6 +95,26 @@ new Vue({
                 this.alertMessage = '';
                 this.showAlert = false;
             }, 2000);
+        },
+        addOrRemoveContactToFavorites(contact){
+            contact.fave = !contact.fave;
+            if (contact.fave) {
+              this.displayAlert("Contact added to Favorites!");
+            } else {
+              this.displayAlert("Contact removed from Favorites!");
+            };
+            this.saveContactsToLocalStorage(this.contacts);
+        },
+        deleteContactFromFavorites(contact){
+          let index = null;
+          for (let i = 0; i < this.contacts.length; i ++) {
+            if (this.contacts[i] === contact) {
+              index = i;
+            }
+          }
+          if (index!=null) {
+            this.trashContact(index);
+          }
         }
     }
 });

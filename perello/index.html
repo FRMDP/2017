@@ -103,10 +103,11 @@
   			  <div class="card" v-for="(persona,index) in personasFiltradas">
     				<h4 class="card-header">Contacto</h4>
   				  <div class="card-body">
-  				    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }} {{ persona.sexo }} {{ persona.favorito }} </h4>
+  				    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }} Genero: {{ persona.sexo }} </h4>
   				    <p class="card-text">Si desea eliminarlo seleccione borrar.</p>
   				    <a href="#" type="submit"  class="btn btn-primary"@click.prevent="eliminarPersona(index)" >Borrar</a>
               <a href="#" type="submit" :hidden=persona.favorito  class="btn btn-primary"@click.prevent="agregarFavorito(index)" >Favorito</a>
+              <p class="card-text" v-if="persona.favorito==true">En favoritos</p>
   				  </div>
   			  </div>
         </div>
@@ -125,7 +126,7 @@
                 <div class="card">
                   <h4 class="card-header">Contacto</h4>
                    <div class="card-body">
-                    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }} {{ persona.sexo }} {{ persona.favorito }} </h4>
+                    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }} Genero: {{ persona.sexo }} </h4>
                     <a href="#" type="submit"  class="btn btn-primary"@click.prevent="eliminarFavorito(index)" >Eliminar favorito</a>
                    </div>
                 </div>

@@ -5,13 +5,13 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/materialize.css">
   <link rel="stylesheet" href="css/app.css">
-  <title>Trabajo Practico 3</title>
+  <title>Trabajo Práctico 4</title>
 </head>
 <body>
   	<div id="app">
   		<nav class="nav-wrapper blue darken-4" id="navbar">
   			<div class="container">
-	  		    <a href="#" class="brand-logo">Trabajo Practico 3</a>
+	  		    <a href="#" class="brand-logo">Trabajo Práctico 4</a>
 	  		    <ul id="nav-mobile" class="right hide-on-med-and-down">
 	  		    	<li><a class="nav-link" href="#" @click="cambiarVista('ingresar')">Ingresar</a></li>
 			        <li><a class="nav-link" href="#" @click="cambiarVista('buscar')">Contactos</a></li>
@@ -22,8 +22,8 @@
 		<!--Ingreso personas -->
 		<div v-show="vista == 'ingresar'">
 			<div class="row">
-				<div class="col s12 m10 l6 offset-m1 offset-l3">
-					<div class="alert" id="alerta">
+				<div class="col s12 m10 l6 offset-m1 offset-l3 hoja">
+					<div class="alert" id="alerta" v-show="mensaje == true">
 						<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
 						Holy Guacamole! Contacto agregado con exito.
 					</div>
@@ -44,7 +44,7 @@
 						</textarea>
 						<label for="sexo">Indique sexo</label>
 						<div class="row" id="sexo">
-							<div class="col l4 offset-l1">
+							<div class="col l4">
 								<input class="with-gap" name="sexo" value="Varon" type="radio" id="varon" 
 									v-model="persona.sexo"/>
 		     					<label for="varon">Varon</label>
@@ -65,7 +65,11 @@
 		<!-- Buscar personas -->
 		<div v-show="vista == 'buscar'">
 			<div class="row">
-				<div class="col s12 m10 l6 offset-m1 offset-l3">
+				<div class="col s12 m10 l6 offset-m1 offset-l3 hoja">
+					<div class="alert" id="alerta2" v-show="mensaje == true">
+						<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+						Holy Guacamole! Contacto editado con exito.
+					</div>
 					<input type="text" placeholder="Filtrar" v-model="filtro">
 					<h3 v-if="!personas.length">No hay personas</h3>
 					<h3 v-if="!personasFiltradas.length">Persona no encontrada</h3>
@@ -85,6 +89,10 @@
 										 	Agregar a favoritos
 										 </div>
 									</a>
+									<a class="editBtn btn-floating btn-large waves-effect waves-light blue "
+										 @click.prevent="traerPersona(index)">
+										 <i class="material-icons">edit</i>
+									</a>
 									<a class="deleteBtn btn-floating btn-large waves-effect waves-light red"
 										 @click.prevent="eliminarPersona(index)">
 										 <i class="material-icons">delete</i>
@@ -99,7 +107,7 @@
 		<!-- Lista de favoritos -->
 		<div v-show="vista == 'favoritos'">
 			<div class="row">
-				<div class="col s12 m10 l6 offset-m1 offset-l3">
+				<div class="col s12 m10 l6 offset-m1 offset-l3 hoja">
 					<input type="text" placeholder="Filtrar" v-model="filtro">
 					<h3 v-if="!favoritos.length">No has agregado favoritos</h3>
 					<h3 v-if="!favoritosFiltrados.length">Favorito no encontrado</h3>
@@ -120,6 +128,40 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div v-if="vista == 'editar'">
+			<div class="row">
+				<div class="col s12 l6 offset-m1 offset-l3 hoja">
+					<h3 v-once>Editar contacto: {{persona.nombre}} {{persona.apellido}}</h3>
+					<form>
+						<input v-model="persona.nombre" type="text" id="first_name" placeholder="Ingrese Nombre">
+						<input v-model="persona.apellido" type="text" id="last_name" 
+							placeholder="Ingrese Apellido">
+						<input type="number" placeholder="Ingrese Edad" id="age" v-model="persona.edad">
+						<input type="number" placeholder="Ingrese Telefono" id="phone" 
+							v-model="persona.telefono">
+						<textarea id="textarea" v-model="persona.gustos" class="materialize-textarea" 
+							placeholder="Ingrese de forma breve sus gustos">
+						</textarea>
+						<label for="sexo">Indique sexo</label>
+						<div class="row" id="sexo">
+							<div class="col l4 offset-l4">
+								<input class="with-gap" name="sexo" value="Varon" type="radio" id="varon" 
+									v-model="persona.sexo"/>
+		     					<label for="varon">Varon</label>
+		     					<input class="with-gap" name="sexo" value="Mujer" type="radio" id="mujer" 
+		     						v-model="persona.sexo"/>
+		     					<label for="mujer">Mujer</label>
+		     				</div>
+	     				</div>
+						<button class="botonIngreso" :disabled="!formOk" type="submit" @click.prevent="editarPersona" 
+							onclick="document.getElementById('alerta2').style.display='block';" >
+							Finalizaste? 
+							<span class="span">Edita los datos</span>
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -28,6 +28,7 @@
 .myCard{
     padding: 20px;
     border: 5px #00897b;
+    text-align: center;
 }
 
 .botonConLetrasRojitas{
@@ -56,10 +57,7 @@
     border-radius: 5px;
 }
 
-.favoriting{
-    display: inline-block
-}
-.favorite__heart {
+.favoriteStar {
     display: inline-block;
     padding: 3px;
     vertical-align: middle;
@@ -69,11 +67,12 @@
     cursor: pointer;
     -webkit-transition: color .2s ease-out;
     transition: color .2s ease-out;
+    font-size: 30px;
 }
-.favorite__heart.is-disabled:hover {
+.favoriteStar.is-disabled:hover {
      cursor: default;
  }
-.favorite__checkbox {
+.favoriteCheck {
     position: absolute;
     overflow: hidden;
     clip: rect(0 0 0 0);
@@ -82,7 +81,8 @@
     margin: -1px;
     padding: 0;
     border: 0;
+
 }
-.favorite__heart__selected{
-    color: #df470b;
+.favoriteStarSelected{
+    color: #ff6e00;
 }

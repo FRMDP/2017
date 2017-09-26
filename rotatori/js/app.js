@@ -9,7 +9,8 @@ const vf = new Vue({
             telefono: '',
             direccion: '',
             mail: '',
-            sexo:''
+            sexo:'',
+            favorito:''
         },
         checkedBox: [],
         ultimoId: 1,
@@ -34,6 +35,12 @@ const vf = new Vue({
         },
         comprobarCheck(check){
             return this.checkedBox.indexOf(check);
+        },
+        personasFavoritas(){// filtra el array y solo devuelve los que son favoritos
+          return this.personas.filter(p=> (p.favorito==true));
+        },
+        cantFavoritos(){ //devuelve la cantidad de favoritos que hay
+            return this.personas.filter(p=> (p.favorito==true)).length;
         },
     }, //computed
     methods: {
@@ -65,6 +72,7 @@ const vf = new Vue({
         nuevaPersona() {
             this.persona.indice = this.ultimoId;
             this.ultimoId++;
+            this.persona.favorito=false;
             this.personas.push(Object.assign({}, this.persona));
             personasText = JSON.stringify(this.personas);
             localStorage.setItem("contactos", personasText);
@@ -79,6 +87,8 @@ const vf = new Vue({
             this.persona.telefono = person.telefono;
             this.persona.mail = person.mail;
             this.persona.sexo = person.sexo;
+            this.persona.favorito= person.favorito;
+
         },
         pasarModificar(person){
             this.cambiarVista('modificar');
@@ -115,6 +125,16 @@ const vf = new Vue({
                 }
             }
         },
+        cambiarFavorito(person){ //busca la persona e invierte el estado de favorito
+            this.cargarPersona(person);
+            pos= this.buscarPosicion();
+            this.personas[pos].favorito= !this.persona.favorito;
+            this.limpiarForm();
+            personasText = JSON.stringify(this.personas);
+            localStorage.setItem("contactos", personasText);
+
+        },
+
     }, //methods
     mounted(){ //se ejecuta una vez al principio
         if(localStorage.length != 0 ){

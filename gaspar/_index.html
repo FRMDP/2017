@@ -17,6 +17,7 @@
           <div class="navbar-start">
             <a class="navbar-item-a" href="#" @click="cambiarVista('ingresar')">Agregar</a>
             <a class="navbar-item-a" href="#" @click="cambiarVista('buscar')">Buscar</a>
+            <a class="navbar-item-a" href="#" @click="cambiarVista('publicar')">Publicar</a>
           </div>
         </div>
       </div>
@@ -162,8 +163,64 @@
       </div>
       </form>
     </div>
+
+    <div id="publicar" v-show="vista == 'publicar'" class="columns">
+      <form class="column field">
+        <label class="label">Escriba algo...</label>
+        <textarea class="textarea" name="paragraph_text" cols="40" rows="2" v-model="publicacion.nota"></textarea>
+        <div class="columns">
+          <div class="column">
+            <label>Seleccione usuario</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="publicacion.persona">
+                  <option v-for="persona in personas" :value="persona">{{ persona.nombre }} {{ persona.apellido}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+          <br>
+            <button class="button is-primary is-pulled-right" type="submit" @click.prevent="agregarPublicacion">Publicar</button>
+          </div>
+        </div>
+      </form>
+      <div class="column">
+        <div v-if="publicaciones.length">
+          <div v-for="publicacion in publicaciones">
+            <div class="box">
+              <article class="media">
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong>{{ publicacion.persona.nombre }} {{ publicacion.persona.apellido }}</strong>
+                      <br>
+                      {{ publicacion.nota }}
+                    </p>
+                  </div>
+                  <nav class="level is-mobile">
+                    <div class="level-left">
+                      <a class="level-item">
+                        <span class="is-small"><i @click.prevent="meGusta(publicacion.id)">Me gusta {{ publicacion.mg }}</i></span>
+                      </a>
+                      <a class="level-item">
+                        <span class="is-small"><i @click.prevent="meEnfada(publicacion.id)">Me enfada {{ publicacion.me }}</i></span>
+                      </a>
+                    </div>
+                  </nav>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div v-else><label class="label">No hay publicaciones...buscate unos amigos</label></div>
+      </div>
+    </div>
+
   </div>
   <script src="js/vue.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
+
+

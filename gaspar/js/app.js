@@ -19,7 +19,8 @@ new Vue({
       persona: null,
       nota: '',
       mg: 0,
-      me: 0
+      me: 0,
+      facho: 0
     },
     publicaciones: []
   },
@@ -29,10 +30,10 @@ new Vue({
     },
     formOk() {
       return this.persona.nombre && this.persona.edad && this.persona.sexo && this.persona.telefono && this.persona.direccion;
-    }/*,
+    },
     formOkp() {
       return this.publicacion.persona && this.publicacion.nota;
-    }*/
+    }
   },
   methods: {
     agregarPersona() {
@@ -93,6 +94,7 @@ new Vue({
     },
     agregarPublicacion(){
       if(!this.publicaciones.length){
+        this.publicaciones = [];
         this.publicacion.id = 0;
       } else {
         let indice = this.publicaciones.length;
@@ -110,9 +112,23 @@ new Vue({
     },
     meGusta(id){
       this.publicaciones[id].mg++;
+      localStorage.setItem('publicacionesList', JSON.stringify(this.publicaciones));
     },
     meEnfada(id){
       this.publicaciones[id].me++;
+      localStorage.setItem('publicacionesList', JSON.stringify(this.publicaciones));
+    },
+    facho(id){
+      this.publicaciones[id].facho++;
+      localStorage.setItem('publicacionesList', JSON.stringify(this.publicaciones));
+    },
+    eliminarPublicacion(id){
+      let indice = 0;
+      while(this.publicaciones[indice].id != id) {
+        indice++;
+      }
+      this.publicaciones.splice(indice, 1);
+      localStorage.setItem('publicacionesList', JSON.stringify(this.publicaciones));
     }
   },
 

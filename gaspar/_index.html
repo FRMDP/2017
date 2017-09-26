@@ -181,7 +181,7 @@
           </div>
           <div class="column">
           <br>
-            <button class="button is-primary is-pulled-right" type="submit" @click.prevent="agregarPublicacion">Publicar</button>
+            <button :disabled="!formOkp" class="button is-primary is-pulled-right" type="submit" @click.prevent="agregarPublicacion">Publicar</button>
           </div>
         </div>
       </form>
@@ -194,6 +194,7 @@
                   <div class="content">
                     <p>
                       <strong>{{ publicacion.persona.nombre }} {{ publicacion.persona.apellido }}</strong>
+                      <button class="delete" @click.prevent="eliminarPublicacion(publicacion.id)"></button>
                       <br>
                       {{ publicacion.nota }}
                     </p>
@@ -201,16 +202,20 @@
                   <nav class="level is-mobile">
                     <div class="level-left">
                       <a class="level-item">
-                        <span class="is-small"><i @click.prevent="meGusta(publicacion.id)">Me gusta {{ publicacion.mg }}</i></span>
+                        <span class="is-small noselect"><i @click.prevent="meGusta(publicacion.id)">Me gusta {{ publicacion.mg }}</i></span>
                       </a>
                       <a class="level-item">
-                        <span class="is-small"><i @click.prevent="meEnfada(publicacion.id)">Me enfada {{ publicacion.me }}</i></span>
+                        <span class="is-small noselect"><i @click.prevent="meEnfada(publicacion.id)">Me enfada {{ publicacion.me }}</i></span>
+                      </a>
+                      <a class="level-item">
+                        <span class="is-small noselect"><i @click.prevent="facho(publicacion.id)">Es un facho {{ publicacion.facho }}</i></span>
                       </a>
                     </div>
                   </nav>
                 </div>
               </article>
             </div>
+            <br>
           </div>
         </div>
         <div v-else><label class="label">No hay publicaciones...buscate unos amigos</label></div>

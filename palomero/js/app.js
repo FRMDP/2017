@@ -1,4 +1,4 @@
-new Vue({
+var vm=new Vue({
   el: '#app',
   data: {
     persona: {
@@ -8,7 +8,18 @@ new Vue({
       telefono:'',
     	sexo: '',
       favs: false,
+      index:'',
     },
+    personaedit: {
+      nombre: '',
+      apellido:'',
+      edad: '',
+      telefono:'',
+      sexo: '',
+      favs: false,
+      index:'',
+    },
+    edit:-1,
     personas: [],
     filtro: '',
     vista: 'ingresar',
@@ -40,8 +51,34 @@ new Vue({
 
   },
   methods: {
+    vereditPersona(index){
+      this.edit=index
+      this.personaedit=this.personas[index]
+    },
+    canceleditPersona(){
+      this.edit=-2;
+    },
+    editPersona(){
+      for (var i = this.personas.length - 1; i >= 0; i--) {
+        if(this.personas[i].index==this.edit)
+        {
+          this.personas[i]=this.personaedit;
+        }
+      }
+      this.agregarPersonaLocalStorage();
+      this.edit=-2
+      
+    },
   	agregarPersona() {
   		this.personas.push(Object.assign({}, this.persona));
+      const indice=this.personas.length-1;
+      if (indice!=0) {
+        this.personas[indice].index=this.personas[indice].index+1;
+      }
+      else{
+        this.personas[indice].index=0;
+      }
+      
       this.agregarPersonaLocalStorage();
   		this.limpiarPersona();
   		this.mensaje = true;
@@ -62,14 +99,24 @@ new Vue({
   	},
 
     hacerFavorito(index) {
-      this.personas[index].favs=true;
+      for (var i = this.personas.length - 1; i >= 0; i--) {
+        if(this.personas[i].index==index)
+        {
+          this.personas[i].favs=true;
+        }
+      }
       this.agregarPersonaLocalStorage();
       this.mensaje=true;
     },
 
     eliminarFav(index)
     {
-      this.personas[index].favs=false;
+      for (var i = this.personas.length - 1; i >= 0; i--) {
+        if(this.personas[i].index==index)
+        {
+          this.personas[i].favs=false;
+        }
+      }
       this.agregarPersonaLocalStorage();
 
     },
@@ -80,7 +127,11 @@ new Vue({
 
     eliminarPersonaLocalStorage(posicion)
     {
-      this.personas.splice(posicion,1);
+      for (var i = this.personas.length - 1; i >= 0; i--) {
+        if(this.personas[i].index==posicion){
+          this.personas.splice(i,1);
+        }
+      }
       this.agregarPersonaLocalStorage();
     },
 

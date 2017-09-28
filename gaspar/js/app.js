@@ -13,7 +13,16 @@ new Vue({
     filtro: '',
     vista: 'ingresar',
     mensaje: false,
-    indi:''
+    indi:'',
+    publicacion: {
+      id: '',
+      persona: null,
+      nota: '',
+      mg: 0,
+      me: 0,
+      facho: 0
+    },
+    publicaciones: []
   },
   computed: {
     personasFiltradas() {
@@ -21,6 +30,9 @@ new Vue({
     },
     formOk() {
       return this.persona.nombre && this.persona.edad && this.persona.sexo && this.persona.telefono && this.persona.direccion;
+    },
+    formOkp() {
+      return this.publicacion.persona && this.publicacion.nota;
     }
   },
   methods: {
@@ -79,14 +91,56 @@ new Vue({
 
     agregarLista_localStorage(lista){
       localStorage.setItem('personaList', JSON.stringify(lista));
+    },
+    agregarPublicacion(){
+      if(!this.publicaciones.length){
+        this.publicaciones = [];
+        this.publicacion.id = 0;
+      } else {
+        let indice = this.publicaciones.length;
+        this.publicacion.id = this.publicaciones[indice - 1].id +1;
+      }
+      this.publicaciones.push(Object.assign({}, this.publicacion));
+      this.limpiarPublicacion();
+      localStorage.setItem('publicacionesList', JSON.stringify(this.publicaciones));
+      console.log(this.publicaciones);
+    },
+    limpiarPublicacion(){
+      this.publicacion.id = '';
+      this.publicacion.persona = '';
+      this.publicacion.nota = '';
+    },
+    meGusta(id){
+      this.publicaciones[id].mg++;
+      localStorage.setItem('publicacionesList', JSON.stringify(this.publicaciones));
+    },
+    meEnfada(id){
+      this.publicaciones[id].me++;
+      localStorage.setItem('publicacionesList', JSON.stringify(this.publicaciones));
+    },
+    facho(id){
+      this.publicaciones[id].facho++;
+      localStorage.setItem('publicacionesList', JSON.stringify(this.publicaciones));
+    },
+    eliminarPublicacion(id){
+      let indice = 0;
+      while(this.publicaciones[indice].id != id) {
+        indice++;
+      }
+      this.publicaciones.splice(indice, 1);
+      localStorage.setItem('publicacionesList', JSON.stringify(this.publicaciones));
     }
-
   },
 
   mounted:function(){
     let storeLista = localStorage.getItem('personaList');
     if(storeLista != null){
       this.personas = JSON.parse(storeLista);
+    }
+
+    let storeListaPublicaciones = localStorage.getItem('publicacionesList');
+    if(storeListaPublicaciones != null){
+      this.publicaciones = JSON.parse(storeListaPublicaciones);
     }
   }
 })

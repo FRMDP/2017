@@ -1,3 +1,4 @@
+Vue.config.devtools = true
 const app = new Vue({
 	el: '#app',
 	data: {
@@ -12,7 +13,9 @@ const app = new Vue({
 			genero  : '',
 			favorito: false
 		},
-		personas : []
+		personas : [],
+		indexPersonaSeleccionada: '',
+		index: ''
 	},
 	methods:{
 		registrar: function(){
@@ -20,7 +23,7 @@ const app = new Vue({
 			this.personas.push(persona);
 			this.limpiarRegistro();
 			this.mensaje = true;
-			localStorage.setItem('personas', JSON.stringify(this.personas));
+			this.guardarContactosEnStorage();
 		},
 		limpiarRegistro: function(){
 			this.persona.nombre   = '';
@@ -32,13 +35,14 @@ const app = new Vue({
 		cambiarVista: function(vista){
 			this.vista = vista;
 			this.cerrarMensaje();
-
+			this.limpiarRegistro();
 		},
 		cerrarMensaje: function(){
 			this.mensaje = false;
 		},
 		eliminarPersona: function(index){
 			this.personas.pop(index);
+			this.guardarContactosEnStorage();
 		},
 		getPersonasLocalStorage: function(){
 			const personas = localStorage.getItem('personas');
@@ -51,6 +55,30 @@ const app = new Vue({
 				this.personas[index].favorito = false;
 			else
 				this.personas[index].favorito = true;
+			this.guardarContactosEnStorage();
+		},
+		editarPersona: function(persona){
+			this.cambiarVista('editar');
+			this.indexPersonaSeleccionada = this.personas.indexOf(persona);
+			const person = this.personas[this.indexPersonaSeleccionada];
+          	this.persona.nombre = person.nombre;
+          	this.persona.apellido = person.apellido;
+          	this.persona.genero = person.genero;
+          	this.persona.email = person.email;
+          	this.persona.telefono = person.telefono;
+          	this.index = this.indexPersonaSeleccionada;
+          	this.indexPersonaSeleccionada = '';
+		},
+		salvarCambios: function(){
+			this.personas[this.index].nombre = this.persona.nombre;
+          	this.personas[this.index].apellido = this.persona.apellido;
+          	this.personas[this.index].genero = this.persona.genero;
+          	this.personas[this.index].email = this.persona.email;
+          	this.personas[this.index].telefono = this.persona.telefono;
+          	this.guardarContactosEnStorage();
+          	this.mensaje = true;
+		},
+		guardarContactosEnStorage: function(){
 			localStorage.setItem('personas', JSON.stringify(this.personas));
 		}
 	},

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TP3-Perello</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/css/style.css"
+</head>
+<body>
+  	<div  id="app">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img src="css\imagen/agenda.png" width="30" height="30" alt="">
+        <a class="navbar-brand" href="#">Agenda</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#" @click="cambiarVista('inicio')">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" @click="cambiarVista('ingresar')">Agregar Contacto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" @click="cambiarVista('buscar')">Buscar Contacto</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+		<div class="container"  v-show="vista == 'inicio'">
+      <form class="center"> 
+        <div class="form-group">
+        <h1>Agenda personal</h1>
+        </div>
+        <div class="form-group">
+        <h2> Bienvenido a la agenda del Sr. Perello para la UTN. Todos sus contactos privados estarán acá.</h2>
+        </div>
+        <div class =" container">
+          <img src="css\imagen/UTN.png" class="responsive imagen">
+        </div>
+      </form>
+    </div>
+    <div class="container" v-show="vista == 'ingresar'">
+        <div>
+        <h1 class="card-text">Usted eligio la pestaña Ingresar</h1>
+          <h3 class="card-text">Aqui agregará sus contactos, por favor complete todos los campos obligatorios.</h3>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Nombre *</label>
+          <input type="text" class="form-control" v-model="persona.nombre" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Agregar Nombre">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Apellido *</label>
+          <input type="text" class="form-control" v-model="persona.apellido" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Agregar Apellido">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Edad *</label>
+          <input type="number" class="form-control"  v-model="persona.edad"id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Agregar Edad">
+        </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"  v-model="persona.sexo" value="option1">Masculino
+          </div>
+          <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"  v-model="persona.sexo" value="option2"> Femenino
+              </label>
+          </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Agregar Persona</button>
+              </div>
+               <div class="form-group">
+                <div class="alert alert-warning" role="alert" width="70px">
+                  * = Campos obligatorios
+                </div>
+               </div>
+                <div class="alert  alert-success alert-dismissible fade show" role="alert" v-if="mensaje">
+  					<button type="button" class="close" data-dismiss="alert" aria-label="Close"  @click.prevent="cerrarMensaje()">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+				  <strong>Exelente!!</strong> Agregaste una persona a tu agenda, recuerda ver tus contacto en la pestaña buscar.
+				</div> 	
+        	</div>
+      		</div>
+		  <div class="container" v-show="vista == 'buscar'">
+        <dir class="form-group">
+        <h1 class="card-text">Usted eligio la pestaña buscar</h1>
+      </dir>
+        <dir class="form-group">
+        <h3 class="card-text">Encontrar la lista de los contactos guardados, ademas posee un filtro para acelerar el proceso de busqueda.</h3>
+        <h3 class="card-text">Para esta version el filtro es solo por nombre</h3>
+        </dir>
+        <div class="form-group">
+			     <input type="text" placeholder="Filtrar" v-model="filtro">
+        </div>
+       <div class="alert alert-warning" role="alert" v-if="!personas.length">
+        No hay personas ingresadas en la agenda
+        </div>
+			 <div class="card" v-else v-for="(persona,index) in personasFiltradas">
+  				<h4 class="card-header">Contacto</h4>
+				  <div class="card-body">
+				    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }}</h4>
+				    <p class="card-text">Si desea eliminarlo seleccione borrar.</p>
+				    <a href="#" type="submit"  class="btn btn-primary"@click.prevent="eliminarPersona(index)" >Borrar</a>
+				  </div>
+			</div>
+		  </div>
+	 </div>
+  <script src="js/vue.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

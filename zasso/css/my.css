@@ -1,16 +1,21 @@
-#app
 .input, .textarea {
   background-color:#e8e8e8;
 }
+.htmlBackground{
+    background: rgb(165, 138, 147);
+}
+.figureEstilo {
+    margin-left: 8px;
+}
 
-#buscar,#agenda,#contenedor{
+.margenesEspecificos{
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 15px;
 }
 
-#form{
+.formEstilos{
   width: 50%;
 }
 
@@ -22,7 +27,7 @@ form, .card{
   width: 100%;
 }
 
-#card-contactos{
+.card-contactos{
   background-color: #a89e9e;
 }
 
@@ -30,15 +35,15 @@ form, .card{
   height:100%;
 }
 
-#boton-agregar
+.boton-agregar
 {
 vertical-align: baseline;
 background-color: #6ed3a1;
 }
-#boton-eliminar{
+.boton-eliminar{
   background-color: #c34c4c;
 }
-#boton-editar{
+.boton-editar-restaurar{
   background-color: #d6b73a;
 }
 

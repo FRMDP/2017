@@ -1,0 +1,6 @@
+1. Se borraron ids de etiquetas duplicadas utilizadas para dar estilos css, se incorporaron a modo de clases en el archivo css
+2. Se arreglo sacaron styles que estaban en el archivo index. Se los reemplazo por clases en el archivo css
+3. Se arreglo el color del fondo que estaba unicamente ligado al body dejando una parte de la pagina en blanco.
+4. Se agrego un link a la ventana principal cuando el usuario clickea sobre el logo del calendario
+5. Se modularizo la funcionalidad de obtener los datos de local storage
+6. Se agrego la vista y funcionalidad de papelera de reciclaje con posibilidad a restaurar

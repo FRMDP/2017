@@ -82,6 +82,9 @@
             <div v-if="borradoAlert" @click.prevent="cerrarAlert" class="alert alert-danger marginOfCards" role="alert">
                 Se ha borrado el usuario. Tranquilo! Esta en su papelera.
             </div>
+            <div v-if="editadoAlert" @click.prevent="cerrarAlert" class="alert alert-info marginOfCards" role="alert">
+                Se ha editado el usuario.
+            </div>
             <h2>Busqueda de Contactos</h2>
             <input type="text" placeholder="Buscar Contacto" v-model="filtro" class="form-control maginOfForms">
             <h3 v-if="!personas.length">No hay personas</h3>
@@ -91,6 +94,7 @@
                         <h4 class="card-title">Nombre: {{ persona.nombre }} <br> Edad: {{ persona.edad }} <br> Sexo: {{
                             persona.sexo }} <br> Telefono: {{ persona.cel }} <br> Mail: {{ persona.mail }}</h4>
                         <a href="#" class="btn btn-outline-danger" @click.prevent="borrarPersona(index)">Borrar</a>
+                        <a href="#" class="btn btn-outline-info" @click.prevent="modificarPersona(index)">Editar</a>
                     </div>
                 </div>
             </div>
@@ -104,6 +108,9 @@
                  role="alert">
                 Se ha restaurado el usuario correctamente.
             </div>
+            <div v-if="editadoAlert" @click.prevent="cerrarAlert" class="alert alert-info marginOfCards" role="alert">
+                Se ha editado el usuario.
+            </div>
             <h2>Mi papelera de reciclaje</h2>
             <input type="text" placeholder="Buscar en la Papelera" v-model="filtro" class="form-control maginOfForms">
             <h3 v-if="!trash.length">Su papelera esta vacia</h3>
@@ -115,10 +122,45 @@
                         <a href="#" class="btn btn-outline-danger" @click.prevent="borrarPersonaDefinitivamente(index)">Borrar
                             Definitivamente</a>
                         <a href="#" class="btn btn-outline-warning" @click.prevent="restaurar(index)">Restaurar</a>
+                        <a href="#" class="btn btn-outline-info" @click.prevent="modificarPersona(index)">Editar</a>
                     </div>
                 </div>
             </div>
             <h3 v-if="!personasFiltradas.length">Su busqueda no produjo resultados</h3>
+        </div>
+        <div class="mx-auto" v-show="vista == 'editar'">
+            <h2>Edite el Contacto</h2>
+            <form>
+                <div class="form-group maginOfForms">
+
+                    <input v-model="persona.nombre" type="text" class="form-control"
+                           placeholder="Ingrese su Nombre">
+                </div>
+                <div class="form-group">
+
+                    <input v-model="persona.edad" type="number" class="form-control" placeholder="Ingrese su Edad"
+                    >
+                </div>
+                <div class="form-group">
+                    <input v-model="persona.cel" type="number" class="form-control"
+                           placeholder="Ingrese su Telefono">
+                </div>
+                <div class="form-group">
+                    <input v-model="persona.mail" type="email" class="form-control"
+                           placeholder="Ingrese su Mail">
+                </div>
+                <div class="centerText">
+                    <input value="Masculino" id="radio1" name="radio" type="radio"
+                           v-model="persona.sexo">
+                    <span class="custom-control-description">Varon</span>
+                    <input value="Femenino" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+                    <span class="custom-control-description">Mujer</span>
+                    <br>
+                    <button :disabled="!formOk" type="submit" @click.prevent="confirmarEdicion"
+                            class="btn btn-outline-success marginOfCards">Aceptar modificaciones
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     <script src="js/vue.js"></script>

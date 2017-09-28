@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="bootstrap/css/bootstrap.min" rel="stylesheet" type="text/css">
   <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
   <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="bootstrap/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -29,8 +28,8 @@
             <li><a href="#" @click="cambiarVista('buscar')">Mis contactos</a></li>
             <li><a href="#" @click="cambiarVista('ingresar')">Agregar contacto</a></li>
             <li><a href="#" @click="cambiarVista('eliminar')">Eliminar contacto</a></li>
-            <li><a href="#" @click="cambiarVista('modificar')">Modificar contactos</a>
-            </li>
+            <li><a href="#" @click="cambiarVista('modificar')">Modificar contactos</a></li>
+            <li><a href="#" @click="cambiarVista('favoritos')">Favoritos</a></li>
           </ul>
         </div> 
       </div> 
@@ -65,6 +64,10 @@
                 <i class="fa fa-users"></i>
                 <a v-if="persona.grupo === ''" class="negativo" @click="cambiarVista('modificar')"> Agregar grupo</a><a v-else> {{persona.grupo}}</a>
               </div>
+              <div>
+                <i class="fa fa-heart"></i>
+                <a v-if="persona.favorito == 'true'"> SI</a><a class="negativo" v-else> NO</a>
+              </div>
             </div>
             <hr>
           </div>
@@ -90,6 +93,17 @@
               <span class="custom-control-description">Mujer</span>
             </div>
           </div>
+
+          <div>
+            <label><i class="fa fa-asterisk" title="Campo requerido" data-placement="bottom" aria-hidden="true"></i>Favorito</label>
+            <div>
+              <input value="true" id="radio3" name="radiof" type="radio" v-model="persona.favorito">
+              <span class="custom-control-description">Si</span>
+              <input value="false" id="radio4" name="radiof" type="radio" v-model="persona.favorito">
+              <span class="custom-control-description">No</span>
+            </div>
+          </div>
+
         </div>
 
         <div class="col-md-4 contenedor">
@@ -122,7 +136,7 @@
         <div class="col-md-4 contenedor">
           <div>
             <label><i class="fa fa-asterisk" title="Campo requerido" data-placement="bottom" aria-hidden="true"></i>Teléfono</label>
-            <input type="tel" class="form-control" placeholder="Ingrese telefono" v-model="persona.telefono" required>
+            <input type="number" class="form-control" placeholder="Ingrese telefono" v-model="persona.telefono" required>
           </div>
           <br>
           <div>
@@ -155,6 +169,10 @@
               <div>
                 <i class="fa fa-users"></i>
                 <a v-if="persona.grupo === ''" class="negativo" @click="cambiarVista('modificar')"> Agregar grupo</a><a v-else> {{persona.grupo}}</a>
+              </div>
+              <div>
+                <i class="fa fa-heart"></i>
+                <a v-if="persona.favorito == 'true'"> SI</a><a class="negativo" v-else> NO</a>
               </div>
               <div>
                 <hr>
@@ -197,12 +215,12 @@
                   </div>
                   <div>
                     <label>Teléfono</label>
-                    <input class="edit form-control" type="text" v-model="persona.telefono"
+                    <input class="edit form-control" type="number" v-model="persona.telefono"
                     @blur="doneEdit(persona)" @keyup.enter="doneEdit(persona)"/>
                   </div>
                   <div>
                     <label>Correo</label>
-                    <input class="edit form-control" type="text" v-model="persona.correo"
+                    <input class="edit form-control" type="text" v-model="persona.mail"
                     @blur="doneEdit(persona)" @keyup.enter="doneEdit(persona)"/>
                   </div>
                   <div>
@@ -210,8 +228,15 @@
                     <input class="edit form-control" type="text" v-model="persona.grupo"
                     @blur="doneEdit(persona)" @keyup.enter="doneEdit(persona)"/>
                   </div>
+                  <div>
+                    <i class="fa fa-heart"></i><label> Favorito</label><br>
+                    <input value="true" id="radio3" :name="persona.nombre + persona.apellido" type="radio" :checked="persona.favorito == true" v-model="persona.favorito">
+                    <span class="custom-control-description">Si</span>
+                    <input value="false" id="radio4" :name="persona.nombre + persona.apellido" type="radio" :checked="persona.favorito == false" v-model="persona.favorito">
+                    <span class="custom-control-description">No</span>
+                  </div>
                   <div class="btnGuardar">
-                    <button  class="btn btn-success" @click="editPersona(Persona)"> Guardar </button>
+                    <button  class="btn btn-success" @click="editPersona(persona)"> Guardar </button>
                   </div>
                 </div>
               </div>
@@ -220,15 +245,49 @@
           </div>
         </div> <!--- Contenedor -->
       </div> <!---Fin Modificar -->
+  
+      <!--VISTA FAVORITOS AGREGADA -->
+        <div v-show="vista == 'favoritos'"  class="col-md-10 template">
+          <h1>Agenda</h1>
+          <h2>Lista de favoritos</h2>
+          <input type="text" class="form-control" placeholder="Buscá a tus contactos favoritos" v-model="filtro">
+          <h3 v-if="!personas.length">No hay contactos agregados.</h3>
+          <div class="col-md-4 contenedor" v-else v-for="persona in favoritosFiltradas">
+            <div class="card">
+              <div class="card-block">
+                <div v-if="persona.genero === 'varon'">
+                  <img src="img/varon.png">
+                </div>
+                <div v-else>
+                  <img src="img/mujer.png">
+                </div>
+                <h4 class="card-title">{{persona.apellido}}, {{persona.nombre}}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{persona.telefono}}</h6>
+                <div>
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                  <a v-if="persona.mail === ''" class="negativo" @click="cambiarVista('modificar')"> Agregar correo</a><a v-else> {{persona.mail}}</a>
+                </div>
+                <div>
+                  <i class="fa fa-users"></i>
+                  <a v-if="persona.grupo === ''" class="negativo" @click="cambiarVista('modificar')"> Agregar grupo</a><a v-else> {{persona.grupo}}</a>
+                </div>
+                <div>
+                  <i class="fa fa-heart"></i>
+                  <a v-if="persona.favorito == 'true'"> SI</a>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div> <!--- Contenedor -->
+        </div> <!---Fin Favoritos -->
 
       <aside class="col-md-1 aside">
       </aside>
 
       <footer>
       </footer>
-    </div>
   </div>
-
+  </div>
   <script src="vue/vue.js" type="text/javascript"></script>
   <script src="vue/bootstrap-vue.js" type="text/javascript"></script>
   <script src="scripts.js" type="text/javascript"></script>

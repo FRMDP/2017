@@ -6,7 +6,8 @@ new Vue({
           apellido: '',
           edad: '',
           sexo: '',
-          mail: ''
+          mail: '',
+          favorito: 'false'
         },
         personas: [],
         filtro: '',
@@ -21,6 +22,11 @@ new Vue({
                                             p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0)
           );
         },
+        favoritosFiltrados() {
+          return this.personas.filter(p => (p.favorito=='true' &&(p.apellido.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+                                            p.edad.indexOf(this.filtro) >= 0 ||
+                                            p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0)));
+        },
         formOk() {
           return this.persona.nombre && this.persona.edad
                  && this.persona.sexo && this.persona.apellido
@@ -28,7 +34,7 @@ new Vue({
         },
         busquedaSinResultados() {
           return this.personasFiltradas.length == 0 &&
-                 
+
                  this.filtro != '';
         }
       },
@@ -81,6 +87,18 @@ new Vue({
           const alert = document.getElementById("editAlert");
           alert.style.display = "block";
         },
+        activarFavoritoQuitado() {
+          const alert = document.getElementById("favouriteAlert");
+          alert.style.display = "block";
+        },
+        activarFavoritoAgregado() {
+          const alert = document.getElementById("favouriteAddAlert");
+          alert.style.display = "block";
+        },
+        activarFavoritoExistente() {
+          const alert = document.getElementById("favouriteExistente");
+          alert.style.display = "block";
+        },
         saveContactsToStorage(){
           localStorage.setItem('personas',JSON.stringify(this.personas));
         },
@@ -98,6 +116,22 @@ new Vue({
           this.personas[this.index].mail = this.persona.mail;
           this.limpiarPersona();
           this.activarAlertaEditado();
+          this.saveContactsToStorage();
+        },
+        agregarFavorito(persona){
+          if(this.personas[this.personas.indexOf(persona)].favorito == 'true')
+          {
+          this.activarFavoritoExistente();
+          }
+          else {
+              this.personas[this.personas.indexOf(persona)].favorito = 'true';
+              this.activarFavoritoAgregado();
+              this.saveContactsToStorage();
+          }
+        },
+        quitarFavorito(persona){
+          this.personas[this.personas.indexOf(persona)].favorito = 'false';
+          this.activarFavoritoQuitado();
           this.saveContactsToStorage();
         }
       },

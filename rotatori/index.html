@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>zapph The Agenda</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="css/materialize.css">
     <link rel="stylesheet" href="css/rotatori.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
@@ -25,6 +26,7 @@
                         <ul>
                             <li><a href="#" @click="cambiarVista('agregar')">Agregar Persona</a></li><br>
                             <li><a href="#" @click="cambiarVista('buscar')">Buscar Persona</a></li>
+                            <li><a href="#" @click="cambiarVista('favoritos')">Ver Favoritos</a></li>
                         </ul>
                     </div>
                 </transition>
@@ -56,17 +58,17 @@
                 <div class="row">
                     <div class="input-field col s6">
                         <i class="material-icons prefix">phone</i>
-                        <input id="telefono" type="number" class="validate" placeholder="Telefono" v-model="persona.telefono">
+                        <input type="number" class="validate" placeholder="Telefono" v-model="persona.telefono">
                     </div>
                     <div class="input-field col s6">
                             <i class="material-icons prefix">location_city</i>
-                            <input id="direccion" type="text" class="validate" placeholder="Direccion" v-model="persona.direccion">
+                            <input type="text" class="validate" placeholder="Direccion" v-model="persona.direccion">
                         </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">email</i>
-                        <input id="email" type="email" class="validate" placeholder="E-Mail" v-model="persona.mail">
+                        <input type="email" class="validate" placeholder="E-Mail" v-model="persona.mail">
                     </div>
                 </div>
                 <div class="row">
@@ -97,7 +99,8 @@
             </transition>
             <!-- CARD -->
             
-            <div class="row"><transition-group name="fade">
+            <div class="row">
+                <transition-group name="fade">
                 <div class="col s6" v-for="p in personasFiltradas" :key="p.indice">
                     <div  class="card blue-grey darken-1 cuadroSombra">
                     <div class="card-content white-text">
@@ -110,10 +113,13 @@
                     <div class="card-action">
                         <a class="waves-effect waves-light btn" @click="borrarPersona(p)"><i class="material-icons left">remove</i>Borrar</a>
                         <a class="waves-effect waves-light btn"  @click="pasarModificar(p)"><i class="material-icons left">edit</i>Modificar</a>
+                        <a v-if="p.favorito==false" class="waves-effect waves-light btn"  @click="cambiarFavorito(p)">Añadir a mi <i class="material-icons right">favorite</i></a>
+                        <a v-else class="waves-effect waves-light btn"  @click="cambiarFavorito(p)">Quitar de mi <i class="material-icons right">favorite_border</i></a>
                     </div>
                     </div>
-                </div> 
-            </div></transition-group>
+                </div>
+            </transition-group>
+            </div>
             
         </div>
         <!-- Termina Buscar Persona -->
@@ -176,6 +182,39 @@
             </div>
         </div>
         <!-- Termina Modificar Persona -->
+        <!-- Ver Favoritos -->
+        <div id="verFavoritos" v-show="vista == 'favoritos'">
+            <h3 class="titulo">Ver Favoritos</h3>
+            <div class="row">
+               <br>
+            </div>
+            <transition name="slide-fade"> <!-- Alert info -->
+                <div class="alert alert-info marginTop" role="alert" v-show="cantFavoritos == 0 ">
+                    SORRY!! No hay personas favoritas!
+                </div>
+            </transition>
+            <!-- CARD -->
+
+            <div class="row">
+                <transition-group name="fade">
+                <div class="col s6" v-for="p in personasFavoritas" :key="p.indice">
+                    <div  class="card blue-grey darken-1 cuadroSombra">
+                        <div class="card-content white-text">
+                            <span class="card-title">{{ p.apellido }}, {{ p.nombre }}</span>
+                            <p>Telefono: {{ p.telefono }}</p>
+                            <p>Direccion: {{ p.direccion }}</p>
+                            <p>Email: {{ p.mail }}</p>
+                            <p>Sexo: {{ p.sexo }}</p>
+                        </div>
+                        <div class="card-action">
+                           <a class="waves-effect waves-light btn"  @click="cambiarFavorito(p)"><i class="material-icons left">favorite_border</i>Quitar Favorito</a>
+                        </div>
+                    </div>
+                </div>
+            </transition-group>
+            </div>
+        </div>
+        <!-- Termina Ver Favoritos -->
     </div><!-- div id=app -->
     <!-- referencias js -->
     <script src="js/vue.js"></script>

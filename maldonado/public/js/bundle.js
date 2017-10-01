@@ -10993,7 +10993,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11112,11 +11112,30 @@ exports.default = {
                 this.personas = JSON.parse(personas);
             }
         },
+        traerPersona: function traerPersona(personaDesdeComponenteEditar) {
+            this.personaEditar.nombre = this.personas[personaDesdeComponenteEditar].nombre;
+            this.personaEditar.apellido = this.personas[personaDesdeComponenteEditar].apellido;
+            this.personaEditar.edad = this.personas[personaDesdeComponenteEditar].edad;
+            this.personaEditar.telefono = this.personas[personaDesdeComponenteEditar].telefono;
+            this.personaEditar.sexo = this.personas[personaDesdeComponenteEditar].sexo;
+            this.personaEditar.gustos = this.personas[personaDesdeComponenteEditar].gustos;
+            this.indicePersonaAEditar = personaDesdeComponenteEditar;
+            this.vista = 'editar';
+        },
         editarPersona: function editarPersona() {
             this.personas.splice(this.indicePersonaAEditar, 1, Object.assign({}, this.personaEditar));
             this.agregarPersonaALocalStorage();
             this.traerPersonasDeLocalStorage();
             this.vista = 'buscar';
+        },
+        eliminarPersona: function eliminarPersona(indicePersonaAeliminar) {
+            this.personas.splice(indicePersonaAeliminar, 1);
+            this.agregarPersonaALocalStorage();
+        },
+        agregarAfavoritos: function agregarAfavoritos(indicePersona) {
+            var nuevoFavorito = this.personas.splice(indicePersona, 1);
+            this.favoritos.push(nuevoFavorito[0]);
+            this.actualizarPersonasYFavoritos();
         },
         agregarFavoritoALocalStorage: function agregarFavoritoALocalStorage() {
             localStorage.setItem('favoritos', JSON.stringify(this.favoritos));
@@ -11144,6 +11163,9 @@ exports.default = {
         this.traerFavoritosDeLocalStorage();
     }
 }; //
+//
+//
+//
 //
 //
 //
@@ -11939,7 +11961,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11963,13 +11985,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
     name: 'vistaBuscar',
-    props: ['personas', 'personaEditar', 'favoritos'],
+    props: ['personas'],
     components: {
         tarjetaContacto: _tarjetaContacto2.default
     },
     data: function data() {
         return {
-            vista: '',
             filtro: '',
             mensaje: false
         };
@@ -11985,37 +12006,14 @@ exports.default = {
         }
     },
     methods: {
-        agregarAfavoritos: function agregarAfavoritos(indicePersona) {
-            var nuevoFavorito = this.personas.splice(indicePersona, 1);
-            this.favoritos.push(nuevoFavorito[0]);
-            this.actualizarPersonasYFavoritos();
+        agregarAfavoritos: function agregarAfavoritos(index) {
+            this.$emit('agregarAfavoritos', index);
         },
-        traerPersona: function traerPersona(personaDesdeComponenteEditar) {
-            console.log(personaDesdeComponenteEditar);
-            this.personaEditar.nombre = this.personas[personaDesdeComponenteEditar].nombre;
-            this.personaEditar.apellido = this.personas[personaDesdeComponenteEditar].apellido;
-            this.personaEditar.edad = this.personas[personaDesdeComponenteEditar].edad;
-            this.personaEditar.telefono = this.personas[personaDesdeComponenteEditar].telefono;
-            this.personaEditar.sexo = this.personas[personaDesdeComponenteEditar].sexo;
-            this.personaEditar.gustos = this.personas[personaDesdeComponenteEditar].gustos;
-            this.indicePersonaAEditar = personaDesdeComponenteEditar;
-            this.vista = 'editar';
+        traerPersona: function traerPersona(index) {
+            this.$emit('traerPersona', index);
         },
-        eliminarPersona: function eliminarPersona(indicePersonaAeliminar) {
-            this.personas.splice(indicePersonaAeliminar, 1);
-            this.agregarPersonaALocalStorage();
-        },
-        agregarPersonaALocalStorage: function agregarPersonaALocalStorage() {
-            localStorage.setItem('personas', JSON.stringify(this.personas));
-        },
-        agregarFavoritoALocalStorage: function agregarFavoritoALocalStorage() {
-            localStorage.setItem('favoritos', JSON.stringify(this.favoritos));
-        },
-
-        //Metodo solamente hecho para no repetir codigo
-        actualizarPersonasYFavoritos: function actualizarPersonasYFavoritos() {
-            this.agregarPersonaALocalStorage();
-            this.agregarFavoritoALocalStorage();
+        eliminarPersona: function eliminarPersona(index) {
+            this.$emit('eliminarPersona', index);
         }
     }
 }; //
@@ -13049,11 +13047,11 @@ var render = function() {
             expression: "vista == 'buscar'"
           }
         ],
-        attrs: {
-          personaEditar: _vm.personaEditar,
-          indicePersonaAEditar: _vm.indicePersonaAEditar,
-          personas: _vm.personas,
-          favoritos: _vm.favoritos
+        attrs: { personas: _vm.personas },
+        on: {
+          agregarAfavoritos: _vm.agregarAfavoritos,
+          traerPersona: _vm.traerPersona,
+          eliminarPersona: _vm.eliminarPersona
         }
       }),
       _vm._v(" "),

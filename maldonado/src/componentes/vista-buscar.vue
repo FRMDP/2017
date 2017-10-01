@@ -9,7 +9,7 @@
                     <input type="text" placeholder="Filtrar" v-model="filtro">
                     <h3 v-if="!this.personas.length">No hay personas</h3>
                     <tarjeta-contacto v-else v-for="(persona, index) in personasFiltradas"
-                        :persona="persona" :index="index" @agregarAfavoritos="agregarAfavoritos" 
+                        :persona="persona" :index="index" @agregarAfavoritos="agregarAfavoritos"
                         @traerPersona="traerPersona" @eliminarPersona="eliminarPersona">
                     </tarjeta-contacto>
                 </div>
@@ -22,13 +22,12 @@
 
     export default {
         name: 'vistaBuscar',
-        props: ['personas', 'personaEditar', 'favoritos'],
+        props: ['personas'],
         components: {
             tarjetaContacto
         },
         data() {
             return {
-                vista: '',
                 filtro: '',
                 mensaje: false
             }
@@ -44,36 +43,14 @@
             }
         },
         methods: {
-            agregarAfavoritos(indicePersona) {
-                const nuevoFavorito = this.personas.splice(indicePersona, 1);
-                this.favoritos.push(nuevoFavorito[0]);
-                this.actualizarPersonasYFavoritos();
+            agregarAfavoritos(index){
+                this.$emit('agregarAfavoritos', index);
             },
-            traerPersona(personaDesdeComponenteEditar){
-                console.log(personaDesdeComponenteEditar);
-                this.personaEditar.nombre = this.personas[personaDesdeComponenteEditar].nombre;
-                this.personaEditar.apellido = this.personas[personaDesdeComponenteEditar].apellido;
-                this.personaEditar.edad = this.personas[personaDesdeComponenteEditar].edad;
-                this.personaEditar.telefono = this.personas[personaDesdeComponenteEditar].telefono;
-                this.personaEditar.sexo = this.personas[personaDesdeComponenteEditar].sexo;
-                this.personaEditar.gustos = this.personas[personaDesdeComponenteEditar].gustos;
-                this.indicePersonaAEditar = personaDesdeComponenteEditar;
-                this.vista = 'editar';
+            traerPersona(index){
+                this.$emit('traerPersona', index);
             },
-            eliminarPersona(indicePersonaAeliminar) {
-                this.personas.splice(indicePersonaAeliminar, 1);
-                this.agregarPersonaALocalStorage();
-            },
-            agregarPersonaALocalStorage(){
-                localStorage.setItem('personas', JSON.stringify(this.personas));
-            },
-            agregarFavoritoALocalStorage(){
-                localStorage.setItem('favoritos', JSON.stringify(this.favoritos));
-            },
-            //Metodo solamente hecho para no repetir codigo
-            actualizarPersonasYFavoritos(){
-                this.agregarPersonaALocalStorage();
-                this.agregarFavoritoALocalStorage();
+            eliminarPersona(index) {
+                this.$emit('eliminarPersona', index);
             }
         }
     }

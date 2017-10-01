@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TP3</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="css/myCss.css"/>
+</head>
+<body>
+  <div id="app">
+   <header>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">Agenda</a>
+          <a class="nav-link" href="#" @click="cambiarVista('ingresar')">Add</a>
+          <a class="nav-link" href="#" @click="cambiarVista('buscarPersonas')">Search</a>
+          <a class="nav-link" href="#" @click="cambiarVista('buscarFavoritos')">Favorites</a>
+        </nav>
+      </div>
+   </header>
+    <div class='container-fluid'>
+      <div class='row justify-content-center'>
+        <div class='col-md-4 center'>
+       	<!--Vista de ingreso de contactos -->
+          <div v-show="vista == 'ingresar'">
+          	<!-- Alert de persona agregada -->
+            <div v-if='mensajePersonaAgregada' class="alert alert-warning alert-dismissible fade show " role="alert">
+              <button @click="cerrarMensajePersona" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>Holy guacamole!</strong> You added a new person
+            </div>
+            <form>
+              <label class="sizeSubTitle"><strong>Add a person</strong></label>
+              <br/>
+              <label>Name</label>
+              <input class="form-control" v-model="persona.nombre" type="text" placeholder="Put your name">
+      				<label>Age</label>
+      				<input class="form-control" type="number" placeholder="Put your age" v-model="persona.edad">
+              <label>Description</label>
+              <textarea  class="form-control Styletextarea" v-model="persona.descripcion"> </textarea>
+              <label class="custom-control custom-radio">
+                <input value="male" class="custom-control-input" id="radio1" name="radio" type="radio" v-model="persona.sexo">
+                <span class="custom-control-indicator"></span>
+        				<span class="custom-control-description">Man</span>
+              </label>
+              <label class="custom-control custom-radio">
+            		<input value="female" class="custom-control-input" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Woman</span>
+              </label>
+              <br/>
+      				<button class="btn btn-success spaceButton" :disabled="!formPeopleOk" type="submit" @click.prevent="agregarPersona">Send</button>
+            </form>
+          </div>
+          <!-- Vista de busqueda de todos los contactos -->
+          <div v-show="vista == 'buscarPersonas'">
+          	<!-- Alert favorito agregado -->
+          	<div v-if='mensajeFavoritoAgregado' class="alert alert-warning alert-dismissible fade show " role="alert">
+              <button @click="cerrarMensajeFavorito" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>Holy guacamole!</strong> You added a new favorite
+            </div>
+            <!-- Alert de editado ok -->
+            <div v-if='mensajeEditado' class="alert alert-warning alert-dismissible fade show " role="alert">
+              <button @click="cerrarMensajeEditado" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>Holy guacamole!</strong> You edited a person succesfully
+            </div>
+            <!-- Alert de borrado ok -->
+            <div v-if='mensajeBorrado' class="alert alert-warning alert-dismissible fade show " role="alert">
+              <button @click="cerrarMensajeBorrado" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>Holy guacamole!</strong> You deleted a person succesfully
+            </div>
+            <label class="sizeSubTitle"><strong>Search people</strong></label>
+            <br/>
+            <input class="form-control" type="text" placeholder="Filter" v-model="filtro">
+            <h3 v-if="!personas.length">:(</h3>
+            <div v-else v-for="(persona,index) in personasFiltradas">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">{{persona.nombre}}</h4>
+                  <p class="card-title"><strong>Age: {{persona.edad}}</strong></p>
+                  <p class="card-title"><strong>Sex: {{persona.sexo}}</strong></p>
+                  <p class="card-text">{{persona.descripcion}} </p>
+                  <a href="#" class="spaceButton" @click="deletePeople(index)">Delete</a>
+                  <a href="#" class="spaceButton" @click='edit(index)'>Edit</a>
+                  <a href="#" class="spaceButton" @click='agregarFavorito(index)'>Add Favorite</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Vista de busqueda de favoritos -->
+          <div v-show="vista == 'buscarFavoritos'">
+      		<!-- Alert de borrado ok -->
+          	<div v-if='mensajeBorrado' class="alert alert-warning alert-dismissible fade show " role="alert">
+              <button @click="cerrarMensajeBorrado" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>Holy guacamole!</strong> You deleted a favorite succesfully
+            </div>
+      		<!-- Alert de editado ok -->
+            <div v-if='mensajeEditado' class="alert alert-warning alert-dismissible fade show " role="alert">
+              <button @click="cerrarMensajeEditado" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>Holy guacamole!</strong> You edited a favorite succesfully
+            </div>
+            <label class="sizeSubTitle"><strong>Search favorites</strong></label>
+            <br/>
+            <input class="form-control" type="text" placeholder="Filter" v-model="filtro">
+            <h3 v-if="!favoritos.length">:(</h3>
+            <div v-else v-for="(favorito,index) in favoritosFiltrados">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">{{favorito.nombre}}</h4>
+                  <p class="card-title"><strong>Age: {{favorito.edad}}</strong></p>
+                  <p class="card-title"><strong>Sex: {{favorito.sexo}}</strong></p>
+                  <p class="card-text">{{favorito.descripcion}} </p>
+                  <a href="#" class="spaceButton" @click="deleteFavorite(index)">Delete</a>
+                  <a href="#" class="spaceButton" @click='edit(index)'>Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- Editar persona -->
+        <div v-show="vista == 'editPeople'">
+          <form>
+            <label class="sizeSubTitle"><strong>Edit person</strong></label>
+            <br/>
+            <label>Name</label>
+            <input type='hidden' v-model='index'/>
+            <input class="form-control" v-model="persona.nombre" type="text" placeholder="Put your name">
+            <label>Age</label>
+            <input class="form-control" type="number" placeholder="Put your age" v-model="persona.edad">
+            <label>Description</label>
+            <textarea  class="form-control Styletextarea" v-model="persona.descripcion"> </textarea>
+            <label class="custom-control custom-radio">
+              <input value="male" class="custom-control-input" id="radio1" name="radio" type="radio" v-model="persona.sexo">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Man</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input value="female" class="custom-control-input" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Woman</span>
+            </label>
+            <br/>
+            <button class="btn btn-success spaceButton" :disabled="!formPeopleOk" type="submit" @click.prevent="saveEditing">Edit</button>
+          </form>
+        </div>
+        <!-- Editar favorito -->
+        <div v-show="vista == 'editFavorite'">
+          <form>
+            <label class="sizeSubTitle"><strong>Edit favorite</strong></label>
+            <br/>
+            <label>Name</label>
+            <input type='hidden' v-model='index'/>
+            <input class="form-control" v-model="favorito.nombre" type="text" placeholder="Put your name">
+            <label>Age</label>
+            <input class="form-control" type="number" placeholder="Put your age" v-model="favorito.edad">
+            <label>Description</label>
+            <textarea  class="form-control Styletextarea" v-model="favorito.descripcion"> </textarea>
+            <label class="custom-control custom-radio">
+              <input value="male" class="custom-control-input" id="radio1" name="radio" type="radio" v-model="favorito.sexo">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Man</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input value="female" class="custom-control-input" id="radio2" name="radio" type="radio" v-model="favorito.sexo">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Woman</span>
+            </label>
+            <br/>
+            <button class="btn btn-success spaceButton" :disabled="!formFavoriteOk" type="submit" @click.prevent="saveEditing">Edit</button>
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/vue.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

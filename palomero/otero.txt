@@ -1,0 +1,12 @@
+COntaminando el repo de fefe
+cambios:
+1 movi de lugar un div para que las cartas se acomoden de a 2 cosa que supuse se intento hacer asi, de no ser asi perdon fefe
+2 agregue la funcionalidad de editar, para ello tuve que hacer lo siguiente:
+	2.1 tuve que agregar un parametro mas a las personas porque de lo contrario al borrar o modificar a las personas cuando estas fueron filtradas se terminaba odificando/borrando o una diferente, porque el indice de personasfiltradas[] no es el mismo que el de personas[]
+	2.2 agregue atributos al objeto Vue para almacenar temporalmente los datos
+
+3 arregle el bug de eliminar cuando estas filtrando (por lo mismo de los indices que expique en el punto anterior)
+	3.1 modifique las funciones de agregar eliminar y fav personas por el mismo tema
+
+
+PD hay que vaciar el LocalStorage para probar los cambios

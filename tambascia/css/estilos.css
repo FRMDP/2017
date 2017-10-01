@@ -1,0 +1,23 @@
+h4 {
+    font-family: 'Ubuntu', sans-serif;
+}
+.maginOfForms {
+    margin-top: 30px;
+}
+.marginOfCards{
+    margin-top: 10px;
+}
+h2 {
+    font-family: 'Ubuntu', sans-serif;
+    color: grey;
+    margin-top: 10px;
+}
+h3 {
+    font-family: 'Ubuntu', sans-serif;
+    color: grey;
+    margin-top: 10px;
+    text-align: center;
+}
+.centerText{
+    text-align:center;
+}

@@ -1,26 +1,17 @@
-# TP #3, revisar la rama tp3.
+### TP #5
 
-## Listado de alumnos
+#### Lineamientos
 
-* [zeratulmdq](https://github.com/zeratulmdq) - Martin Benvenuti
-* [ignaciocasales](https://github.com/ignaciocasales) - Ignacio Casales
-* [SantiBlanc87](https://github.com/SantiBlanc87) - Santiago Blanc
-* [Facundo97Maldonado](https://github.com/Facundo97Maldonado) - Facundo Maldonado
-* [fedealdosivi](https://github.com/fedealdosivi) - Federico Palomero García
-* [maurogsp](https://github.com/maurogsp) - Mauro Gaspar
-* [DanielScha](https://github.com/DanielScha) - Daniel Adrian Schaerer
-* [matirey](https://github.com/matirey) - Reynoso Matias
-* [co0per](https://github.com/co0per) - Lisandro Cooper
-* [Iampietro](https://github.com/Iampietro/2017) - Matias Iampietro
-* [rodrimaqui](https://github.com/rodrimaqui) - Rodrigo Maquirriain
-* [CarlosAndresTambascia](https://github.com/CarlosAndresTambascia) - Carlos Andres Tambascia
-* [Favega89](https://github.com/Favega89) - Facundo Vega Puente
-* [grotatori](https://github.com/grotatori) - Gisela Rotatori
-* [matiramos](https://github.com/matiramos) - Matias Ramos
-* [JuanAbraciano](https://github.com/JuanAbraciano) - Juan Manuel Abraciano
-* [MartinLiut](https://github.com/MartinLiut) - Martin Liut
-* [julian00](https://github.com/julian00) - Alejandro Arizaga
-* [RodolfoSavino](https://github.com/RodolfoSavino) - Rodolfo Savino
-* [kingrag92](https://github.com/kingrag92) - Luciano Perello
-* [yasiotero](https://github.com/yasiotero) - Yasi Otero
-* [ZassoMartin](https://github.com/ZassoMartin) - Zasso Sergio Martin
+    *   Tienen que hacer el PR contra la rama TP5, no contra master.
+    *   Resuelven la historia de usuario asignada en Taiga. Crean las subtareas que consideren necesarias y trabajan sobre esas tareas. El tablero lo manejan completamente uds, este sprint no toco nada yo.
+    *   Tienen tiempo hasta las 18Hs del dia miércoles 4/10 para refactorizar su agenda utilizando las herramientas que aprendimos en clase (webpack, babel, vue-loader) y crear los componentes que crean necesarios.
+    *   No utilizar bibliotecas de manejo de DOM (jQuery o similares).
+    *   Tiene que funcionar todo. En su código actual (sobre todo en la parte de borrado) muchas veces falla. Si consideran que tienen que modificar las cosas de manera radical porque componentizar lo requiere, **háganlo**.
+
+#### Qué se evalúa?
+    *   Prolijidad del código: indentaciones, espacios innecesarios, utilización de convenciones, etc.
+    *   Nombres de variables y funciones significativas.
+    *   Utilización de las herramientas (Git, Github, Taiga).
+    *   ES6, Array#extras, String, Object, Math, Array, etc.
+    *   Markup HTML innecesario (no crear elementos de más ni elementos que no correspondan a lo que quieren representar).
+    *   Sentido común.

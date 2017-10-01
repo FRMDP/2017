@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mi Agenda Oline</title>
+  <link rel="stylesheet" type="text/css" href="bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="miestilo.css">
+</head>
+<body>
+  <div id="app">
+    <nav id="navegacion" class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Mi Agenda</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <h4 class="navbar-toggler-icon"></h4>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" @click="cambiarVista('ingresar')">Ingresar<h4 class="sr-only">(current)</h4></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" @click="cambiarVista('buscar')">Buscar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" @click="cambiarVista('exportar')">Exportar / Importar</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <transition name="bounce">
+      <div id="alerta" class="alert" :class="tipomensaje" v-if="boleanmensaje">
+        <strong>{{fuerte}}</strong>{{mensaje}}
+      </div>
+    </transition>
+
+      <transition name="fade" mode="out-in">
+        <div v-show="vista == 'exportar'" class="vista vexportar row">
+          <div v-if="!personas.length" class="col-md-12">
+            <h4>Exportar:</h4>
+            <h5>No se encontraron datos en la agenda para exportar</h5>
+            <hr>
+          </div>
+
+          <div v-else class="col">
+            <div class="form-group txtcontenedor">
+              <h4>Exportar:</h4>
+              <label>Copie el contenido del cuadro y guardelo en algun archivo de texto</label>
+              <button class="btn btn-primary form-group" @click="exportar">Copiar al portapapeles</button>
+              <textarea class="form-control" rows="21" id="txtexporat" readonly>{{contenidoAexportar}}</textarea>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group txtcontenedor">
+              <h4>Importar:</h4>
+              <h6><input type="radio" value="reemplazar" name="tipoImportacion" v-model="importacion"> Reemplazar contenido existente</h6>
+              <h6><input type="radio" value="agregar" name="tipoImportacion" v-model="importacion"> Agregar al contenido actual</h6>
+              <label for="comment">Pegue aqui el texto a importar:</label>
+              <button class="btn btn-primary form-group" @click="importar">Importar!</button>
+              <textarea class="form-control" rows="21" id="textimport"></textarea>
+            </div>
+          </div>
+        </div>
+      </transition>
+
+      <transition name="fade" mode="out-in">
+        <div v-show="vista == 'buscar'" class="vista vbuscar">
+
+          <input class="form-control form-group" type="text" placeholder="Filtrar" v-model="filtro">
+
+
+          <h3 v-if="!personas.length">No hay personas</h3>
+          <div v-else class="row">
+            <h3 v-if="!personasFiltradas.length">Ningun contacto coincide con la busqueda</h3>
+            <div  v-for="(persona,indice) in personasFiltradas" class="col-md-4 form-group">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">{{ persona.nombre }}</h4>
+                  <hr>
+                  <p class="card-text">Telefono: {{persona.telefono}}</p>
+                  <p class="card-text">Mail: {{persona.mail}}</p>
+                  <p class="card-text">Sexo: {{persona.sexo}}</p>
+                  <a href="#" class="btn btn-primary" @click="eliminarPersona(indice)"> Eliminar</a>
+                  <a href="#" class="btn btn-primary" @click="editarPersona(indice)"> Editar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+
+      <transition name="fade" mode="out-in">
+        <div v-show="vista == 'ingresar'" class="vista">
+          <div class="vingresar row">
+            <div class="col-md-12">
+              <h3>Bienvenido a Mi Agenda online</h3>
+              <p>En esta seccion podra agregar contactos a su agenda personal</p>
+            </div>
+
+            <div class="col-md-12 form-group">
+              <h5>Nombre</h5>
+              <input class="form-control" v-model="persona.nombre" type="text" placeholder="Ingrese nombre">
+              <transition name="slide-fade">
+                <label v-show="!nombreOK&&persona.nombre!=''" class="aviso">El nombre debe tener 3 caracteres como minimo y al menos una letra</label>
+              </transition>
+
+            </div>
+
+            <div class="col-md-12 form-group">
+              <h5>Sexo</h5>
+              <span class="radio-inline"><input value="Masculino" id="radio1" name="radio" type="radio" v-model="persona.sexo"> Varon</span>
+              <span class="radio-inline"><input value="Femenino" id="radio2" name="radio" type="radio" v-model="persona.sexo"> Mujer</span>
+              <span class="radio-inline"><input value="Otro" id="radio3" name="radio" type="radio" v-model="persona.sexo"> Otro</span>
+            </div>
+
+            <div class="col-md-12 form-group">
+              <h5>Telefono</h5>
+              <input class="form-control" v-model="persona.telefono" type="number" placeholder="Ingrese Telefono">
+              <transition name="slide-fade">
+                <label v-show="!telefonoOk&&persona.telefono!=''" class="aviso">El telefono es requerido</label>
+              </transition>
+
+            </div>
+
+            <div class="col-md-12 form-group">
+              <h5>Mail</h5>
+              <input class="form-control" v-model="persona.mail" type="text" placeholder="Ingrese el mail">
+              <transition name="slide-fade">
+                <label v-show="!mailOk&&persona.mail!=''" class="aviso">Ingrese un mail valido</label>
+              </transition>
+
+            </div>
+            <div class="col">
+              <button class="btn btn-primary" :disabled="!formOk" type="submit" @click="agregarPersona">Agregar</button>
+            </div>
+
+          </div>
+        </div>
+      </transition>
+
+      <transition name="fade" mode="out-in">
+        <div v-show="vista == 'editar'" class="vista">
+          <div class="vingresar row">
+            <div class="col-md-12">
+              <h3>Bienvenido a Mi Agenda online</h3>
+              <p>En esta seccion podra editar el contacto personal</p>
+            </div>
+            <input type='hidden' v-model='indice'/>
+            <div class="col-md-12 form-group">
+              <h5>Nombre</h5>
+              <input class="form-control" v-model="persona.nombre" type="text" placeholder="Ingrese nombre">
+              <transition name="slide-fade">
+                <label v-show="!nombreOK&&persona.nombre!=''" class="aviso">El nombre debe tener 3 caracteres como minimo y al menos una letra</label>
+              </transition>
+
+            </div>
+
+            <div class="col-md-12 form-group">
+              <h5>Sexo</h5>
+              <span class="radio-inline"><input value="Masculino" id="radio1" name="radio" type="radio" v-model="persona.sexo"> Varon</span>
+              <span class="radio-inline"><input value="Femenino" id="radio2" name="radio" type="radio" v-model="persona.sexo"> Mujer</span>
+              <span class="radio-inline"><input value="Otro" id="radio3" name="radio" type="radio" v-model="persona.sexo"> Otro</span>
+            </div>
+
+            <div class="col-md-12 form-group">
+              <h5>Telefono</h5>
+              <input class="form-control" v-model="persona.telefono" type="number" placeholder="Ingrese Telefono">
+              <transition name="slide-fade">
+                <label v-show="!telefonoOk&&persona.telefono!=''" class="aviso">El telefono es requerido</label>
+              </transition>
+
+            </div>
+
+            <div class="col-md-12 form-group">
+              <h5>Mail</h5>
+              <input class="form-control" v-model="persona.mail" type="text" placeholder="Ingrese el mail">
+              <transition name="slide-fade">
+                <label v-show="!mailOk&&persona.mail!=''" class="aviso">Ingrese un mail valido</label>
+              </transition>
+
+            </div>
+            <div class="col">
+              <button class="btn btn-primary" :disabled="!formOk" type="submit" @click="guardarEdicion">Editar</button>
+            </div>
+
+          </div>
+        </div>
+      </transition>
+
+
+  </div>
+  <script src="vue.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

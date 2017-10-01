@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="htmlBackground">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="css/bulma.css">
+  <link rel="stylesheet" href="css/my.css">
+  <title>AGENDA ZASSO</title>
+</head>
+
+<body>
+  <div class="container" id=app>
+    <div class="navbar">
+      <a class="nav-item">
+        <figure class="image is-32x32 figureEstilo">
+          <img src="css/images.jpg" @click="cambiarVista('ingresar')">
+        </figure>
+      </a>
+      <a class="navbar-item is-tab" href="#" @click="cambiarVista('ingresar')">Igresar nuevo contacto</a>
+      <a class="navbar-item is-tab" href="#" @click="cambiarVista('buscar')">Buscar contactos</a>
+      <a class="navbar-item is-tab" href="#" @click="cambiarVista('papelera')">Papelera de reciclaje</a>
+    </div>
+    <div v-show="vista == 'ingresar'">
+      <form class='formEstilos'>
+        <div class="field">
+          <label class="label">Nombre</label>
+          <div class="control">
+            <input class="input" v-model="persona.nombre" type="text" placeholder="Ingrese nombre">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Apellido</label>
+          <div class="control">
+            <input class="input" v-model="persona.apellido" type="text" placeholder="Ingrese apellido">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Edad</label>
+          <div class="control">
+            <input class="input" type="number" placeholder="Ingrese edad" v-model="persona.edad">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Telefono</label>
+          <div class="control">
+            <input class="input" type="number" placeholder="Ingrese telefono" v-model="persona.telefono">
+          </div>
+        </div>
+        <label class="label">Seleccione Sexo</label>
+        <label class="checkbox">
+          <input value="Varón" name="radio" type="radio" v-model="persona.sexo">
+          Varón
+        </label>
+        <label class="checkbox">
+          <input value="Mujer"
+                 name="radio" type="radio" v-model="persona.sexo">
+          Mujer
+        </label>
+        <button class="button boton-agregar" :disabled="!formOk" type="submit" @click.prevent="agregarPersona">Ingresar</button>
+        <div v-show="mensaje" class="modal">
+          <div class="modal-content">
+            <button class="delete" @click="cerrarMensaje"></button>
+            <p>Contacto Agendado</p>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="container margenesEspecificos" v-show="vista == 'buscar'">
+      <form>
+        <input class="input" type="text" placeholder="Busqueda avanzada" v-model="filtro">
+      </form>
+      <div width="auto" class="grid-wrapper margenesEspecificos">
+        <h3 v-if="!personas.length">No hay personas</h3>
+        <h3 v-if="!personasFiltradas.length">No se encontraron resultados con los parametros ingresados</h3>
+        <div class="grid-item margenesEspecificos" v-else v-for="(persona, index) in personasFiltradas">
+          <div class="card card-contactos">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-5">Nombre: {{persona.nombre}}</p>
+                  <p class="title is-5">Apellido: {{persona.apellido}}</p>
+                  <div class="content">
+                    <p class="subtitle is-5">Edad: {{ persona.edad }}</p>
+                    <p class="subtitle is-5">Sexo: {{persona.sexo}}</p>
+                    <p class="subtitle is-5">Telefono: {{persona.telefono}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="button boton-eliminar" @click="eliminarPersona(index)">Eliminar</button>
+            <button class="button boton-editar-restaurar" @click="parametrosEditar('editar',index)">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container margenesEspecificos" v-show="vista == 'papelera'">
+      <form>
+        <input class="input" type="text" placeholder="Busqueda avanzada" v-model="filtro">
+      </form>
+      <div width="auto" class="grid-wrapper margenesEspecificos">
+        <h3 v-if="!papelera.length">No hay personas</h3>
+        <h3 v-if="!papeleraFiltrados.length">No se encontraron resultados con los parametros ingresados</h3>
+        <div class="grid-item" v-else v-for="(persona, index) in papeleraFiltrados">
+          <div class="card card-contactos">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-5">Nombre: {{persona.nombre}}</p>
+                  <p class="title is-5">Apellido: {{persona.apellido}}</p>
+                  <div class="content">
+                    <p class="subtitle is-5">Edad: {{ persona.edad }}</p>
+                    <p class="subtitle is-5">Sexo: {{persona.sexo}}</p>
+                    <p class="subtitle is-5">Telefono: {{persona.telefono}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="button boton-eliminar" @click="eliminarPersonaDefinitivamente(index)">Eliminar definitivamente</button>
+            <button class="button boton-editar-restaurar" @click="restaurar(index)">Restaurar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-show="vista == 'editar'">
+      <form class='formEstilos'>
+        <div class="field">
+          <label class="label">Nombre</label>
+          <div class="control">
+            <input class="input" v-model="persona.nombre" type="text" placeholder="Ingrese nombre">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Apellido</label>
+          <div class="control">
+            <input class="input" v-model="persona.apellido" type="text" placeholder="Ingrese apellido">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Edad</label>
+          <div class="control">
+            <input class="input" type="number" placeholder="Ingrese edad" v-model="persona.edad">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Telefono</label>
+          <div class="control">
+            <input class="input" type="number" placeholder="Ingrese telefono" v-model="persona.telefono">
+          </div>
+        </div>
+        <label class="label">Seleccione Sexo</label>
+        <label class="checkbox">
+          <input value="Varón" name="radio" type="radio" v-model="persona.sexo">
+          Varón
+        </label>
+        <label class="checkbox">
+          <input value="Mujer" name="radio" type="radio" v-model="persona.sexo">
+          Mujer
+        </label>
+        <button class="button boton-agregar" :disabled="!formOk" type="submit" @click.prevent="editarPersona(indice)">Guardar cambios</button>
+        <div v-show="mensaje" class="modal">
+          <div class="modal-content">
+            <button class="delete" @click="cerrarEdicion()"></button>
+            <p>Contacto Modificado</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="js/vue.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

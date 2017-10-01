@@ -1,0 +1,223 @@
+<html>
+<head>
+    <title>zapph The Agenda</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/materialize.css">
+    <link rel="stylesheet" href="css/rotatori.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+</head>
+<body>
+    <div id="app">
+        <!-- Barra menu FIJA -->
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a class="brand-logo right"><img src="img/logo.png"></a>
+                    <ul id="nav-mobile" class="left hide-on-med-and-down over">
+                        <li>
+                            <button type="button" class="close marginLeft" data-dismiss="alert" @click="cambiarMenu">
+                            <i class="material-icons left">menu</i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <transition name="fade">
+                    <div id="menu" v-show="estadoMenu" class="menu">
+                        <ul>
+                            <li><a href="#" @click="cambiarVista('agregar')">Agregar Persona</a></li><br>
+                            <li><a href="#" @click="cambiarVista('buscar')">Buscar Persona</a></li>
+                            <li><a href="#" @click="cambiarVista('favoritos')">Ver Favoritos</a></li>
+                        </ul>
+                    </div>
+                </transition>
+            </nav>
+        </div>
+        <!-- Agregar Persona -->
+        <div class="row" v-show="vista == 'agregar'">
+            <transition name="slide-fade"><!-- Alerta success -->
+                <div class="alert alert-success marginTop" role="alert" v-show="alertaAgregado">
+                    <button type="button" class="close" data-dismiss="alert" @click="cambiarAlerta('agregado')">
+                    <i class="material-icons left">remove</i>
+                    </button>
+                    FELICITACIONES!!!! Agregaste una nueva persona!! Hay {{ cantPersonas }} persona/as guardada/as
+                </div>
+            </transition>
+            <h3 class="titulo">Nueva Persona</h3>
+            <!-- Formulario con datos -->
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">person</i>
+                        <input placeholder="Nombre" id="nombre" type="text" class="validate" v-model="persona.nombre">
+                    </div>
+                    <div class="input-field col s6">
+                            <i class="material-icons prefix">person</i>
+                        <input placeholder="Apellido" id="apellido" type="text" class="validate" v-model="persona.apellido">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">phone</i>
+                        <input type="number" class="validate" placeholder="Telefono" v-model="persona.telefono">
+                    </div>
+                    <div class="input-field col s6">
+                            <i class="material-icons prefix">location_city</i>
+                            <input type="text" class="validate" placeholder="Direccion" v-model="persona.direccion">
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">email</i>
+                        <input type="email" class="validate" placeholder="E-Mail" v-model="persona.mail">
+                    </div>
+                </div>
+                <div class="row">
+                    <h4 class="subtitulo">Sexo</h4>
+                    <p><input class="with-gap" name="group1" type="radio" id="test3" value="Masculino" v-model="persona.sexo"/>
+                    <label for="test3">Masculino</label></p>
+                    <p><input class="with-gap" name="group1" type="radio" id="test4" value="Femenino" v-model="persona.sexo"/>
+                    <label for="test4">Femenino</label></p>
+                </div>
+                <button :disabled="!formOK" class="btn waves-effect waves-light" type="submit" name="action" @click.prevent="nuevaPersona">Guardar
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+        </div>
+        <!-- Termina Agregar Persona -->
+        <!-- Buscar Persona -->
+        <div id="buscarPersona" v-show="vista == 'buscar'">
+            <h3 class="titulo">Buscar Persona</h3>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="buscar" type="text" class="validate" placeholder="Buscar" v-model="filtro">
+                </div>
+            </div>
+            <transition name="slide-fade"> <!-- Alert info -->
+                <div class="alert alert-info marginTop" role="alert" v-show="cantPersonas == 0">
+                    SORRY!! No hay personas guardadas!
+                </div>
+            </transition>
+            <!-- CARD -->
+            
+            <div class="row">
+                <transition-group name="fade">
+                <div class="col s6" v-for="p in personasFiltradas" :key="p.indice">
+                    <div  class="card blue-grey darken-1 cuadroSombra">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{ p.apellido }}, {{ p.nombre }}</span>
+                        <p>Telefono: {{ p.telefono }}</p>
+                        <p>Direccion: {{ p.direccion }}</p>
+                        <p>Email: {{ p.mail }}</p>
+                        <p>Sexo: {{ p.sexo }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a class="waves-effect waves-light btn" @click="borrarPersona(p)"><i class="material-icons left">remove</i>Borrar</a>
+                        <a class="waves-effect waves-light btn"  @click="pasarModificar(p)"><i class="material-icons left">edit</i>Modificar</a>
+                        <a v-if="p.favorito==false" class="waves-effect waves-light btn"  @click="cambiarFavorito(p)">Añadir a mi <i class="material-icons right">favorite</i></a>
+                        <a v-else class="waves-effect waves-light btn"  @click="cambiarFavorito(p)">Quitar de mi <i class="material-icons right">favorite_border</i></a>
+                    </div>
+                    </div>
+                </div>
+            </transition-group>
+            </div>
+            
+        </div>
+        <!-- Termina Buscar Persona -->
+        <!-- Modificar Persona -->
+        <div v-show="vista == 'modificar'">
+            <transition name="slide-fade">
+                <div class="alert alert-success marginTop" role="alert" v-show="alertaModificado">
+                    <button type="button" class="close" data-dismiss="alert" @click="cambiarAlerta('modificado')">
+                        <i class="material-icons left">remove</i>
+                    </button>
+                    FELICITACIONES!!!! Modificaste con exito a la persona
+                </div>
+            </transition>
+            <h3 class="titulo">Modificar Persona</h3>
+            <h4 class="subindice">*Tilde campos a editar</h4>
+            <div class="row" >
+                <form class="marginTop col s12">
+                    <div class="row">
+                        <div class="col s6">
+                            <input type="checkbox" id='chkbNombre' value="Nombre" v-model="checkedBox"/>
+                            <label for='chkbNombre'>Nombre</label>
+                            <input placeholder="Nombre" id="first_name" type="text" :disabled="checkedBox.indexOf('Nombre')<0" class="validate" v-model="persona.nombre">
+                        </div>
+                        <div class="col s6">
+                            <input type="checkbox" id='chkbApellido' value="Apellido" v-model="checkedBox"/>
+                            <label for='chkbApellido'>Apellido</label>
+                            <input id="last_name" type="text" class="validate" placeholder="Apellido" :disabled="checkedBox.indexOf('Apellido')<0" v-model="persona.apellido">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <input type="checkbox" id='chkbTelefono' value="Telefono" v-model="checkedBox"/>
+                            <label for='chkbTelefono'>Telefono</label>
+                            <input id="telefono" type="number" class="validate" placeholder="Telefono" :disabled="checkedBox.indexOf('Telefono')<0" v-model="persona.telefono">
+                        </div>  
+                        <div class="col s6">
+                            <input type="checkbox" id='chkbDireccion' v-model="checkedBox" value="Direccion"/>
+                            <label for='chkbDireccion'>Direccion</label>
+                            <input id="direccion" type="text" class="validate" placeholder="Direccion" :disabled="checkedBox.indexOf('Direccion')<0" v-model="persona.direccion">
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <input type="checkbox" id='chkbEmail' v-model="checkedBox" value="Email"/>
+                            <label for='chkbEmail'>Email</label>
+                            <input id="email" type="email" class="validate" placeholder="E-Mail" :disabled="checkedBox.indexOf('Email')<0" v-model="persona.mail">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h4 class="subtitulo">Sexo</h4>
+                        <p><input class="with-gap" name="group2" type="radio" :checked="persona.sexo == 'Masculino'" id="test5" value="Masculino" v-model="persona.sexo" />
+                        <label for="test5">Masculino</label></p>
+                        <p><input class="with-gap" name="group2" type="radio" :checked="persona.sexo == 'Femenino'" id="test6" value="Femenino" v-model="persona.sexo"/>
+                        <label for="test6">Femenino</label></p>
+                    </div>
+                    <button class="btn waves-effect waves-light" type="submit" name="action" @click.prevent="modificarPersona">Modificar
+                        <i class="material-icons right">edit</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- Termina Modificar Persona -->
+        <!-- Ver Favoritos -->
+        <div id="verFavoritos" v-show="vista == 'favoritos'">
+            <h3 class="titulo">Ver Favoritos</h3>
+            <div class="row">
+               <br>
+            </div>
+            <transition name="slide-fade"> <!-- Alert info -->
+                <div class="alert alert-info marginTop" role="alert" v-show="cantFavoritos == 0 ">
+                    SORRY!! No hay personas favoritas!
+                </div>
+            </transition>
+            <!-- CARD -->
+
+            <div class="row">
+                <transition-group name="fade">
+                <div class="col s6" v-for="p in personasFavoritas" :key="p.indice">
+                    <div  class="card blue-grey darken-1 cuadroSombra">
+                        <div class="card-content white-text">
+                            <span class="card-title">{{ p.apellido }}, {{ p.nombre }}</span>
+                            <p>Telefono: {{ p.telefono }}</p>
+                            <p>Direccion: {{ p.direccion }}</p>
+                            <p>Email: {{ p.mail }}</p>
+                            <p>Sexo: {{ p.sexo }}</p>
+                        </div>
+                        <div class="card-action">
+                           <a class="waves-effect waves-light btn"  @click="cambiarFavorito(p)"><i class="material-icons left">favorite_border</i>Quitar Favorito</a>
+                        </div>
+                    </div>
+                </div>
+            </transition-group>
+            </div>
+        </div>
+        <!-- Termina Ver Favoritos -->
+    </div><!-- div id=app -->
+    <!-- referencias js -->
+    <script src="js/vue.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

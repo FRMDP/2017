@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Agenda Electronica</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+          crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+</head>
+
+<body>
+<div class="container-fluid" id="app">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark" @click="cerrarAlert">
+                <a class="navbar-brand" href="#" @click="cambiarVista('ingresar')">Mi Agenda</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#" @click="cambiarVista('ingresar')">Ingresar</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#" @click="cambiarVista('buscar')">Buscar</a>
+                        </li>
+
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#" @click="cambiarVista('papelera')">Papelera de Reciclaje</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mx-auto" v-show="vista == 'ingresar'">
+            <div v-if="ingresadoAlert" @click.prevent="cerrarAlert" class="alert alert-success marginOfCards"
+                 role="alert">
+                Usuario ingresado con exito.
+            </div>
+            <h2>Ingreso de Contactos</h2>
+            <form>
+                <div class="form-group maginOfForms">
+
+                    <input v-model="persona.nombre" type="text" class="form-control"
+                           placeholder="Ingrese su Nombre">
+                </div>
+                <div class="form-group">
+
+                    <input v-model="persona.edad" type="number" class="form-control" placeholder="Ingrese su Edad"
+                    >
+                </div>
+                <div class="form-group">
+                    <input v-model="persona.cel" type="number" class="form-control"
+                           placeholder="Ingrese su Telefono">
+                </div>
+                <div class="form-group">
+                    <input v-model="persona.mail" type="email" class="form-control"
+                           placeholder="Ingrese su Mail">
+                </div>
+                <div class="centerText">
+                    <input value="Masculino" id="radio1" name="radio" type="radio"
+                           v-model="persona.sexo">
+                    <span class="custom-control-description">Varon</span>
+                    <input value="Femenino" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+                    <span class="custom-control-description">Mujer</span>
+                    <br>
+                    <button :disabled="!formOk" type="submit" @click.prevent="agregarPersona"
+                            class="btn btn-outline-success marginOfCards">Ingresar
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="mx-auto" v-show="vista == 'buscar'">
+            <div v-if="borradoAlert" @click.prevent="cerrarAlert" class="alert alert-danger marginOfCards" role="alert">
+                Se ha borrado el usuario. Tranquilo! Esta en su papelera.
+            </div>
+            <div v-if="editadoAlert" @click.prevent="cerrarAlert" class="alert alert-info marginOfCards" role="alert">
+                Se ha editado el usuario.
+            </div>
+            <h2>Busqueda de Contactos</h2>
+            <input type="text" placeholder="Buscar Contacto" v-model="filtro" class="form-control maginOfForms">
+            <h3 v-if="!personas.length">No hay personas</h3>
+            <div v-else v-for="(persona, index) in personasFiltradas">
+                <div class="card marginOfCards">
+                    <div class="card-body">
+                        <h4 class="card-title">Nombre: {{ persona.nombre }} <br> Edad: {{ persona.edad }} <br> Sexo: {{
+                            persona.sexo }} <br> Telefono: {{ persona.cel }} <br> Mail: {{ persona.mail }}</h4>
+                        <a href="#" class="btn btn-outline-danger" @click.prevent="borrarPersona(index)">Borrar</a>
+                        <a href="#" class="btn btn-outline-info" @click.prevent="modificarPersona(index)">Editar</a>
+                    </div>
+                </div>
+            </div>
+            <h3 v-if="!personasFiltradas.length">Su busqueda no produjo resultados</h3>
+        </div>
+        <div class="mx-auto" v-show="vista == 'papelera'">
+            <div v-if="borradoAlert" @click.prevent="cerrarAlert" class="alert alert-danger marginOfCards" role="alert">
+                Se ha borrado el usuario Definitivamente.
+            </div>
+            <div v-if="restauradoAlert" @click.prevent="cerrarAlert" class="alert alert-warning marginOfCards"
+                 role="alert">
+                Se ha restaurado el usuario correctamente.
+            </div>
+            <div v-if="editadoAlert" @click.prevent="cerrarAlert" class="alert alert-info marginOfCards" role="alert">
+                Se ha editado el usuario.
+            </div>
+            <h2>Mi papelera de reciclaje</h2>
+            <input type="text" placeholder="Buscar en la Papelera" v-model="filtro" class="form-control maginOfForms">
+            <h3 v-if="!trash.length">Su papelera esta vacia</h3>
+            <div v-else v-for="(persona, index) in trashFiltrados">
+                <div class="card marginOfCards">
+                    <div class="card-body">
+                        <h4 class="card-title">Nombre: {{ persona.nombre }} <br> Edad: {{ persona.edad }} <br> Sexo: {{
+                            persona.sexo }} <br> Telefono: {{ persona.cel }} <br> Mail: {{ persona.mail }}</h4>
+                        <a href="#" class="btn btn-outline-danger" @click.prevent="borrarPersonaDefinitivamente(index)">Borrar
+                            Definitivamente</a>
+                        <a href="#" class="btn btn-outline-warning" @click.prevent="restaurar(index)">Restaurar</a>
+                        <a href="#" class="btn btn-outline-info" @click.prevent="modificarPersona(index)">Editar</a>
+                    </div>
+                </div>
+            </div>
+            <h3 v-if="!personasFiltradas.length">Su busqueda no produjo resultados</h3>
+        </div>
+        <div class="mx-auto" v-show="vista == 'editar'">
+            <h2>Edite el Contacto</h2>
+            <form>
+                <div class="form-group maginOfForms">
+
+                    <input v-model="persona.nombre" type="text" class="form-control"
+                           placeholder="Ingrese su Nombre">
+                </div>
+                <div class="form-group">
+
+                    <input v-model="persona.edad" type="number" class="form-control" placeholder="Ingrese su Edad"
+                    >
+                </div>
+                <div class="form-group">
+                    <input v-model="persona.cel" type="number" class="form-control"
+                           placeholder="Ingrese su Telefono">
+                </div>
+                <div class="form-group">
+                    <input v-model="persona.mail" type="email" class="form-control"
+                           placeholder="Ingrese su Mail">
+                </div>
+                <div class="centerText">
+                    <input value="Masculino" id="radio1" name="radio" type="radio"
+                           v-model="persona.sexo">
+                    <span class="custom-control-description">Varon</span>
+                    <input value="Femenino" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+                    <span class="custom-control-description">Mujer</span>
+                    <br>
+                    <button :disabled="!formOk" type="submit" @click.prevent="confirmarEdicion"
+                            class="btn btn-outline-success marginOfCards">Aceptar modificaciones
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

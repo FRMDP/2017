@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TP - 03</title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/misEstilos.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+      <div id="app">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="nav-link navbar-brand" href="#" @click="cambiarVista('ingresar')">Ingresar</a>
+              <a class="nav-link navbar-brand" href="#" @click="cambiarVista('buscar')">Buscar</a>
+              <a class="nav-link navbar-brand" href="#" @click="cambiarVista('favoritos')">Favoritos</a>
+          </nav>
+          <div class="row justify-content-md-center">
+              <div class="col-md-10">
+                <div v-show="vista == 'ingresar'">
+                    <div id="alerta" class="alert alert-success alerta">
+                        <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>Holy guacamole!</strong> Persona agregada correctamente.
+                    </div>
+                  <form>
+                    <div class="form-row">
+                      <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                        <label>Nombre</label>
+                        <input v-model="persona.nombre" type="text" placeholder="Ingrese nombre" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                        <label>Apellido</label>
+                        <input v-model="persona.apellido" type="text" placeholder="Ingrese apellido" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                        <label>Edad</label>
+                        <input type="number" placeholder="Ingrese edad" v-model="persona.edad" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                        <label>Mail</label>
+                        <input type="email" placeholder="Ingrese e-mail" v-model="persona.mail" class="form-control">
+                      </div>
+                    </div>
+                      <label class="radio-inline">
+                        <input value="v" id="radio1" name="radio" type="radio" v-model="persona.sexo"
+                      checked>
+                      </label>
+                      <span class="custom-control-description">Varon</span>
+                      <label class="radio-inline">
+                        <input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+                      </label>
+                      <span class="custom-control-description">Mujer</span>
+                      <button :disabled="!formOk" class="btn btn-primary" type="submit" @click.prevent="agregarPersona"> Ingresar
+                      </button>
+                  </form>
+                </div>
+              </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col-md-10 col-sm-10 col-xs-10">
+              <div v-show="vista == 'buscar'">
+                  <div class="row justify-content-md-center" v-show="personas.length">
+                    <span id="spanNearFilter"><strong> Buscar contacto: </strong></span>
+                    <input type="text" placeholder="Ej: Pablo 'Homero' Fino" v-model="filtro">
+                  </div>
+                  <div id="deleteAlert" class="alert alert-danger alerta">
+                        <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>Contacto eliminado exitosamente.</strong>
+                  </div>
+                  <div id="favouriteAddAlert" class="alert alert-warning alerta">
+                        <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>Favorito agregado exitosamente.</strong>
+                  </div>
+                  <div id="favouriteExistente" class="alert alert-warning alerta">
+                        <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>El contacto ya se encuentra en Favoritos.</strong>
+                  </div>
+                  <div class="row justify-content-md-center">
+                    <div class="jumbotron" v-if="!personas.length">
+                      <h1 class="display-3">Hello there!</h1>
+                      <p class="lead">Haven't added any contact yet? Go on and attach your friends!</p>
+                      <hr class="my-4">
+                    </div>
+                    <div class="jumbotron marginTop" v-else-if="busquedaSinResultados">
+                      <h1 class="display-3">Hello there!</h1>
+                      <p class="lead">We are sorry, your search didn't have any match :(</p>
+                      <hr class="my-4">
+                    </div>
+                    <div v-else v-for="(persona, index) in personasFiltradas" class="card card-inverse" id="people">
+                          <div class="card-body">
+                              <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
+                              <h6 class="card-subtitle mb-2 text-muted">{{ persona.edad }} años</h6>
+                              <p class="card-text">Email: <strong>{{ persona.mail }}.</strong></p>
+                              <button data-toggle="tooltip" data-placement="top" data-html="true" type="button" class="btn btn-outline-warning floatRight" @click="agregarFavorito(persona)">Favorito
+                              </button>
+                              <button data-toggle="tooltip" data-placement="top" data-html="true" title="   Borrar persona" type="button" class="btn btn-outline-danger floatRight" @click.prevent="borrarPersona(persona)">Borrar
+                              </button>
+                              <button data-toggle="tooltip" data-placement="top" data-html="true" type="button" class="btn btn-outline-success floatRight" @click="editarPersona(persona)">editar
+                              </button>
+
+                          </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col-md-10 col-sm-10 col-xs-10">
+              <div v-show="vista == 'editar'">
+              <div id="editAlert" class="alert alert-info alerta">
+                  <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
+                  <strong>Contacto editado exitosamente.</strong>
+              </div>
+                  <form>
+                       <input type="hidden" v-model="index">
+                       <div class="form-row">
+                          <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                            <label>Nombre</label>
+                            <input v-model="persona.nombre" type="text" class="form-control">
+                          </div>
+                          <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                            <label>Apellido</label>
+                            <input v-model="persona.apellido" type="text" class="form-control">
+                          </div>
+                          <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                            <label>Edad</label>
+                            <input type="number" v-model="persona.edad" class="form-control">
+                          </div>
+                          <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                            <label>Mail</label>
+                            <input type="email" v-model="persona.mail" class="form-control">
+                          </div>
+                    </div>
+                    <input value="v" id="radio1" name="radio" type="radio" v-model="persona.sexo"
+                      checked>
+                      <span class="custom-control-description">Varon</span>
+                      <input value="m" id="radio2" name="radio" type="radio" v-model="persona.sexo">
+                      <span class="custom-control-description">Mujer</span>
+                      <button :disabled="!formOk" class="btn btn-primary" type="submit" @click.prevent="guardarCambios">Editar</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col-md-10 col-sm-10 col-xs-10">
+              <div v-show="vista == 'favoritos'">
+                  <div class="row justify-content-md-center" v-show="personas.length">
+                    <span id="spanNearFilter"><strong> Buscar favorito: </strong></span>
+                    <input type="text" placeholder="Ej: Cerveza Duff" v-model="filtro">
+                  </div>
+                  <div id="favouriteAlert" class="alert alert-danger alerta">
+                        <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>Favorito eliminado exitosamente.</strong>
+                  </div>
+                  <div class="row justify-content-md-center">
+                    <div class="jumbotron" v-if="!personas.length">
+                      <h1 class="display-3">Hello there!</h1>
+                      <p class="lead">Haven't added any favourite yet? Go on and attach your friends!</p>
+                      <hr class="my-4">
+                    </div>
+                    <div class="jumbotron marginTop" v-else-if="busquedaSinResultados">
+                      <h1 class="display-3">Hello there!</h1>
+                      <p class="lead">We are sorry, your search didn't have any match :(</p>
+                      <hr class="my-4">
+                    </div>
+                    <div v-else v-for="(persona, index) in favoritosFiltrados" class="card card-inverse" id="people">
+                          <div class="card-body">
+                              <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
+                              <h6 class="card-subtitle mb-2 text-muted">{{ persona.edad }} años</h6>
+                              <p class="card-text">Email: <strong>{{ persona.mail }}.</strong></p>
+                              <button data-toggle="tooltip" data-placement="top" data-html="true" title="   Borrar persona" type="button" class="btn btn-outline-danger floatRight" @click.prevent="quitarFavorito(persona)">Quitar de Favoritos
+                              </button>
+                          </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <script src="js/vue.js"></script>
+  <script src="js/app.js"> </script>
+</body>
+</html>

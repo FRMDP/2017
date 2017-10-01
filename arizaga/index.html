@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Agenda</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+<body>
+	
+
+	<div id="app">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		 	<a class="navbar-brand" href="#" @click="cambiarVista('agregar')">Agregar</a>
+		 	<a class="navbar-brand" href="#" @click="cambiarVista('buscar')">Buscar</a>
+			<a class="navbar-brand" href="#" @click="cambiarVista('listar')">Listar</a>
+			<input class="form-control mr-sm-2" type="text" placeholder="Buscar" v-model="filtro" v-show="vista == 'buscar'" aria-label="Search" style="width: 200px;">
+		  
+		</nav>
+<!--formulario agregar-->
+		<div  class="container" v-show="vista == 'agregar'" style="margin-top:30px;">
+			<div class="alert alert-success alert-dismissible fade show" role="alert" v-show="mensaje">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"  @click.prevent="cerrarMensaje">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  <strong>Se agrego correctamente</strong>
+			</div>
+
+			<form>
+				<div class="form-group">
+					<label style="margin: 5px" for="nombre">Nombre</label>
+					<input v-model="persona.nombre" type="text" class="form-control" id="nombre">
+				</div>
+
+				<div class="form-group">
+					<label style="margin: 5px" for="telefono">Telefono</label>
+					<input v-model="persona.telefono" type="number" class="form-control" id="telefono" >
+				</div>
+
+				<div class="form-group">
+					<label style="margin: 5px" for="direccion">Direccion</label>
+					<input v-model="persona.direccion" type="text" class="form-control" id="direccion">
+				</div>
+				<div class="form-group">
+					<label style="margin: 5px" for="email">E-mail</label>
+					<input v-model="persona.email" type="email" class="form-control" id="email">
+				</div>
+
+				<div class="form-group">
+					<label style="margin:5px">Sexo</label>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input v-model="persona.sexo" class="form-check-input" type="radio" name="exampleRadios" id="hombre" value="H" unchecked>
+					    Hombre
+					  </label>
+					  <label class="form-check-label">
+					    <input v-model="persona.sexo" class="form-check-input" type="radio" name="exampleRadios" id="mujer" value="M" unchecked>
+					    Mujer
+					  </label>
+					</div>
+				</div>
+			</form>
+			<button :disabled="!formOk" style="margin: 10px" type="submit" class="btn btn-primary"  @click.prevent="agregarPersona">Guardar</button>			
+		</div>
+<!--formulario buscar-->
+		<div class="container" v-show="vista=='buscar'" style="margin-top:30px;">
+			<h3 v-if="personas.length == 0">No hay personas</h3>
+			<h3 v-else-if="personasFiltradas.length == 0">No hay contactos que coincidan con la condición de búsqueda</h3>
+			<div v-else v-for="(persona, index) in personasFiltradas">
+				<div class="card"  style="width: 25rem;  padding: 10px 20px 10px 20px; margin-bottom: 15px; background-color: #F0F8FF">
+					<h4 class="card-title">{{ persona.nombre }}</h4>
+					<p class="card-text">Telefono: {{persona.telefono}}</p>
+					<p class="card-text">Direccion: {{persona.direccion}}</p>
+					<p class="card-text">E-mail: {{persona.email}}</p>
+					<p class="card-text">Sexo: {{persona.sexo}}</p>
+					<button style="margin: 5px" type="submit" class="btn btn-danger"  @click.prevent="borrarPersona(index)">Eliminar</button>
+				</div>
+			</div>
+		</div>
+<!--formulario listar-->	
+		<div v-show="vista=='listar'" class="container" style="margin-top: 10px; margin-top:30px;">
+			<h3 v-if="personas.length == 0">No hay personas</h3>
+			<div v-else v-for="(persona, index) in personas">
+				<div class="card" style="width: 25rem; padding: 10px 20px 10px 20px; margin-bottom: 15px; background-color: #F0F8FF">
+					<h4 class="card-title">{{ persona.nombre }}</h4>
+					<p class="card-text">Telefono: {{persona.telefono}}</p>
+					<p class="card-text">Direccion: {{persona.direccion}}</p>
+					<p class="card-text">E-mail: {{persona.email}}</p>
+					<p class="card-text">Sexo: {{persona.sexo}}</p>
+					<button style="margin: 5px" type="submit" class="btn btn-danger"  @click.prevent="borrarPersona(index)">Eliminar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/scripts.js"></script>	
+</body>
+</html>

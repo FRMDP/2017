@@ -33,17 +33,17 @@ new Vue({
                 this.contact.telephoneNumber;
         },
         filteredFavorites() {
-            return this.contacts.filter(p => p.fave == true);
+            return this.contacts.filter(p => p.fave === true);
         }
     },
     methods: {
         addContact() {
             this.contacts.push(Object.assign({}, this.contact));
-            this.cleanPerson();
+            this.cleanContactFields();
             this.saveContactsToLocalStorage(this.contacts);
             this.displayAlert('The contact has been created');
         },
-        cleanPerson() {
+        cleanContactFields() {
             this.contact.firstName = '';
             this.contact.lastName = '';
             this.contact.address = '';
@@ -102,7 +102,7 @@ new Vue({
               this.displayAlert("Contact added to Favorites!");
             } else {
               this.displayAlert("Contact removed from Favorites!");
-            };
+            }
             this.saveContactsToLocalStorage(this.contacts);
         },
         deleteContactFromFavorites(contact){
@@ -112,7 +112,7 @@ new Vue({
               index = i;
             }
           }
-          if (index!=null) {
+          if (index!==null) {
             this.trashContact(index);
           }
         }

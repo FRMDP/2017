@@ -4,7 +4,8 @@
 
 .notification-alert {
     position: absolute;
-    width: 100%;
+    width: 80%;
+    left: 10%;
     top: 190px;
 }
 

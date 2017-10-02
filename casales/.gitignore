@@ -1,0 +1,7 @@
+#Intellij files
+.idea/
+*.iml
+#node
+node_modules/
+#This file should be auto-generated
+public/js/bundle.js

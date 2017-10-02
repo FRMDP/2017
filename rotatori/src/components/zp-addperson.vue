@@ -1,6 +1,6 @@
 <template>
-    <div class="row" v-show="optionView == 'addPerson'">
-        <zp-alert v-show="alert == true" :messageAlert='messageAlert' :classAlert='classAlert'></zp-alert>
+    <div class="row" >
+        <zp-alert :alert="alert" @changeAlert="changeAlert" :messageAlert='messageAlert' :classAlert='classAlert'></zp-alert>
         <h3 class="titulo">Nueva Persona</h3>
         <form class="col s12">
             <div class="row">
@@ -48,7 +48,7 @@
     
     export default {
     	name: 'zpAddperson',
-        props: ['optionView'],
+        props: [],
          components: {
             zpAlert
         },
@@ -95,11 +95,7 @@
             changeAlert(){
                 this.alert = !this.alert;
             }
-        }
+        },
     }
 
 </script>
-
-<style>
-
-</style>

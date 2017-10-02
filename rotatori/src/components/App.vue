@@ -2,10 +2,10 @@
     <div class='app'>
         <zp-menu @toggleMenu="toggleMenu" ></zp-menu>
         <zp-sidemenu :isMenuOpen="isMenuOpen" @changeView="changeView"></zp-sidemenu>
-        <zp-addperson :optionView="optionView" @addPerson="addPerson"></zp-addperson>
-        <zp-searchperson :optionView="optionView" :persons="persons" @deletePerson="deletePerson" @changeFav="changeFav" @changeView="changeView" @loadPersonM="loadPersonM"></zp-searchperson>
-        <zp-favorite :optionView="optionView" :persons="persons" @deletePerson="deletePerson" @changeFav="changeFav" @changeView="changeView"></zp-favorite>
-        <zp-modperson :optionView="optionView" :person="person" @modPerson="modPerson"></zp-modperson>
+        <zp-addperson v-if="optionView == 'addPerson'" @addPerson="addPerson"></zp-addperson>
+        <zp-searchperson v-if="optionView=='searchPersons'" :persons="persons" @deletePerson="deletePerson" @changeFav="changeFav" @changeView="changeView" @loadPersonM="loadPersonM"></zp-searchperson>
+        <zp-favorite v-if="optionView=='favorite'" :persons="persons" @deletePerson="deletePerson" @changeFav="changeFav" @changeView="changeView"></zp-favorite>
+        <zp-modperson v-if="optionView=='modPerson'" :person="person" @modPerson="modPerson"></zp-modperson>
     </div>
 </template>
 

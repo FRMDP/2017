@@ -1,5 +1,5 @@
 <template>
-    <div v-show="optionView == 'modPerson'">
+    <div>
         <h3 class="titulo">Modificar Persona</h3>
         <h4 class="subindice">*Tilde campos a editar</h4>
         <zp-alert :messageAlert='messageAlert' :alert='alert' @changeAlert='changeAlert' :classAlert='classAlert'></zp-alert>
@@ -56,7 +56,7 @@
 
     export default {
     	name: 'zpModperson',
-        props: ['person','optionView'],
+        props: ['person'],
         components: {
             zpAlert
         },

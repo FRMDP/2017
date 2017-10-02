@@ -1,7 +1,7 @@
 <template>
     <transition name="slide-fade">
-        <div class="alert marginTop" role="alert" v-show="alert" :class="classAlert">
-            <button v-show="classAlert=='alert-info'" type="button" class="close" data-dismiss="alert" @click="changeAlert">
+        <div class="alert marginTop" role="alert" :class="classAlert" v-if="alert">
+            <button v-if="classAlert=='alert-success'" type="button" class="close" data-dismiss="alert" @click="changeAlert">
             <i class="material-icons left">remove</i>
             </button>
             {{ messageAlert }}

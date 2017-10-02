@@ -1,5 +1,5 @@
 <template>
-    <div id="buscarPersona" v-show="optionView == 'searchPersons'">
+    <div id="buscarPersona">
         <h3 class="titulo">Buscar Persona</h3>
         <div class="row">
             <div class="input-field col s12">
@@ -22,7 +22,7 @@
     
     export default {
         name: 'zpSearchperson',
-        props: ['optionView','persons'],
+        props: ['persons'],
         components: {
             zpAlert,
             zpCard

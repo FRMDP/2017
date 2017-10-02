@@ -162,6 +162,61 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_alert_vue__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_alert_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_alert_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_624129e4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_alert_vue__ = __webpack_require__(23);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(19)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_alert_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_624129e4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_alert_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\components\\zp-alert.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] zp-alert.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-624129e4", Component.options)
+  } else {
+    hotAPI.reload("data-v-624129e4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 /*
@@ -243,7 +298,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -262,7 +317,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(20)
+var listToStyles = __webpack_require__(21)
 
 /*
 type StyleObject = {
@@ -464,69 +519,14 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_alert_vue__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_alert_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_alert_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_624129e4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_alert_vue__ = __webpack_require__(25);
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(22)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_alert_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_624129e4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_alert_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "src\\components\\zp-alert.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] zp-alert.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-624129e4", Component.options)
-  } else {
-    hotAPI.reload("data-v-624129e4", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
 /* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_card_vue__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_card_vue__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_card_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_card_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f6664564_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_card_vue__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f6664564_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_card_vue__ = __webpack_require__(30);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -11017,7 +11017,7 @@ module.exports = g;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4c092288_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4c092288_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(40);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -11083,15 +11083,15 @@ var _zpAddperson = __webpack_require__(17);
 
 var _zpAddperson2 = _interopRequireDefault(_zpAddperson);
 
-var _zpSearchperson = __webpack_require__(27);
+var _zpSearchperson = __webpack_require__(25);
 
 var _zpSearchperson2 = _interopRequireDefault(_zpSearchperson);
 
-var _zpFavorite = __webpack_require__(34);
+var _zpFavorite = __webpack_require__(32);
 
 var _zpFavorite2 = _interopRequireDefault(_zpFavorite);
 
-var _zpModperson = __webpack_require__(39);
+var _zpModperson = __webpack_require__(37);
 
 var _zpModperson2 = _interopRequireDefault(_zpModperson);
 
@@ -11534,21 +11534,17 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_addperson_vue__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_addperson_vue__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_addperson_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_addperson_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_9f34c230_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_addperson_vue__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_9f34c230_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_addperson_vue__ = __webpack_require__(24);
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(18)
-}
 var normalizeComponent = __webpack_require__(0)
 /* script */
 
 /* template */
 
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -11587,79 +11583,6 @@ if (false) {(function () {
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(19);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("153bbbd0", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9f34c230\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./zp-addperson.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9f34c230\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./zp-addperson.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -11667,7 +11590,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _zpAlert = __webpack_require__(3);
+var _zpAlert = __webpack_require__(1);
 
 var _zpAlert2 = _interopRequireDefault(_zpAlert);
 
@@ -11675,7 +11598,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
     name: 'zpAddperson',
-    props: ['optionView'],
+    props: [],
     components: {
         zpAlert: _zpAlert2.default
     },
@@ -11770,17 +11693,17 @@ exports.default = {
 //
 
 /***/ }),
-/* 22 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(23);
+var content = __webpack_require__(20);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("3f8b0627", content, false);
+var update = __webpack_require__(3)("3f8b0627", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -11796,10 +11719,10 @@ if(false) {
 }
 
 /***/ }),
-/* 23 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -11810,7 +11733,40 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 24 */
+/* 21 */
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11846,7 +11802,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 25 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11855,42 +11811,34 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: "slide-fade" } }, [
-    _c(
-      "div",
-      {
-        directives: [
+    _vm.alert
+      ? _c(
+          "div",
           {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.alert,
-            expression: "alert"
-          }
-        ],
-        staticClass: "alert marginTop",
-        class: _vm.classAlert,
-        attrs: { role: "alert" }
-      },
-      [
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.classAlert == "alert-info",
-                expression: "classAlert=='alert-info'"
-              }
-            ],
-            staticClass: "close",
-            attrs: { type: "button", "data-dismiss": "alert" },
-            on: { click: _vm.changeAlert }
+            staticClass: "alert marginTop",
+            class: _vm.classAlert,
+            attrs: { role: "alert" }
           },
-          [_c("i", { staticClass: "material-icons left" }, [_vm._v("remove")])]
-        ),
-        _vm._v("\n        " + _vm._s(_vm.messageAlert) + "\n    ")
-      ]
-    )
+          [
+            _vm.classAlert == "alert-success"
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: { type: "button", "data-dismiss": "alert" },
+                    on: { click: _vm.changeAlert }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons left" }, [
+                      _vm._v("remove")
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v("\n        " + _vm._s(_vm.messageAlert) + "\n    ")
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -11905,7 +11853,7 @@ if (false) {
 }
 
 /***/ }),
-/* 26 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11915,28 +11863,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: _vm.optionView == "addPerson",
-          expression: "optionView == 'addPerson'"
-        }
-      ],
-      staticClass: "row"
-    },
+    { staticClass: "row" },
     [
       _c("zp-alert", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.alert == true,
-            expression: "alert == true"
-          }
-        ],
-        attrs: { messageAlert: _vm.messageAlert, classAlert: _vm.classAlert }
+        attrs: {
+          alert: _vm.alert,
+          messageAlert: _vm.messageAlert,
+          classAlert: _vm.classAlert
+        },
+        on: { changeAlert: _vm.changeAlert }
       }),
       _vm._v(" "),
       _c("h3", { staticClass: "titulo" }, [_vm._v("Nueva Persona")]),
@@ -12182,18 +12117,18 @@ if (false) {
 }
 
 /***/ }),
-/* 27 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_searchperson_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_searchperson_vue__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_searchperson_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_searchperson_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3c8cc0bb_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_searchperson_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3c8cc0bb_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_searchperson_vue__ = __webpack_require__(31);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(28)
+  __webpack_require__(26)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -12237,17 +12172,17 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 28 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(29);
+var content = __webpack_require__(27);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("fb9d798a", content, false);
+var update = __webpack_require__(3)("fb9d798a", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -12263,10 +12198,10 @@ if(false) {
 }
 
 /***/ }),
-/* 29 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -12277,7 +12212,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 30 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12287,7 +12222,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _zpAlert = __webpack_require__(3);
+var _zpAlert = __webpack_require__(1);
 
 var _zpAlert2 = _interopRequireDefault(_zpAlert);
 
@@ -12318,7 +12253,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
     name: 'zpSearchperson',
-    props: ['optionView', 'persons'],
+    props: ['persons'],
     components: {
         zpAlert: _zpAlert2.default,
         zpCard: _zpCard2.default
@@ -12359,7 +12294,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 31 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12418,7 +12353,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 32 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12526,7 +12461,7 @@ if (false) {
 }
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12536,17 +12471,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: _vm.optionView == "searchPersons",
-          expression: "optionView == 'searchPersons'"
-        }
-      ],
-      attrs: { id: "buscarPersona" }
-    },
+    { attrs: { id: "buscarPersona" } },
     [
       _c("h3", { staticClass: "titulo" }, [_vm._v("Buscar Persona")]),
       _vm._v(" "),
@@ -12631,18 +12556,18 @@ if (false) {
 }
 
 /***/ }),
-/* 34 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_favorite_vue__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_favorite_vue__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_favorite_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_favorite_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c9e47a4c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_favorite_vue__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c9e47a4c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_favorite_vue__ = __webpack_require__(36);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(35)
+  __webpack_require__(33)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -12686,17 +12611,17 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(36);
+var content = __webpack_require__(34);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("303a0674", content, false);
+var update = __webpack_require__(3)("303a0674", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -12712,10 +12637,10 @@ if(false) {
 }
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -12726,7 +12651,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12736,7 +12661,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _zpAlert = __webpack_require__(3);
+var _zpAlert = __webpack_require__(1);
 
 var _zpAlert2 = _interopRequireDefault(_zpAlert);
 
@@ -12765,7 +12690,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
     name: 'zpFavorite',
-    props: ['persons', 'optionView'],
+    props: ['persons'],
     components: {
         zpAlert: _zpAlert2.default,
         zpCard: _zpCard2.default
@@ -12804,7 +12729,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12814,17 +12739,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: _vm.optionView == "favorite",
-          expression: "optionView == 'favorite'"
-        }
-      ],
-      attrs: { id: "verFavoritos" }
-    },
+    { attrs: { id: "verFavoritos" } },
     [
       _c("h3", { staticClass: "titulo" }, [_vm._v("Ver Favoritos")]),
       _vm._v(" "),
@@ -12891,14 +12806,14 @@ if (false) {
 }
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_modperson_vue__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_modperson_vue__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_modperson_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_zp_modperson_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_332c0809_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_modperson_vue__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_332c0809_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_zp_modperson_vue__ = __webpack_require__(39);
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -12942,7 +12857,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12952,7 +12867,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _zpAlert = __webpack_require__(3);
+var _zpAlert = __webpack_require__(1);
 
 var _zpAlert2 = _interopRequireDefault(_zpAlert);
 
@@ -12960,7 +12875,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
     name: 'zpModperson',
-    props: ['person', 'optionView'],
+    props: ['person'],
     components: {
         zpAlert: _zpAlert2.default
     },
@@ -13048,7 +12963,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 41 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13058,16 +12973,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      directives: [
-        {
-          name: "show",
-          rawName: "v-show",
-          value: _vm.optionView == "modPerson",
-          expression: "optionView == 'modPerson'"
-        }
-      ]
-    },
     [
       _c("h3", { staticClass: "titulo" }, [_vm._v("Modificar Persona")]),
       _vm._v(" "),
@@ -13556,7 +13461,7 @@ if (false) {
 }
 
 /***/ }),
-/* 42 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13575,34 +13480,39 @@ var render = function() {
         on: { changeView: _vm.changeView }
       }),
       _vm._v(" "),
-      _c("zp-addperson", {
-        attrs: { optionView: _vm.optionView },
-        on: { addPerson: _vm.addPerson }
-      }),
+      _vm.optionView == "addPerson"
+        ? _c("zp-addperson", { on: { addPerson: _vm.addPerson } })
+        : _vm._e(),
       _vm._v(" "),
-      _c("zp-searchperson", {
-        attrs: { optionView: _vm.optionView, persons: _vm.persons },
-        on: {
-          deletePerson: _vm.deletePerson,
-          changeFav: _vm.changeFav,
-          changeView: _vm.changeView,
-          loadPersonM: _vm.loadPersonM
-        }
-      }),
+      _vm.optionView == "searchPersons"
+        ? _c("zp-searchperson", {
+            attrs: { persons: _vm.persons },
+            on: {
+              deletePerson: _vm.deletePerson,
+              changeFav: _vm.changeFav,
+              changeView: _vm.changeView,
+              loadPersonM: _vm.loadPersonM
+            }
+          })
+        : _vm._e(),
       _vm._v(" "),
-      _c("zp-favorite", {
-        attrs: { optionView: _vm.optionView, persons: _vm.persons },
-        on: {
-          deletePerson: _vm.deletePerson,
-          changeFav: _vm.changeFav,
-          changeView: _vm.changeView
-        }
-      }),
+      _vm.optionView == "favorite"
+        ? _c("zp-favorite", {
+            attrs: { persons: _vm.persons },
+            on: {
+              deletePerson: _vm.deletePerson,
+              changeFav: _vm.changeFav,
+              changeView: _vm.changeView
+            }
+          })
+        : _vm._e(),
       _vm._v(" "),
-      _c("zp-modperson", {
-        attrs: { optionView: _vm.optionView, person: _vm.person },
-        on: { modPerson: _vm.modPerson }
-      })
+      _vm.optionView == "modPerson"
+        ? _c("zp-modperson", {
+            attrs: { person: _vm.person },
+            on: { modPerson: _vm.modPerson }
+          })
+        : _vm._e()
     ],
     1
   )

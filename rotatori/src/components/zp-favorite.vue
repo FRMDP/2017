@@ -1,5 +1,5 @@
 <template>
-    <div id="verFavoritos" v-show="optionView == 'favorite'">
+    <div id="verFavoritos">
         <h3 class="titulo">Ver Favoritos</h3>
         <div class="row">
             <br>
@@ -20,7 +20,7 @@
     
      export default {
     	name: 'zpFavorite',
-        props: ['persons','optionView'],
+        props: ['persons'],
         components: {
             zpAlert,
             zpCard

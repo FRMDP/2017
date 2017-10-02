@@ -2,7 +2,7 @@
 	<div class="app">
 		<ic-hero @changeView="changeView"></ic-hero>
 		<ic-alerts :showAlert="showAlert" :alertMessage="alertMessage" ></ic-alerts>
-		<contacts-main :view="view"></contacts-main>
+		<contacts-main :view="view" @displayAlert="displayAlert"></contacts-main>
 		<ic-footer></ic-footer>
 	</div>
 </template>

@@ -27,13 +27,13 @@
 								<p class="card-header-title">
 									{{ contact.firstName }} {{ contact.lastName }}
 								</p>
-								<a @click="addOrRemoveContactToFavorites(contact)" v-if="!contact.fave"
+								<a @click="fave(contact)" v-if="!contact.fave"
 								   class="card-header-icon" aria-label="more options">
 									<span class="icon">
 										<i class="fa fa-star-o" aria-hidden="true"></i>
 									</span>
 								</a>
-								<a @click="addOrRemoveContactToFavorites(contact)" v-else class="card-header-icon"
+								<a @click="fave(contact)" v-else class="card-header-icon"
 								   aria-label="more options">
 									<span class="icon">
 										<i class="fa fa-star" aria-hidden="true"></i>
@@ -75,21 +75,12 @@
             }
         },
 	    methods: {
-            addOrRemoveContactToFavorites(contact) {
+            fave(contact) {
                 contact.fave = !contact.fave;
-                if (contact.fave) {
-                    this.displayAlert('Contact added to Favorites.');
-                } else {
-                    this.displayAlert('Contact removed from Favorites.');
-                }
-                this.saveContactsToLocalStorage(this.contacts);
+                this.$emit('fave', contact);
             },
 		    trashContact(index) {
-                let trashed = this.contacts.splice(index, 1);
-                this.saveContactsToLocalStorage(this.contacts);
-                this.deletedContacts.push(trashed[0]);
-                this.saveTrashedToLocalStorage(this.deletedContacts);
-                this.displayAlert('The contact has been moved to trash.');
+                this.$emit('trashContact', index);
             }
 	    }
     }

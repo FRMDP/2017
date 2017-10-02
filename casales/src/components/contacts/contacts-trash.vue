@@ -17,7 +17,7 @@
 						<div class="card">
 							<header class="card-header">
 								<p class="card-header-title">
-									{{ firstToUpper(contact.firstName) }} {{ firstToUpper(contact.lastName) }}
+									{{ contact.firstName }} {{ contact.lastName }}
 								</p>
 								<span v-if="contact.fave" class="card-header-icon" aria-label="more options">
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -25,13 +25,15 @@
 							</header>
 							<div class="card-content">
 								<div class="content">
-									<p><strong>Address: </strong>{{ firstToUpper(contact.address) }}</p>
+									<p><strong>Address: </strong>{{ contact.address }}</p>
 									<p><strong>Phone Number: </strong>{{ contact.telephoneNumber }}</p>
 								</div>
 							</div>
 							<footer class="card-footer">
 								<a class="card-footer-item" @click.prevent="restoreFromTrashed(index)">Restore</a>
-								<a class="card-footer-item" @click.prevent="deleteContactForever(index)">Delete Forever</a>
+								<a class="card-footer-item" @click.prevent="deleteContactForever(index)">
+									Delete Forever
+								</a>
 							</footer>
 						</div>
 					</div>
@@ -44,20 +46,14 @@
 <script>
     export default {
         name: 'contactsTrash',
-	    props: ['deletedContacts'],
-	    methods:{
+        props: ['deletedContacts'],
+        methods: {
             deleteContactForever(index) {
-                this.deletedContacts.splice(index, 1);
-                this.saveTrashedToLocalStorage(this.deletedContacts);
-                this.displayAlert('The contact has been permanently removed.');
+                this.$emit('deleteContactForever', index);
             },
             restoreFromTrashed(index) {
-                let restored = this.deletedContacts.splice(index, 1);
-                this.saveTrashedToLocalStorage(this.deletedContacts);
-                this.contacts.push(restored[0]);
-                this.saveContactsToLocalStorage(this.contacts);
-                this.displayAlert('The contact has been restored.');
+                this.$emit('restoreFromTrashed', index);
             }
-	    }
+        }
     }
 </script>

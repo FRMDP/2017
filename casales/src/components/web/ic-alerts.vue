@@ -7,8 +7,8 @@
 </template>
 
 <script>
-	export default {
-	    name: 'icAlerts',
-		props: ['showAlert', 'alertMessage']
-	}
+    export default {
+        name: 'icAlerts',
+        props: ['showAlert', 'alertMessage']
+    }
 </script>

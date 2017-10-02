@@ -19,7 +19,7 @@
 								<p class="card-header-title">
 									{{ contact.firstName }} {{ contact.lastName }}
 								</p>
-								<a @click="addOrRemoveContactToFavorites(contact)" class="card-header-icon" aria-label="more options">
+								<a @click="unfave(contact)" class="card-header-icon" aria-label="more options">
                                   <span class="icon">
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                   </span>
@@ -31,9 +31,6 @@
 									<p><strong>Phone Number: </strong>{{ contact.telephoneNumber }}</p>
 								</div>
 							</div>
-							<footer class="card-footer">
-								<a class="card-footer-item" @click.prevent="deleteContactFromFavorites(contact)">Delete</a>
-							</footer>
 						</div>
 					</div>
 				</div>
@@ -45,24 +42,17 @@
 <script>
     export default {
         name: 'contactsFavs',
-	    props: ['contacts'],
-	    computed: {
+        props: ['contacts'],
+        computed: {
             filteredFavorites() {
                 return this.contacts.filter(p => p.fave === true);
             }
-	    },
-	    methods: {
-            deleteContactFromFavorites(contact) {
-                let index = null;
-                for (let i = 0; i < this.contacts.length; i++) {
-                    if (this.contacts[i] === contact) {
-                        index = i;
-                    }
-                }
-                if (index !== null) {
-                    this.trashContact(index);
-                }
+        },
+        methods: {
+            unfave(contact) {
+                contact.fave = false;
+                this.$emit('unfave', contact);
             }
-	    }
+        }
     }
 </script>

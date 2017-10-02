@@ -10,7 +10,6 @@
   "author": "Ignacio Casales",
   "license": "MIT",
   "dependencies": {
-    "bulma": "^0.5.3",
     "vue": "^2.4.4"
   },
   "devDependencies": {

@@ -49,6 +49,10 @@ h1, h3{
 	color: rgba(1, 1, 1, .6);
 }
 
+.btn-floating:hover, .btn-floating:active {
+	background-color: initial;
+}
+
 .btnEditar{
 	margin-right: 10px;
 }
@@ -69,3 +73,6 @@ h1, h3{
 	color: #4CAF50;
 }
 
+.formulario input::-webkit-input-placeholder, .formulario textarea::-webkit-input-placeholder, label {
+  color: rgba(1, 1, 1, .7);
+}

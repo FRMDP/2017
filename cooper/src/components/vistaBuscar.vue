@@ -1,5 +1,5 @@
 <template>
-    <div class="negrita">
+    <div class="negrita container">
         <div class="row">
             <h2>Listado de personas</h2>
             <input type="text" placeholder="Buscar por nombre" v-model="filtro">
@@ -51,6 +51,7 @@
           },
           contarDenuncias(personita) {
             cant = 0;
+            console.log('esteban');
             for (let i = 0; this.denuncias.length > i; i++) {
               if(this.denuncias[i].id_persona == personita.id) 
                 cant++;

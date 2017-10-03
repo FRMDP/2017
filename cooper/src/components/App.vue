@@ -46,30 +46,38 @@
     	},
     	methods: {
     		cambiarVista(vista) {
-    			console.log(vista);
     			this.vista = vista;
     		},
         addPersona(chabon) {
-          chabon.id = this.personas.length;
-          this.personas.push(Object.assign({}, chabon));
-          localStorage.setItem('personas', JSON.stringify(chabon));
+          if(!this.personas.length){
+            this.personas = [];
+            chabon.id = 0;
+          } else {
+            let indice = this.personas.length;
+            chabon.id = this.personas[indice - 1].id +1;
+            this.personas.push(Object.assign({}, chabon));
+            localStorage.setItem('personas', JSON.stringify(this.personas));
+          }
         },
         denunciarPersona(chabon) {
           this.persona = chabon;
           this.denunciando = true;
           this.vista = 'denuncias';
+        },
+        cargarPersonasDenuncias(){
+          const personas = localStorage.getItem('personas');
+          if(personas){
+            this.personas = JSON.parse(personas);
+          }
+
+          const denuncias = localStorage.getItem('denuncias');
+          if(denuncias){
+            this.denuncias = JSON.parse(denuncias);
+          }
         }
     	},
       mounted(){
-        const personas = localStorage.getItem('personas');
-        if(!personas){
-          this.personas = JSON.parse(personas)
-        }
-
-        const denuncias = localStorage.getItem('denuncias');
-        if(!denuncias){
-          this.denuncias = JSON.parse(denuncias)
-        }
+        this.cargarPersonasDenuncias();
       }
     }
 </script>

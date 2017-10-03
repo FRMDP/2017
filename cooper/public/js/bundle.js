@@ -10993,7 +10993,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11104,30 +11104,38 @@ exports.default = {
 
   methods: {
     cambiarVista: function cambiarVista(vista) {
-      console.log(vista);
       this.vista = vista;
     },
     addPersona: function addPersona(chabon) {
-      chabon.id = this.personas.length;
-      this.personas.push(Object.assign({}, chabon));
-      localStorage.setItem('personas', JSON.stringify(chabon));
+      if (!this.personas.length) {
+        this.personas = [];
+        chabon.id = 0;
+      } else {
+        var indice = this.personas.length;
+        chabon.id = this.personas[indice - 1].id + 1;
+        this.personas.push(Object.assign({}, chabon));
+        localStorage.setItem('personas', JSON.stringify(this.personas));
+      }
     },
     denunciarPersona: function denunciarPersona(chabon) {
       this.persona = chabon;
       this.denunciando = true;
       this.vista = 'denuncias';
+    },
+    cargarPersonasDenuncias: function cargarPersonasDenuncias() {
+      var personas = localStorage.getItem('personas');
+      if (personas) {
+        this.personas = JSON.parse(personas);
+      }
+
+      var denuncias = localStorage.getItem('denuncias');
+      if (denuncias) {
+        this.denuncias = JSON.parse(denuncias);
+      }
     }
   },
   mounted: function mounted() {
-    var personas = localStorage.getItem('personas');
-    if (!personas) {
-      this.personas = JSON.parse(personas);
-    }
-
-    var denuncias = localStorage.getItem('denuncias');
-    if (!denuncias) {
-      this.denuncias = JSON.parse(denuncias);
-    }
+    this.cargarPersonasDenuncias();
   }
 };
 
@@ -11790,7 +11798,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11860,6 +11868,7 @@ exports.default = {
     },
     contarDenuncias: function contarDenuncias(personita) {
       cant = 0;
+      console.log('esteban');
       for (var i = 0; this.denuncias.length > i; i++) {
         if (this.denuncias[i].id_persona == personita.id) cant++;
       }
@@ -11877,7 +11886,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "negrita" }, [
+  return _c("div", { staticClass: "negrita container" }, [
     _c(
       "div",
       { staticClass: "row" },
@@ -12087,7 +12096,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.top-menu {\n  position: fixed;\n  top: 0;\n  left: 0;\n  padding: 10px;\n  width: 100%;\n  background-color: red;\n  z-index: 100;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 

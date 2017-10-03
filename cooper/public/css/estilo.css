@@ -1,11 +1,11 @@
 body {
-	background: #004749;
-	color: white;
-	font-family: 'Lato', Arial, sans-serif;
+  background: #004749;
+  color: white;
+  font-family: 'Lato', Arial, sans-serif;
 }
 
 .negrita {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
@@ -17,15 +17,15 @@ body {
 }
 
 nav {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 nav .brand-logo {
-	color: black;
+  color: black;
 }
 
 h2{
-	color: #00ffa1;
+  color: #00ffa1;
 }
 
 html {
@@ -45,8 +45,7 @@ html {
     animation-delay:2s;
     -webkit-animation-delay:3s; /* Safari and Chrome */
     -webkit-animation-fill-mode: forwards;
-
-} 
+}
 
 @keyframes signup-response{
     from {opacity :1;}
@@ -57,12 +56,7 @@ html {
     from {opacity :1;}
     to {opacity :0;}
 }
-/*
-table, th, td {
-    border: 1px solid black;
-}*/
 
 th, td {
     padding: 10px;
 }
-

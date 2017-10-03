@@ -71,6 +71,14 @@
 	.btn-floating:hover, .btn-floating:active {
 		background-color: initial;
 	}
+	
+	.btn-floating.btnFavorito:hover {
+		background-color: yellow;
+	}
+	
+	.floating:focus.btnFavorito:active {
+		color: inherit;
+	}
 
 	.btnEditar{
 		margin-right: 10px;

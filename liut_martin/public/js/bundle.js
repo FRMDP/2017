@@ -12002,7 +12002,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.card .card-content .descripcion_usuario{\n\tfont-weight: 300;\n\tmargin     : 0px;\n}\n.card .card-content .card-title i{\n\tline-height: inherit;\n}\n.btnFavorito{\n\tmargin-right: 10px;\n\tbackground: #ccc;\n\tcolor: rgba(1, 1, 1, .6);\n}\n.btn-floating:hover, .btn-floating:active {\n\tbackground-color: initial;\n}\n.btnEditar{\n\tmargin-right: 10px;\n}\n.favoritoOn{\n\tbackground: yellow;\n}\n.favoritoOn i{\n\tcolor: rgba(1, 1, 1, .6);\n}\n", ""]);
+exports.push([module.i, "\n.card .card-content .descripcion_usuario{\n\tfont-weight: 300;\n\tmargin     : 0px;\n}\n.card .card-content .card-title i{\n\tline-height: inherit;\n}\n.btnFavorito{\n\tmargin-right: 10px;\n\tbackground: #ccc;\n\tcolor: rgba(1, 1, 1, .6);\n}\n.btn-floating:hover, .btn-floating:active {\n\tbackground-color: initial;\n}\n.btn-floating.btnFavorito:hover {\n\tbackground-color: yellow;\n}\n.floating:focus.btnFavorito:active {\n\tcolor: inherit;\n}\n.btnEditar{\n\tmargin-right: 10px;\n}\n.favoritoOn{\n\tbackground: yellow;\n}\n.favoritoOn i{\n\tcolor: rgba(1, 1, 1, .6);\n}\n", ""]);
 
 // exports
 

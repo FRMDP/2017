@@ -38,3 +38,10 @@ h1, h3{
 .formulario input::-webkit-input-placeholder, .formulario textarea::-webkit-input-placeholder, label {
   color: rgba(1, 1, 1, .7);
 }
+
+button.btn-floating:hover {
+	transform: scale(1.2);
+	-webkit-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	transition: all .5s ease;
+}

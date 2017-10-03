@@ -4,9 +4,10 @@
         <div class="row contenedor">
             <agregar-contacto v-if="vista == 'registro'"  :personas="personas" :persona="persona"></agregar-contacto> 
             <lista-contactos  v-if="vista == 'ver_todos'" :personas="personas" :persona="persona" @cambiarVista="cambiarVista" @cambiarIndex="cambiarIndex" @setPersona="setPersona"></lista-contactos>
-            <lista-favoritos  v-if="vista == 'favoritos'" :personas="personas"></lista-favoritos>
+            <lista-favoritos  v-if="vista == 'favoritos'" :personas="personas" :persona="persona"></lista-favoritos>
             <editar-contacto  v-if="vista == 'editar'"    :personas="personas" :persona="persona" :indexPersonaSeleccionada="indexPersonaSeleccionada"></editar-contacto>
         </div>
+        <pie></pie>
     </div>
 </template>
 
@@ -16,6 +17,7 @@
     import listaContactos from './lista-contactos.vue';
     import listaFavoritos from './lista-favoritos.vue';
     import editarContacto from './editar-contacto.vue';
+    import pie from './pie.vue';
 
     export default {
     	name: 'app',
@@ -24,7 +26,8 @@
             agregarContacto,
             listaContactos,
             listaFavoritos,
-            editarContacto
+            editarContacto,
+            pie
     	},
     	data() {
     		return {
@@ -58,16 +61,8 @@
                     this.personas = JSON.parse(personas);
                 }
             },
-            agregarOquitarFavorito: function(index) {
-                if(this.personas[index].favorito)
-                    this.personas[index].favorito = false;
-                else
-                    this.personas[index].favorito = true;
-                localStorage.setItem('personas', JSON.stringify(this.personas));
-            },
             cambiarIndex: function(index) {
                 this.indexPersonaSeleccionada = index;
-                console.log(this.personas[this.indexPersonaSeleccionada]);
             },
             setPersona: function(persona) {
                 this.persona.nombre = persona.nombre;

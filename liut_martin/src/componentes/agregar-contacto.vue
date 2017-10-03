@@ -33,7 +33,7 @@
 <script>
 	export default {
 		name: 'agregarContacto',
-        props: ['vista', 'persona', 'personas'],
+        props: ['persona', 'personas'],
         data() {
             return {
                 mensaje: false
@@ -57,3 +57,9 @@
         }
 	}
 </script>
+
+<style>
+    .contenedor_radios{ 
+        margin-bottom: 15px; 
+    }
+</style>

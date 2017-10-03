@@ -4,7 +4,7 @@
 	    	<div class="container">
 		        <ul id="nav-mobile" class="center hide-on-med-and-down">
 		           <li :class="{ active : vista == 'registro'}" ><a @click="cambiarVista('registro')"><i class="material-icons left">group_add</i>Registro</a></span></li>
-		           <li :class="{ active : vista == 'ver_todos'}"><a @click="cambiarVista('ver_todos')"><i class="material-icons left">storage</i>Ver todos</a></li>
+		           <li :class="{ active : vista == 'ver_todos'}"><a @click="cambiarVista('ver_todos')"><i class="material-icons left">list</i>Ver todos</a></li>
 		           <li :class="{ active : vista == 'favoritos'}"><a @click="cambiarVista('favoritos')"><i class="material-icons left">star_border</i>Favoritos</a></li>
 		        </ul>
 	      	</div>
@@ -33,3 +33,18 @@
 		}
 	}
 </script>
+
+<style>
+	.menu{
+		opacity: .9;
+	}
+
+	.menu ul li a:hover {
+		-webkit-transition: all .5s ease;
+		-o-transition: all .5s ease;
+		transition: all .5s ease;
+		transform: scale(1.05);
+	}
+
+	nav ul a { font-weight: 300; }
+</style>

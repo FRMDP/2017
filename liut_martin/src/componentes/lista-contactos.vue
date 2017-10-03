@@ -9,27 +9,9 @@
 		        <input v-model="busqueda" id="icon_prefix" type="text" class="validate" placeholder="Buscar contacto">
 	    	</div>  
 	    	<div v-if="personasFiltradas.length > 0">
-		    	<div v-for="(persona, index) in personasFiltradas" class="card blue darken-2">
-		            <div class="card-content white-text">
-		              <span class="card-title">
-		              	<p><i class="material-icons left">person</i> {{persona.apellido}} {{persona.nombre}} </p>
-	              		<button class="waves-effect red btn-floating right darken-0" @click="eliminarPersona(index);">
-	              			<i class="material-icons">delete_forever</i>
-	              		</button>
-	              		<button class="waves-effect  blue lighten-2 btn-floating right btnEditar" 
-	              		@click="editarPersona(index)">
-							<i class="material-icons">mode_edit</i>
-						</button>
-						<button class="waves-effect waves-yellow btn-floating right btnFavorito" :class="{ favoritoOn : persona.favorito}" @click="agregarOquitarFavorito(index);">
-							<i class="material-icons">star_border</i>
-						</button>
-		              </span>
-		              <ul class="descripcion_usuario">
-		              	<li>E-mail: {{persona.email}}</li>
-		              	<li>Teléfono: {{persona.telefono}}</li>
-		              </ul>
-		            </div>
-		        </div>
+		    	<div v-for="(persona, index) in personasFiltradas">
+		    		<tarjeta-contacto :persona="persona" :personas="personas" :index="index" @editarPersona="editarPersona"></tarjeta-contacto>
+		    	</div>
 		    </div>
 		    <h3 v-else class="center">No se encontraron resultados con "{{busqueda}}"</h3>
 	    </div>
@@ -38,30 +20,25 @@
 </template>
 
 <script>
+	import tarjetaContacto from './tarjeta-contacto.vue';
+
 	export default {
-		name: 'listaContactos',
-		props: ['persona', 'personas', 'mensaje'],
+		name      : 'listaContactos',
+		props     : ['persona', 'personas', 'mensaje'],
+		components: {
+			tarjetaContacto
+		},
 		data(){
 			return {
 				busqueda: ''
 			}
 		},
 		methods: {
-			eliminarPersona: function(index){
-				this.personas.pop(index);
-			},
 			getPersonasLocalStorage: function(){
 				const personas = localStorage.getItem('personas');
 				if(personas){
 					this.personas = JSON.parse(personas);
 				}
-			},
-			agregarOquitarFavorito: function(index){
-				if(this.personas[index].favorito)
-					this.personas[index].favorito = false;
-				else
-					this.personas[index].favorito = true;
-				localStorage.setItem('personas', JSON.stringify(this.personas));
 			},
 			editarPersona: function(index){
 				this.$emit('cambiarVista', 'editar');

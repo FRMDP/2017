@@ -23,26 +23,26 @@
     	},
     	data() {
     		return {
-                persona: {
-                  id: '',
-                  nombre: '',
-                  apellido: '',
-                  edad: '',
-                  direccion: '',
-                  sexo: ''
-                },
-                personas: [],
-                denuncia: {
-                  id_persona: '',
-                  motivo: '',
-                  descripcion: ''
-                },
-                denuncias: [],
-                filtro: '',
-                vista: 'ingresar',
-                mensaje2: false,
-                denunciando: false
-            }
+          persona: {
+            id: '',
+            nombre: '',
+            apellido: '',
+            edad: '',
+            direccion: '',
+            sexo: ''
+          },
+          personas: [],
+          denuncia: {
+            id_persona: '',
+            motivo: '',
+            descripcion: ''
+          },
+          denuncias: [],
+          filtro: '',
+          vista: 'ingresar',
+          mensaje2: false,
+          denunciando: false
+        }
     	},
     	methods: {
     		cambiarVista(vista) {

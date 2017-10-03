@@ -49,7 +49,7 @@
           denunciarPersona(chabon){
             this.$emit('denunciarPersona', Object.assign({}, chabon))
           },
-          contarDenuncias(personita) {
+          contarDenuncias(personita) { //pasar el array de denuncias no es practico
             cant = 0;
             console.log('esteban');
             for (let i = 0; this.denuncias.length > i; i++) {

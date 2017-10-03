@@ -16,12 +16,10 @@
                         <label for="sexo">Indique sexo</label>
                         <div class="row" id="sexo">
                             <div class="col l4">
-                                <input class="with-gap" name="sexo" value="Varon" type="radio" id="varon" 
-                                    v-model="personaEditar.sexo"/>
-                                <label for="varon">Varon</label>
-                                <input class="with-gap" name="sexo" value="Mujer" type="radio" id="mujer" 
-                                    v-model="personaEditar.sexo"/>
-                                <label for="mujer">Mujer</label>
+                                <select v-model="personaEditar.sexo" name="sexo" style="display: block;">
+                                    <option value="Varon" id="varon">Varon</option>
+                                    <option value="Mujer" id="mujer">Mujer</option>
+                                </select>
                             </div>
                         </div>
                         <button class="botonIngreso" :disabled="!formOk" type="submit" @click.prevent="editarPersona" 

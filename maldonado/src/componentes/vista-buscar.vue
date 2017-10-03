@@ -9,7 +9,8 @@
                     <input type="text" placeholder="Filtrar" v-model="filtro">
                     <h3 v-if="!this.personas.length">No hay personas</h3>
                     <tarjeta-contacto v-else v-for="(persona, index) in personasFiltradas"
-                        :persona="persona" :index="index" @agregarAfavoritos="agregarAfavoritos"
+                        :persona="persona" :index="index" :isFavorito="isFavorito"
+                        @agregarAfavoritos="agregarAfavoritos"
                         @traerPersona="traerPersona" @eliminarPersona="eliminarPersona">
                     </tarjeta-contacto>
                 </div>
@@ -29,7 +30,8 @@
         data() {
             return {
                 filtro: '',
-                mensaje: false
+                mensaje: false,
+                isFavorito: false
             }
         },
         computed: {

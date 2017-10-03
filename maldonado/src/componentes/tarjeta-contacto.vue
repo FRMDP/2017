@@ -8,19 +8,23 @@
                 <p class="card-text">Gustos: {{ persona.gustos }}</p>
                 <div class="card-action">
                     <div class="cardActionContent">
-                        <a class="wrapper btn-floating pulse btn-large waves-effect waves-dark green"
+                        <a v-if="!this.isFavorito" class="wrapper btn-floating pulse btn-large waves-effect waves-dark green"
                             @click.prevent="agregarAfavoritos(index)">
                             <i class="material-icons">favorite</i>
                             <div class="tooltip">
                                 Agregar a favoritos
                             </div>
                         </a>
-                        <a class="editBtn btn-floating btn-large waves-effect waves-light blue "
+                        <a v-if="!this.isFavorito" class="editBtn btn-floating btn-large waves-effect waves-light blue "
                             @click.prevent="traerPersona(index)">
                             <i class="material-icons">edit</i>
                         </a>
-                        <a class="deleteBtn btn-floating btn-large waves-effect waves-light red"
+                        <a v-if="!this.isFavorito" class="deleteBtn btn-floating btn-large waves-effect waves-light red"
                             @click.prevent="eliminarPersona(index)">
+                            <i class="material-icons">delete</i>
+                        </a>
+                        <a v-if="this.isFavorito" class="deleteBtn btn-floating btn-large waves-effect waves-light red"
+                            @click.prevent="eliminarFavorito(index)">
                             <i class="material-icons">delete</i>
                         </a>
                     </div>
@@ -32,7 +36,7 @@
 <script>
 	export default {
 		name: 'tarjetaContacto',
-		props: ['persona', 'index'],
+		props: ['persona', 'index', 'isFavorito'],
 		methods: {
 			agregarAfavoritos(index){
                 this.$emit('agregarAfavoritos', index);
@@ -42,6 +46,9 @@
             },
             eliminarPersona(index) {
                 this.$emit('eliminarPersona', index);
+            },
+            eliminarFavorito(index) {
+                this.$emit('eliminarFavorito', index);
             }
 		}
 	}

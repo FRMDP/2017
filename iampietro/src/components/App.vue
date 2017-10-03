@@ -91,7 +91,7 @@
 			},
 			quitarFavorito(personaAquitar) {
 				this.indexPersonaEliminar = this.personas.indexOf(personaAquitar);
-				this.personas[this.indexPersonaEliminar].favoritos = 'false';
+				this.personas[this.indexPersonaEliminar].favoritos = false;
 				this.saveContactsToStorage();
 			}
 		},

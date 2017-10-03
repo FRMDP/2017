@@ -3,7 +3,7 @@
 		<div class="col-md-10 col-sm-10 col-xs-10">
 			<div id="alerta" class="alert alert-success alerta">
                         <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
-                      	<strong>Holy guacamole!</strong> Persona agregada correctamente.
+                      	Puedes descansar tranquilo, <strong>has hecho un amigo</strong>.
             </div>
                 <form>
                     <div class="form-row">
@@ -51,7 +51,7 @@
 					edad: '',
 					sexo: '',
 					mail: '',
-					favoritos: 'false'
+					favoritos: false
 				}
 			}
 		},

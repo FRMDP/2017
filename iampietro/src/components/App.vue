@@ -19,7 +19,7 @@
 	import agendaNav from './agenda-nav.vue';
 	import vistaAgregarPersona from './vista-agregarPersona.vue';
 	import vistaBuscar from './vista-buscar.vue';
-	import vistaEditar from './vista-editarPersona.vue';
+	import vistaEditarPersona from './vista-editarPersona.vue';
 	import vistaFavoritos from './vista-favoritos.vue';
 
 	export default {
@@ -28,8 +28,8 @@
 			agendaNav,
 			vistaAgregarPersona,
 			vistaBuscar,
-			vistaEditar,
-			vistaFavoritos,
+			vistaEditarPersona,
+			vistaFavoritos
 		},
 		data() {
 			return {
@@ -42,8 +42,7 @@
 					apellido: '',
 					edad: '',
 					sexo: '',
-					mail: '',
-					favoritos: ''
+					mail: ''
 				}
 			}
 		},
@@ -64,11 +63,9 @@
 				this.personas.push(persona);
 				this.saveContactsToStorage();
 			},
-			agregarAfavoritos(indice) {
-				if(this.personas[indice].favoritos)
-					this.personas[indice].favoritos = false;
-				else
-					this.personas[indice].favoritos = true;
+			agregarAfavoritos(persona) {
+				this.indexPersonaEditada = this.personas.indexOf(persona);
+				this.personas[this.indexPersonaEditada].favoritos = true;
 				this.saveContactsToStorage();
 			},
 			eliminarPersona(persona) {
@@ -79,18 +76,22 @@
 			},
 			personToEdit(personaAeditar) {
 				this.indexPersonaEditada = this.personas.indexOf(personaAeditar);
-				this.personaEditable = this.personas[indexPersonaEditada];
+				this.personaEditable.nombre = this.personas[this.indexPersonaEditada].nombre;
+				this.personaEditable.apellido = this.personas[this.indexPersonaEditada].apellido;
+				this.personaEditable.edad = this.personas[this.indexPersonaEditada].edad;
+				this.personaEditable.sexo = this.personas[this.indexPersonaEditada].sexo;
+				this.personaEditable.mail = this.personas[this.indexPersonaEditada].mail;
 				this.cambiarVista('editar');
 
 			},
 			guardarCambios(personaEditada) {
-				this.personas[this.indexPersonaEditada] = personaEditada;
+				this.personas.splice(this.indexPersonaEditada, 1, personaEditada);
 				this.indexPersonaEditada = '';
 				this.saveContactsToStorage();
 			},
 			quitarFavorito(personaAquitar) {
 				this.indexPersonaEliminar = this.personas.indexOf(personaAquitar);
-				this.personas[this.indexPersonaEliminar].favorito = 'false';
+				this.personas[this.indexPersonaEliminar].favoritos = 'false';
 				this.saveContactsToStorage();
 			}
 		},

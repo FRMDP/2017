@@ -1,13 +1,13 @@
 <template>
 	<div class="row justify-content-md-center">
 		<div class="col-md-10 col-sm-10 col-xs-10">
-			<div class="row justify-content-md-center" v-show="personas.length">
-                <span id="spanNearFilter"><strong> Buscar favorito: </strong></span>
+			<div class="row justify-content-md-center" v-if="personas.length">
+                <span class="spanNearFilter"><strong> Buscar favorito: </strong></span>
                 <input type="text" placeholder="Ej: Cerveza Duff" v-model="filtro">
             </div>
-            <div id="favouriteAlert" class="alert alert-danger alerta">
+            <div id="favouriteAlert" class="alert alert-info alerta">
                 <span aria-hidden="true" class="floatRight" onclick="this.parentElement.style.display='none';">&times;</span>
-                <strong>Favorito eliminado exitosamente.</strong>
+                <strong v-model="name">Has quitado a "{{ name }}" de tus contactos favoritos.</strong>
             </div>
             <div class="row justify-content-md-center">
                 <div class="jumbotron" v-if="!personas.length">
@@ -20,7 +20,7 @@
                       <p class="lead">We are sorry, your search didn't have any match :(</p>
                       <hr class="my-4">
                 </div>
-                <div v-else v-for="(persona, index) in favoritosFiltrados" class="card card-inverse" id="people">
+                <div v-else v-for="persona in favoritosFiltrados" class="card card-inverse" id="people">
                     <div class="card-body">
                         <h4 class="card-title">{{ persona.apellido }}, {{ persona.nombre }}</h4>
                         <h6 class="card-subtitle mb-2 text-muted">{{ persona.edad }} años</h6>
@@ -38,10 +38,17 @@
 	export default {
 		name: 'vistaFavoritos',
 		props: ['personas'],
+		data() {
+			return {
+				filtro: '',
+				name: ''
+			}
+		},
 		methods: {
 			quitarFavorito(persona){
-				this.$emit('quitarFavorito', Object.assign({}, persona));
+				this.name = persona.nombre + " " + persona.apellido;
 				this.activarFavoritoQuitado();
+				this.$emit('quitarFavorito', persona);
 			},
 	        activarFavoritoQuitado() {
 	          const alert = document.getElementById("favouriteAlert");
@@ -50,9 +57,14 @@
 		},
 		computed: {
 			favoritosFiltrados() {
-	          return this.personas.filter(p => (p.favorito=='true' &&(p.apellido.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+	          return this.personas.filter(p => (p.favoritos==true &&(p.apellido.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
 	                                            p.edad.indexOf(this.filtro) >= 0 ||
 	                                            p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0)));
+	        },
+	        busquedaSinResultados() {
+	          return this.favoritosFiltrados.length == 0 &&
+
+	                 this.filtro != '';
 	        }
 		}
 	}

@@ -1,6 +1,4 @@
 <template>
-	
-	<div v-show="vista == 'ingresar'">
      <div class="card">
       <div class="card-content">
       <div class="row">
@@ -39,34 +37,22 @@
    </div> 
   </div>
  </div>
-</div>
-
-
 </template>
 
 <script>
 	export default{
-		name:'ingresar',
+		name:'agregar',
     props: ['vista','personas','persona'],
 		data(){
-			
-		}
+			mensaje:false
+		},
 
-    methods:{
+    
+
+    methods: {
       agregarPersona() {
-      this.personas.push(Object.assign({}, this.persona));
-      const indice=this.personas.length-1;
-      if (indice!=0) {
-        this.personas[indice].index=this.personas[indice].index+1;
-      }
-      else{
-        this.personas[indice].index=0;
-      }
-      
-      this.agregarPersonaLocalStorage();
+      this.$emit('agregarPersona',this.persona);
       this.limpiarPersona();
-      this.mensaje = true;
-      this.cambiarVista("buscar");
     },
     limpiarPersona() {
       this.persona.nombre = '';
@@ -74,7 +60,7 @@
       this.persona.sexo = '';
       this.persona.apellido='';
       this.persona.telefono=''
-    },
+     }
     }
 	}
 </script>

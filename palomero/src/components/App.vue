@@ -7,7 +7,6 @@
 
 <script>
 	import topMenu from './top-menu.vue';
-	import sideMenu from './side-menu.vue';
 	import userCard from './user-card.vue';
 
     export default {
@@ -17,9 +16,31 @@
     	},
     	data() {
     		return {
-                
-            }
-    	},
+                persona: {
+                    nombre: '',
+                    apellido:'',
+                    edad: '',
+                    telefono:'',
+                    sexo: '',
+                    favs: false,
+                    index:'',
+                },
+                personaedit: {
+                    nombre: '',
+                    apellido:'',
+                    edad: '',
+                    telefono:'',
+                    sexo: '',
+                    favs: false,
+                    index:'',
+                },
+                edit:-1,
+                personas: [],
+                filtro: '',
+                vista: 'ingresar',
+                mensaje: false
+                }     
+            },
 
     	methods: {
             cambiarVista(vista) {

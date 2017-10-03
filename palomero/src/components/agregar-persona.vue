@@ -47,9 +47,35 @@
 <script>
 	export default{
 		name:'ingresar',
+    props: ['vista','personas','persona'],
 		data(){
 			
 		}
+
+    methods:{
+      agregarPersona() {
+      this.personas.push(Object.assign({}, this.persona));
+      const indice=this.personas.length-1;
+      if (indice!=0) {
+        this.personas[indice].index=this.personas[indice].index+1;
+      }
+      else{
+        this.personas[indice].index=0;
+      }
+      
+      this.agregarPersonaLocalStorage();
+      this.limpiarPersona();
+      this.mensaje = true;
+      this.cambiarVista("buscar");
+    },
+    limpiarPersona() {
+      this.persona.nombre = '';
+      this.persona.edad = '';
+      this.persona.sexo = '';
+      this.persona.apellido='';
+      this.persona.telefono=''
+    },
+    }
 	}
 </script>
 

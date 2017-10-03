@@ -28,11 +28,13 @@
 
 <script>
 	export default{
-		name:'favoritos',
+		name:'verFavoritos',
 		props:['vista','personas'],
 
 		data(){
+		return{
 			mensaje:false
+		}
 		},
 
 		computed:{

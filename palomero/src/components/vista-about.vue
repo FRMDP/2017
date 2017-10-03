@@ -33,11 +33,13 @@
 
 			<script>
 				export default{
-					name:'about',
+					name:'vistaAbout',
 					props:['vista'],
 
 					data(){
+					return{
 						mensaje:false
+					}
 					},
 
 					methods:{

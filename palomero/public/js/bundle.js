@@ -10993,7 +10993,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11068,10 +11068,10 @@ exports.default = {
     name: 'app',
     components: {
         topMenu: _topMenu2.default,
-        agregar: _agregarPersona2.default,
-        buscar: _buscarContactos2.default,
-        about: _vistaAbout2.default,
-        favoritos: _verFavoritos2.default
+        agregarPersona: _agregarPersona2.default,
+        buscarContactos: _buscarContactos2.default,
+        vistaAbout: _vistaAbout2.default,
+        verFavoritos: _verFavoritos2.default
     },
     data: function data() {
         return {
@@ -11117,9 +11117,6 @@ exports.default = {
 
             this.agregarPersonaLocalStorage();
         },
-        agregarPersonaLocalStorage: function agregarPersonaLocalStorage() {
-            localStorage.setItem('personas', JSON.stringify(this.personas));
-        },
         traerPersonasLocalStorage: function traerPersonasLocalStorage() {
             var personasLocalStorage = localStorage.getItem('personas');
             if (personasLocalStorage) {
@@ -11132,6 +11129,8 @@ exports.default = {
         this.traerPersonasLocalStorage();
     }
 }; //
+//
+//
 //
 //
 //
@@ -11467,7 +11466,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11525,17 +11524,37 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-  name: 'agregar',
+  name: 'agregarPersona',
   props: ['vista', 'personas', 'persona'],
   data: function data() {
-    mensaje: false;
+    return {
+      mensaje: false
+    };
   },
 
 
+  computed: {
+    formOk: function formOk() {
+      return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.telefono && this.persona.sexo;
+    }
+  },
+
   methods: {
     agregarPersona: function agregarPersona() {
-      this.$emit('agregarPersona', this.persona);
+      this.personas.push(Object.assign({}, this.persona));
+      var indice = this.personas.length - 1;
+      if (indice != 0) {
+        this.personas[indice].index = this.personas[indice].index + 1;
+      } else {
+        this.personas[indice].index = 0;
+      }
+
+      this.agregarPersonaLocalStorage();
       this.limpiarPersona();
+      this.mensaje = true;
+    },
+    agregarPersonaLocalStorage: function agregarPersonaLocalStorage() {
+      localStorage.setItem('personas', JSON.stringify(this.personas));
     },
     limpiarPersona: function limpiarPersona() {
       this.persona.nombre = '';
@@ -11850,11 +11869,25 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-	name: 'buscar',
+	name: 'buscarContactos',
 	props: ['vista', 'personas'],
 
 	data: function data() {
-		mensaje: false;
+		return {
+			mensaje: false,
+			filtro: '',
+			edit: -1,
+
+			personaedit: {
+				nombre: '',
+				apellido: '',
+				edad: '',
+				telefono: '',
+				sexo: '',
+				favs: false,
+				index: ''
+			}
+		};
 	},
 
 
@@ -11885,6 +11918,9 @@ exports.default = {
 				}
 			}
 			this.agregarPersonaLocalStorage();
+		},
+		agregarPersonaLocalStorage: function agregarPersonaLocalStorage() {
+			localStorage.setItem('personas', JSON.stringify(this.personas));
 		},
 		vereditPersona: function vereditPersona(index) {
 			this.edit = index;
@@ -12316,7 +12352,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -12366,11 +12402,13 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-	name: 'about',
+	name: 'vistaAbout',
 	props: ['vista'],
 
 	data: function data() {
-		mensaje: false;
+		return {
+			mensaje: false
+		};
 	},
 
 
@@ -12631,11 +12669,13 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-	name: 'favoritos',
+	name: 'verFavoritos',
 	props: ['vista', 'personas'],
 
 	data: function data() {
-		mensaje: false;
+		return {
+			mensaje: false
+		};
 	},
 
 
@@ -12785,9 +12825,15 @@ var render = function() {
         on: { agregarPersonaLocalStorage: _vm.agregarPersona }
       }),
       _vm._v(" "),
-      _c("vista-about"),
+      _vm.vista == "about" ? _c("vista-about") : _vm._e(),
       _vm._v(" "),
-      _vm.vista == "favoritos" ? _c("ver-favoritos") : _vm._e()
+      _vm.vista == "buscar"
+        ? _c("buscar-contactos", { attrs: { personas: _vm.personas } })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.vista == "favoritos"
+        ? _c("ver-favoritos", { attrs: { personas: _vm.personas } })
+        : _vm._e()
     ],
     1
   )

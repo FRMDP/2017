@@ -43,11 +43,26 @@
 
 <script>
 	export default{
-		name: 'buscar',
+		name: 'buscarContactos',
 		props:['vista','personas'],
 
 		data(){
-			mensaje:false
+		return{
+			mensaje:false,
+			filtro: '',
+            edit:-1,
+
+
+                personaedit: {
+                    nombre: '',
+                    apellido:'',
+                    edad: '',
+                    telefono:'',
+                    sexo: '',
+                    favs: false,
+                    index:'',
+                }
+		}
 		},
 
 		computed: {
@@ -82,6 +97,11 @@
 					}
 				}
 				this.agregarPersonaLocalStorage();
+			},
+
+
+			agregarPersonaLocalStorage(){
+				localStorage.setItem('personas',JSON.stringify(this.personas));
 			},
 
 			vereditPersona(index){

@@ -41,19 +41,43 @@
 
 <script>
 	export default{
-		name:'agregar',
+		name:'agregarPersona',
     props: ['vista','personas','persona'],
 		data(){
+      return{
 			mensaje:false
+    }
 		},
 
-    
+    computed:{
+
+    formOk() {
+      return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.telefono && this.persona.sexo;
+    }
+
+    },
 
     methods: {
-      agregarPersona() {
-      this.$emit('agregarPersona',this.persona);
-      this.limpiarPersona();
-    },
+      agregarPersona() {    
+        this.personas.push(Object.assign({}, this.persona));
+        const indice=this.personas.length-1;
+        if (indice!=0) {
+          this.personas[indice].index=this.personas[indice].index+1;
+        }
+        else{
+          this.personas[indice].index=0;
+        }
+
+        this.agregarPersonaLocalStorage();
+        this.limpiarPersona();
+        this.mensaje = true;
+      },
+
+
+      agregarPersonaLocalStorage(){
+        localStorage.setItem('personas',JSON.stringify(this.personas));
+      },
+
     limpiarPersona() {
       this.persona.nombre = '';
       this.persona.edad = '';

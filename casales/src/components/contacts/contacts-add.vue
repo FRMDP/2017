@@ -1,8 +1,8 @@
 <template>
 	<section class="section">
 		<div class="container">
-			<div class="columns is-mobile">
-				<div class="column is-half is-offset-one-quarter">
+			<div class="columns is-desktop">
+				<div class="column is-half-desktop is-offset-one-quarter-desktop">
 					<div class="box has-text-centered">
 						<h6 class="title is-6">Add a new contact</h6>
 					</div>

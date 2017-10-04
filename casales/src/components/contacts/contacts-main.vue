@@ -25,8 +25,8 @@
             contactsTrash: contactsTrash
         },
         mounted() {
-            this.getContactsFromLocalStorage();
-            this.getTrashedFromLocalStorage();
+            this.$persistence.getContactsFromLocalStorage();
+            this.$persistence.getTrashedFromLocalStorage();
         },
         data() {
             return {
@@ -38,43 +38,29 @@
             displayAlert(message) {
                 this.$emit('displayAlert', message);
             },
-            saveContactsToLocalStorage(contacts) {
-                localStorage.setItem('contacts', JSON.stringify(contacts));
-            },
-            saveTrashedToLocalStorage(trashedContacts) {
-                localStorage.setItem('trashedContacts', JSON.stringify(trashedContacts))
-            },
-            getContactsFromLocalStorage() {
-                let list = JSON.parse(localStorage.getItem('contacts'));
-                this.contacts = list ? list : [];
-            },
-            getTrashedFromLocalStorage() {
-                let list = JSON.parse(localStorage.getItem('trashedContacts'));
-                this.deletedContacts = list ? list : [];
-            },
             addContact(contact) {
                 this.contacts.push(Object.assign({}, contact));
-                this.saveContactsToLocalStorage(this.contacts);
+                this.$persistence.saveContactsToLocalStorage(this.contacts);
             },
             trashContact(index) {
                 let trashed = this.contacts.splice(index, 1);
-                this.saveContactsToLocalStorage(this.contacts);
+                this.$persistence.saveContactsToLocalStorage(this.contacts);
                 this.deletedContacts.push(trashed[0]);
-                this.saveTrashedToLocalStorage(this.deletedContacts);
+                this.$persistence.saveTrashedToLocalStorage(this.deletedContacts);
                 this.displayAlert('The contact ' + trashed[0].firstName + ' ' + trashed[0].lastName +
                     ' has been moved to trash.');
             },
             restoreFromTrashed(index) {
                 let restored = this.deletedContacts.splice(index, 1);
-                this.saveTrashedToLocalStorage(this.deletedContacts);
+                this.$persistence.saveTrashedToLocalStorage(this.deletedContacts);
                 this.contacts.push(restored[0]);
-                this.saveContactsToLocalStorage(this.contacts);
+                this.$persistence.saveContactsToLocalStorage(this.contacts);
                 this.displayAlert('The contact ' + restored[0].firstName + ' ' + restored[0].lastName +
                     ' has been restored.');
             },
             deleteContactForever(index) {
                 let deleted = this.deletedContacts.splice(index, 1);
-                this.saveTrashedToLocalStorage(this.deletedContacts);
+                this.$persistence.saveTrashedToLocalStorage(this.deletedContacts);
                 this.displayAlert('The contact ' + deleted[0].firstName + ' ' + deleted[0].lastName +
                     ' has been permanently removed.');
             },
@@ -83,12 +69,12 @@
                     this.displayAlert(contact.firstName + ' ' + contact.lastName + ' added to Favorites.') :
                     this.displayAlert(contact.firstName + ' ' + contact.lastName + ' removed from Favorites.');
 
-                this.saveContactsToLocalStorage(this.contacts);
+                this.$persistence.saveContactsToLocalStorage(this.contacts);
             },
             unfave(contact) {
                 this.displayAlert(contact.firstName + ' ' + contact.lastName + ' removed from Favorites.');
 
-                this.saveContactsToLocalStorage(this.contacts);
+                this.$persistence.saveContactsToLocalStorage(this.contacts);
             }
         }
     }

@@ -8,16 +8,16 @@
 							<span class="icon is-large is-left"><i class="fa fa-address-book"></i></span>
 						</a>
 						<a class="nav-item" @click="changeView('search')">
-							Search
+							<strong>Search</strong>
 						</a>
 						<a class="nav-item" @click="changeView('add')">
-							Add
+							<strong>Add</strong>
 						</a>
 						<a class="nav-item" @click="changeView('favorites')">
-							Favorites
+							<strong>Favorites</strong>
 						</a>
 						<a class="nav-item" @click="changeView('trash')">
-							Trash
+							<strong>Trash</strong>
 						</a>
 					</div>
 				</div>

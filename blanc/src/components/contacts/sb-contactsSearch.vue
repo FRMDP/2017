@@ -33,7 +33,7 @@
                             <p>Gender: {{ contact.gender }}</p>
                         </div>
                         <div class="card-action">
-                            <a class="waves-effect waves-light btn modal-trigger grey white-text" @click="setToDelete(contact)">Delete</a>
+                            <a href="#confirmDel" class="waves-effect waves-light btn modal-trigger grey white-text" @click="setToDelete(contact)">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
         },
         methods: {
             setToDelete(contact) {
-                this.$emit('setToDelete', this.contact);
+                this.$emit('setToDelete', contact);
             }
         }
     }

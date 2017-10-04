@@ -1,5 +1,5 @@
 <template>
-    <div id="index-banner" class="default-primary-color" @click="changeView('home')">
+    <div id="index-banner" class="default-primary-color sb-clickable-area" @click="changeView('home')">
         <div class="section">
             <div class="container">
                 <br><br>

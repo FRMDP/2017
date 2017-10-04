@@ -2,8 +2,8 @@
     <div>
         <sb-contactsHome @changeView="changeView" :view="view" v-if="view === 'home'"></sb-contactsHome>
         <sb-contactsAdd @addContact="addContact" @showPopUpAlert="showPopUpAlert" v-if="view === 'new'"></sb-contactsAdd>
-        <sb-contactsSearch :contactList="contactList" @setToDelete="setToDelete" v-if="view === 'search'"></sb-contactsSearch>
-        <sb-confirmDelete @changeView="changeView" @deleteContact="deleteContact" :toDelete="toDelete" :view="view" v-if="contactToDelete"></sb-confirmDelete>
+        <sb-contactsSearch @setToDelete="setToDelete" :contactList="contactList" v-if="view === 'search'"></sb-contactsSearch>
+        <sb-confirmDelete @resetToDelete="resetToDelete" @changeView="changeView" @deleteContact="deleteContact" :toDelete="toDelete" :view="view" v-if="Object.keys(toDelete).length"></sb-confirmDelete>
     </div>
 </template>
 
@@ -31,14 +31,9 @@
                 toDelete: {}
             }
         },
-        computed: {
-          contactToDelete: function(){
-              return Object.keys(this.toDelete).length;
-          }
-        },
         methods: {
             changeView(view){
-                this.$emit('changeView',this.view)
+                this.$emit('changeView',view)
             },
             saveContactsToStorage(contactList) {
                 localStorage.setItem('contactList', JSON.stringify(contactList));
@@ -65,9 +60,13 @@
                     this.contactList.splice(index, 1);
                     this.saveContactsToStorage(this.contactList)
                 }
+                this.resetToDelete();
+            },
+            resetToDelete(){
+                this.toDelete = {};
             },
             showPopUpAlert(msg){
-                this.$emit('showPopUpAlert', this.msg);
+                this.$emit('showPopUpAlert', msg);
             }
         }
     }

@@ -2,7 +2,7 @@
     <div class="app">
         <sb-Navbar @changeView="changeView"></sb-Navbar>
         <sb-Banner @changeView="changeView"></sb-Banner>
-        <sb-contactsMain @changeView="changeView" :view="view" @showPopUpAlert="showPopUpAlert"></sb-contactsMain>
+        <sb-contactsMain @changeView="changeView" @showPopUpAlert="showPopUpAlert" :view="view"></sb-contactsMain>
         <sb-Footer></sb-Footer>
         <sb-popAlert :showAlert="showAlert" :alertMsg="alertMsg"></sb-popAlert>
     </div>

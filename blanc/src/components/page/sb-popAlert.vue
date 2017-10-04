@@ -1,8 +1,8 @@
 <template>
     <transition name="fade">
-        <div class="card-panel default-primary-color" v-if="showAlert">
-            <span class="white-text">
-                <p>{{ alertMessage }}</p>
+        <div class="sb-card-alert card-panel dark-primary-color" v-if="showAlert">
+            <span class="center white-text">
+                <p>{{ alertMsg }}</p>
             </span>
         </div>
     </transition>
@@ -11,6 +11,6 @@
 <script>
     export default {
         name: 'sbPopAlert',
-        props: ['showAlert', 'alertMessage']
+        props: ['showAlert', 'alertMsg']
     }
 </script>

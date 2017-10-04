@@ -10993,7 +10993,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11082,20 +11082,9 @@ exports.default = {
                 telefono: '',
                 sexo: '',
                 favs: false,
-                index: ''
+                index: 0
             },
-            personaedit: {
-                nombre: '',
-                apellido: '',
-                edad: '',
-                telefono: '',
-                sexo: '',
-                favs: false,
-                index: ''
-            },
-            edit: -1,
             personas: [],
-            filtro: '',
             vista: 'about',
             mensaje: false
         };
@@ -11105,17 +11094,6 @@ exports.default = {
     methods: {
         cambiarVista: function cambiarVista(vista) {
             this.vista = vista;
-        },
-        agregarPersona: function agregarPersona() {
-            this.personas.push(Object.assign({}, this.persona));
-            var indice = this.personas.length - 1;
-            if (indice != 0) {
-                this.personas[indice].index = this.personas[indice].index + 1;
-            } else {
-                this.personas[indice].index = 0;
-            }
-
-            this.agregarPersonaLocalStorage();
         },
         traerPersonasLocalStorage: function traerPersonasLocalStorage() {
             var personasLocalStorage = localStorage.getItem('personas');
@@ -11466,7 +11444,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11548,10 +11526,37 @@ exports.default = {
       } else {
         this.personas[indice].index = 0;
       }
-
       this.agregarPersonaLocalStorage();
       this.limpiarPersona();
       this.mensaje = true;
+    },
+    crearIndex: function crearIndex() {
+      if (this.personas.lenght > 0) {
+        var indice = 0;
+        var mayor = 0;
+        while (indice < this.personas.lenght) {
+          if (mayor < this.personas[indice].index) {
+            mayor = this.personas[indice].index;
+          }
+          indice++;
+        }
+        this.persona.index = mayor;
+      } else {
+        this.persona.index = 0;
+      }
+    },
+    buscarIndice: function buscarIndice() {
+      var personasLocalStorage = localStorage.getItem('personas');
+      var indiceMayor = 0;
+      if (personasLocalStorage) {
+        var persons = JSON.parse(personasLocalStorage);
+        for (var p in persons) {
+          if (indiceMayor < p.index) {
+            indiceMayor = p.index;
+          }
+        }
+      }
+      alert(indiceMayor);
     },
     agregarPersonaLocalStorage: function agregarPersonaLocalStorage() {
       localStorage.setItem('personas', JSON.stringify(this.personas));
@@ -12691,6 +12696,9 @@ exports.default = {
 	},
 
 	methods: {
+		agregarPersonaLocalStorage: function agregarPersonaLocalStorage() {
+			localStorage.setItem('personas', JSON.stringify(this.personas));
+		},
 		eliminarFav: function eliminarFav(index) {
 			for (var i = this.personas.length - 1; i >= 0; i--) {
 				if (this.personas[i].index == index) {
@@ -12821,8 +12829,7 @@ var render = function() {
             expression: "vista == 'ingresar'"
           }
         ],
-        attrs: { personas: _vm.personas, persona: _vm.persona },
-        on: { agregarPersonaLocalStorage: _vm.agregarPersona }
+        attrs: { personas: _vm.personas, persona: _vm.persona }
       }),
       _vm._v(" "),
       _vm.vista == "about" ? _c("vista-about") : _vm._e(),

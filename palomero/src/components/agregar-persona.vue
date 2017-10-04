@@ -58,7 +58,7 @@
     },
 
     methods: {
-      agregarPersona() {    
+      agregarPersona() {
         this.personas.push(Object.assign({}, this.persona));
         const indice=this.personas.length-1;
         if (indice!=0) {
@@ -67,10 +67,44 @@
         else{
           this.personas[indice].index=0;
         }
-
         this.agregarPersonaLocalStorage();
         this.limpiarPersona();
         this.mensaje = true;
+      },
+
+      crearIndex(){
+        if(this.personas.lenght>0){
+          let indice=0;
+          let mayor=0;
+          while(indice<this.personas.lenght){
+            if(mayor<this.personas[indice].index)
+            {
+              mayor=this.personas[indice].index;
+            }
+            indice ++;
+          }
+          this.persona.index=mayor;
+        }
+        else{
+          this.persona.index=0;
+        }
+      },
+
+      buscarIndice()
+      {
+        const personasLocalStorage=localStorage.getItem('personas');
+        let indiceMayor=0;
+        if(personasLocalStorage){
+          let persons=JSON.parse(personasLocalStorage);
+          for(let p in persons){
+            if(indiceMayor<p.index)
+            {
+              indiceMayor=p.index;
+            }
+          }
+        }
+        alert(indiceMayor);
+
       },
 
 

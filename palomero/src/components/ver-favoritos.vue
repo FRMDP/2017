@@ -51,6 +51,11 @@
 		},
 
 		methods:{
+
+			agregarPersonaLocalStorage(){
+				localStorage.setItem('personas',JSON.stringify(this.personas));
+			},
+
 			eliminarFav(index)
 			{
 				for (var i = this.personas.length - 1; i >= 0; i--) {

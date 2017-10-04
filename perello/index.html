@@ -25,6 +25,9 @@
             <li class="nav-item">
               <a class="nav-link" href="#" @click="cambiarVista('buscar')">Buscar Contacto</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" @click="cambiarVista('favoritos')">Favoritos</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -37,7 +40,7 @@
         <h2> Bienvenido a la agenda del Sr. Perello para la UTN. Todos sus contactos privados estarán acá.</h2>
         </div>
         <div class =" container">
-          <img src="css\imagen/UTN.png" class="responsive imagen">
+          <img src="css\imagen/utn.png" class="responsive imagen">
         </div>
       </form>
     </div>
@@ -59,11 +62,11 @@
         </div>
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"  v-model="persona.sexo" value="option1">Masculino
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"  v-model="persona.sexo" value="masculino">Masculino
           </div>
           <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"  v-model="persona.sexo" value="option2"> Femenino
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"  v-model="persona.sexo" value="femenino"> Femenino
               </label>
           </div>
               <div class="form-group">
@@ -84,11 +87,11 @@
       		</div>
 		  <div class="container" v-show="vista == 'buscar'">
         <dir class="form-group">
-        <h1 class="card-text">Usted eligio la pestaña buscar</h1>
-      </dir>
+         <h1 class="card-text">Usted eligio la pestaña buscar</h1>
+        </dir>
         <dir class="form-group">
-        <h3 class="card-text">Encontrar la lista de los contactos guardados, ademas posee un filtro para acelerar el proceso de busqueda.</h3>
-        <h3 class="card-text">Para esta version el filtro es solo por nombre</h3>
+         <h3 class="card-text">Encontrar la lista de los contactos guardados, ademas posee un filtro para acelerar el proceso de busqueda.</h3>
+         <h3 class="card-text">Para esta version el filtro es solo por nombre</h3>
         </dir>
         <div class="form-group">
 			     <input type="text" placeholder="Filtrar" v-model="filtro">
@@ -97,17 +100,41 @@
         No hay personas ingresadas en la agenda
         </div>
         <div v-if="personasFiltradas.length > 0">
-  			  <div class="card" v-else v-for="(persona,index) in personasFiltradas">
+  			  <div class="card" v-for="(persona,index) in personasFiltradas">
     				<h4 class="card-header">Contacto</h4>
   				  <div class="card-body">
-  				    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }}</h4>
+  				    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }} Genero: {{ persona.sexo }} </h4>
   				    <p class="card-text">Si desea eliminarlo seleccione borrar.</p>
   				    <a href="#" type="submit"  class="btn btn-primary"@click.prevent="eliminarPersona(index)" >Borrar</a>
+              <a href="#" type="submit" :hidden=persona.favorito  class="btn btn-primary"@click.prevent="agregarFavorito(index)" >Favorito</a>
+              <p class="card-text" v-if="persona.favorito==true">En favoritos</p>
   				  </div>
   			  </div>
         </div>
         <h3 v-else>No se encontraron resultados con "{{filtro}}"</h3>
 		  </div>
+      <div class="container" v-show="vista == 'favoritos'">
+        <dir class="form-group">
+         <h1 class="card-text">Usted eligio la pestaña favoritos</h1>
+        </dir>
+        <div class="alert alert-warning" role="alert" v-if="!personas.length">
+        No hay personas ingresadas en la agenda
+        </div>
+        <div v-if="personas.length > 0">
+            <div v-for="(persona,index) in personas">
+              <div v-if="persona.favorito==true">
+                <div class="card">
+                  <h4 class="card-header">Contacto</h4>
+                   <div class="card-body">
+                    <h4 class="card-title"> Nombre: {{ persona.nombre }} Apellido: {{ persona.apellido }}      Edad: {{ persona.edad }} Genero: {{ persona.sexo }} </h4>
+                    <a href="#" type="submit"  class="btn btn-primary"@click.prevent="eliminarFavorito(index)" >Eliminar favorito</a>
+                   </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <h3 v-else>Aun no has agregado ningun contacto como favorito :(</h3>
+      </div>
 	 </div>
   <script src="js/vue.js"></script>
   <script src="js/app.js"></script>

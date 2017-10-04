@@ -8,9 +8,10 @@ var app = new Vue({
   	    	telefono: '',
           mail:'',
           genero:'',
-          grupo:''
-  	    },
-  	    personas: [],
+          grupo:'',
+          favorito: '' //Agregado campo favorito
+        },
+        personas: [],
   	    filtro: '',
   	    vista: 'ingresar',
   	    mensaje: false,
@@ -28,12 +29,23 @@ var app = new Vue({
             p.grupo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
             p.genero.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0);
         
-  	  	},
+        },
+        favoritosFiltradas(){
+           return this.personas.filter(p => (p.nombre.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+            p.apellido.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+            p.telefono.indexOf(this.filtro) >= 0 ||
+            p.mail.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+            p.grupo.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0 ||
+            p.genero.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0) &&
+            p.favorito.indexOf(true)>=0);
+        },
   	  	formOk() {
   	  		return this.persona.nombre 
           && this.persona.apellido 
           && this.persona.telefono
-          && this.persona.genero;
+          && this.persona.genero
+          && this.persona.grupo
+          && this.persona.favorito; //Agregado opcion mas en formOK
   	  	}
   	  },
 
@@ -57,6 +69,7 @@ var app = new Vue({
           this.persona.mail = '';
           this.persona.genero = '';
           this.persona.grupo='';
+          this.persona.favorito = ''; //Agregado limpiar favorito
   	  	},
   	  	cambiarVista(vista) {
   	  		this.vista = vista;
@@ -77,7 +90,6 @@ var app = new Vue({
         },
 
         doneEdit: function(persona){
-          debugger;
           if(!this.editedPersona){
             return
           }
@@ -85,10 +97,10 @@ var app = new Vue({
           persona.nombre = persona.nombre.trim();
           persona.apellido = persona.apellido.trim();
           persona.telefono = persona.telefono.trim();
-          persona.correo = persona.correo.trim();
+          persona.mail = persona.mail.trim();
           persona.grupo = persona.grupo;
           if(!persona.nombre || !persona.apellido || !persona.telefono 
-            || !persona.correo || !persona.grupo){
+            || !persona.mail || !persona.grupo){
             this.eliminarPersona(persona);
           }
           localStorage.setItem(STORAGE_KEY, JSON.stringify(this.personas));

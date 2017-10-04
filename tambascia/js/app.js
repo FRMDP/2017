@@ -15,6 +15,9 @@ new Vue({
         borradoAlert: false,
         restauradoAlert: false,
         ingresadoAlert: false,
+        editadoAlert: false,
+        vistaPersonaEditada: '',
+        index: ''
     },
     computed: {
         personasFiltradas() {
@@ -51,13 +54,13 @@ new Vue({
             localStorage.setItem('persona', JSON.stringify(this.personas));
         },
         getTrashFromStorage() {
-            const persons = localStorage.getItem('persona');
+            const persons = localStorage.getItem('papelera');
             if (persons) {
                 this.trash = JSON.parse(persons);
             }
         },
         saveTrashToStorage() {
-            localStorage.setItem('persona', JSON.stringify(this.trash));
+            localStorage.setItem('papelera', JSON.stringify(this.trash));
         },
         borrarPersona(idx) {
            let borrado = this.personas.splice(idx, 1);
@@ -80,15 +83,44 @@ new Vue({
         },
         cambiarVista(vista) {
             this.vista = vista;
+            this.limpiarPersona();
         },
         cerrarAlert() {
             this.borradoAlert = false;
             this.restauradoAlert = false;
             this.ingresadoAlert = false;
+            this.editadoAlert = false;
         },
-        modificarPersona(){
-            this.modificar = true;
-
+        modificarPersona(idx){
+            this.vistaPersonaEditada = this.vista;
+            let editado;
+            if(this.vistaPersonaEditada == "buscar"){
+                 editado = this.personas[idx];
+            }
+            else if(this.vistaPersonaEditada == 'papelera'){
+                editado = this.trash[idx];
+            }
+            this.index = idx;
+            this.cambiarVista("editar");
+            this.persona.nombre = editado.nombre;
+            this.persona.edad = editado.edad;
+            this.persona.mail = editado.mail;
+            this.persona.sexo = editado.sexo;
+            this.persona.cel = editado.cel;
+        },
+        confirmarEdicion(){
+            if(this.vistaPersonaEditada == "buscar"){
+                this.personas.splice(this.index, 1, Object.assign({}, this.persona));
+                this.savePersonasToStorage();
+            }
+            else if(this.vistaPersonaEditada == 'papelera'){
+                this.trash.splice(this.index, 1, Object.assign({}, this.persona));
+                this.saveTrashToStorage();
+            }
+            this.index = '';
+            this.cambiarVista(this.vistaPersonaEditada);
+            this.vistaPersonaEditada = '';
+            this.editadoAlert = true;
         }
     },
     mounted() {

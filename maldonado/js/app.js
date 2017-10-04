@@ -13,6 +13,8 @@ new Vue({
     favoritos: [],
     filtro: '',
     vista: 'ingresar',
+    indice: null,
+    mensaje: false
   },
   computed: {
   	personasFiltradas() {
@@ -42,6 +44,7 @@ new Vue({
   		this.personas.push(Object.assign({}, this.persona));
   		this.limpiarPersona();
       this.agregarPersonaALocalStorage();
+      this.mensaje = true;
   	},
     agregarPersonaALocalStorage(){
       localStorage.setItem('personas', JSON.stringify(this.personas));
@@ -89,10 +92,24 @@ new Vue({
     //Se mueve entre las diferentes vistas
   	cambiarVista(vista) {
   		this.vista = vista;
+      this.limpiarPersona();
+      this.mensaje = false;
   	},
     actualizarPersonasYFavoritos(){
       this.agregarPersonaALocalStorage();
       this.agregarFavoritoALocalStorage();
+    },
+    traerPersona(index){
+      this.indice = index;
+      this.persona = this.personas[index];
+      this.vista = 'editar';
+    },
+    editarPersona(){
+      this.personas[this.indice] = this.persona;
+      this.agregarPersonaALocalStorage();
+      this.traerPersonasDeLocalStorage();
+      this.vista = 'buscar';
+      this.mensaje = true;
     }
   },
   mounted() {

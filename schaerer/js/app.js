@@ -6,7 +6,8 @@ new Vue({
 			apellido: '',
 			edad: '',
 			sexo: '',
-			direccion: ''
+			direccion: '',
+			favorito: false
 		},
 		contactos: [],
 		filtro: '',
@@ -30,6 +31,9 @@ new Vue({
 		},
 		busquedaIncorrecta(){			// PARA HACER APARECER MENSAJE CUANDO FILTRAS ALGO QUE NO HAY
 			return this.contactos.length > 0 && this.contactosFiltrados.length == 0 && this.filtro!='';
+		},
+		contactosFavoritos(){
+			return this.contactos.filter(c => c.favorito == true);
 		}
 	},
 	methods: {
@@ -91,7 +95,12 @@ new Vue({
 			this.limpiarDatosContacto();
 			this.indiceContactoSeleccionado = '';
 			this.mensajeContactoEditado = true;
-		}
+		},
+		estadoFavorito(contact) {
+			this.indiceContactoSeleccionado = this.contactos.indexOf(contact);
+            this.contacto.favorito = contact.favorito;
+            this.setContactosLocalStorage();
+        }
 	},
 	mounted(){
 		this.getContactosLocalStorage();

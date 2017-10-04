@@ -75,6 +75,10 @@
 			              		<button class="waves-effect red btn-floating right darken-0" @click="eliminarPersona(index);">
 			              			<i class="material-icons">delete_forever</i>
 			              		</button>
+			              		<button class="waves-effect green btn-floating right darken-0 btnEditar" 
+			              		@click="editarPersona(persona)">
+									<i class="material-icons">mode_edit</i>
+								</button>
 								<button class="waves-effect waves-yellow btn-floating right btnFavorito" :class="{ favoritoOn : persona.favorito}" @click="agregarOquitarFavorito(index);">
 									<i class="material-icons">star_border</i>
 								</button>
@@ -106,6 +110,38 @@
 			        </div>
 			    </div>
 			    <h3 v-else class="center">No hay favoritos</h3>
+		    </div>
+		    <div v-if="vista == 'editar'" >
+		    <form class="col s12 l6 offset-l3 ">
+		    	<input type="hidden" v-model="index">
+		      <div class="row">
+		      	<h1 class="center">Editar Contacto</h1>
+		        <div class="input-field col s12">
+		          <input v-model="persona.nombre" type="text" class="validate" required>
+		        </div>
+		        <div class="input-field col s12">
+		          <input v-model="persona.apellido" type="text" class="validate" required>
+		        </div>
+		        <div class="input-field col s12">
+		          <input v-model="persona.email" type="email" class="validate" required>
+		        </div>
+		        <div class="input-field col s12">
+		          <input v-model="persona.telefono" type="text" class="validate" required>
+		        </div>
+		        <div class="col s12 contenedor_radios">
+					<p class="center">
+		        	<input name="genero" type="radio" id="ma" class="with-gap" value="m" v-model="persona.genero" required />
+	     			<label for="ma" class="black-text">Masculino</label>
+		        	<input name="genero" type="radio" id="fe" class="with-gap" value="f" v-model="persona.genero" required />
+	     			<label for="fe" class="black-text">Femenino</label>
+	     			</p>
+		        </div>
+		        <div class="input-field col s12 center">
+		          <button type="submit" class="blue waves-effect waves-light btn darken-2" @click.prevent="salvarCambios"><i class="material-icons left">save</i>Guardar</button>
+		        </div>
+		      </div>
+		       <div v-if="mensaje == true" class="white-text card-panel green lighten-1 center"><i class="material-icons left">done</i>¡ Usuario editado correctamente !</div>
+		    </form>
 		    </div>
 		</div>
 	</div>

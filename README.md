@@ -1,11 +1,12 @@
-### TP #4
+### TP #5
 
 #### Lineamientos
 
-    *   Tienen que hacer el PR contra la rama TP4, no contra master.
+    *   Tienen que hacer el PR contra la rama TP5, no contra master.
     *   Resuelven la historia de usuario asignada en Taiga. Crean las subtareas que consideren necesarias y trabajan sobre esas tareas. El tablero lo manejan completamente uds, este sprint no toco nada yo.
-    *   Tienen tiempo hasta el miércoles 20/9 a las 22Hs para hacer un commit con un archivo que tenga por nombre su apellido en minúscula y esté dentro de la carpeta en la que van a trabajar (la de su compañero).
-    *   Tienen tiempo hasta las 18Hs del dia martes 26/9 para leer y entender el código de su compañero (el próximo a su apellido en orden alfabético) y agregar una vista con funcionalidad a ese código. Tienen que mantener la línea que empezó su compañero, esto significa utilizar el mismo framework CSS, el mismo tipo de avisos al usuario, mismos flujo de trabajo, etc.
+    *   Tienen tiempo hasta las 18Hs del dia miércoles 4/10 para refactorizar su agenda utilizando las herramientas que aprendimos en clase (webpack, babel, vue-loader) y crear los componentes que crean necesarios.
+    *   No utilizar bibliotecas de manejo de DOM (jQuery o similares).
+    *   Tiene que funcionar todo. En su código actual (sobre todo en la parte de borrado) muchas veces falla. Si consideran que tienen que modificar las cosas de manera radical porque componentizar lo requiere, **háganlo**.
 
 #### Qué se evalúa?
     *   Prolijidad del código: indentaciones, espacios innecesarios, utilización de convenciones, etc.

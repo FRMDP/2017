@@ -6,7 +6,6 @@
 	margin-top: 20px;
 }
 .botonIngreso {
-  margin-left: 170px;
   border: 5px solid transparent;
   background: #0569FF;
   color: black;
@@ -51,11 +50,20 @@
 	padding-bottom: 15px;
 	border: 1px black;
 }
+
+/* No es la forma correcta de alinear los elementos */
 .cardActionContent{
-	padding-left: 70%;
+	/* padding-left: 70%; */
+  text-align: right;
 }
+
 .deleteBtn {
 	margin-left: 15px;
+}
+
+/* Para que el margen se asigne a todos los posibles botones y no solo al de borrar */
+.cardActionContent a {
+  margin-left: 15px;
 }
 
 .wrapper .tooltip {
@@ -120,15 +128,16 @@
 }
 
 .alert {
-	display: none;
+	/* La vista se maneja con vue
+  display: none; */
 	margin-left: 30px;
 	margin-top: 25px;
-	margin-bottom: 50px;
-    padding: 20px;
-    background-color: #80ff80;
-    color: black;
-    font-weight: bold;
-    border-radius: 5px;
+	margin-bottom: 10px;
+  background-color: #80ff80;
+  padding: 20px;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
 }
 
 .closebtn {
@@ -147,5 +156,10 @@
 }
 
 .tituloIngreso{
-	padding-left: 45px;
+	/* No es la forma correcta de centrar el texto
+  padding-left: 45px; */
+  font-weight: 300;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0;
 }

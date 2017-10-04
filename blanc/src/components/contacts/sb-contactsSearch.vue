@@ -9,9 +9,9 @@
         </div>
         <div class="row">
             <div class="col s12 m9 offset-m2">
-                <div class="input-field">
-                    <input id="find" type="text" v-model="filter" :disabled="!contactList.length">
+                <div class="input left-align">
                     <label for="find">Search</label>
+                    <input id="find" type="text" v-model="filter" :disabled="!contactList.length">
                 </div>
             </div>
         </div>

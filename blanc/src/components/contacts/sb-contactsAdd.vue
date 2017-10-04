@@ -10,18 +10,18 @@
         <div class="row">
             <div class="col s12">
                 <div class="row">
-                    <div class="input-field col s6">
-                        <input id="givenName" type="text" class="validate" v-model="contact.givenName">
+                    <div class="input col s6">
                         <label for="givenName">First Name</label>
+                        <input id="givenName" type="text" class="validate" v-model="contact.givenName">
                     </div>
-                    <div class="input-field col s6">
-                        <input id="surName" type="text" class="validate" v-model="contact.surName">
+                    <div class="input col s6">
                         <label for="surName">Last Name</label>
+                        <input id="surName" type="text" class="validate" v-model="contact.surName">
                     </div>
                     <div class="row">
-                        <div class="input-field col s12">
-                            <input id="address" type="text" class="validate" v-model="contact.address">
+                        <div class="input col s12">
                             <label for="address">Address</label>
+                            <input id="address" type="text" class="validate" v-model="contact.address">
                         </div>
                     </div>
                     <div class="row">
@@ -31,15 +31,15 @@
                         <label for="female">Female</label>
                     </div>
                     <div class="row">
-                        <div class="input-field col s12">
+                        <div class="input col s12">
                             <label for="birthdate">Date of Birth</label>
                             <input id="birthdate" type="date" class="validate right-align" v-model="contact.birthdate">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s12">
-                            <input id="number" type="number" class="validate" v-model="contact.number" number>
+                        <div class="input col s12">
                             <label for="number">Telephone</label>
+                            <input id="number" type="number" class="validate" v-model="contact.number" number>
                         </div>
                     </div>
                     <div class="row">

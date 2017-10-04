@@ -3,7 +3,7 @@
         <sb-contactsHome @changeView="changeView" :view="view" v-if="view === 'home'"></sb-contactsHome>
         <sb-contactsAdd @addContact="addContact" @showPopUpAlert="showPopUpAlert" v-if="view === 'new'"></sb-contactsAdd>
         <sb-contactsSearch :contactList="contactList" @setToDelete="setToDelete" v-if="view === 'search'"></sb-contactsSearch>
-        <sb-confirmDelete @changeView="changeView" @deleteContact="deleteContact" :toDelete="toDelete" :view="view" v-if="toDelete.length"></sb-confirmDelete>
+        <sb-confirmDelete @changeView="changeView" @deleteContact="deleteContact" :toDelete="toDelete" :view="view" v-if="contactToDelete"></sb-confirmDelete>
     </div>
 </template>
 
@@ -30,6 +30,11 @@
                 contactList: [],
                 toDelete: {}
             }
+        },
+        computed: {
+          contactToDelete: function(){
+              return Object.keys(this.toDelete).length;
+          }
         },
         methods: {
             changeView(view){

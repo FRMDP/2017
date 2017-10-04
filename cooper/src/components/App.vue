@@ -1,9 +1,9 @@
 <template>
     <div class="app">
     	<top-menu @cambiarVista="cambiarVista"></top-menu>
-        <vistaIngresar v-if="vista == 'ingresar'" @addPersona="addPersona" :persona="persona"></vistaIngresar>
-        <vistaBuscar v-if="vista == 'buscar'" :personas="personas" :denuncias="denuncias" @denunciarPersona="denunciarPersona"></vistaBuscar>
-        <vistaDenunciar v-if="vista == 'denuncias'" :denunciando="denunciando" :denuncias="denuncias"></vistaDenunciar>
+        <vistaIngresar v-if="vista == 'ingresar'" @addPersona="addPersona"></vistaIngresar>
+        <vistaBuscar v-if="vista == 'buscar'" :personas="personas" :denuncias="denuncias" @denunciarPersona="denunciarPersona" @contarDenuncias="contarDenuncias" @eliminarPersona="eliminarPersona"></vistaBuscar>
+        <vistaDenunciar v-if="vista == 'denuncias'" @getNombre="getNombre" :nombreApellido="nombreApellido" :denunciando="denunciando" :persona="persona" :denuncias="denuncias" @denunciarPersonaII="denunciarPersonaII"></vistaDenunciar>
     </div>
 </template>
 
@@ -23,6 +23,7 @@
     	},
     	data() {
     		return {
+          personas: [],
           persona: {
             id: '',
             nombre: '',
@@ -31,12 +32,7 @@
             direccion: '',
             sexo: ''
           },
-          personas: [],
-          denuncia: {
-            id_persona: '',
-            motivo: '',
-            descripcion: ''
-          },
+          nombreApellido: '',
           denuncias: [],
           filtro: '',
           vista: 'ingresar',
@@ -55,14 +51,27 @@
           } else {
             let indice = this.personas.length;
             chabon.id = this.personas[indice - 1].id +1;
-            this.personas.push(Object.assign({}, chabon));
-            localStorage.setItem('personas', JSON.stringify(this.personas));
           }
+          this.personas.push(chabon);
+          localStorage.setItem('personas', JSON.stringify(this.personas));
         },
-        denunciarPersona(chabon) {
+        eliminarPersona(persona_a_borrar) {
+          let pos = 0;
+          while(this.personas[pos].id != persona_a_borrar.id) 
+            pos++;
+          this.personas.splice(pos, 1);
+          localStorage.setItem('personas', JSON.stringify(this.personas));
+        },
+        denunciarPersona(chabon) { //paso 3
           this.persona = chabon;
           this.denunciando = true;
           this.vista = 'denuncias';
+        },
+        denunciarPersonaII(denuncia){ //ultimo paso
+          denuncia.id_persona = this.persona.id;
+          this.denuncias.push(denuncia);
+          localStorage.setItem('denuncias', JSON.stringify(this.denuncias));
+          this.denunciando = false;
         },
         cargarPersonasDenuncias(){
           const personas = localStorage.getItem('personas');
@@ -73,6 +82,21 @@
           const denuncias = localStorage.getItem('denuncias');
           if(denuncias){
             this.denuncias = JSON.parse(denuncias);
+          }
+        },
+        contarDenuncias(personita) {
+          cant = 0;
+          for (let i = 0; this.denuncias.length > i; i++) {
+            if(this.denuncias[i].id_persona == personita.id) 
+              cant++;
+            }
+          return cant;
+        },
+        getNombre(id){
+            for (let i = 0; this.personas.length > i; i++) {
+              if(this.personas[i].id == id) {
+                this.nombreApellido = this.personas[i].nombre + " " + this.personas[i].apellido;
+            }
           }
         }
     	},

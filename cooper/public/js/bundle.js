@@ -10911,7 +10911,7 @@ module.exports = g;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c7dea62c_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c7dea62c_hasScoped_true_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(37);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -10993,7 +10993,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11054,7 +11054,7 @@ var _vistaBuscar = __webpack_require__(22);
 
 var _vistaBuscar2 = _interopRequireDefault(_vistaBuscar);
 
-var _vistaDenunciar = __webpack_require__(27);
+var _vistaDenunciar = __webpack_require__(32);
 
 var _vistaDenunciar2 = _interopRequireDefault(_vistaDenunciar);
 
@@ -11080,6 +11080,7 @@ exports.default = {
   },
   data: function data() {
     return {
+      personas: [],
       persona: {
         id: '',
         nombre: '',
@@ -11088,12 +11089,7 @@ exports.default = {
         direccion: '',
         sexo: ''
       },
-      personas: [],
-      denuncia: {
-        id_persona: '',
-        motivo: '',
-        descripcion: ''
-      },
+      nombreApellido: '',
       denuncias: [],
       filtro: '',
       vista: 'ingresar',
@@ -11113,14 +11109,29 @@ exports.default = {
       } else {
         var indice = this.personas.length;
         chabon.id = this.personas[indice - 1].id + 1;
-        this.personas.push(Object.assign({}, chabon));
-        localStorage.setItem('personas', JSON.stringify(this.personas));
       }
+      this.personas.push(chabon);
+      localStorage.setItem('personas', JSON.stringify(this.personas));
+    },
+    eliminarPersona: function eliminarPersona(persona_a_borrar) {
+      var pos = 0;
+      while (this.personas[pos].id != persona_a_borrar.id) {
+        pos++;
+      }this.personas.splice(pos, 1);
+      localStorage.setItem('personas', JSON.stringify(this.personas));
     },
     denunciarPersona: function denunciarPersona(chabon) {
+      //paso 3
       this.persona = chabon;
       this.denunciando = true;
       this.vista = 'denuncias';
+    },
+    denunciarPersonaII: function denunciarPersonaII(denuncia) {
+      //ultimo paso
+      denuncia.id_persona = this.persona.id;
+      this.denuncias.push(denuncia);
+      localStorage.setItem('denuncias', JSON.stringify(this.denuncias));
+      this.denunciando = false;
     },
     cargarPersonasDenuncias: function cargarPersonasDenuncias() {
       var personas = localStorage.getItem('personas');
@@ -11131,6 +11142,20 @@ exports.default = {
       var denuncias = localStorage.getItem('denuncias');
       if (denuncias) {
         this.denuncias = JSON.parse(denuncias);
+      }
+    },
+    contarDenuncias: function contarDenuncias(personita) {
+      cant = 0;
+      for (var i = 0; this.denuncias.length > i; i++) {
+        if (this.denuncias[i].id_persona == personita.id) cant++;
+      }
+      return cant;
+    },
+    getNombre: function getNombre(id) {
+      for (var i = 0; this.personas.length > i; i++) {
+        if (this.personas[i].id == id) {
+          this.nombreApellido = this.personas[i].nombre + " " + this.personas[i].apellido;
+        }
       }
     }
   },
@@ -11229,7 +11254,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11260,10 +11285,6 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = {
 	name: 'topMenu',
-	data: function data() {
-		return {};
-	},
-
 	methods: {
 		cambiarVista: function cambiarVista(vista) {
 			this.$emit('cambiarVista', vista);
@@ -11439,7 +11460,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -11483,10 +11504,18 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = {
   name: 'vistaIngresar',
-  props: ['persona', 'vista'],
+  props: ['vista'],
   data: function data() {
     return {
-      mensaje: false
+      mensaje: false,
+      persona: {
+        id: '',
+        nombre: '',
+        apellido: '',
+        edad: '',
+        direccion: '',
+        sexo: ''
+      }
     };
   },
 
@@ -11716,7 +11745,7 @@ if (false) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_vistaBuscar_vue__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_vistaBuscar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_vistaBuscar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e2be0fac_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_vistaBuscar_vue__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e2be0fac_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_vistaBuscar_vue__ = __webpack_require__(31);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -11798,13 +11827,169 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _tarjetaPersona = __webpack_require__(26);
+
+var _tarjetaPersona2 = _interopRequireDefault(_tarjetaPersona);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  name: 'vistaBuscar',
+  props: ['personas', 'vista', 'denuncias'], //recibe de App
+  components: {
+    tarjetaPersona: _tarjetaPersona2.default
+  },
+  data: function data() {
+    return {
+      filtro: ''
+    };
+  },
+
+  computed: {
+    personasFiltradas: function personasFiltradas() {
+      var _this = this;
+
+      return this.personas.filter(function (p) {
+        return p.nombre.toLowerCase().indexOf(_this.filtro.toLowerCase()) >= 0 || p.apellido.toLowerCase().indexOf(_this.filtro.toLowerCase()) >= 0 || p.edad.indexOf(_this.filtro) >= 0 || p.direccion.toLowerCase().indexOf(_this.filtro.toLowerCase()) >= 0;
+      });
+    }
+  },
+  methods: {
+    denunciarPersona: function denunciarPersona(chabon) {
+      //paso 2
+      this.$emit('denunciarPersona', chabon);
+    },
+    eliminarPersona: function eliminarPersona(chabon) {
+      this.$emit('eliminarPersona', chabon);
+    }
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tarjeta_persona_vue__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tarjeta_persona_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tarjeta_persona_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_9d0f0056_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_tarjeta_persona_vue__ = __webpack_require__(30);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(27)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_tarjeta_persona_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_9d0f0056_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_tarjeta_persona_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/components/tarjeta-persona.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] tarjeta-persona.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9d0f0056", Component.options)
+  } else {
+    hotAPI.reload("data-v-9d0f0056", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(28);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("13e74fc9", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9d0f0056\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./tarjeta-persona.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9d0f0056\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./tarjeta-persona.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11833,52 +12018,102 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 exports.default = {
-  name: 'vistaBuscar',
-  props: ['personas', 'vista', 'denuncias'], //recibe de App
-  data: function data() {
-    return {
-      filtro: ''
-    };
-  },
-
-  computed: {
-    personasFiltradas: function personasFiltradas() {
-      var _this = this;
-
-      return this.personas.filter(function (p) {
-        return p.nombre.toLowerCase().indexOf(_this.filtro.toLowerCase()) >= 0 || p.apellido.toLowerCase().indexOf(_this.filtro.toLowerCase()) >= 0 || p.edad.indexOf(_this.filtro) >= 0 || p.direccion.toLowerCase().indexOf(_this.filtro.toLowerCase()) >= 0;
-      });
-    }
-  },
+  name: 'tarjeta',
+  props: ['persona'],
   methods: {
-    denunciarPersona: function denunciarPersona(chabon) {
-      this.$emit('denunciarPersona', Object.assign({}, chabon));
+    eliminarPersona: function eliminarPersona(chabon) {
+      this.$emit('eliminarPersona', chabon);
     },
-    contarDenuncias: function contarDenuncias(personita) {
-      cant = 0;
-      console.log('esteban');
-      for (var i = 0; this.denuncias.length > i; i++) {
-        if (this.denuncias[i].id_persona == personita.id) cant++;
-      }
-      return cant;
+    denunciarPersona: function denunciarPersona(chabon) {
+      //paso 1
+      this.$emit('denunciarPersona', chabon);
+    },
+    contarDenuncias: function contarDenuncias(chabon) {
+      this.$emit('contarDenuncias', chabon);
     }
   }
 };
 
 /***/ }),
-/* 26 */
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col s12 m6 l3", attrs: { id: "card" } }, [
+    _c("div", { staticClass: "card blue-grey darken-1" }, [
+      _c("div", { staticClass: "card-content white-text" }, [
+        _c("h4", { staticClass: "card-title" }, [
+          _vm._v(
+            _vm._s(_vm.persona.nombre) + " " + _vm._s(_vm.persona.apellido)
+          )
+        ]),
+        _vm._v(" "),
+        _c("h6", [_vm._v("Edad: " + _vm._s(_vm.persona.edad))]),
+        _vm._v(" "),
+        _c("h6", [_vm._v("Direccion: " + _vm._s(_vm.persona.direccion))]),
+        _vm._v(" "),
+        _vm.persona.sexo == "v"
+          ? _c("h6", [_vm._v("Varon")])
+          : _c("h6", [_vm._v("Mujer")]),
+        _vm._v(" "),
+        _vm.contarDenuncias(_vm.persona)
+          ? _c("h6", [
+              _vm._v("Denuncias: " + _vm._s(_vm.contarDenuncias(_vm.persona)))
+            ])
+          : _c("h6", [_vm._v("Sin denuncias")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-action" }, [
+        _c(
+          "a",
+          {
+            attrs: { id: "borrar", href: "#" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.eliminarPersona(_vm.persona)
+              }
+            }
+          },
+          [_vm._v("Borrar")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.denunciarPersona(_vm.persona)
+              }
+            }
+          },
+          [_vm._v("Denunciar")]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-9d0f0056", esExports)
+  }
+}
+
+/***/ }),
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11921,74 +12156,13 @@ var render = function() {
               _vm._v("Los datos ingresados no concuerdan con ninguna persona")
             ])
           : _vm._l(_vm.personasFiltradas, function(persona) {
-              return _c("div", [
-                _c(
-                  "div",
-                  { staticClass: "col s12 m6 l3", attrs: { id: "card" } },
-                  [
-                    _c("div", { staticClass: "card blue-grey darken-1" }, [
-                      _c("div", { staticClass: "card-content white-text" }, [
-                        _c("h4", { staticClass: "card-title" }, [
-                          _vm._v(
-                            _vm._s(persona.nombre) +
-                              " " +
-                              _vm._s(persona.apellido)
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", [_vm._v("Edad: " + _vm._s(persona.edad))]),
-                        _vm._v(" "),
-                        _c("h6", [
-                          _vm._v("Direccion: " + _vm._s(persona.direccion))
-                        ]),
-                        _vm._v(" "),
-                        persona.sexo == "v"
-                          ? _c("h6", [_vm._v("Varon")])
-                          : _c("h6", [_vm._v("Mujer")]),
-                        _vm._v(" "),
-                        _vm.contarDenuncias(persona)
-                          ? _c("h6", [
-                              _vm._v(
-                                "Denuncias: " +
-                                  _vm._s(_vm.contarDenuncias(persona))
-                              )
-                            ])
-                          : _c("h6", [_vm._v("Sin denuncias")])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-action" }, [
-                        _c(
-                          "a",
-                          {
-                            attrs: { id: "borrar", href: "#" },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.eliminarPersona(persona)
-                              }
-                            }
-                          },
-                          [_vm._v("Borrar")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.denunciarPersona(persona)
-                              }
-                            }
-                          },
-                          [_vm._v("Denunciar")]
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              ])
+              return _c("tarjeta-persona", {
+                attrs: { persona: persona },
+                on: {
+                  denunciarPersona: _vm.denunciarPersona,
+                  eliminarPersona: _vm.eliminarPersona
+                }
+              })
             })
       ],
       2
@@ -12007,18 +12181,18 @@ if (false) {
 }
 
 /***/ }),
-/* 27 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_vistaDenunciar_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_vistaDenunciar_vue__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_vistaDenunciar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_vistaDenunciar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_030db497_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_vistaDenunciar_vue__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_030db497_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_vistaDenunciar_vue__ = __webpack_require__(36);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(28)
+  __webpack_require__(33)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -12062,13 +12236,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 28 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(29);
+var content = __webpack_require__(34);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -12088,7 +12262,7 @@ if(false) {
 }
 
 /***/ }),
-/* 29 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -12096,13 +12270,13 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 30 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12168,16 +12342,42 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = {
   name: 'vistaDenunciar',
-  props: ['persona', 'vista', 'denunciando', 'denuncias'],
+  props: ['persona', 'denunciando', 'denuncias', 'nombreApellido'], //la persona es para cuando estas denunciandola
   data: function data() {
-    return {};
+    return {
+      denuncia: {
+        id_persona: '',
+        motivo: '',
+        descripcion: ''
+      }
+    };
   },
 
-  methods: {}
+  computed: {
+    formOk: function formOk() {
+      return this.denuncia.motivo;
+    }
+  },
+  methods: {
+    denunciarPersonaII: function denunciarPersonaII(denuncia) {
+      //paso 4
+      this.$emit('denunciarPersonaII', Object.assign({}, this.denuncia));
+      this.cleanFormulario();
+      return this.nombreApellido;
+    },
+    cleanFormulario: function cleanFormulario() {
+      this.denuncia.id_persona = '';
+      this.denuncia.motivo = '';
+      this.denuncia.descripcion = '';
+    },
+    getNombre: function getNombre(id_persona) {
+      this.$emit('getNombre', id_persona);
+    }
+  }
 };
 
 /***/ }),
-/* 31 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12186,7 +12386,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.denunciando
-    ? _c("div", [
+    ? _c("div", { staticClass: "container" }, [
         _c("form", { staticClass: "normal", attrs: { autocomplete: "off" } }, [
           _c("h2", [_vm._v("Realizar denuncia")]),
           _vm._v(" "),
@@ -12361,7 +12561,7 @@ var render = function() {
                 {
                   staticClass: "btn waves-effect waves-light right",
                   attrs: {
-                    disabled: !_vm.formOk2,
+                    disabled: !_vm.formOk,
                     type: "submit",
                     name: "action"
                   },
@@ -12378,7 +12578,7 @@ var render = function() {
           ])
         ])
       ])
-    : _c("div", [
+    : _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row" }, [
           !_vm.denuncias.length
             ? _c("h3", [_vm._v("No hay denuncias")])
@@ -12458,7 +12658,7 @@ if (false) {
 }
 
 /***/ }),
-/* 32 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12473,22 +12673,32 @@ var render = function() {
       _c("top-menu", { on: { cambiarVista: _vm.cambiarVista } }),
       _vm._v(" "),
       _vm.vista == "ingresar"
-        ? _c("vistaIngresar", {
-            attrs: { persona: _vm.persona },
-            on: { addPersona: _vm.addPersona }
-          })
+        ? _c("vistaIngresar", { on: { addPersona: _vm.addPersona } })
         : _vm._e(),
       _vm._v(" "),
       _vm.vista == "buscar"
         ? _c("vistaBuscar", {
             attrs: { personas: _vm.personas, denuncias: _vm.denuncias },
-            on: { denunciarPersona: _vm.denunciarPersona }
+            on: {
+              denunciarPersona: _vm.denunciarPersona,
+              contarDenuncias: _vm.contarDenuncias,
+              eliminarPersona: _vm.eliminarPersona
+            }
           })
         : _vm._e(),
       _vm._v(" "),
       _vm.vista == "denuncias"
         ? _c("vistaDenunciar", {
-            attrs: { denunciando: _vm.denunciando, denuncias: _vm.denuncias }
+            attrs: {
+              nombreApellido: _vm.nombreApellido,
+              denunciando: _vm.denunciando,
+              persona: _vm.persona,
+              denuncias: _vm.denuncias
+            },
+            on: {
+              getNombre: _vm.getNombre,
+              denunciarPersonaII: _vm.denunciarPersonaII
+            }
           })
         : _vm._e()
     ],

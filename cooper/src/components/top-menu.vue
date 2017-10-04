@@ -14,11 +14,6 @@
 <script>
     export default {
     	name: 'topMenu',
-    	data() {
-    		return {
-    			
-    		}
-    	},
     	methods: {
     		cambiarVista(vista) {
     			this.$emit('cambiarVista', vista);
@@ -28,5 +23,4 @@
 </script>
 
 <style>
-
 </style>

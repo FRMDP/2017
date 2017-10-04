@@ -1,5 +1,5 @@
 <template>
-  <div v-if="denunciando">
+  <div v-if="denunciando" class="container">
     <form autocomplete="off" class="normal">
       <h2>Realizar denuncia</h2>
       <h5>Usuario a denunciar: {{ persona.nombre }} {{ persona.apellido }}</h5>
@@ -18,12 +18,12 @@
         <div class="col l7">
         <h6>Detalles de la denuncia (opcional)</h6>
         <textarea name="paragraph_text" cols="50" rows="10" v-model="denuncia.descripcion"></textarea>
-        <button :disabled="!formOk2" class="btn waves-effect waves-light right" type="submit" name="action"  @click.prevent="denunciarPersonaII(denuncia)">Aceptar</button>
+        <button :disabled="!formOk" class="btn waves-effect waves-light right" type="submit" name="action"  @click.prevent="denunciarPersonaII(denuncia)">Aceptar</button>
         </div>
       </div>
     </form>
   </div>
-  <div v-else>
+  <div v-else class="container">
     <div class="row">
       <h3 v-if="!denuncias.length">No hay denuncias</h3>
       <div v-else>
@@ -55,14 +55,35 @@
 <script>
     export default {
       name: 'vistaDenunciar',
-      props: ['persona', 'vista', 'denunciando', 'denuncias'],
+      props: ['persona', 'denunciando', 'denuncias', 'nombreApellido'], //la persona es para cuando estas denunciandola
       data() {
         return {
-          
+          denuncia: {
+            id_persona: '',
+            motivo: '',
+            descripcion: ''
+          }
+        }
+      },
+      computed: {
+        formOk() {
+          return this.denuncia.motivo;
         }
       },
       methods: {
-
+        denunciarPersonaII(denuncia){ //paso 4
+          this.$emit('denunciarPersonaII', Object.assign({}, this.denuncia));
+          this.cleanFormulario();
+          return this.nombreApellido;
+        },
+        cleanFormulario() {
+          this.denuncia.id_persona = '';
+          this.denuncia.motivo = '';
+          this.denuncia.descripcion = '';
+        },
+        getNombre(id_persona){
+          this.$emit('getNombre', id_persona);
+        }
       }
     }
 </script>

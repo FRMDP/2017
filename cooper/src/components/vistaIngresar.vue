@@ -27,9 +27,18 @@
 <script>
     export default {
     	name: 'vistaIngresar',
-      props: ['persona', 'vista'],
-      data(){ return {
-          mensaje: false
+      props: [ 'vista'],
+      data(){ 
+        return {
+          mensaje: false,
+          persona: {
+            id: '',
+            nombre: '',
+            apellido: '',
+            edad: '',
+            direccion: '',
+            sexo: ''
+          }
         }
       },
       computed:{

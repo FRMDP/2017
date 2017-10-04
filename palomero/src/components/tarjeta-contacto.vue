@@ -13,10 +13,29 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>  
 </template>
 
 <script>
-	
+	export default{
+		name:'tarjetaContacto',
+		props:['persona','index'],
+
+	data(){
+		return{
+
+		}
+	},
+	methods:{
+	eliminarFav(index)
+	{
+		this.$emit('eliminarFav',this.index);
+	}
+}
+}
 	
 </script>
+
+<style>
+	
+</style>

@@ -27,9 +27,16 @@
 </template>
 
 <script>
+
+	import tarjetaContacto from './tarjeta-contacto.vue';
+
 	export default{
 		name:'verFavoritos',
 		props:['vista','personas'],
+
+		components:{
+			tarjetaContacto
+		},
 
 		data(){
 		return{

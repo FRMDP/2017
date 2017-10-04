@@ -9,7 +9,7 @@
                         <p>Do you wish to continue?</p>
                     </div>
                     <div class="card-action">
-                        <a @click="deleteContact(toDelete,'search')">Yes</a>
+                        <a @click="deleteContact(toDelete)">Yes</a>
                         <a @click="resetToDelete()">No</a>
                     </div>
                 </div>

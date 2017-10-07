@@ -16,13 +16,31 @@
                         </span>
                         <div class="nav-right nav-menu">
                             <a class="nav-item">
-                                News
+                                <b-icon
+                                        pack="fa"
+                                        icon="newspaper-o"
+                                        size="is-small"
+                                        type="is-light">
+                                </b-icon>
+                                &nbsp;News
                             </a>
                             <a class="nav-item">
-                                Categories
+                                <b-icon
+                                        pack="fa"
+                                        icon="th-list"
+                                        size="is-small"
+                                        type="is-light">
+                                </b-icon>
+                                &nbsp;Categories
                             </a>
-                            <a class="nav-item">
-                                Add
+                            <a class="nav-item" href="/#/add">
+                                <b-icon
+                                        pack="fa"
+                                        icon="pencil"
+                                        size="is-small"
+                                        type="is-light">
+                                </b-icon>
+                                &nbsp;Add
                             </a>
                         </div>
                     </div>
@@ -73,6 +91,6 @@
     }
 </script>
 
-<style src="../assets/css/landing.css">
+<style src="../assets/css/na-landing.css">
 
 </style>

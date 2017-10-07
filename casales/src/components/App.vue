@@ -7,3 +7,11 @@
 <script>
     export default {}
 </script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+    body {
+        font-family: 'Raleway', sans-serif;
+    }
+</style>

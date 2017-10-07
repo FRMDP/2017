@@ -1,0 +1,23 @@
+/* Custom Styles
+-------------------------------------------------- */
+.bg-landing {
+    background: linear-gradient(
+            rgba(116, 235, 213, 0.6),
+            rgba(172, 182, 229, 0.6)
+    ),
+    linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+    ),
+    url('./../img/bg-home.jpg') no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.promo-img {
+    border-radius: 10px;
+    border: 10px solid #fff;
+}

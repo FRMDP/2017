@@ -1,8 +1,7 @@
 /* Custom Styles
 -------------------------------------------------- */
 .bg-landing {
-    /*background-color: #F62459;*/
-    background-image: linear-gradient(rgba(25, 181, 254, 0.6), rgba(69, 70, 71, 0.6)), linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../img/bg-home.jpg');
+    background-image: linear-gradient(rgba(116, 235, 213, 0.6), rgba(172, 182, 229, 0.6)), linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../img/bg-home.jpg');
 }
 
 .promo-img {

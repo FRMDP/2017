@@ -1,3 +1,11 @@
+/* Custom Styles
+-------------------------------------------------- */
+.bg-news {
+    background: linear-gradient(rgba(233, 228, 240, 0.6), rgba(211, 204, 227, 0.6)), linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../img/bg-news.jpg') no-repeat;
+    background-attachment: fixed;
+    min-height: 510px;
+}
+
 .drop-shadow {
     box-shadow: 0 2px 3px #888888;
 }

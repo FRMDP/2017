@@ -23,7 +23,7 @@
                     </b-icon>
                     &nbsp;News
                 </a>
-                <a id="nav-item-2" class="nav-item animated fadeIn">
+                <a id="nav-item-2" class="nav-item animated fadeIn" href="/#/categories">
                     <b-icon
                             pack="fa"
                             icon="th-list"

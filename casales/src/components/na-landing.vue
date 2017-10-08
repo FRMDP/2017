@@ -11,7 +11,7 @@
                 <div class="columns is-vcentered">
                     <div class="column is-5">
                         <figure id="promo" class="image is-4by3 animated fadeIn">
-                            <img src="img/promo.jpg"
+                            <img src="~../assets/img/promo.jpg"
                                  class="promo-img" alt="Description">
                         </figure>
                     </div>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg-news">
         <div class="container is-fluid">
             <na-navigation class="drop-shadow" :logo="'dark'"></na-navigation>
         </div>
@@ -8,7 +8,7 @@
             <section class="section">
                 <div class="columns">
                     <div class="column is-8-desktop is-offset-2-desktop">
-                        <div class="box">
+                        <div class="box animated fadeInUp">
                             <h1 class="title">
                                 News item Title
                             </h1>
@@ -53,16 +53,20 @@
                 </div>
             </section>
         </div>
+
+        <na-footer></na-footer>
     </div>
 </template>
 
 <script>
     import naNavigation from "./na-navigation.vue";
+    import naFooter from "./na-footer.vue";
 
     export default {
         name: 'news',
         components: {
             naNavigation: naNavigation,
+            naFooter: naFooter
         }
     }
 </script>

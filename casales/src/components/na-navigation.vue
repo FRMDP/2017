@@ -2,11 +2,12 @@
     <nav class="nav">
         <div class="container">
             <div class="nav-left">
-                <b-tooltip label="World News!" position="is-right">
-                    <a class="nav-item animated fadeInLeftBig" href="/">
-                        <img :src="imageLink" alt="World News Logo">
-                    </a>
-                </b-tooltip>
+                <a class="nav-item animated fadeInLeftBig" href="/">
+                    <img :src="imageLink" alt="World News Logo">
+                </a>
+                <p class="nav-item animated fadeIn">
+                    &nbsp;|&nbsp;{{ this.subtitle.toUpperCase() }}&nbsp;
+                </p>
             </div>
             <span class="nav-toggle">
                 <span></span>
@@ -19,7 +20,7 @@
                             pack="fa"
                             icon="newspaper-o"
                             size="is-small"
-                            type="is-light">
+                            :type="'is-' + this.logo">
                     </b-icon>
                     &nbsp;News
                 </a>
@@ -28,7 +29,7 @@
                             pack="fa"
                             icon="th-list"
                             size="is-small"
-                            type="is-light">
+                            :type="'is-' + this.logo">
                     </b-icon>
                     &nbsp;Categories
                 </a>
@@ -37,7 +38,7 @@
                             pack="fa"
                             icon="pencil"
                             size="is-small"
-                            type="is-light">
+                            :type="'is-' + this.logo">
                     </b-icon>
                     &nbsp;Write
                 </a>
@@ -49,7 +50,7 @@
 <script>
     export default {
         name: 'naNavigation',
-        props: ['logo'],
+        props: ['logo', 'subtitle'],
         computed: {
             imageLink(){
                 switch (this.logo) {

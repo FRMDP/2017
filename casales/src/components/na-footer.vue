@@ -3,14 +3,14 @@
         <div class="container">
             <div class="content has-text-centered">
                 <p>Made by Ignacio Casales</p>
-                <p>
+                <a href="https://github.com/ignaciocasales" target="_blank">
                     <b-icon
                             pack="fa"
                             icon="github"
                             size="is-medium"
                             type="is-dark">
                     </b-icon>
-                </p>
+                </a>
             </div>
         </div>
     </footer>

@@ -2,7 +2,7 @@
     <section class="hero is-fullheight is-dark bg-landing">
         <div class="hero-head">
             <div class="container">
-                <na-navigation :logo="'light'"></na-navigation>
+                <na-navigation :logo="'light'" :subtitle="'Home'"></na-navigation>
             </div>
         </div>
 

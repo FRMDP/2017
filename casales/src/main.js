@@ -1,11 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Buefy from 'buefy';
-import 'buefy/lib/buefy.css';
+import Buefy from "buefy";
+import "buefy/lib/buefy.css";
 
 import App from "./components/App.vue";
 import storageService from "./services/storageService";
 import router from "./utils/router";
+import stringUtils from "./utils/stringUtils";
 
 Vue.use(VueRouter);
 
@@ -14,6 +15,7 @@ Vue.use(Buefy, {
 });
 
 Vue.prototype.$storageService = storageService;
+Vue.prototype.$stringUtils = stringUtils;
 
 new Vue({
     router,

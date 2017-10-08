@@ -1,7 +1,7 @@
 <template>
     <div class="bg-news">
         <div class="container is-fluid">
-            <na-navigation class="drop-shadow" :logo="'dark'"></na-navigation>
+            <na-navigation class="drop-shadow" :logo="'dark'" :subtitle="'News'"></na-navigation>
         </div>
 
         <div class="container">

@@ -3,6 +3,7 @@ import home from "../components/na-landing.vue";
 import add from "../components/na-add.vue";
 import news from "../components/na-news.vue";
 import categories from "../components/na-categories.vue";
+import categoriesNews from "../components/na-categories-news.vue";
 
 export default new VueRouter({
     routes: [
@@ -25,6 +26,10 @@ export default new VueRouter({
         {
             path: '/categories',
             component: categories
+        },
+        {
+            path: '/categories/:id',
+            component: categoriesNews
         }
     ]
 });

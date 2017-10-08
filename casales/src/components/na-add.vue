@@ -4,10 +4,10 @@
             <div class="container">
                 <div class="columns">
                     <div class="column is-8-desktop is-offset-2-desktop">
-                        <h1 class="title">
+                        <h1 class="title animated fadeIn">
                             Write an Article
                         </h1>
-                        <div class="box">
+                        <div class="box animated fadeInUp">
                             <b-field grouped>
                                 <b-field label="Title" expanded>
                                     <b-field>

@@ -10,6 +10,7 @@
 
 <style>
     @import url('https://fonts.googleapis.com/css?family=Raleway');
+    @import "../assets/css/animate.css";
 
     body {
         font-family: 'Raleway', sans-serif;

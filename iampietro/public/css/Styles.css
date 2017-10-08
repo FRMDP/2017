@@ -1,0 +1,39 @@
+body {
+	margin-top: 10px;
+}
+
+div div h1 {
+	padding-top: 17px;
+}
+
+.forP {
+	font-family: Georgia;
+	font-size: 18px;
+    line-height: 27px;
+    max-width: 700px;
+    margin: 0 0 20px 50px;
+}
+
+#entertainment:hover {
+	background-color: #f06292;
+}
+
+#sports:hover {
+	background-color: #66bb6a;
+}
+
+#economy:hover {
+	background-color: #d50000;
+}
+
+#world:hover {
+	background-color: #aeea00;
+}
+
+#politics:hover {
+	background-color: #1a237e;
+}
+
+#localy:hover {
+	background-color: #1565c0;
+}

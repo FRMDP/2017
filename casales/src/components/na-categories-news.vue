@@ -1,7 +1,17 @@
 <template>
     <div class="bg-categories-news">
         <div class="container is-fluid">
-            <na-navigation class="drop-shadow" :logo="'dark'" :subtitle="getSubtitle"></na-navigation>
+            <na-navigation class="drop-shadow" :logo="'dark'" :subtitle="getCategoryName"></na-navigation>
+        </div>
+
+        <div class="container">
+            <section class="section">
+                <div class="columns">
+                    <div class="column is-8-desktop is-offset-2-desktop">
+                        <na-articles :filter="getCategoryName"></na-articles>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <na-footer></na-footer>
@@ -12,12 +22,14 @@
     import naNavigation from "./na-navigation.vue";
     import naFooter from "./na-footer.vue";
     import categoriesService from "./../services/categoriesService";
+    import naArticles from "./na-articles.vue";
 
     export default {
         name: 'categoriesNews',
         components: {
             naNavigation: naNavigation,
-            naFooter: naFooter
+            naFooter: naFooter,
+            naArticles: naArticles
         },
         data() {
             return {
@@ -31,7 +43,7 @@
             id() {
                 return this.$route.params.id;
             },
-            getSubtitle() {
+            getCategoryName() {
                 return this.category.name;
             }
         },

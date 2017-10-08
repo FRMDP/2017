@@ -2,49 +2,7 @@
     <section class="hero is-fullheight is-dark bg-landing">
         <div class="hero-head">
             <div class="container">
-                <nav class="nav">
-                    <div class="container">
-                        <div class="nav-left">
-                            <a class="nav-item animated fadeInLeftBig">
-                                <img src="img/brand.png" alt="Description">
-                            </a>
-                        </div>
-                        <span class="nav-toggle">
-                              <span></span>
-                              <span></span>
-                              <span></span>
-                        </span>
-                        <div class="nav-right nav-menu">
-                            <a id="nav-item-3" class="nav-item animated fadeIn">
-                                <b-icon
-                                        pack="fa"
-                                        icon="newspaper-o"
-                                        size="is-small"
-                                        type="is-light">
-                                </b-icon>
-                                &nbsp;News
-                            </a>
-                            <a id="nav-item-2" class="nav-item animated fadeIn">
-                                <b-icon
-                                        pack="fa"
-                                        icon="th-list"
-                                        size="is-small"
-                                        type="is-light">
-                                </b-icon>
-                                &nbsp;Categories
-                            </a>
-                            <a id="nav-item-1" class="nav-item animated fadeIn" href="/#/add">
-                                <b-icon
-                                        pack="fa"
-                                        icon="pencil"
-                                        size="is-small"
-                                        type="is-light">
-                                </b-icon>
-                                &nbsp;Write
-                            </a>
-                        </div>
-                    </div>
-                </nav>
+                <na-navigation :logo="'light'"></na-navigation>
             </div>
         </div>
 
@@ -90,8 +48,13 @@
 </template>
 
 <script>
+    import naNavigation from "./na-navigation.vue";
+
     export default {
-        name: 'home'
+        name: 'home',
+        components: {
+            naNavigation: naNavigation,
+        }
     }
 </script>
 

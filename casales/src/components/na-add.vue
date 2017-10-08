@@ -12,6 +12,10 @@
                                 <b-field label="Title" expanded>
                                     <b-field>
                                         <b-select placeholder="Select a category">
+                                            <option v-for="category in categories" :value="category.id"
+                                                    :key="category.id">
+                                                {{ category.name.toUpperCase() }}
+                                            </option>
                                         </b-select>
                                         <b-input placeholder="Title" expanded></b-input>
                                     </b-field>
@@ -33,6 +37,9 @@
                             </b-field>
                             <b-field label="Reporter">
                                 <b-select placeholder="Select a name">
+                                    <option v-for="reporter in reporters" :value="reporter.id" :key="reporter.id">
+                                        {{ reporter.name }}
+                                    </option>
                                 </b-select>
                             </b-field>
                             <hr>
@@ -59,6 +66,9 @@
 </template>
 
 <script>
+    import categoriesService from "./../services/categoriesService";
+    import reportersService from "./../services/reportersService";
+
     export default {
         name: 'add',
         data() {
@@ -67,8 +77,14 @@
             return {
                 date: new Date(),
                 minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 2),
-                maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+                maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+                categories: [],
+                reporters: []
             }
+        },
+        created() {
+            this.categories = categoriesService.getCategories();
+            this.reporters = reportersService.getReporters();
         }
     }
 </script>

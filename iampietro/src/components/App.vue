@@ -5,25 +5,25 @@
 	    		<div class="nav-wrapper container"><router-link to="/news" class="brand-logo blue-text text-darken-4">Sputnik</router-link>
 	    			<ul class="right hide-on-med-and-down">
 	    				<li>
-	    					<router-link to="/sports" class="black-text" id="sports">Sports</router-link>
+	    					<router-link to="/category/1" class="black-text" id="sports">Sports</router-link>
 	    				</li>
 	    				<li>
-	    					<router-link to="/economy" class="black-text" id="economy">Economy</router-link>
+	    					<router-link to="/category/2" class="black-text" id="local">Local</router-link>
 	    				</li>
 	    				<li>
-	    					<router-link to="/politics" class="black-text" id="politics">Politics</router-link>
+	    					<router-link to="/category/3" class="black-text" id="world">World</router-link>
 	    				</li>
 	    				<li>
-	    					<router-link to="/entertainment" class="black-text" id="entertainment">Entertainment</router-link>
+	    					<router-link to="/category/4" class="black-text" id="economy">Economy</router-link>
 	    				</li>
 	    				<li>
-	    					<router-link to="/world" class="black-text" id="world">World</router-link>
+	    					<router-link to="/category/5" class="black-text" id="politics">Politics</router-link>
 	    				</li>
 	    				<li>
-	    					<router-link to="/localy" class="black-text" id="localy">Localy</router-link>
+	    					<router-link to="/category/6" class="black-text" id="entertainment">Entertainment</router-link>
 	    				</li>
 	    				<li>
-	    					<router-link to="new/:id"></router-link>
+	    					<router-link to="/new/:id"></router-link>
 	    				</li>
 	    			</ul>
 			    	<router-view></router-view>

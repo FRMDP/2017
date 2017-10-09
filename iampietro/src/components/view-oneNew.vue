@@ -1,10 +1,10 @@
 <template>
-	<div class="section no-pad-bot">
+	<div class="section">
 		<div class="container">
 			<h1 class="header black-text">{{ New.title }}</h1>
 			<p class="black-text"><strong>{{ New.date }}</strong></p>
 			<p class="right-align black-text">Autor: <strong>{{ New.reporter.name }}</strong></p>
-			<hr>
+			<div class="divider"></div>
 			<div class="row center">
 				<p class="light black-text forP">
 					{{ New.body }}
@@ -31,7 +31,7 @@
 		    		name: ''
 		    	},
 		    	New: {
-		    		id: '',
+		    		id: '2',
 		    		title: 'Some random thing',
 		    		body: 'Ayudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsables',
 		    		category: {name: 'sports'},

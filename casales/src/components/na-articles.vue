@@ -10,7 +10,7 @@
             <span class="tag" :class="isColor(article.category.name)">{{ article.category.name.toUpperCase() }}</span>
             <section class="section">
                 <div class="content">
-                    <p class="has-text-right has-text-muted">published on {{ article.date }}</p>
+                    <p class="has-text-right has-text-muted">published on {{article.date | formatDate}}</p>
                     <p>
                         {{ article.body }}
                     </p>

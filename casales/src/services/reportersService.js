@@ -1,16 +1,24 @@
 import storageService from "./storageService";
 
+const reporters = [];
+
 const KEY = 'reporters';
 
 export default {
     getReporter(id) {
-        const reporters = this.getReporters();
-        return reporters.find(r => r.id == id);
+        this.reporters = this.getReporters();
+        return this.reporters.find(r => r.id == id);
     },
     getReporters() {
         return storageService.getFromLocalStorage(KEY);
     },
-    saveReporters(reporters) {
-        storageService.saveToLocalStorage(KEY, reporters);
+    saveReporter(reporter) {
+        this.reporters = this.getReporters();
+
+        reporter.id = this.reporters.length + 1;
+
+        this.reporters.push(reporter);
+
+        storageService.saveToLocalStorage(KEY, this.reporters);
     }
 }

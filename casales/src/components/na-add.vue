@@ -53,11 +53,11 @@
                                     </span>
                                     <span>Submit</span>
                                 </button>
-                                <button class="button is-danger is-outlined">
+                                <button class="button is-danger is-outlined" @click="confirmDelete">
                                     <span class="icon is-small">
                                         <i class="fa fa-times"></i>
                                     </span>
-                                    <span>Cancel</span>
+                                    <span>Discard</span>
                                 </button>
                             </p>
                         </div>
@@ -107,6 +107,12 @@
                     this.article.category.id &&
                     this.article.reporter.id &&
                     this.article.date;
+            },
+            formHasContent() {
+                return this.article.title ||
+                    this.article.body ||
+                    this.article.category.id ||
+                    this.article.reporter.id;
             }
         },
         methods: {
@@ -114,12 +120,42 @@
                 articlesService.saveArticle(this.article);
 
                 this.cleanFields();
+
+                this.$dialog.alert({
+                    title: 'Article created',
+                    message: 'The article has been created.',
+                    type: 'is-success',
+                    hasIcon: true,
+                    onConfirm: () => {
+                        this.$toast.open('Article created');
+                        this.$router.push({ path: `/news` });
+                    }
+                });
             },
             cleanFields() {
                 this.article.title = '';
                 this.article.body = '';
                 this.article.category.id = '';
                 this.article.reporter.id = '';
+            },
+            confirmDelete() {
+                if (this.formHasContent) {
+                    this.$dialog.confirm({
+                        title: 'Discard article',
+                        message: 'Are you sure you want to <b>discard</b> this article? This action cannot be undone.',
+                        confirmText: 'Delete article',
+                        type: 'is-danger',
+                        hasIcon: true,
+                        onConfirm: () => {
+                            this.cleanFields();
+                            this.$toast.open('Article discarded!');
+                            this.$router.push({path: `/news`});
+                        }
+                    });
+                } else {
+                    this.$toast.open('Nothing to save!');
+                    this.$router.push({path: `/news`});
+                }
             }
         },
         created() {

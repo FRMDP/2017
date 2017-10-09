@@ -3,7 +3,7 @@
 .bg-categories {
     background: linear-gradient(rgba(255, 110, 127, 0.6), rgba(191, 233, 255, 0.6)), linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../img/bg-categories.jpg') no-repeat;
     background-attachment: fixed;
-    min-height: 510px;
+    min-height: 800px;
 }
 
 .drop-shadow {

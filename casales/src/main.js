@@ -5,7 +5,6 @@ import "buefy/lib/buefy.css";
 import moment from "moment";
 
 import App from "./components/App.vue";
-import storageService from "./services/storageService";
 import router from "./utils/router";
 import stringUtils from "./utils/stringUtils";
 
@@ -21,7 +20,6 @@ Vue.filter('formatDate', function (value) {
     }
 });
 
-Vue.prototype.$storageService = storageService;
 Vue.prototype.$stringUtils = stringUtils;
 
 new Vue({

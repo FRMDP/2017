@@ -9,8 +9,8 @@ const KEY = 'news';
 
 export default {
     getArticle(id) {
-        const articles = this.getCategories();
-        return articles.find(n => n.id == id);
+        this.articles = this.getCategories();
+        return this.articles.find(n => n.id == id);
     },
     getArticles() {
         return storageService.getFromLocalStorage(KEY);
@@ -19,8 +19,8 @@ export default {
         this.articles = this.getArticles();
 
         article.id = this.articles.length + 1;
-        article.category.name = categoriesService.getCategory(article.category.id).name;
-        article.reporter.name = reportersService.getReporter(article.reporter.id).name;
+        article.category = categoriesService.getCategory(article.category.id);
+        article.reporter = reportersService.getReporter(article.reporter.id);
         article.date = moment(article.date).valueOf();
 
         this.articles.push(article);

@@ -1,6 +1,7 @@
 import storageService from "./storageService";
 import categoriesService from "./../services/categoriesService";
 import reportersService from "./../services/reportersService";
+import moment from "moment";
 
 const articles = [];
 
@@ -20,6 +21,7 @@ export default {
         article.id = this.articles.length + 1;
         article.category.name = categoriesService.getCategory(article.category.id).name;
         article.reporter.name = reportersService.getReporter(article.reporter.id).name;
+        article.date = moment(article.date).valueOf();
 
         this.articles.push(article);
 

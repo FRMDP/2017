@@ -9,12 +9,12 @@
                     &nbsp;|&nbsp;{{ this.subtitle.toUpperCase() }}&nbsp;
                 </p>
             </div>
-            <span class="nav-toggle">
+            <span class="nav-toggle" @click.prevent="toggleMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </span>
-            <div class="nav-right nav-menu">
+            <div class="nav-right nav-menu" :class="isActive ? 'is-active' : ''">
                 <a id="nav-item-3" class="nav-item animated fadeIn" href="/#/news">
                     <b-icon
                             pack="fa"
@@ -51,6 +51,11 @@
     export default {
         name: 'naNavigation',
         props: ['logo', 'subtitle'],
+        data() {
+          return {
+              isActive: false
+          }
+        },
         computed: {
             imageLink(){
                 switch (this.logo) {
@@ -61,6 +66,11 @@
                     default:
                         return ('img/brand.png');
                 }
+            }
+        },
+        methods: {
+            toggleMenu() {
+                this.isActive = !this.isActive;
             }
         }
     }

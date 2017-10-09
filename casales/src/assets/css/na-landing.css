@@ -1,7 +1,13 @@
 /* Custom Styles
 -------------------------------------------------- */
+html {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
 .bg-landing {
-    background-image: linear-gradient(rgba(116, 235, 213, 0.6), rgba(172, 182, 229, 0.6)), linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../img/bg-home.jpg');
+    background: linear-gradient(rgba(116, 235, 213, 0.6), rgba(172, 182, 229, 0.6)), linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./../img/bg-home.jpg') no-repeat;
+    background-attachment: fixed;
 }
 
 .promo-img {

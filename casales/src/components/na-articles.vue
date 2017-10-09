@@ -2,7 +2,7 @@
     <div>
         <div v-if="!filteredArticles.length">
             <p class="title is-1 custom-info animated zoomIn">Couldn't find anything !</p>
-            <a href="/#/categories"><p class="custom-info-sub animated fadeIn">Go back to categories?</p></a>
+            <a href="/#/categories"><p class="custom-info-sub animated fadeIn">Go to categories?</p></a>
         </div>
         <na-articles-item v-for="(article, index) in filteredArticles" :data="article"
                           :key="article.id" :article="article"></na-articles-item>

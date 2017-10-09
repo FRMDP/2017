@@ -1,6 +1,3 @@
-.nav-wrapper{
-	background: black;
-}
 
 h3{
 	color: red;
@@ -20,8 +17,6 @@ h5{
 
 body{
 	background: white;
-	padding-right: 100px;
-	padding-left: 100px;
 }
 
 label{

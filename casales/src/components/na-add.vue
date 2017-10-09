@@ -11,13 +11,13 @@
                             <b-field grouped>
                                 <b-field label="Title" expanded>
                                     <b-field>
-                                        <b-select placeholder="Select a category">
+                                        <b-select placeholder="Select a category" v-model="article.category.id">
                                             <option v-for="category in categories" :value="category.id"
                                                     :key="category.id">
                                                 {{ category.name.toUpperCase() }}
                                             </option>
                                         </b-select>
-                                        <b-input placeholder="Title" expanded></b-input>
+                                        <b-input placeholder="Title" expanded v-model="article.title"></b-input>
                                     </b-field>
                                 </b-field>
                             </b-field>
@@ -25,18 +25,20 @@
                                 <b-input type="textarea"
                                          minlength="50"
                                          maxlength="500"
-                                         placeholder="The body must contain a minimum of 50 characters">
+                                         placeholder="The body must contain a minimum of 50 characters"
+                                         v-model="article.body">
                                 </b-input>
                             </b-field>
                             <b-field label="Select a date">
                                 <b-datepicker
                                         placeholder="Click to select..."
                                         :min-date="minDate"
-                                        :max-date="maxDate">
+                                        :max-date="maxDate"
+                                        v-model="article.date">
                                 </b-datepicker>
                             </b-field>
                             <b-field label="Reporter">
-                                <b-select placeholder="Select a name">
+                                <b-select placeholder="Select a name" v-model="article.reporter.id">
                                     <option v-for="reporter in reporters" :value="reporter.id" :key="reporter.id">
                                         {{ reporter.name }}
                                     </option>
@@ -44,7 +46,8 @@
                             </b-field>
                             <hr>
                             <p class="control">
-                                <button class="button is-success is-outlined">
+                                <button @click.prevent="saveNews" class="button is-success is-outlined"
+                                        :disabled="!formOk">
                                     <span class="icon is-small">
                                         <i class="fa fa-check"></i>
                                     </span>
@@ -68,6 +71,7 @@
 <script>
     import categoriesService from "./../services/categoriesService";
     import reportersService from "./../services/reportersService";
+    import articlesService from "./../services/articlesService";
 
     export default {
         name: 'add',
@@ -79,7 +83,43 @@
                 minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 2),
                 maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
                 categories: [],
-                reporters: []
+                reporters: [],
+                article: {
+                    id: '',
+                    title: '',
+                    body: '',
+                    category: {
+                        id: '',
+                        name: ''
+                    },
+                    reporter: {
+                        id: '',
+                        name: ''
+                    },
+                    date: today
+                }
+            }
+        },
+        computed: {
+            formOk() {
+                return this.article.title &&
+                    this.article.body &&
+                    this.article.category.id &&
+                    this.article.reporter.id &&
+                    this.article.date;
+            }
+        },
+        methods: {
+            saveNews() {
+                articlesService.saveArticle(this.article);
+
+                this.cleanFields();
+            },
+            cleanFields() {
+                this.article.title = '';
+                this.article.body = '';
+                this.article.category.id = '';
+                this.article.reporter.id = '';
             }
         },
         created() {

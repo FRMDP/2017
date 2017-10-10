@@ -6,7 +6,7 @@
         <hr>
         <div class="content">
             <p class="has-text-right has-text-muted">published on {{article.date | formatDate}}</p>
-            <p>
+            <p style="word-wrap:break-word;">
                 {{ article.body }}
             </p>
         </div>

@@ -1,52 +1,62 @@
 <template>
 	<div class="section">
 		<div class="container">
-			<h1 class="header black-text">{{ New.title }}</h1>
-			<p class="black-text"><strong>{{ New.date }}</strong></p>
-			<p class="right-align black-text">Autor: <strong>{{ New.reporter.name }}</strong></p>
+			<h1 class="header black-text">{{ particularNew.title }}</h1>
+			<p class="black-text"><strong>{{ particularNew.date }}</strong></p>
+			<p class="right-align black-text">Autor: <strong>{{ particularNew.reporter.name }}</strong></p>
 			<div class="divider"></div>
 			<div class="row center">
 				<p class="light black-text forP">
-					{{ New.body }}
+					{{ particularNew.body }}
 				</p>
 			</div>
 			<div class="row">
-				<p class="black-text">En esta nota: <strong>{{ New.category.name }}</strong></p>
+				<p class="black-text">En esta nota: <strong>{{ particularNew.category.name }}</strong></p>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+	import newsService from '../services/newsService';
+
 	export default {
 		data() {
 			return {
-
-				Reporter: {
-	    		id: '',
-	    		name: ''
-		    	},
-		    	Category: {
+		    	particularNew: {
 		    		id: '',
-		    		name: ''
-		    	},
-		    	New: {
-		    		id: '2',
-		    		title: 'Some random thing',
-		    		body: 'Ayudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsablesAyudamos en la logística para que se pueda concretar esta fiesta que se inició en 1999 entre amigos y se transformó en un evento cultural que muestra que los jóvenes paranaenses saben organizar y son responsables',
-		    		category: {name: 'sports'},
-		    		reporter: {name: 'saraza'},
-		    		date: '23-07-1993'
+		    		title: '',
+		    		body: '',
+		    		category: {
+		    			id: 0,
+		    			name: ''
+		    		},
+		    		reporter: {
+		    			id: 0,
+		    			name: ''
+		    		},
+		    		date: ''
 		    	}
 			}
 		},
 		methods: {
-
+			getNew(idNew) {
+				debugger;
+				return newsService.getNew(this.id);
+			}
 		},
 		watch: {
-
+			'$route.params.id': function() {
+				this.particularNew = this.getNew(this.id);
+			}
 		},
 		created() {
+			this.particularNew = this.getNew(this.id);
+		},
+		computed: {
+			id() {
+				return this.$route.params.id;
+			}
 
 		}
 	}

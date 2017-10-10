@@ -22,22 +22,19 @@
 	    				<li>
 	    					<router-link to="/category/6" class="black-text" id="entertainment">Entertainment</router-link>
 	    				</li>
-	    				<li>
-	    					<router-link to="/new/:id"></router-link>
-	    				</li>
 	    			</ul>
-			    	<router-view></router-view>
+	    			<router-link to="/particularNew/:id"></router-link>
 	    		</div>
 	    	</nav>
     	</div>
-    	
+    	<router-view></router-view>
     </div>
 </template>
 
 <script>
     export default {
-
-    }
+    	
+	}
 </script>
 
 <style>

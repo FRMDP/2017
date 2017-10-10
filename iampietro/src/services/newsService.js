@@ -1,20 +1,25 @@
 export default {
 
 	addNew(oneNew){
-		var news = this.getNews()
+		const news = this.getNews()
 		news.push(oneNew);
 		localStorage.setItem('news', JSON.stringify(news));
 	},
 
 	getNews() {
-		var news = localStorage.getItem('news') || '[]';
+		const news = localStorage.getItem('news') || '[]';
 		return JSON.parse(news); 
 	},
 
 	getNewsPerCategory(idCat) {
-		var newsFiltred = localStorage.getItem('news') || '[]';
-		JSON.parse(newsFiltred);
-		return newsFiltred.find(n => n.idCat == category.id);
-	}
+		let newsFiltred = localStorage.getItem('news') || '[]';
+		newsFiltred = JSON.parse(newsFiltred);
+		return newsFiltred.filter((n) => idCat == n.category.id);
+	},
 
+	getNew(idNew) {
+		let particularNew = localStorage.getItem('news') || '[]';
+		particularNew = JSON.parse(particularNew);
+		return particularNew.find(n => idNew == n.id);
+	}
 }

@@ -1,19 +1,22 @@
 <template>
-    <div class="bg-categories">
-        <div class="container is-fluid">
-            <na-navigation class="drop-shadow" :logo="'dark'" :subtitle="'Categories'"></na-navigation>
-        </div>
+    <div>
+        <div class="bg-categories"></div>
+        <div>
+            <div class="container is-fluid">
+                <na-navigation class="drop-shadow" :logo="'dark'" :subtitle="'Categories'"></na-navigation>
+            </div>
 
-        <div class="container">
-            <section class="section">
-                <div class="columns is-desktop is-multiline is-centered">
-                    <na-categories-item v-for="(category, index) in categories" :data="category"
-                                        :key="category.id" :category="category"></na-categories-item>
-                </div>
-            </section>
-        </div>
+            <div class="container">
+                <section class="section">
+                    <div class="columns is-desktop is-multiline is-centered">
+                        <na-categories-item v-for="(category, index) in categories" :data="category"
+                                            :key="category.id" :category="category"></na-categories-item>
+                    </div>
+                </section>
+            </div>
 
-        <na-footer></na-footer>
+            <na-footer></na-footer>
+        </div>
     </div>
 </template>
 

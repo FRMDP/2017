@@ -1,80 +1,87 @@
 <template>
-    <section class="hero is-fullheight is-dark is-bold">
-        <div class="hero-body">
-            <div class="container">
-                <div class="columns">
-                    <div class="column is-8-desktop is-offset-2-desktop">
-                        <h1 class="title animated fadeIn">
-                            Write an Article
-                        </h1>
-                        <div class="box animated fadeInUp">
-                            <b-field grouped>
-                                <b-field label="Title" expanded>
-                                    <b-field>
-                                        <b-select placeholder="Select a category" v-model="article.category.id">
-                                            <option v-for="category in categories" :value="category.id"
-                                                    :key="category.id">
-                                                {{ category.name.toUpperCase() }}
-                                            </option>
-                                        </b-select>
-                                        <b-input placeholder="Title" expanded v-model="article.title"></b-input>
+    <div>
+        <section class="hero is-fullheight is-dark is-bold">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="columns">
+                        <div class="column is-8-desktop is-offset-2-desktop">
+                            <h1 class="title animated fadeIn">
+                                Write an Article
+                            </h1>
+                            <div class="box animated fadeInUp">
+                                <b-field grouped>
+                                    <b-field label="Title" expanded>
+                                        <b-field>
+                                            <b-select placeholder="Select a category" v-model="article.category.id">
+                                                <option v-for="category in categories" :value="category.id"
+                                                        :key="category.id">
+                                                    {{ category.name.toUpperCase() }}
+                                                </option>
+                                            </b-select>
+                                            <b-input placeholder="Title" expanded v-model="article.title"></b-input>
+                                        </b-field>
                                     </b-field>
                                 </b-field>
-                            </b-field>
-                            <b-field label="Body">
-                                <b-input type="textarea"
-                                         minlength="50"
-                                         maxlength="500"
-                                         placeholder="The body must contain a minimum of 50 characters"
-                                         v-model="article.body">
-                                </b-input>
-                            </b-field>
-                            <b-field label="Select a date">
-                                <b-datepicker
-                                        placeholder="Click to select..."
-                                        :min-date="minDate"
-                                        :max-date="maxDate"
-                                        v-model="article.date">
-                                </b-datepicker>
-                            </b-field>
-                            <b-field label="Reporter">
-                                <b-select placeholder="Select a name" v-model="article.reporter.id">
-                                    <option v-for="reporter in reporters" :value="reporter.id" :key="reporter.id">
-                                        {{ reporter.name }}
-                                    </option>
-                                </b-select>
-                            </b-field>
-                            <hr>
-                            <p class="control">
-                                <button @click.prevent="saveNews" class="button is-success is-outlined"
-                                        :disabled="!formOk">
+                                <b-field label="Body">
+                                    <b-input type="textarea"
+                                             minlength="50"
+                                             maxlength="500"
+                                             placeholder="The body must contain a minimum of 50 characters"
+                                             v-model="article.body">
+                                    </b-input>
+                                </b-field>
+                                <b-field label="Select a date">
+                                    <b-datepicker
+                                            placeholder="Click to select..."
+                                            :min-date="minDate"
+                                            :max-date="maxDate"
+                                            v-model="article.date">
+                                    </b-datepicker>
+                                </b-field>
+                                <b-field label="Reporter">
+                                    <b-select placeholder="Select a name" v-model="article.reporter.id">
+                                        <option v-for="reporter in reporters" :value="reporter.id" :key="reporter.id">
+                                            {{ reporter.name }}
+                                        </option>
+                                    </b-select>
+                                </b-field>
+                                <hr>
+                                <p class="control">
+                                    <button @click.prevent="saveNews" class="button is-success is-outlined"
+                                            :disabled="!formOk">
                                     <span class="icon is-small">
                                         <i class="fa fa-check"></i>
                                     </span>
-                                    <span>Submit</span>
-                                </button>
-                                <button class="button is-danger is-outlined" @click="confirmDelete">
+                                        <span>Submit</span>
+                                    </button>
+                                    <button class="button is-danger is-outlined" @click="confirmDelete">
                                     <span class="icon is-small">
                                         <i class="fa fa-times"></i>
                                     </span>
-                                    <span>Discard</span>
-                                </button>
-                            </p>
+                                        <span>Discard</span>
+                                    </button>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <na-footer></na-footer>
+    </div>
 </template>
 
 <script>
     import categoriesService from "./../services/categoriesService";
     import reportersService from "./../services/reportersService";
     import articlesService from "./../services/articlesService";
+    import naFooter from "./na-footer.vue";
 
     export default {
         name: 'add',
+        components: {
+            naFooter: naFooter
+        },
         data() {
             const today = new Date();
 

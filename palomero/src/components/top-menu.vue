@@ -1,20 +1,16 @@
 <template>
- <v-toolbar dark class="primary">
-    <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title class="white--text">Title</v-toolbar-title>
+ <v-toolbar class="red lighten-1">
+    <v-toolbar-title>Mdq News</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn icon>
-      <v-icon>search</v-icon>
-    </v-btn>
-    <v-btn icon>
-      <v-icon>apps</v-icon>
-    </v-btn>
-    <v-btn icon>
-      <v-icon>refresh</v-icon>
-    </v-btn>
-    <v-btn icon>
-      <v-icon>more_vert</v-icon>
-    </v-btn>
+    <v-toolbar-side-icon class="hidden-md-and-up"></v-toolbar-side-icon>
+    <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn flat>Sport</v-btn>
+      <v-btn flat>Local</v-btn>
+      <v-btn flat>World</v-btn>
+      <v-btn flat>Economy</v-btn>
+      <v-btn flat>Politics</v-btn>
+      <v-btn flat>Entertainment</v-btn>
+    </v-toolbar-items>
   </v-toolbar>
 </template>
 

@@ -27172,7 +27172,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -27182,10 +27182,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
-//
-//
 //
 //
 //
@@ -27230,34 +27226,30 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-toolbar",
-    { staticClass: "primary", attrs: { dark: "" } },
+    { staticClass: "red lighten-1" },
     [
-      _c("v-toolbar-side-icon"),
-      _vm._v(" "),
-      _c("v-toolbar-title", { staticClass: "white--text" }, [_vm._v("Title")]),
+      _c("v-toolbar-title", [_vm._v("Mdq News")]),
       _vm._v(" "),
       _c("v-spacer"),
       _vm._v(" "),
-      _c(
-        "v-btn",
-        { attrs: { icon: "" } },
-        [_c("v-icon", [_vm._v("search")])],
-        1
-      ),
-      _vm._v(" "),
-      _c("v-btn", { attrs: { icon: "" } }, [_c("v-icon", [_vm._v("apps")])], 1),
+      _c("v-toolbar-side-icon", { staticClass: "hidden-md-and-up" }),
       _vm._v(" "),
       _c(
-        "v-btn",
-        { attrs: { icon: "" } },
-        [_c("v-icon", [_vm._v("refresh")])],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-btn",
-        { attrs: { icon: "" } },
-        [_c("v-icon", [_vm._v("more_vert")])],
+        "v-toolbar-items",
+        { staticClass: "hidden-sm-and-down" },
+        [
+          _c("v-btn", { attrs: { flat: "" } }, [_vm._v("Sport")]),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { flat: "" } }, [_vm._v("Local")]),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { flat: "" } }, [_vm._v("World")]),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { flat: "" } }, [_vm._v("Economy")]),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { flat: "" } }, [_vm._v("Politics")]),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { flat: "" } }, [_vm._v("Entertainment")])
+        ],
         1
       )
     ],

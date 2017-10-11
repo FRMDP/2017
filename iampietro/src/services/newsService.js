@@ -21,5 +21,23 @@ export default {
 		let particularNew = localStorage.getItem('news') || '[]';
 		particularNew = JSON.parse(particularNew);
 		return particularNew.find(n => idNew == n.id);
+	},
+
+	getCorrectId() {
+		let news = localStorage.getItem('news') || '[]';
+		news = JSON.parse(news);
+		return news.length+1;
+	},
+
+	getReporterId(name) {
+		let reporters = localStorage.getItem('reporters') || '[]';
+		reporters = JSON.parse(reporters);
+		return reporters.find(r => r.name == name).id;
+	},
+
+	getCategoryId(name) {
+		let categories = localStorage.getItem('categories') || '[]';
+		categories = JSON.parse(categories);
+		return categories.find(c => c.name == name).id;
 	}
 }

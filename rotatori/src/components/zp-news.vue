@@ -2,7 +2,10 @@
     <div>ver noticias</div>
 </template>
 <script>
-export default {
-  
-}
+    
+    export default {
+        components:{
+    
+        }
+    }
 </script>

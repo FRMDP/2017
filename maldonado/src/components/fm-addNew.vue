@@ -4,6 +4,7 @@
 			<div class="col s12 m8 l6 offset-m2 offset-l3">
 				<h2 class="center">Agrega una noticia</h2>
 				<form>
+					<!-- TITLE -->
 			      <div class="row">
 			      	<h4>Titulo</h4>
 			        <div class="input-field col s12">
@@ -11,6 +12,8 @@
 			          type="text" class="validate">
 			        </div>
 			      </div>
+			      <!-- TITLE -->
+			      <!-- BODY -->
 			      <div class="row">
 			        <h4>Cuerpo</h4>
 			        <div class="input-field col s12">
@@ -19,6 +22,8 @@
 			          </textarea>
 			        </div>
 			      </div>
+			      <!-- BODY -->
+			      <!-- CATEGORIES -->
 			  	  <div class="row">
 			  	  	<h4>Elige una categoria</h4>
 			  	  	<div class="row">
@@ -52,6 +57,8 @@
 				  	  	</div>
 			  	  	</div>
 			  	  </div>
+			  	  <!-- END CATEGORIES -->
+			  	  <!-- REPORTERS -->
 			  	  <div class="row">
 			  	  	<h4>Quien escribe esto?</h4>
 			  	  	<div class="row">
@@ -75,9 +82,10 @@
 				  	  	</div>
 			  	  	</div>
 			  	  </div>
+			  	  <!-- END REPORTERS -->
 			  	  <div class="row">
-			  	  	<button :disabled="!newIsOk" class="btn waves-effect waves-light green"
-			  	  		@click.prevent="addNew" name="action" type="submit">
+			  	  	<button :disabled="!newIsOk" class="btn-flat waves-effect waves-light green"
+			  	  		@click.prevent="addNew">
 			  	  		Agregar
 			  	  		<i class="material-icons right">send</i>
 			  	  	</button>
@@ -119,7 +127,7 @@
 		},
 		methods: {
 			addNew() {
-				this.oneNew.id = newsService.idExists();
+				this.oneNew.id = newsService.setNewId();
 				this.oneNew.category.id = newsService.linkCategory(this.oneNew.category.name);
 				this.oneNew.reporter.id = newsService.linkReporter(this.oneNew.reporter.name);
 				this.oneNew.date = new Date().toJSON().slice(0, 10);

@@ -13723,7 +13723,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.logo{\n\tmargin-left: 40px;\n\tcolor: black !important;\n}\n.nav{\n\tmargin-bottom: 40px;\n}\nnav{\n\tbackground-color: #ffffff;\n}\n/*.navbar{\n\tleft: 0;\n\ttop: 0;\n\tposition: fixed;\n\twidth: 100%;\n\theight: 65px;\n\tpadding-left: 50px;\n\tpadding-right: 50px;\n\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n.menu {\n\tline-height: 1;\n\tmargin: 0 auto 3em;\n}\n\n.menu__list {\n\tposition: relative;\n\tdisplay: -webkit-flex;\n\tdisplay: flex;\n\t-webkit-flex-wrap: wrap;\n\tflex-wrap: wrap;\n\tmargin: 0;\n\tpadding: 0;\n\tlist-style: none;\n}\n\n.menu__item {\n\tdisplay: block;\n\tmargin: 1em 0;\n}\n/*Colors by section\n.notices:hover{\n\tcolor: lightblue;\n}\n.locals:hover{\n\tcolor: red;\n}\n.sports{\n\tcolor: green;\n}\n.world{\n\tcolor: blue;\n}\n.economy{\n\tcolor: yellow;\n}\n.politics{\n\tcolor: black;\n}\n.entertainment{\n\tcolor: orange;\n}\n\n.menu__link {\n\tfont-size: 1.05em;\n\tfont-weight: bold;\n\tdisplay: block;\n\tpadding: 1em;\n\tcursor: pointer;\n\t-webkit-user-select: none;\n\t-moz-user-select: none;\n\t-ms-user-select: none;\n\tuser-select: none;\n\t-webkit-touch-callout: none;\n\t-khtml-user-select: none;\n\t-webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n\n.menu__link:hover,\n.menu__link:focus {\n\toutline: none;\n}\n.menu--stephano .menu__item {\n\tposition: relative;\n\tmargin: 0 1em;\n}\n\n.menu--stephano .menu__link {\n\tposition: relative;\n\tmin-width: 105px;\n\ttext-align: center;\n\tcolor: #b5b5b5;\n\t-webkit-transition: color 0.3s;\n\ttransition: color 0.3s;\n}\n\n.menu--stephano .menu__link:hover,\n.menu--stephano .menu__link:focus {\n\tcolor: #929292;\n}\n\n.menu--stephano .menu__item--current .menu__link {\n\tcolor: #d94f5c;\n}\n\n.menu--stephano .menu__item::before,\n.menu--stephano .menu__link::before,\n.menu--stephano .menu__link::after {\n\tcontent: '';\n\tposition: absolute;\n\tbottom: 0;\n\twidth: 10px;\n\theight: 2px;\n\topacity: 0;\n\tbackground: #d94f5c;\n}\n\n/* flipped sides \n.menu--stephano .menu__link::before,\n.menu--stephano .menu__link::after {\n\t-webkit-transform: translate3d(0, 10px, 0);\n\ttransform: translate3d(0, 10px, 0);\n\t-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;\n\ttransition: transform 0.3s, opacity 0.3s;\n}\n\n.menu--stephano .menu__item--current .menu__link::before,\n.menu--stephano .menu__item--current .menu__link::after {\n\topacity: 1;\n}\n\n/* left flip \n.menu--stephano .menu__link::before {\n\tleft: 0;\n\t-webkit-transform-origin: 0% 0%;\n\ttransform-origin: 0% 0%;\n}\n\n.menu--stephano .menu__item--current .menu__link::before {\n\t-webkit-transform: rotate3d(0, 0, 1, -90deg);\n\ttransform: rotate3d(0, 0, 1, -90deg);\n}\n\n/* right flip \n.menu--stephano .menu__link::after {\n\tright: 0;\n\t-webkit-transform-origin: 100% 0%;\n\ttransform-origin: 100% 0%;\n}\n\n.menu--stephano .menu__item--current .menu__link::after {\n\t-webkit-transform: rotate3d(0, 0, 1, 90deg);\n\ttransform: rotate3d(0, 0, 1, 90deg);\n}\n\n/* bottom line \n.menu--stephano .menu__item::before {\n\tleft: 0;\n\twidth: 100%;\n\t-webkit-transform: translate3d(0, 10px, 0);\n\ttransform: translate3d(0, 10px, 0);\n\t-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;\n\ttransition: transform 0.3s, opacity 0.3s;\n}\n\n.menu--stephano .menu__item--current::before {\n\topacity: 1;\n\t-webkit-transform: translate3d(0, 0, 0);\n\ttransform: translate3d(0, 0, 0);\n\t-webkit-transition: -webkit-transform 0.3s, opacity 0.1s;\n\ttransition: transform 0.3s, opacity 0.1s;\n}\na{\n\ttext-decoration: none !important;\n}*/\n\n\n", ""]);
+exports.push([module.i, "\n.logo{\n\tmargin-left: 40px;\n\tcolor: black !important;\n}\n.nav{\n\tmargin-bottom: 40px;\n}\nnav{\n\tbackground-color: #ffffff;\n}\n/* Se agrega al final si sobra tiempo\n.navbar{\n\tleft: 0;\n\ttop: 0;\n\tposition: fixed;\n\twidth: 100%;\n\theight: 65px;\n\tpadding-left: 50px;\n\tpadding-right: 50px;\n\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n.menu {\n\tline-height: 1;\n\tmargin: 0 auto 3em;\n}\n\n.menu__list {\n\tposition: relative;\n\tdisplay: -webkit-flex;\n\tdisplay: flex;\n\t-webkit-flex-wrap: wrap;\n\tflex-wrap: wrap;\n\tmargin: 0;\n\tpadding: 0;\n\tlist-style: none;\n}\n\n.menu__item {\n\tdisplay: block;\n\tmargin: 1em 0;\n}\n/*Colors by section\n.notices:hover{\n\tcolor: lightblue;\n}\n.locals:hover{\n\tcolor: red;\n}\n.sports{\n\tcolor: green;\n}\n.world{\n\tcolor: blue;\n}\n.economy{\n\tcolor: yellow;\n}\n.politics{\n\tcolor: black;\n}\n.entertainment{\n\tcolor: orange;\n}\n\n.menu__link {\n\tfont-size: 1.05em;\n\tfont-weight: bold;\n\tdisplay: block;\n\tpadding: 1em;\n\tcursor: pointer;\n\t-webkit-user-select: none;\n\t-moz-user-select: none;\n\t-ms-user-select: none;\n\tuser-select: none;\n\t-webkit-touch-callout: none;\n\t-khtml-user-select: none;\n\t-webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n\n.menu__link:hover,\n.menu__link:focus {\n\toutline: none;\n}\n.menu--stephano .menu__item {\n\tposition: relative;\n\tmargin: 0 1em;\n}\n\n.menu--stephano .menu__link {\n\tposition: relative;\n\tmin-width: 105px;\n\ttext-align: center;\n\tcolor: #b5b5b5;\n\t-webkit-transition: color 0.3s;\n\ttransition: color 0.3s;\n}\n\n.menu--stephano .menu__link:hover,\n.menu--stephano .menu__link:focus {\n\tcolor: #929292;\n}\n\n.menu--stephano .menu__item--current .menu__link {\n\tcolor: #d94f5c;\n}\n\n.menu--stephano .menu__item::before,\n.menu--stephano .menu__link::before,\n.menu--stephano .menu__link::after {\n\tcontent: '';\n\tposition: absolute;\n\tbottom: 0;\n\twidth: 10px;\n\theight: 2px;\n\topacity: 0;\n\tbackground: #d94f5c;\n}\n\n/* flipped sides \n.menu--stephano .menu__link::before,\n.menu--stephano .menu__link::after {\n\t-webkit-transform: translate3d(0, 10px, 0);\n\ttransform: translate3d(0, 10px, 0);\n\t-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;\n\ttransition: transform 0.3s, opacity 0.3s;\n}\n\n.menu--stephano .menu__item--current .menu__link::before,\n.menu--stephano .menu__item--current .menu__link::after {\n\topacity: 1;\n}\n\n/* left flip \n.menu--stephano .menu__link::before {\n\tleft: 0;\n\t-webkit-transform-origin: 0% 0%;\n\ttransform-origin: 0% 0%;\n}\n\n.menu--stephano .menu__item--current .menu__link::before {\n\t-webkit-transform: rotate3d(0, 0, 1, -90deg);\n\ttransform: rotate3d(0, 0, 1, -90deg);\n}\n\n/* right flip \n.menu--stephano .menu__link::after {\n\tright: 0;\n\t-webkit-transform-origin: 100% 0%;\n\ttransform-origin: 100% 0%;\n}\n\n.menu--stephano .menu__item--current .menu__link::after {\n\t-webkit-transform: rotate3d(0, 0, 1, 90deg);\n\ttransform: rotate3d(0, 0, 1, 90deg);\n}\n\n/* bottom line \n.menu--stephano .menu__item::before {\n\tleft: 0;\n\twidth: 100%;\n\t-webkit-transform: translate3d(0, 10px, 0);\n\ttransform: translate3d(0, 10px, 0);\n\t-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;\n\ttransition: transform 0.3s, opacity 0.3s;\n}\n\n.menu--stephano .menu__item--current::before {\n\topacity: 1;\n\t-webkit-transform: translate3d(0, 0, 0);\n\ttransform: translate3d(0, 0, 0);\n\t-webkit-transition: -webkit-transform 0.3s, opacity 0.1s;\n\ttransition: transform 0.3s, opacity 0.1s;\n}\na{\n\ttext-decoration: none !important;\n}*/\n\n\n", ""]);
 
 // exports
 
@@ -13806,7 +13806,7 @@ var render = function() {
           _c(
             "li",
             [
-              _c("router-link", { attrs: { to: "news", id: "news" } }, [
+              _c("router-link", { attrs: { to: "news" } }, [
                 _vm._v("\n\t\t\t\t\t\t\tNoticias\n\t\t\t\t\t\t")
               ])
             ],
@@ -13944,15 +13944,15 @@ var _fmCategory2 = _interopRequireDefault(_fmCategory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import fmNewByCategory from '../components/fm-byCategory'
+//import fmNewByCategory from '../components/fm-byCategory' Aun no implementado
 //import fmReporter from '../components/fm-reporter.vue' se deja para el final por si hago perfil de reportero
 
 exports.default = new _vueRouter2.default({
   routes: [{ path: '/news', component: _fmNews2.default }, { path: '/addNew', component: _fmAddNew2.default },
-  //{ path: '/new/:id', component: fmOneNew },
+  //{ path: '/oneNew/:id', component: fmOneNew },
   { path: '/category/:id', component: _fmCategory2.default }]
 });
-//import fmOneNew from '../components/fm-oneNew'
+//import fmOneNew from '../components/fm-oneNew' Aun no implementado
 
 /***/ }),
 /* 21 */
@@ -14760,12 +14760,8 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn waves-effect waves-light green",
-                attrs: {
-                  disabled: !_vm.newIsOk,
-                  name: "action",
-                  type: "submit"
-                },
+                staticClass: "btn-flat waves-effect waves-light green",
+                attrs: { disabled: !_vm.newIsOk },
                 on: {
                   click: function($event) {
                     $event.preventDefault()

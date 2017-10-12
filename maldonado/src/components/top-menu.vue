@@ -6,7 +6,7 @@
 			<div class="container">
 					<ul class="right">
 						<li>
-							<router-link to="news" id="news">
+							<router-link to="news">
 								Noticias
 							</router-link>
 						</li>

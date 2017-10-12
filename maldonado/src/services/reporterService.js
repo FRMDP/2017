@@ -18,7 +18,7 @@ const reporters = [
 ];
 
 export default {
-	
+    
     getReporter(name) {
         return reporters.find(reporter => reporter.name == name);
     },

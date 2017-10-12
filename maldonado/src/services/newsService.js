@@ -13,7 +13,7 @@ export default {
 	getNew(categoryId){
 		return JSON.parse(localStorage.getItem('news')).filter(newNew => newNew.category.id == categoryId);
 	},
-	idExists(){
+	setNewId(){
 		return JSON.parse(localStorage,getItem('news')).lenght+1;
 	},
 	linkCategory(){

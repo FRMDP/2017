@@ -14,16 +14,17 @@ export default {
 		return JSON.parse(localStorage.getItem('news')).filter(newNew => newNew.category.id == categoryId);
 	},
 	setNewId(){
-		if(localStorage.getItem('news').lenght == null){
+		const news = localStorage.getItem('news');
+		if(!news){
 			return 1;
 		}else{
-			return JSON.parse(localStorage.getItem('news')).lenght+1;
+			return JSON.parse(localStorage.getItem('news')).lenght+1;			
 		}
 	},
-	linkCategory(){
+	linkCategory(name){
 		return JSON.parse(localStorage.getItem('categories')).find(category => category.name == name).id;
 	},
-	linkReporter(){
+	linkReporter(name){
 		return JSON.parse(localStorage.getItem('reporters')).find(reporter => reporter.name == name).id;
 	}
 }

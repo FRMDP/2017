@@ -20,7 +20,11 @@ module.exports = {
 				loaders: {
 				}
 			}
-		}
+		}/*,
+		{
+			test: /\.materialize$/,
+			loader:
+		}*/
       ]
 	},
 	resolve: {

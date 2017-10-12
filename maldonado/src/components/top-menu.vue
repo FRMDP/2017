@@ -3,7 +3,7 @@
 	<div class="navbar-fixed nav">
 		<nav>
 			<a href="#" class="brand-logo logo">Maldoff</a>
-			<div class="container">
+			<div>
 				<ul class="right">
 					<li>
 						<router-link to="news">

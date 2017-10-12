@@ -94,11 +94,13 @@
 			  	  </div>
 			  	  <!-- END REPORTERS -->
 			  	  <div class="row">
-			  	  	<button :disabled="!newIsOk" class="btn-flat waves-effect waves-light green"
-			  	  		@click.prevent="addNew">
-			  	  		Agregar
-			  	  		<i class="material-icons right">send</i>
-			  	  	</button>
+			  	  	<div class="col s6 m4 l4 offset-s2 offset-m3 offset-l3">
+				  	  	<button :disabled="!newIsOk" class="btn-flat waves-effect waves-light green"
+				  	  		@click.prevent="addNew">
+				  	  		Agregar
+				  	  		<i class="material-icons right">send</i>
+				  	  	</button>
+			  	  	</div>
 			  	  </div>
 			    </form>
 			</div>

@@ -19,11 +19,14 @@ const reporters = [
 
 export default {
     
-    getReporter(name) {
-        return reporters.find(reporter => reporter.name == name);
+    addReporters() {
+        localStorage.setItem('reporters', JSON.stringify(reporters));
     },
-    getReporters(){
-        return reporters;
+    getReporter(id) {
+        return JSON.parse(localStorage.getItem('reporters')).find(reporter => reporter.id == id);
+    },
+    getReporters() {
+        return JSON.parse(localStorage.getItem('reporters'));
     }
 
 }

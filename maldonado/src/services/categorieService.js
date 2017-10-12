@@ -26,12 +26,15 @@ const categories = [
 ];
 
 export default {
-	
+    
+	addCategories() {
+        localStorage.setItem('categories', JSON.stringify(categories));
+    },
     getCategory(id) {
-        return categories.find(category => category.id == id);
+        return JSON.parse(localStorage.getItem('categories')).find(category => category.id == id);
     },
     getCategories() {
-        return categories;
+        return JSON.parse(localStorage.getItem('categories'));
     }
 
 }

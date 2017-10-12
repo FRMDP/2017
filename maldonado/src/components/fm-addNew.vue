@@ -28,32 +28,38 @@
 			  	  	<h4>Elige una categoria</h4>
 			  	  	<div class="row">
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" class="with-gap" v-model="oneNew.category.name" id="1">
-				  	  		<label for="1">Locales</label>
+				  	  		<input name="category" type="radio" value="Locals" class="with-gap" 
+				  	  			v-model="oneNew.category.name" id="locals">
+				  	  		<label for="locals">Locales</label>
 				  	  	</div>
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" class="with-gap" v-model="oneNew.category.name" id="2">
-				  	  		<label for="2">Deportes</label>
-				  	  	</div>
-			  	  	</div>
-			  	  	<div class="row">
-				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" class="with-gap" v-model="oneNew.category.name" id="3">
-				  	  		<label for="3">Mundo</label>
-				  	  	</div>
-				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" class="with-gap" v-model="oneNew.category.name" id="4">
-				  	  		<label for="4">Economia</label>
+				  	  		<input name="category" type="radio" value="Sports" class="with-gap" 
+				  	  			v-model="oneNew.category.name" id="sports">
+				  	  		<label for="sports">Deportes</label>
 				  	  	</div>
 			  	  	</div>
 			  	  	<div class="row">
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" class="with-gap" v-model="oneNew.category.name" id="5">
-				  	  		<label for="5">Politica</label>
+				  	  		<input name="category" type="radio" value="World" class="with-gap" 
+				  	  			v-model="oneNew.category.name" id="world">
+				  	  		<label for="world">Mundo</label>
 				  	  	</div>
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" class="with-gap" v-model="oneNew.category.name" id="6">
-				  	  		<label for="6">Entretenimiento</label>
+				  	  		<input name="category" type="radio" value="Economy" class="with-gap" 
+				  	  			v-model="oneNew.category.name" id="economy">
+				  	  		<label for="economy">Economia</label>
+				  	  	</div>
+			  	  	</div>
+			  	  	<div class="row">
+				  	  	<div class="col s12 m6 l6">
+				  	  		<input name="category" type="radio" value="Politics" class="with-gap" 
+				  	  			v-model="oneNew.category.name" id="politics">
+				  	  		<label for="politics">Politica</label>
+				  	  	</div>
+				  	  	<div class="col s12 m6 l6">
+				  	  		<input name="category" type="radio" value="Entertainment" class="with-gap" 
+				  	  			v-model="oneNew.category.name" id="entertainment">
+				  	  		<label for="entertainment">Entretenimiento</label>
 				  	  	</div>
 			  	  	</div>
 			  	  </div>
@@ -63,22 +69,26 @@
 			  	  	<h4>Quien escribe esto?</h4>
 			  	  	<div class="row">
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="reporter" type="radio" class="with-gap" v-model="oneNew.reporter.name" id="7">
-				  	  		<label for="7">John Doe</label>
+				  	  		<input name="reporter" type="radio" value="John" class="with-gap" 
+				  	  			v-model="oneNew.reporter.name" id="john">
+				  	  		<label for="john">John Doe</label>
 				  	  	</div>
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="reporter" type="radio" class="with-gap" v-model="oneNew.reporter.name" id="8">
-				  	  		<label for="8">Jane Doe</label>
+				  	  		<input name="reporter" type="radio" value="Jane" class="with-gap" 
+				  	  			v-model="oneNew.reporter.name" id="jane">
+				  	  		<label for="jane">Jane Doe</label>
 				  	  	</div>
 			  	  	</div>
 			  	  	<div class="row">
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="reporter" type="radio" class="with-gap" v-model="oneNew.reporter.name" id="9">
-				  	  		<label for="9">Chuck Norris</label>
+				  	  		<input name="reporter" type="radio" value="Chuck" class="with-gap" 
+				  	  			v-model="oneNew.reporter.name" id="chuck">
+				  	  		<label for="chuck">Chuck Norris</label>
 				  	  	</div>
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="reporter" type="radio" class="with-gap" v-model="oneNew.reporter.name" id="10">
-				  	  		<label for="10">Barack Obama</label>
+				  	  		<input name="reporter" type="radio" value="Barack" class="with-gap" 
+				  	  			v-model="oneNew.reporter.name" id="barack">
+				  	  		<label for="barack">Barack Obama</label>
 				  	  	</div>
 			  	  	</div>
 			  	  </div>

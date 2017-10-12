@@ -3200,8 +3200,12 @@ exports.default = (_addNew$getNews$getNe = {
 	return JSON.parse(localStorage.getItem('news')).filter(function (newNew) {
 		return newNew.category.id == categoryId;
 	});
-}), _defineProperty(_addNew$getNews$getNe, 'idExists', function idExists() {
-	return JSON.parse(localStorage, getItem('news')).lenght + 1;
+}), _defineProperty(_addNew$getNews$getNe, 'setNewId', function setNewId() {
+	if (localStorage.getItem('news').lenght == null) {
+		return 1;
+	} else {
+		return JSON.parse(localStorage.getItem('news')).lenght + 1;
+	}
 }), _defineProperty(_addNew$getNews$getNe, 'linkCategory', function linkCategory() {
 	return JSON.parse(localStorage.getItem('categories')).find(function (category) {
 		return category.name == name;
@@ -14323,7 +14327,7 @@ exports.default = {
 	},
 	methods: {
 		addNew: function addNew() {
-			this.oneNew.id = _newsService2.default.idExists();
+			this.oneNew.id = _newsService2.default.setNewId();
 			this.oneNew.category.id = _newsService2.default.linkCategory(this.oneNew.category.name);
 			this.oneNew.reporter.id = _newsService2.default.linkReporter(this.oneNew.reporter.name);
 			this.oneNew.date = new Date().toJSON().slice(0, 10);
@@ -14338,6 +14342,24 @@ exports.default = {
 		}
 	}
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14521,16 +14543,23 @@ var render = function() {
                     }
                   ],
                   staticClass: "with-gap",
-                  attrs: { name: "category", type: "radio", id: "1" },
-                  domProps: { checked: _vm._q(_vm.oneNew.category.name, null) },
+                  attrs: {
+                    name: "category",
+                    type: "radio",
+                    value: "Locals",
+                    id: "locals"
+                  },
+                  domProps: {
+                    checked: _vm._q(_vm.oneNew.category.name, "Locals")
+                  },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = null
+                      _vm.oneNew.category.name = "Locals"
                     }
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "1" } }, [_vm._v("Locales")])
+                _c("label", { attrs: { for: "locals" } }, [_vm._v("Locales")])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col s12 m6 l6" }, [
@@ -14544,16 +14573,23 @@ var render = function() {
                     }
                   ],
                   staticClass: "with-gap",
-                  attrs: { name: "category", type: "radio", id: "2" },
-                  domProps: { checked: _vm._q(_vm.oneNew.category.name, null) },
+                  attrs: {
+                    name: "category",
+                    type: "radio",
+                    value: "Sports",
+                    id: "sports"
+                  },
+                  domProps: {
+                    checked: _vm._q(_vm.oneNew.category.name, "Sports")
+                  },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = null
+                      _vm.oneNew.category.name = "Sports"
                     }
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "2" } }, [_vm._v("Deportes")])
+                _c("label", { attrs: { for: "sports" } }, [_vm._v("Deportes")])
               ])
             ]),
             _vm._v(" "),
@@ -14569,16 +14605,23 @@ var render = function() {
                     }
                   ],
                   staticClass: "with-gap",
-                  attrs: { name: "category", type: "radio", id: "3" },
-                  domProps: { checked: _vm._q(_vm.oneNew.category.name, null) },
+                  attrs: {
+                    name: "category",
+                    type: "radio",
+                    value: "World",
+                    id: "world"
+                  },
+                  domProps: {
+                    checked: _vm._q(_vm.oneNew.category.name, "World")
+                  },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = null
+                      _vm.oneNew.category.name = "World"
                     }
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "3" } }, [_vm._v("Mundo")])
+                _c("label", { attrs: { for: "world" } }, [_vm._v("Mundo")])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col s12 m6 l6" }, [
@@ -14592,16 +14635,23 @@ var render = function() {
                     }
                   ],
                   staticClass: "with-gap",
-                  attrs: { name: "category", type: "radio", id: "4" },
-                  domProps: { checked: _vm._q(_vm.oneNew.category.name, null) },
+                  attrs: {
+                    name: "category",
+                    type: "radio",
+                    value: "Economy",
+                    id: "economy"
+                  },
+                  domProps: {
+                    checked: _vm._q(_vm.oneNew.category.name, "Economy")
+                  },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = null
+                      _vm.oneNew.category.name = "Economy"
                     }
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "4" } }, [_vm._v("Economia")])
+                _c("label", { attrs: { for: "economy" } }, [_vm._v("Economia")])
               ])
             ]),
             _vm._v(" "),
@@ -14617,16 +14667,25 @@ var render = function() {
                     }
                   ],
                   staticClass: "with-gap",
-                  attrs: { name: "category", type: "radio", id: "5" },
-                  domProps: { checked: _vm._q(_vm.oneNew.category.name, null) },
+                  attrs: {
+                    name: "category",
+                    type: "radio",
+                    value: "Politics",
+                    id: "politics"
+                  },
+                  domProps: {
+                    checked: _vm._q(_vm.oneNew.category.name, "Politics")
+                  },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = null
+                      _vm.oneNew.category.name = "Politics"
                     }
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "5" } }, [_vm._v("Politica")])
+                _c("label", { attrs: { for: "politics" } }, [
+                  _vm._v("Politica")
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col s12 m6 l6" }, [
@@ -14640,16 +14699,23 @@ var render = function() {
                     }
                   ],
                   staticClass: "with-gap",
-                  attrs: { name: "category", type: "radio", id: "6" },
-                  domProps: { checked: _vm._q(_vm.oneNew.category.name, null) },
+                  attrs: {
+                    name: "category",
+                    type: "radio",
+                    value: "Entertainment",
+                    id: "entertainment"
+                  },
+                  domProps: {
+                    checked: _vm._q(_vm.oneNew.category.name, "Entertainment")
+                  },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = null
+                      _vm.oneNew.category.name = "Entertainment"
                     }
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "6" } }, [
+                _c("label", { attrs: { for: "entertainment" } }, [
                   _vm._v("Entretenimiento")
                 ])
               ])
@@ -14671,16 +14737,23 @@ var render = function() {
                     }
                   ],
                   staticClass: "with-gap",
-                  attrs: { name: "reporter", type: "radio", id: "7" },
-                  domProps: { checked: _vm._q(_vm.oneNew.reporter.name, null) },
+                  attrs: {
+                    name: "reporter",
+                    type: "radio",
+                    value: "John",
+                    id: "john"
+                  },
+                  domProps: {
+                    checked: _vm._q(_vm.oneNew.reporter.name, "John")
+                  },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.reporter.name = null
+                      _vm.oneNew.reporter.name = "John"
                     }
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "7" } }, [_vm._v("John Doe")])
+                _c("label", { attrs: { for: "john" } }, [_vm._v("John Doe")])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col s12 m6 l6" }, [
@@ -14694,16 +14767,23 @@ var render = function() {
                     }
                   ],
                   staticClass: "with-gap",
-                  attrs: { name: "reporter", type: "radio", id: "8" },
-                  domProps: { checked: _vm._q(_vm.oneNew.reporter.name, null) },
+                  attrs: {
+                    name: "reporter",
+                    type: "radio",
+                    value: "Jane",
+                    id: "jane"
+                  },
+                  domProps: {
+                    checked: _vm._q(_vm.oneNew.reporter.name, "Jane")
+                  },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.reporter.name = null
+                      _vm.oneNew.reporter.name = "Jane"
                     }
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "8" } }, [_vm._v("Jane Doe")])
+                _c("label", { attrs: { for: "jane" } }, [_vm._v("Jane Doe")])
               ])
             ]),
             _vm._v(" "),
@@ -14719,16 +14799,25 @@ var render = function() {
                     }
                   ],
                   staticClass: "with-gap",
-                  attrs: { name: "reporter", type: "radio", id: "9" },
-                  domProps: { checked: _vm._q(_vm.oneNew.reporter.name, null) },
+                  attrs: {
+                    name: "reporter",
+                    type: "radio",
+                    value: "Chuck",
+                    id: "chuck"
+                  },
+                  domProps: {
+                    checked: _vm._q(_vm.oneNew.reporter.name, "Chuck")
+                  },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.reporter.name = null
+                      _vm.oneNew.reporter.name = "Chuck"
                     }
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "9" } }, [_vm._v("Chuck Norris")])
+                _c("label", { attrs: { for: "chuck" } }, [
+                  _vm._v("Chuck Norris")
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col s12 m6 l6" }, [
@@ -14742,16 +14831,25 @@ var render = function() {
                     }
                   ],
                   staticClass: "with-gap",
-                  attrs: { name: "reporter", type: "radio", id: "10" },
-                  domProps: { checked: _vm._q(_vm.oneNew.reporter.name, null) },
+                  attrs: {
+                    name: "reporter",
+                    type: "radio",
+                    value: "Barack",
+                    id: "barack"
+                  },
+                  domProps: {
+                    checked: _vm._q(_vm.oneNew.reporter.name, "Barack")
+                  },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.reporter.name = null
+                      _vm.oneNew.reporter.name = "Barack"
                     }
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "10" } }, [_vm._v("Barack Obama")])
+                _c("label", { attrs: { for: "barack" } }, [
+                  _vm._v("Barack Obama")
+                ])
               ])
             ])
           ]),

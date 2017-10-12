@@ -4,43 +4,43 @@
 		<nav>
 			<a href="#" class="brand-logo logo">Maldoff</a>
 			<div class="container">
-					<ul class="right">
-						<li>
-							<router-link to="news">
-								Noticias
-							</router-link>
-						</li>
-						<li>
-							<router-link to="/category/1">
-								Locales
-							</router-link>
-						</li>
-						<li>
-							<router-link to="/category/2">
-								Deportes
-							</router-link>
-						</li>
-						<li>
-							<router-link to="/category/3">
-								Mundo
-							</router-link>
-						</li>
-						<li>
-							<router-link to="/category/4">
-								Economia
-							</router-link>
-						</li>
-						<li>
-							<router-link to="/category/5">
-								Politica
-							</router-link>
-						</li>
-						<li>
-							<router-link to="/category/6">
-								Entretenimiento
-							</router-link>
-						</li>
-					</ul>
+				<ul class="right">
+					<li>
+						<router-link to="news">
+							Noticias
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/category/1">
+							Locales
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/category/2">
+							Deportes
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/category/3">
+							Mundo
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/category/4">
+							Economia
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/category/5">
+							Politica
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/category/6">
+							Entretenimiento
+						</router-link>
+					</li>
+				</ul>
 			</div>
 		</nav>
 	</div>

@@ -14,7 +14,11 @@ export default {
 		return JSON.parse(localStorage.getItem('news')).filter(newNew => newNew.category.id == categoryId);
 	},
 	setNewId(){
-		return JSON.parse(localStorage,getItem('news')).lenght+1;
+		if(localStorage.getItem('news').lenght == null){
+			return 1;
+		}else{
+			return JSON.parse(localStorage.getItem('news')).lenght+1;
+		}
 	},
 	linkCategory(){
 		return JSON.parse(localStorage.getItem('categories')).find(category => category.name == name).id;

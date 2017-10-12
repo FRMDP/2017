@@ -1,11 +1,11 @@
-/*export default {
-	agregarNumero(numero) {
-		const numeros = this.traerNumeros();
-		numeros.push(numero);
-		localStorage.setItem('numeros', JSON.stringify(numeros));
+export default {
+	addNew(){
+		const news = this.getNews();
+		news.push(nnew);
+		localStorage.setItem('news',JSON.stringify(news));
 	},
-	traerNumeros() {
-		const nums = localStorage.getItem('numeros') || '[]';
-		return JSON.parse(nums);
+	getNews(){
+		const news = localStorage.getItem('news');
+		return JSON.parse(news);
 	}
-}*/
+}

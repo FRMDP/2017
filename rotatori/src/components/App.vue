@@ -1,13 +1,29 @@
 <template>
     <div class="app">
-	    <router-link to="/news">Noticias</router-link>
-    	<router-view></router-view>
+        <zp-menu @toggleMenu="toggleMenu" id="toolbar"></zp-menu>
+    	<router-view class="relative"></router-view>
     </div>
 </template>
 
 <script>
+    import zpMenu from './zp-menu.vue';
+    import zpSidemenu from './zp-sidemenu.vue';
     export default {
-        name: 'app'
+        name: 'app',
+        components: {
+            zpMenu,
+            zpSidemenu
+        },
+        data(){
+            return {
+                isMenuOpen: false
+            }
+        },
+        methods: {
+    		toggleMenu() {
+    			this.isMenuOpen = !this.isMenuOpen;
+            }
+        }
     }
 </script>
 

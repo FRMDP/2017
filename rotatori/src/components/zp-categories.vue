@@ -1,14 +1,13 @@
 <template>
-    <div>
-        <zp-littlenew></zp-littlenew>
+    <div>Categoriaaaaaaaas
     </div>
    
 </template>
 <script>
-    import zpLittlenew from './zp-littlenew.vue'
+    
     export default {
         components:{
-            zpLittlenew
+    
         },
         data(){
             return {

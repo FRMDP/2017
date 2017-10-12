@@ -25,7 +25,7 @@
                                 <b-field label="Body">
                                     <b-input type="textarea"
                                              minlength="50"
-                                             maxlength="500"
+                                             maxlength="2500"
                                              placeholder="The body must contain a minimum of 50 characters"
                                              v-model="article.body">
                                     </b-input>
@@ -35,7 +35,7 @@
                                             placeholder="Click to select..."
                                             :min-date="minDate"
                                             :max-date="maxDate"
-                                            v-model="article.date">
+                                            v-model="date">
                                     </b-datepicker>
                                 </b-field>
                                 <b-field label="Reporter">
@@ -103,7 +103,7 @@
                         id: '',
                         name: ''
                     },
-                    date: today
+                    date: ''
                 }
             }
         },
@@ -112,8 +112,7 @@
                 return this.article.title &&
                     this.article.body &&
                     this.article.category.id &&
-                    this.article.reporter.id &&
-                    this.article.date;
+                    this.article.reporter.id;
             },
             formHasContent() {
                 return this.article.title ||
@@ -124,7 +123,7 @@
         },
         methods: {
             saveNews() {
-                articlesService.saveArticle(this.article);
+                articlesService.saveArticle(this.article, this.date);
 
                 this.cleanFields();
 
@@ -135,7 +134,7 @@
                     hasIcon: true,
                     onConfirm: () => {
                         this.$toast.open('Article created');
-                        this.$router.push({ path: `/news` });
+                        this.$router.push({path: `/news`});
                     }
                 });
             },

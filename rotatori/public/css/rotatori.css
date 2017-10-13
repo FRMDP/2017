@@ -1,6 +1,7 @@
 #toolbar{
     position:fixed;
     width: 100%;
+    z-index: 999;
 }
 .relative{
     padding-top: 65px;
@@ -12,7 +13,15 @@
     margin-bottom: 10px;
     color: #AD2C2C;
 }
-
+h1{
+    text-align: center;
+    text-shadow: 2px 2px 5px #05239C;
+    font-size: 3em;
+}
+.paddings{
+    padding-left: 100px;
+    padding-right: 100px;
+}
 .marginTop{
     margin-top: 1rem;
 }

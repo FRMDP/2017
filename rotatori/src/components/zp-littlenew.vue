@@ -11,8 +11,8 @@
             </md-card-content>
 
             <md-card-actions>
-                <md-button @click="$router.push({ name: 'New', params: { id: 1 }})"> ver completo</md-button>
-                <md-button><router-link :to="{ name: 'New', params: { id: 1 }}">Categoria</router-link></md-button>
+                <md-button @click="$router.push({ name: 'newById', params: { id: 1 }})"> ver completo</md-button>
+                <md-button><router-link :to="{ name: 'catById', params: { id: 1 }}">Categoria</router-link></md-button>
             </md-card-actions>
         </md-card>
     </div>

@@ -8,7 +8,7 @@
 
             <div class="container">
                 <section class="section">
-                    <div class="columns is-desktop is-multiline is-centered">
+                    <div class="columns is-multiline is-centered">
                         <na-categories-item v-for="(category, index) in categories" :data="category"
                                             :key="category.id" :category="category"></na-categories-item>
                     </div>

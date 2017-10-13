@@ -7,19 +7,19 @@
 }
 
 #nav-item-1 {
-    -webkit-animation-delay: .5s;
-    -moz-animation-delay: .5s;
-    -o-animation-delay: .5s;
+    -webkit-animation-delay: .4s;
+    -moz-animation-delay: .4s;
+    -o-animation-delay: .4s;
 }
 
 #nav-item-2 {
-    -webkit-animation-delay: .7s;
-    -moz-animation-delay: .7s;
-    -o-animation-delay: .7s;
+    -webkit-animation-delay: .3s;
+    -moz-animation-delay: .3s;
+    -o-animation-delay: .3s;
 }
 
 #nav-item-3 {
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    -o-animation-delay: 1s;
+    -webkit-animation-delay: .2s;
+    -moz-animation-delay: .2s;
+    -o-animation-delay: .2s;
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="column is-4">
+    <div class="column is-12-mobile is-6-tablet is-4-desktop is-4-widescreen is-3-fullhd">
         <a :href="link">
             <div class="card animated" @mouseover="mouseOver" :class="{'pulse': isPulse,'': !isPulse}">
                 <div class="card-image">

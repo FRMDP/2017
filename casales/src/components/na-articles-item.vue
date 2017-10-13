@@ -1,5 +1,5 @@
 <template>
-    <div class="box animated fadeInUp">
+    <div class="box animated fadeIn">
         <h1 class="title is-1">{{ article.title }}</h1>
         <hr class="custom-hr">
         <a :href="'/#/categories/' + article.category.id">

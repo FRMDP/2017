@@ -10,7 +10,7 @@ export default {
 	getNew(id){
 		return JSON.parse(localStorage.getItem('news')).find(newNew => newNew.id == id);
 	},
-	getNew(categoryId){
+	getNewByCategory(categoryId){
 		return JSON.parse(localStorage.getItem('news')).filter(newNew => newNew.category.id == categoryId);
 	},
 	setNewId(){

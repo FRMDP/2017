@@ -1,0 +1,499 @@
+.menu {
+	line-height: 1;
+	margin: 0 auto 3em;
+}
+
+.menu__list {
+	position: relative;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	margin-left: 200px;
+}
+
+.menu__item {
+	display: block;
+	margin: 1em 0;
+}
+
+.menu__link {
+	font-size: 1.05em;
+	font-weight: bold;
+	display: block;
+	padding: 1em;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
+	-khtml-user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.menu__link:hover,
+.menu__link:focus {
+	outline: none;
+}
+
+/* Stephano */
+.menu--stephano .menu__item {
+	position: relative;
+	margin: 0 1em;
+}
+
+.menu--stephano .menu__link {
+	position: relative;
+	min-width: 105px;
+	text-align: center;
+	color: #b5b5b5;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+/*NEWS*/
+
+.menu--stephano .menu__link_news:hover,
+.menu--stephano .menu__link_news:focus {
+	color: #bf80ff;
+}
+
+.menu--stephano .menu__item--current .menu__link_news {
+	color: #6600cc;
+}
+
+.menu--stephano .menu__item::before,
+.menu--stephano .menu__link_news::before,
+.menu--stephano .menu__link_news::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 10px;
+	height: 2px;
+	opacity: 0;
+	background: #6600cc;
+}
+
+/* flipped sides */
+.menu--stephano .menu__link_news::before,
+.menu--stephano .menu__link_news::after {
+	-webkit-transform: translate3d(0, 10px, 0);
+	transform: translate3d(0, 10px, 0);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu--stephano .menu__item--current .menu__link_news::before,
+.menu--stephano .menu__item--current .menu__link_news::after {
+	opacity: 1;
+}
+
+/* left flip */
+.menu--stephano .menu__link_news::before {
+	left: 0;
+	-webkit-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_news::before {
+	-webkit-transform: rotate3d(0, 0, 1, -90deg);
+	transform: rotate3d(0, 0, 1, -90deg);
+}
+
+/* right flip */
+.menu--stephano .menu__link_news::after {
+	right: 0;
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_news::after {
+	-webkit-transform: rotate3d(0, 0, 1, 90deg);
+	transform: rotate3d(0, 0, 1, 90deg);
+}
+
+/*END NEWS*/
+
+/*LOCALS*/
+
+.menu--stephano .menu__link_locals:hover,
+.menu--stephano .menu__link_locals:focus {
+	color: #ffcc80;
+}
+
+.menu--stephano .menu__item--current .menu__link_locals {
+	color: #ff9900;
+}
+
+.menu--stephano .menu__item::before,
+.menu--stephano .menu__link_locals::before,
+.menu--stephano .menu__link_locals::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 10px;
+	height: 2px;
+	opacity: 0;
+	background: #ff9900;
+}
+
+/* flipped sides */
+.menu--stephano .menu__link_locals::before,
+.menu--stephano .menu__link_locals::after {
+	-webkit-transform: translate3d(0, 10px, 0);
+	transform: translate3d(0, 10px, 0);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu--stephano .menu__item--current .menu__link_locals::before,
+.menu--stephano .menu__item--current .menu__link_locals::after {
+	opacity: 1;
+}
+
+/* left flip */
+.menu--stephano .menu__link_locals::before {
+	left: 0;
+	-webkit-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_locals::before {
+	-webkit-transform: rotate3d(0, 0, 1, -90deg);
+	transform: rotate3d(0, 0, 1, -90deg);
+}
+
+/* right flip */
+.menu--stephano .menu__link_locals::after {
+	right: 0;
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_locals::after {
+	-webkit-transform: rotate3d(0, 0, 1, 90deg);
+	transform: rotate3d(0, 0, 1, 90deg);
+}
+/*END LOCALS */
+
+/*SPORTS*/
+
+.menu--stephano .menu__link_sports:hover,
+.menu--stephano .menu__link_sports:focus {
+	color: #66ff66;
+}
+
+.menu--stephano .menu__item--current .menu__link_sports {
+	color: #00e600;
+}
+
+.menu--stephano .menu__item::before,
+.menu--stephano .menu__link_sports::before,
+.menu--stephano .menu__link_sports::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 10px;
+	height: 2px;
+	opacity: 0;
+	background: #00e600;
+}
+
+/* flipped sides */
+.menu--stephano .menu__link_sports::before,
+.menu--stephano .menu__link_sports::after {
+	-webkit-transform: translate3d(0, 10px, 0);
+	transform: translate3d(0, 10px, 0);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu--stephano .menu__item--current .menu__link_sports::before,
+.menu--stephano .menu__item--current .menu__link_sports::after {
+	opacity: 1;
+}
+
+/* left flip */
+.menu--stephano .menu__link_sports::before {
+	left: 0;
+	-webkit-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_sports::before {
+	-webkit-transform: rotate3d(0, 0, 1, -90deg);
+	transform: rotate3d(0, 0, 1, -90deg);
+}
+
+/* right flip */
+.menu--stephano .menu__link_sports::after {
+	right: 0;
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_sports::after {
+	-webkit-transform: rotate3d(0, 0, 1, 90deg);
+	transform: rotate3d(0, 0, 1, 90deg);
+}
+/*END SPORTS */
+
+/*WORLD*/
+
+.menu--stephano .menu__link_world:hover,
+.menu--stephano .menu__link_world:focus {
+	color: #8080ff;
+}
+
+.menu--stephano .menu__item--current .menu__link_world {
+	color: #0000ff;
+}
+
+.menu--stephano .menu__item::before,
+.menu--stephano .menu__link_world::before,
+.menu--stephano .menu__link_world::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 10px;
+	height: 2px;
+	opacity: 0;
+	background: #0000ff;
+}
+
+/* flipped sides */
+.menu--stephano .menu__link_world::before,
+.menu--stephano .menu__link_world::after {
+	-webkit-transform: translate3d(0, 10px, 0);
+	transform: translate3d(0, 10px, 0);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu--stephano .menu__item--current .menu__link_world::before,
+.menu--stephano .menu__item--current .menu__link_world::after {
+	opacity: 1;
+}
+
+/* left flip */
+.menu--stephano .menu__link_world::before {
+	left: 0;
+	-webkit-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_world::before {
+	-webkit-transform: rotate3d(0, 0, 1, -90deg);
+	transform: rotate3d(0, 0, 1, -90deg);
+}
+
+/* right flip */
+.menu--stephano .menu__link_world::after {
+	right: 0;
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_world::after {
+	-webkit-transform: rotate3d(0, 0, 1, 90deg);
+	transform: rotate3d(0, 0, 1, 90deg);
+}
+/*END WORLD */
+
+/*ECONOMY*/
+
+.menu--stephano .menu__link_economy:hover,
+.menu--stephano .menu__link_economy:focus {
+	color: #999900;
+}
+
+.menu--stephano .menu__item--current .menu__link_economy {
+	color: #ffff00;
+}
+
+.menu--stephano .menu__item::before,
+.menu--stephano .menu__link_economy::before,
+.menu--stephano .menu__link_economy::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 10px;
+	height: 2px;
+	opacity: 0;
+	background: #ffff00;
+}
+
+/* flipped sides */
+.menu--stephano .menu__link_economy::before,
+.menu--stephano .menu__link_economy::after {
+	-webkit-transform: translate3d(0, 10px, 0);
+	transform: translate3d(0, 10px, 0);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu--stephano .menu__item--current .menu__link_economy::before,
+.menu--stephano .menu__item--current .menu__link_economy::after {
+	opacity: 1;
+}
+
+/* left flip */
+.menu--stephano .menu__link_economy::before {
+	left: 0;
+	-webkit-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_economy::before {
+	-webkit-transform: rotate3d(0, 0, 1, -90deg);
+	transform: rotate3d(0, 0, 1, -90deg);
+}
+
+/* right flip */
+.menu--stephano .menu__link_economy::after {
+	right: 0;
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_economy::after {
+	-webkit-transform: rotate3d(0, 0, 1, 90deg);
+	transform: rotate3d(0, 0, 1, 90deg);
+}
+/*END ECONOMY */
+
+/*POLITICS*/
+
+.menu--stephano .menu__link_politics:hover,
+.menu--stephano .menu__link_politics:focus {
+	color: #c3c388;
+}
+
+.menu--stephano .menu__item--current .menu__link_politics {
+	color: #55552b;
+}
+
+.menu--stephano .menu__item::before,
+.menu--stephano .menu__link_politics::before,
+.menu--stephano .menu__link_politics::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 10px;
+	height: 2px;
+	opacity: 0;
+	background: #55552b;
+}
+
+/* flipped sides */
+.menu--stephano .menu__link_politics::before,
+.menu--stephano .menu__link_politics::after {
+	-webkit-transform: translate3d(0, 10px, 0);
+	transform: translate3d(0, 10px, 0);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu--stephano .menu__item--current .menu__link_politics::before,
+.menu--stephano .menu__item--current .menu__link_politics::after {
+	opacity: 1;
+}
+
+/* left flip */
+.menu--stephano .menu__link_politics::before {
+	left: 0;
+	-webkit-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_politics::before {
+	-webkit-transform: rotate3d(0, 0, 1, -90deg);
+	transform: rotate3d(0, 0, 1, -90deg);
+}
+
+/* right flip */
+.menu--stephano .menu__link_politics::after {
+	right: 0;
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_politics::after {
+	-webkit-transform: rotate3d(0, 0, 1, 90deg);
+	transform: rotate3d(0, 0, 1, 90deg);
+}
+/*END POLITICS */
+
+/*ENTERTAINMENT*/
+
+.menu--stephano .menu__link_entertainment:hover,
+.menu--stephano .menu__link_entertainment:focus {
+	color: #ff6666;
+}
+
+.menu--stephano .menu__item--current .menu__link_entertainment {
+	color: #ff0000;
+}
+
+.menu--stephano .menu__item::before,
+.menu--stephano .menu__link_entertainment::before,
+.menu--stephano .menu__link_entertainment::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 10px;
+	height: 2px;
+	opacity: 0;
+	background: #ff0000;
+}
+
+/* flipped sides */
+.menu--stephano .menu__link_entertainment::before,
+.menu--stephano .menu__link_entertainment::after {
+	-webkit-transform: translate3d(0, 10px, 0);
+	transform: translate3d(0, 10px, 0);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu--stephano .menu__item--current .menu__link_entertainment::before,
+.menu--stephano .menu__item--current .menu__link_entertainment::after {
+	opacity: 1;
+}
+
+/* left flip */
+.menu--stephano .menu__link_entertainment::before {
+	left: 0;
+	-webkit-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_entertainment::before {
+	-webkit-transform: rotate3d(0, 0, 1, -90deg);
+	transform: rotate3d(0, 0, 1, -90deg);
+}
+
+/* right flip */
+.menu--stephano .menu__link_entertainment::after {
+	right: 0;
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0%;
+}
+
+.menu--stephano .menu__item--current .menu__link_entertainment::after {
+	-webkit-transform: rotate3d(0, 0, 1, 90deg);
+	transform: rotate3d(0, 0, 1, 90deg);
+}
+/*END ENTERTAINMENT */
+
+/* Stack items for smaller screens */
+@media screen and (max-width:55em) {
+	.menu__list {
+		display: block;
+		margin: 0 auto;
+	}
+}

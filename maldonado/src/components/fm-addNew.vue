@@ -1,6 +1,6 @@
 <template>
 	<div class="container form">
-		<div class="row">
+		<div class="row" style="margin-top: 60px;">
 			<div class="col s12 m8 l6 offset-m2 offset-l3">
 				<h2 class="center">Agrega una noticia</h2>
 				<form>
@@ -69,24 +69,24 @@
 			  	  	<h4>Quien escribe esto?</h4>
 			  	  	<div class="row">
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="reporter" type="radio" value="John" class="with-gap" 
+				  	  		<input name="reporter" type="radio" value="John Doe" class="with-gap" 
 				  	  			v-model="oneNew.reporter.name" id="john">
 				  	  		<label for="john">John Doe</label>
 				  	  	</div>
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="reporter" type="radio" value="Jane" class="with-gap" 
+				  	  		<input name="reporter" type="radio" value="Jane Doe" class="with-gap" 
 				  	  			v-model="oneNew.reporter.name" id="jane">
 				  	  		<label for="jane">Jane Doe</label>
 				  	  	</div>
 			  	  	</div>
 			  	  	<div class="row">
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="reporter" type="radio" value="Chuck" class="with-gap" 
+				  	  		<input name="reporter" type="radio" value="Chuck Norris" class="with-gap" 
 				  	  			v-model="oneNew.reporter.name" id="chuck">
 				  	  		<label for="chuck">Chuck Norris</label>
 				  	  	</div>
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="reporter" type="radio" value="Barack" class="with-gap" 
+				  	  		<input name="reporter" type="radio" value="Barack Obama" class="with-gap" 
 				  	  			v-model="oneNew.reporter.name" id="barack">
 				  	  		<label for="barack">Barack Obama</label>
 				  	  	</div>
@@ -94,12 +94,11 @@
 			  	  </div>
 			  	  <!-- END REPORTERS -->
 			  	  <div class="row">
-			  	  	<div class="col s6 m4 l4 offset-s2 offset-m3 offset-l3">
-				  	  	<button :disabled="!newIsOk" class="btn-flat waves-effect waves-light green"
-				  	  		@click.prevent="addNew">
-				  	  		Agregar
-				  	  		<i class="material-icons right">send</i>
-				  	  	</button>
+			  	  	<div class="col s6 m4 l4 offset-s3 offset-m4 offset-l4">
+			  	  		<button :disabled="!newIsOk" class="btn waves-effect waves-light green" type="submit" 
+			  	  			@click.prevent="addNew" name="action">
+			  	  			<i class="material-icons">publish</i>
+						</button>
 			  	  	</div>
 			  	  </div>
 			    </form>

@@ -9,7 +9,7 @@ const KEY = 'news';
 
 export default {
     getArticle(id) {
-        this.articles = this.getCategories();
+        this.articles = this.getArticles();
         return this.articles.find(n => n.id == id);
     },
     getArticles() {

@@ -25,7 +25,7 @@
                                 <b-field label="Body">
                                     <b-input type="textarea"
                                              minlength="50"
-                                             maxlength="500"
+                                             maxlength="2500"
                                              placeholder="The body must contain a minimum of 50 characters"
                                              v-model="article.body">
                                     </b-input>
@@ -134,7 +134,7 @@
                     hasIcon: true,
                     onConfirm: () => {
                         this.$toast.open('Article created');
-                        this.$router.push({ path: `/news` });
+                        this.$router.push({path: `/news`});
                     }
                 });
             },

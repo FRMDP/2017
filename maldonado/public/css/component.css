@@ -95,6 +95,7 @@
 /* left flip */
 .menu--stephano .menu__link_news::before {
 	left: 0;
+	width: 45px;
 	-webkit-transform-origin: 0% 0%;
 	transform-origin: 0% 0%;
 }
@@ -107,6 +108,7 @@
 /* right flip */
 .menu--stephano .menu__link_news::after {
 	right: 0;
+	width: 45px;
 	-webkit-transform-origin: 100% 0%;
 	transform-origin: 100% 0%;
 }
@@ -158,6 +160,7 @@
 /* left flip */
 .menu--stephano .menu__link_locals::before {
 	left: 0;
+	width: 45px;
 	-webkit-transform-origin: 0% 0%;
 	transform-origin: 0% 0%;
 }
@@ -170,6 +173,7 @@
 /* right flip */
 .menu--stephano .menu__link_locals::after {
 	right: 0;
+	width: 45px;
 	-webkit-transform-origin: 100% 0%;
 	transform-origin: 100% 0%;
 }
@@ -220,6 +224,7 @@
 /* left flip */
 .menu--stephano .menu__link_sports::before {
 	left: 0;
+	width: 45px;
 	-webkit-transform-origin: 0% 0%;
 	transform-origin: 0% 0%;
 }
@@ -232,6 +237,7 @@
 /* right flip */
 .menu--stephano .menu__link_sports::after {
 	right: 0;
+	width: 45px;
 	-webkit-transform-origin: 100% 0%;
 	transform-origin: 100% 0%;
 }
@@ -282,6 +288,7 @@
 /* left flip */
 .menu--stephano .menu__link_world::before {
 	left: 0;
+	width: 45px;
 	-webkit-transform-origin: 0% 0%;
 	transform-origin: 0% 0%;
 }
@@ -294,6 +301,7 @@
 /* right flip */
 .menu--stephano .menu__link_world::after {
 	right: 0;
+	width: 45px;
 	-webkit-transform-origin: 100% 0%;
 	transform-origin: 100% 0%;
 }
@@ -344,6 +352,7 @@
 /* left flip */
 .menu--stephano .menu__link_economy::before {
 	left: 0;
+	width: 45px;
 	-webkit-transform-origin: 0% 0%;
 	transform-origin: 0% 0%;
 }
@@ -356,6 +365,7 @@
 /* right flip */
 .menu--stephano .menu__link_economy::after {
 	right: 0;
+	width: 45px;
 	-webkit-transform-origin: 100% 0%;
 	transform-origin: 100% 0%;
 }
@@ -406,6 +416,7 @@
 /* left flip */
 .menu--stephano .menu__link_politics::before {
 	left: 0;
+	width: 45px;
 	-webkit-transform-origin: 0% 0%;
 	transform-origin: 0% 0%;
 }
@@ -418,6 +429,7 @@
 /* right flip */
 .menu--stephano .menu__link_politics::after {
 	right: 0;
+	width: 45px;
 	-webkit-transform-origin: 100% 0%;
 	transform-origin: 100% 0%;
 }
@@ -468,6 +480,7 @@
 /* left flip */
 .menu--stephano .menu__link_entertainment::before {
 	left: 0;
+	width: 45px;
 	-webkit-transform-origin: 0% 0%;
 	transform-origin: 0% 0%;
 }
@@ -480,6 +493,7 @@
 /* right flip */
 .menu--stephano .menu__link_entertainment::after {
 	right: 0;
+	width: 45px;
 	-webkit-transform-origin: 100% 0%;
 	transform-origin: 100% 0%;
 }

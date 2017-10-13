@@ -28,36 +28,36 @@
 			  	  	<h4>Elige una categoria</h4>
 			  	  	<div class="row">
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" value="Locals" class="with-gap" 
+				  	  		<input name="category" type="radio" value="locals" class="with-gap" 
 				  	  			v-model="oneNew.category.name" id="locals">
 				  	  		<label for="locals">Locales</label>
 				  	  	</div>
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" value="Sports" class="with-gap" 
+				  	  		<input name="category" type="radio" value="sports" class="with-gap" 
 				  	  			v-model="oneNew.category.name" id="sports">
 				  	  		<label for="sports">Deportes</label>
 				  	  	</div>
 			  	  	</div>
 			  	  	<div class="row">
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" value="World" class="with-gap" 
+				  	  		<input name="category" type="radio" value="world" class="with-gap" 
 				  	  			v-model="oneNew.category.name" id="world">
 				  	  		<label for="world">Mundo</label>
 				  	  	</div>
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" value="Economy" class="with-gap" 
+				  	  		<input name="category" type="radio" value="economy" class="with-gap" 
 				  	  			v-model="oneNew.category.name" id="economy">
 				  	  		<label for="economy">Economia</label>
 				  	  	</div>
 			  	  	</div>
 			  	  	<div class="row">
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" value="Politics" class="with-gap" 
+				  	  		<input name="category" type="radio" value="politics" class="with-gap" 
 				  	  			v-model="oneNew.category.name" id="politics">
 				  	  		<label for="politics">Politica</label>
 				  	  	</div>
 				  	  	<div class="col s12 m6 l6">
-				  	  		<input name="category" type="radio" value="Entertainment" class="with-gap" 
+				  	  		<input name="category" type="radio" value="entertainment" class="with-gap" 
 				  	  			v-model="oneNew.category.name" id="entertainment">
 				  	  		<label for="entertainment">Entretenimiento</label>
 				  	  	</div>
@@ -138,6 +138,7 @@
 		},
 		methods: {
 			addNew() {
+				debugger;
 				this.oneNew.id = newsService.setNewId();
 				this.oneNew.category.id = newsService.linkCategory(this.oneNew.category.name);
 				this.oneNew.reporter.id = newsService.linkReporter(this.oneNew.reporter.name);

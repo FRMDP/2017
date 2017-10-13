@@ -6,13 +6,14 @@
 </template>
 
 <script>
-	import topMenu from './top-menu.vue';
+    import topMenu from './top-menu.vue';
+    import newsService from '../services/newsService.js';
     import categorieService from '../services/categorieService.js';
     import reporterService from '../services/reporterService.js';
     export default {
-    	components: {
-    		topMenu
-    	},
+        components: {
+            topMenu
+        },
         created() {
             categorieService.addCategories();
             reporterService.addReporters();
@@ -25,5 +26,9 @@
 </script>
 
 <style>
-
+    .background {
+        background-image: url('');/*agregar url imagen*/
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 </style>

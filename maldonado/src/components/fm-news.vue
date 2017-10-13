@@ -33,7 +33,7 @@
         },
         methods: {
             getNews(){
-                this.news = newsService.getNews(this.id);
+                return newsService.getNews(this.id);
             }
         },
         computed: {

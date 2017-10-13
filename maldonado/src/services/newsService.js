@@ -1,7 +1,10 @@
 export default {
 	addNew(newNew) {
 		const news = this.getNews();
-		news.push(newNew);
+		if(!news){
+			this.news = [];
+		}
+		this.news.push(newNew);
 		localStorage.setItem('news', JSON.stringify(news));
 	},
 	getNews() {

@@ -476,7 +476,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	addNew: function addNew(newNew) {
 		var news = this.getNews();
-		news.push(newNew);
+		if (!news) {
+			this.news = [];
+		}
+		this.news.push(newNew);
 		localStorage.setItem('news', JSON.stringify(news));
 	},
 	getNews: function getNews() {
@@ -13614,7 +13617,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.background {\n    background-image: url('');/*agregar url imagen*/\n    background-repeat: no-repeat;\n    background-attachment: fixed;\n}\n", ""]);
 
 // exports
 
@@ -13667,6 +13670,10 @@ var _topMenu = __webpack_require__(15);
 
 var _topMenu2 = _interopRequireDefault(_topMenu);
 
+var _newsService = __webpack_require__(3);
+
+var _newsService2 = _interopRequireDefault(_newsService);
+
 var _categorieService = __webpack_require__(6);
 
 var _categorieService2 = _interopRequireDefault(_categorieService);
@@ -13676,6 +13683,14 @@ var _reporterService = __webpack_require__(20);
 var _reporterService2 = _interopRequireDefault(_reporterService);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     components: {
@@ -13689,13 +13704,7 @@ exports.default = {
         _categorieService2.default.getCategories();
         _reporterService2.default.getReporters();
     }
-}; //
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 15 */
@@ -13799,6 +13808,9 @@ exports.push([module.i, "\n.logo{\n\tmargin-left: 40px;\n\tcolor: black !importa
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 //
 //
 //
@@ -13843,7 +13855,9 @@ exports.push([module.i, "\n.logo{\n\tmargin-left: 40px;\n\tcolor: black !importa
 //
 //
 
-name: 'topMenu';
+exports.default = {
+	name: 'topMenu'
+};
 
 /***/ }),
 /* 19 */
@@ -14087,7 +14101,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //import fmReporter from '../components/fm-reporter.vue' se deja para el final por si hago perfil de reportero
 
 exports.default = new _vueRouter2.default({
-  routes: [{ path: '/news', component: _fmNews2.default }, { path: '/addNew', component: _fmAddNew2.default }, { path: '/oneNew', component: _fmOneNew2.default }, { path: '/category/:id', component: _fmCategory2.default }]
+  routes: [{ path: '/news', component: _fmNews2.default }, { path: '/addNew', component: _fmAddNew2.default }, { path: '/oneNew', component: _fmOneNew2.default }, //realmente es '/oneNew/:id', solo era para ver el design
+  { path: '/category/:id', component: _fmCategory2.default }]
 });
 
 /***/ }),
@@ -14180,7 +14195,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -14212,7 +14227,7 @@ exports.default = {
 
     methods: {
         getNews: function getNews() {
-            this.news = _newsService2.default.getNews(this.id);
+            return _newsService2.default.getNews(this.id);
         }
     },
     computed: {
@@ -14251,8 +14266,6 @@ exports.default = {
 //
 //
 //
-//
-//
 
 /***/ }),
 /* 27 */
@@ -14263,50 +14276,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c(
-      "div",
-      { staticClass: "row" },
-      _vm._l(_vm.news, function(oneNew) {
-        return _c("div", [
-          _c("div", { staticClass: "col s12 m6 l4" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-image" }, [
-                _c("img", { attrs: { src: "" } }),
-                _vm._v(" "),
-                _c("span", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(oneNew.title))
-                ])
-              ]),
+  return _c(
+    "div",
+    { staticClass: "container" },
+    _vm._l(_vm.news, function(oneNew) {
+      return _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col s12 m6 l4" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-image" }, [
+              _c("img", { attrs: { src: "" } }),
               _vm._v(" "),
-              _c("div", { staticClass: "card-content" }, [
-                _c("p", [_vm._v(_vm._s(oneNew.body))])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "card-action" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      attrs: { to: "{name: 'oneNew'. params: {id: oneNew.id}}" }
-                    },
-                    [
-                      _c("p", [
-                        _vm._v("Mas informacion acerca de esta noticia")
-                      ])
-                    ]
-                  )
-                ],
-                1
-              )
-            ])
+              _c("span", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(oneNew.title))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-content" }, [
+              _c("p", [_vm._v(_vm._s(oneNew.body))])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-action" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: { to: "{name: 'oneNew'. params: {id: oneNew.id}}" }
+                  },
+                  [_c("p", [_vm._v("Mas informacion acerca de esta noticia")])]
+                )
+              ],
+              1
+            )
           ])
         ])
-      })
-    )
-  ])
+      ])
+    })
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -14459,6 +14466,7 @@ exports.default = {
 	},
 	methods: {
 		addNew: function addNew() {
+			debugger;
 			this.oneNew.id = _newsService2.default.setNewId();
 			this.oneNew.category.id = _newsService2.default.linkCategory(this.oneNew.category.name);
 			this.oneNew.reporter.id = _newsService2.default.linkReporter(this.oneNew.reporter.name);
@@ -14679,15 +14687,15 @@ var render = function() {
                   attrs: {
                     name: "category",
                     type: "radio",
-                    value: "Locals",
+                    value: "locals",
                     id: "locals"
                   },
                   domProps: {
-                    checked: _vm._q(_vm.oneNew.category.name, "Locals")
+                    checked: _vm._q(_vm.oneNew.category.name, "locals")
                   },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = "Locals"
+                      _vm.oneNew.category.name = "locals"
                     }
                   }
                 }),
@@ -14709,15 +14717,15 @@ var render = function() {
                   attrs: {
                     name: "category",
                     type: "radio",
-                    value: "Sports",
+                    value: "sports",
                     id: "sports"
                   },
                   domProps: {
-                    checked: _vm._q(_vm.oneNew.category.name, "Sports")
+                    checked: _vm._q(_vm.oneNew.category.name, "sports")
                   },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = "Sports"
+                      _vm.oneNew.category.name = "sports"
                     }
                   }
                 }),
@@ -14741,15 +14749,15 @@ var render = function() {
                   attrs: {
                     name: "category",
                     type: "radio",
-                    value: "World",
+                    value: "world",
                     id: "world"
                   },
                   domProps: {
-                    checked: _vm._q(_vm.oneNew.category.name, "World")
+                    checked: _vm._q(_vm.oneNew.category.name, "world")
                   },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = "World"
+                      _vm.oneNew.category.name = "world"
                     }
                   }
                 }),
@@ -14771,15 +14779,15 @@ var render = function() {
                   attrs: {
                     name: "category",
                     type: "radio",
-                    value: "Economy",
+                    value: "economy",
                     id: "economy"
                   },
                   domProps: {
-                    checked: _vm._q(_vm.oneNew.category.name, "Economy")
+                    checked: _vm._q(_vm.oneNew.category.name, "economy")
                   },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = "Economy"
+                      _vm.oneNew.category.name = "economy"
                     }
                   }
                 }),
@@ -14803,15 +14811,15 @@ var render = function() {
                   attrs: {
                     name: "category",
                     type: "radio",
-                    value: "Politics",
+                    value: "politics",
                     id: "politics"
                   },
                   domProps: {
-                    checked: _vm._q(_vm.oneNew.category.name, "Politics")
+                    checked: _vm._q(_vm.oneNew.category.name, "politics")
                   },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = "Politics"
+                      _vm.oneNew.category.name = "politics"
                     }
                   }
                 }),
@@ -14835,15 +14843,15 @@ var render = function() {
                   attrs: {
                     name: "category",
                     type: "radio",
-                    value: "Entertainment",
+                    value: "entertainment",
                     id: "entertainment"
                   },
                   domProps: {
-                    checked: _vm._q(_vm.oneNew.category.name, "Entertainment")
+                    checked: _vm._q(_vm.oneNew.category.name, "entertainment")
                   },
                   on: {
                     __c: function($event) {
-                      _vm.oneNew.category.name = "Entertainment"
+                      _vm.oneNew.category.name = "entertainment"
                     }
                   }
                 }),
@@ -15123,7 +15131,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.icons{\n\tpadding-bottom: 30px;\n}\n", ""]);
+exports.push([module.i, "\n.icons {\n\tpadding-bottom: 30px;\n}\n.text {\n\tcolor: white;\n}\n", ""]);
 
 // exports
 
@@ -15234,13 +15242,13 @@ var staticRenderFns = [
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col s12 m8 l6" }, [
-          _c("h6", [_vm._v(" Categoria blabla")])
+          _c("h6", { staticClass: "text" }, [_vm._v("Categoria blabla")])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col s12 m8 offset-m2 l6 offset-l3" }, [
-          _c("h2", [_vm._v(" TITULO BLABLA ")])
+          _c("h2", { staticClass: "text" }, [_vm._v(" TITULO BLABLA ")])
         ])
       ]),
       _vm._v(" "),
@@ -15256,7 +15264,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "col s8 m6 l4" }, [
           _c("img", { attrs: { src: "", alt: "" } }),
           _vm._v(" "),
-          _c("p", [_vm._v("Nombre del autor")])
+          _c("p", { staticClass: "text" }, [_vm._v("Nombre del autor")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "icons" }, [
@@ -15302,7 +15310,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col s12 m12 l12" }, [
-          _c("h5", [_vm._v("Cuerpo de la noticia")])
+          _c("h5", { staticClass: "text" }, [_vm._v("Cuerpo de la noticia")])
         ])
       ])
     ])

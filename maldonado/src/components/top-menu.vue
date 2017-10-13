@@ -42,7 +42,9 @@
 </template>
 
 <script>
-	name: 'topMenu'
+	export default {
+		name: 'topMenu'
+	}
 </script>
 
 <style>

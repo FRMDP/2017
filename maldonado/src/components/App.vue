@@ -10,6 +10,7 @@
     import newsService from '../services/newsService.js';
     import categorieService from '../services/categorieService.js';
     import reporterService from '../services/reporterService.js';
+    
     export default {
         components: {
             topMenu

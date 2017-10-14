@@ -69,7 +69,6 @@
 				}
 			}
 		},
-		/*
 		methods: {
 			getNew(id){
 				return newsService.getNew(id);
@@ -87,7 +86,7 @@
 			id() {
 				return this.$route.params.id;
 			}
-		}*/
+		}
 	}
 </script>
 

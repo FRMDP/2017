@@ -11,7 +11,7 @@
                         <h5>{{ oneNew.title }}</h5>
                     </div>
                     <div class="card-action">
-                        <router-link to="{name: 'aNew', params: {id: oneNew.id}}"> <!-- esto aun no funciona -->
+                        <router-link :to="{name: 'aNew', params: {id: oneNew.id}}"> <!-- esto aun no funciona -->
                             <p>Mas informacion acerca de esta noticia</p>
                         </router-link>
                     </div>

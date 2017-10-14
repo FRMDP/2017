@@ -14300,7 +14300,9 @@ var render = function() {
               [
                 _c(
                   "router-link",
-                  { attrs: { to: "{name: 'aNew', params: {id: oneNew.id}}" } },
+                  {
+                    attrs: { to: { name: "aNew", params: { id: oneNew.id } } }
+                  },
                   [_c("p", [_vm._v("Mas informacion acerca de esta noticia")])]
                 )
               ],
@@ -15168,6 +15170,26 @@ exports.default = {
 				date: ''
 			}
 		};
+	},
+
+	methods: {
+		getNew: function getNew(id) {
+			return _newsService2.default.getNew(id);
+		}
+	},
+	watch: {
+		'$route.params.id': function $routeParamsId() {
+			this.oneNew = this.getNew(this.id);
+		}
+	},
+	created: function created() {
+		this.oneNew = this.getNew(this.id);
+	},
+
+	computed: {
+		id: function id() {
+			return this.$route.params.id;
+		}
 	}
 }; //
 //

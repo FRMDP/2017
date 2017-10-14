@@ -3,7 +3,7 @@
 		<a href="#" class="brand-logo logo">Maldoff</a>
 		<ul class="menu__list">
 			<li class="menu__item menu__item--current">
-				<router-link to="news" class="menu__link menu__link_news">
+				<router-link to="/news" class="menu__link menu__link_news">
 					Noticias
 				</router-link>
 			</li>

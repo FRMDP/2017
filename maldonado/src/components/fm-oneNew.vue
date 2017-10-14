@@ -2,28 +2,34 @@
 	<div class="container">
 		<div class="row">
 			<div class="col s12 m8 l6">
-				<h6>{{ oneNew.category.name }}</h6>
+				<h6>
+					<router-link v-bind:to="'/category/' + oneNew.category.id" >
+						{{ oneNew.category.name }}
+					</router-link>
+				</h6>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col s12 m8 offset-m2 l6 offset-l3">
+			<div class="col s12 m10 offset-m2 l10 offset-l2">
 				<h2> {{ oneNew.title }} </h2>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col 12 m12 l12">
-				<img src="" alt=""> <!-- imagen mas grande -->
-					<p>foto del autor</p>
+				<img src="https://picsum.photos/950/350/?random">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col s8 m6 l4">
-				<img src="" alt=""> <!-- iria imagen del autor -->
-				<p>{{ oneNew.reporter.name }}</p>
+			<div class="col s4 m2 l2">
+				<img class="reporter" src="https://picsum.photos/75/75/?random">
+				<p class="reporterName">{{ oneNew.reporter.name }}</p>
+			</div>
+			<div class="col s4 m4 l4">
+				<p>Seguime en las redes sociales</p>
 			</div>
 			<!-- Icons facebook, twitter, instagram -->
 			<div class="icons">
-				<div class="col s4 m6 l8 push-s2 push-m4 push-l4">
+				<div class="col s4 m6 l6 push-s1 push-m2 push-l2">
 					<a class="btn-floating waves-effect waves-dark #1a237e indigo darken-4">
 						<i class="fa fa-facebook-official"></i>
 					</a>
@@ -40,7 +46,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col s12 m12 l12">
+			<div class="col s12 m12 l12 body">
 				<h5>{{ oneNew.body }}</h5>
 			</div>
 		</div>
@@ -70,7 +76,7 @@
 			}
 		},
 		methods: {
-			getNew(id){
+			getNew(id) {
 				return newsService.getNew(id);
 			}
 		},
@@ -92,6 +98,15 @@
 
 <style>
 	.icons {
-		padding-bottom: 30px;
+		padding-bottom: -20px !important;
+	}
+	.reporter {
+		border-radius: 50%;
+	}
+	.body {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	.reporterName {
+		padding-left: 5px;
 	}
 </style>

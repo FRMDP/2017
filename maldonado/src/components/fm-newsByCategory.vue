@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row" >
+        <div class="row">
             <div class="col s12 m6 l4" v-for="oneNew in news">
                 <div class="card large hoverable">
                     <div class="card-image">
@@ -27,15 +27,10 @@
     import newsService from '../services/newsService.js';
 
     export default {
-        name: 'fmNew',
+        name: 'fmNewsByCategory',
         data() {
             return {
                 news: []
-            }
-        },
-        methods: {
-            getNews() {
-                return newsService.getNews(this.id);
             }
         },
         computed: {
@@ -43,9 +38,14 @@
                 return this.$route.params.id;
             }
         },
+        methods: {
+            getNews() {
+                return newsService.getNewsByCategory(this.id);
+            }
+        },
         watch: {
             '$route.params.id': function() {
-                this.news = this.getNews(this.id)
+                this.news = this.getNews(this.id);
             }
         },
         created() {

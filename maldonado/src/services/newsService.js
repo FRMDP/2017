@@ -1,27 +1,24 @@
 export default {
 	addNew(newNew) {
 		const news = this.getNews();
-		if(!news){
-			this.news = [];
-		}
-		this.news.push(newNew);
-		localStorage.setItem('news', JSON.stringify(this.news));
+		news.push(newNew);
+		localStorage.setItem('news', JSON.stringify(news));
 	},
 	getNews() {
 		return JSON.parse(localStorage.getItem('news'));
 	},
 	getNew(id){
-		return JSON.parse(localStorage.getItem('news')).find(newNew => newNew.id == id);
+		return JSON.parse(localStorage.getItem('news')).find(news => news.id == id);
 	},
-	getNewByCategory(categoryId){
-		return JSON.parse(localStorage.getItem('news')).filter(newNew => newNew.category.id == categoryId);
+	getNewsByCategory(categoryId){
+		return JSON.parse(localStorage.getItem('news')).filter(news => news.category.id == categoryId);
 	},
 	setNewId(){
 		const news = localStorage.getItem('news');
 		if(!news){
 			return 1;
 		}else{
-			return JSON.parse(localStorage.getItem('news')).lenght+1;			
+			return JSON.parse(localStorage.getItem('news')).length+1;			
 		}
 	},
 	linkCategory(name){

@@ -7,21 +7,14 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    position: relative;
+    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-}
-.hero.is-dark.is-bold {
-
+    z-index: -1;
 }
 
-.hero.is-fullheight {
-    min-height: 100vh;
-}
-
-.hero.is-dark {
-    background-color: #69707a;
-    color: #f5f7fa;
+.title {
+    color: whitesmoke;
 }

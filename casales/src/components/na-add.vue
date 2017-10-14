@@ -1,6 +1,7 @@
 <template>
     <div>
-        <section class="hero is-fullheight is-dark is-bold">
+        <div class="bg-add"></div>
+        <section class="hero">
             <div class="hero-body">
                 <div class="container">
                     <div class="columns">

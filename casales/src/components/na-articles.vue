@@ -4,25 +4,27 @@
             <p class="title is-1 custom-info animated zoomIn">Couldn't find anything !</p>
             <a href="/#/categories"><p class="custom-info-sub animated fadeIn">Go to categories?</p></a>
         </div>
-        <na-articles-item v-for="(article, index) in paginatedArticles" :data="article"
-                          :key="article.id" :article="article" :wrappedText="true"></na-articles-item>
-        <section v-if="paginatedArticles.length">
-            <p class="has-text-light">
-                <strong class="has-text-light">
-                    Showing {{ paginate().length }} of {{ filteredArticles().length }}
-                </strong> | {{ perPage }} per page.
-            </p>
-            <hr>
-            <b-pagination
-                    :total="total"
-                    :current.sync="current"
-                    :order="order"
-                    :size="size"
-                    :simple="isSimple"
-                    :per-page="perPage"
-                    @change="paginate">
-            </b-pagination>
-        </section>
+        <div v-if="paginatedArticles.length">
+            <na-articles-item v-for="(article, index) in paginatedArticles" :data="article"
+                              :key="article.id" :article="article" :wrappedText="true"></na-articles-item>
+            <section>
+                <p class="has-text-light">
+                    <strong class="has-text-light">
+                        Showing {{ paginate().length }} of {{ filteredArticles().length }}
+                    </strong> | {{ perPage }} per page.
+                </p>
+                <hr>
+                <b-pagination
+                        :total="total"
+                        :current.sync="current"
+                        :order="order"
+                        :size="size"
+                        :simple="isSimple"
+                        :per-page="perPage"
+                        @change="paginate">
+                </b-pagination>
+            </section>
+        </div>
     </div>
 </template>
 

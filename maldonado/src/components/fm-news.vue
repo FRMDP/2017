@@ -5,13 +5,13 @@
                 <div class="card">
                     <div class="card-image">
                         <img src="">
-                        <span class="card-title">{{ oneNew.title }}</span>
+                        <span class="card-title">{{ oneNew.category.name }}</span>
                     </div>
                     <div class="card-content">
-                        <p>{{ oneNew.body }}</p>
+                        <h5>{{ oneNew.title }}</h5>
                     </div>
                     <div class="card-action">
-                        <router-link to="{name: 'oneNew'. params: {id: oneNew.id}}">
+                        <router-link to="{name: 'aNew', params: {id: oneNew.id}}"> <!-- esto aun no funciona -->
                             <p>Mas informacion acerca de esta noticia</p>
                         </router-link>
                     </div>

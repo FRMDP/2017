@@ -138,7 +138,6 @@
 		},
 		methods: {
 			addNew() {
-				debugger;
 				this.oneNew.id = newsService.setNewId();
 				this.oneNew.category.id = newsService.linkCategory(this.oneNew.category.name);
 				this.oneNew.reporter.id = newsService.linkReporter(this.oneNew.reporter.name);

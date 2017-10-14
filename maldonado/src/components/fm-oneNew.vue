@@ -2,12 +2,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col s12 m8 l6">
-				<h6 class="text">Categoria blabla</h6>
+				<h6>{{ oneNew.category.name }}</h6>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col s12 m8 offset-m2 l6 offset-l3">
-				<h2 class="text"> TITULO BLABLA </h2>
+				<h2> {{ oneNew.title }} </h2>
 			</div>
 		</div>
 		<div class="row">
@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="col s8 m6 l4">
 				<img src="" alt=""> <!-- iria imagen del autor -->
-				<p class="text">Nombre del autor</p>
+				<p>{{ oneNew.reporter.name }}</p>
 			</div>
 			<!-- Icons facebook, twitter, instagram -->
 			<div class="icons">
@@ -41,7 +41,7 @@
 		</div>
 		<div class="row">
 			<div class="col s12 m12 l12">
-				<h5 class="text">Cuerpo de la noticia</h5>
+				<h5>{{ oneNew.body }}</h5>
 			</div>
 		</div>
 	</div>
@@ -94,8 +94,5 @@
 <style>
 	.icons {
 		padding-bottom: 30px;
-	}
-	.text {
-		color: white;
 	}
 </style>

@@ -5,7 +5,7 @@ const categories = [
     	},
     	{
     		id: 2, 
-    		name: "local"
+    		name: "locals"
     	},
     	{
     		id: 3,

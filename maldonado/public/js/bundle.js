@@ -480,7 +480,7 @@ exports.default = {
 			this.news = [];
 		}
 		this.news.push(newNew);
-		localStorage.setItem('news', JSON.stringify(news));
+		localStorage.setItem('news', JSON.stringify(this.news));
 	},
 	getNews: function getNews() {
 		return JSON.parse(localStorage.getItem('news'));
@@ -3234,7 +3234,7 @@ var categories = [{
     name: "sports"
 }, {
     id: 2,
-    name: "local"
+    name: "locals"
 }, {
     id: 3,
     name: "world"
@@ -14101,8 +14101,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //import fmReporter from '../components/fm-reporter.vue' se deja para el final por si hago perfil de reportero
 
 exports.default = new _vueRouter2.default({
-  routes: [{ path: '/news', component: _fmNews2.default }, { path: '/addNew', component: _fmAddNew2.default }, { path: '/oneNew', component: _fmOneNew2.default }, //realmente es '/oneNew/:id', solo era para ver el design
-  { path: '/category/:id', component: _fmCategory2.default }]
+  routes: [{ path: '/news', component: _fmNews2.default }, { path: '/addNew', component: _fmAddNew2.default }, { path: '/oneNew/:id', component: _fmOneNew2.default, name: 'aNew' }, { path: '/category/:id', component: _fmCategory2.default }]
 });
 
 /***/ }),
@@ -14287,12 +14286,12 @@ var render = function() {
               _c("img", { attrs: { src: "" } }),
               _vm._v(" "),
               _c("span", { staticClass: "card-title" }, [
-                _vm._v(_vm._s(oneNew.title))
+                _vm._v(_vm._s(oneNew.category.name))
               ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-content" }, [
-              _c("p", [_vm._v(_vm._s(oneNew.body))])
+              _c("h5", [_vm._v(_vm._s(oneNew.title))])
             ]),
             _vm._v(" "),
             _c(
@@ -14301,9 +14300,7 @@ var render = function() {
               [
                 _c(
                   "router-link",
-                  {
-                    attrs: { to: "{name: 'oneNew'. params: {id: oneNew.id}}" }
-                  },
+                  { attrs: { to: "{name: 'aNew', params: {id: oneNew.id}}" } },
                   [_c("p", [_vm._v("Mas informacion acerca de esta noticia")])]
                 )
               ],
@@ -14466,7 +14463,6 @@ exports.default = {
 	},
 	methods: {
 		addNew: function addNew() {
-			debugger;
 			this.oneNew.id = _newsService2.default.setNewId();
 			this.oneNew.category.id = _newsService2.default.linkCategory(this.oneNew.category.name);
 			this.oneNew.reporter.id = _newsService2.default.linkReporter(this.oneNew.reporter.name);
@@ -15131,7 +15127,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.icons {\n\tpadding-bottom: 30px;\n}\n.text {\n\tcolor: white;\n}\n", ""]);
+exports.push([module.i, "\n.icons {\n\tpadding-bottom: 30px;\n}\n", ""]);
 
 // exports
 
@@ -15232,86 +15228,91 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col s12 m8 l6" }, [
+        _c("h6", [_vm._v(_vm._s(_vm.oneNew.category.name))])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col s12 m8 offset-m2 l6 offset-l3" }, [
+        _c("h2", [_vm._v(" " + _vm._s(_vm.oneNew.title) + " ")])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col s8 m6 l4" }, [
+        _c("img", { attrs: { src: "", alt: "" } }),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.oneNew.reporter.name))])
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col s12 m12 l12" }, [
+        _c("h5", [_vm._v(_vm._s(_vm.oneNew.body))])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col s12 m8 l6" }, [
-          _c("h6", { staticClass: "text" }, [_vm._v("Categoria blabla")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col s12 m8 offset-m2 l6 offset-l3" }, [
-          _c("h2", { staticClass: "text" }, [_vm._v(" TITULO BLABLA ")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col 12 m12 l12" }, [
-          _c("img", { attrs: { src: "", alt: "" } }),
-          _vm._v(" "),
-          _c("p", [_vm._v("foto del autor")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col s8 m6 l4" }, [
-          _c("img", { attrs: { src: "", alt: "" } }),
-          _vm._v(" "),
-          _c("p", { staticClass: "text" }, [_vm._v("Nombre del autor")])
-        ]),
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col 12 m12 l12" }, [
+        _c("img", { attrs: { src: "", alt: "" } }),
         _vm._v(" "),
-        _c("div", { staticClass: "icons" }, [
-          _c("div", { staticClass: "col s4 m6 l8 push-s2 push-m4 push-l4" }, [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "btn-floating waves-effect waves-dark #1a237e indigo darken-4"
-              },
-              [_c("i", { staticClass: "fa fa-facebook-official" })]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass:
-                  "btn-floating waves-effect waves-dark #039be5 light-blue darken-1"
-              },
-              [_c("i", { staticClass: "fa fa-twitter" })]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass:
-                  "btn-floating waves-effect waves-dark #fb8c00 orange darken-1"
-              },
-              [_c("i", { staticClass: "fa fa-instagram" })]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass:
-                  "btn-floating waves-effect waves-dark #ffeb3b yellow"
-              },
-              [_c("i", { staticClass: "fa fa-snapchat" })]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col s12 m12 l12" }, [
-          _c("h5", { staticClass: "text" }, [_vm._v("Cuerpo de la noticia")])
-        ])
+        _c("p", [_vm._v("foto del autor")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icons" }, [
+      _c("div", { staticClass: "col s4 m6 l8 push-s2 push-m4 push-l4" }, [
+        _c(
+          "a",
+          {
+            staticClass:
+              "btn-floating waves-effect waves-dark #1a237e indigo darken-4"
+          },
+          [_c("i", { staticClass: "fa fa-facebook-official" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "btn-floating waves-effect waves-dark #039be5 light-blue darken-1"
+          },
+          [_c("i", { staticClass: "fa fa-twitter" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "btn-floating waves-effect waves-dark #fb8c00 orange darken-1"
+          },
+          [_c("i", { staticClass: "fa fa-instagram" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn-floating waves-effect waves-dark #ffeb3b yellow"
+          },
+          [_c("i", { staticClass: "fa fa-snapchat" })]
+        )
       ])
     ])
   }

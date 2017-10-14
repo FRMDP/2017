@@ -5,7 +5,7 @@ export default {
 			this.news = [];
 		}
 		this.news.push(newNew);
-		localStorage.setItem('news', JSON.stringify(news));
+		localStorage.setItem('news', JSON.stringify(this.news));
 	},
 	getNews() {
 		return JSON.parse(localStorage.getItem('news'));

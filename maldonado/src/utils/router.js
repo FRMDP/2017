@@ -10,7 +10,7 @@ export default new VueRouter({
   routes: [
   	  { path: '/news', component: fmNews},
   	  { path: '/addNew', component: fmAddNew },
-  	  { path: '/oneNew', component: fmOneNew },//realmente es '/oneNew/:id', solo era para ver el design
+  	  { path: '/oneNew/:id', component: fmOneNew, name: 'aNew' },
 	  { path: '/category/:id', component: fmCategory },
 	]
 });

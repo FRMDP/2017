@@ -5,7 +5,7 @@
                 <div class="card large hoverable">
                     <div class="card-image">
                         <img src="https://picsum.photos/200/300/?random">
-                        <span class="card-title">{{ oneNew.title }}</span>
+                        <span class="card-title"><strong>{{ oneNew.title }}</strong></span>
                     </div>
                     <div class="card-content">
                         <p class="truncate">
@@ -16,6 +16,7 @@
                         <router-link v-bind:to="'/oneNew/' + oneNew.id">
                             <p>Mas informacion</p>
                         </router-link>
+                        <p class="right-align">{{ oneNew.date }}</p>
                     </div>
                 </div>
             </div>

@@ -2,26 +2,22 @@
     <div class="app">
     	<top-menu></top-menu>
     	<router-view></router-view>
+        <fm-footer></fm-footer>
     </div>
 </template>
 
 <script>
     import topMenu from './top-menu.vue';
-    import newsService from '../services/newsService.js';
-    import categorieService from '../services/categorieService.js';
-    import reporterService from '../services/reporterService.js';
+    import fmFooter from './fm-footer.vue';
 
     export default {
         components: {
-            topMenu
-        },
+            topMenu,
+            fmFooter
+        }
     }
 </script>
 
 <style>
-    .background {
-        background-image: url('');/*agregar url imagen*/
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
+
 </style>

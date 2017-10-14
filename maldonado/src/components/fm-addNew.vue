@@ -108,7 +108,7 @@
 </template>
 
 <script>
-	import newsService from '../services/newsService.js';
+	import newsService from '../services/newsService';
 
 	export default {
 		name: 'addNew',

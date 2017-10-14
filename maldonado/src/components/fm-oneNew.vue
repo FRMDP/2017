@@ -4,6 +4,7 @@
 			<div class="col s12 m8 l6">
 				<h6>
 					<router-link v-bind:to="'/category/' + oneNew.category.id" >
+						<i class="fa fa-caret-left"></i> 
 						{{ oneNew.category.name }}
 					</router-link>
 				</h6>
@@ -20,11 +21,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col s4 m2 l2">
-				<img class="reporter" src="https://picsum.photos/75/75/?random">
-				<p class="reporterName">{{ oneNew.reporter.name }}</p>
+			<div class="col s4 m3 l3 center-align">
+				<img class="reporterImage" src="https://picsum.photos/75/75/?random">
+				<br>
+				<router-link v-bind:to="'/reporter/' + oneNew.reporter.id" class="reporterName">
+					{{ oneNew.reporter.name }}
+				</router-link>
 			</div>
-			<div class="col s4 m4 l4">
+			<div class="col s4 m3 l3">
 				<p>Seguime en las redes sociales</p>
 			</div>
 			<!-- Icons facebook, twitter, instagram -->
@@ -55,6 +59,7 @@
 
 <script>
 	import newsService from '../services/newsService';
+
 	export default {
 		name: 'oneNew',
 		data() {
@@ -100,7 +105,7 @@
 	.icons {
 		padding-bottom: -20px !important;
 	}
-	.reporter {
+	.reporterImage {
 		border-radius: 50%;
 	}
 	.body {

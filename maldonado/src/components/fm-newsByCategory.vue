@@ -1,11 +1,14 @@
 <template>
     <div class="container">
         <div class="row">
+            <div class="col s12 m12 l12" v-if="!news.length">
+                <h4 class="center-align noNews">No hay noticias en esta categoria aun</h4>
+            </div>
             <div class="col s12 m6 l4" v-for="oneNew in news">
                 <div class="card large hoverable">
                     <div class="card-image">
                         <img src="https://picsum.photos/200/300/?random">
-                        <span class="card-title">{{ oneNew.title }}</span>
+                        <span class="card-title"><strong>{{ oneNew.title }}</strong></span>
                     </div>
                     <div class="card-content">
                         <p class="truncate">
@@ -16,6 +19,7 @@
                         <router-link v-bind:to="'/oneNew/' + oneNew.id">
                             <p>Mas informacion</p>
                         </router-link>
+                        <p class="right-align">{{ oneNew.date }}</p>
                     </div>
                 </div>
             </div>
@@ -55,5 +59,7 @@
 </script>
 
 <style>
-
+    .noNews {
+        margin-top: 200px;
+    }
 </style>

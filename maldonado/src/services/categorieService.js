@@ -1,11 +1,11 @@
 const categories = [
     	{
     		id: 1,
-    	 	name: "sports"
+    	 	name: "locals"
     	},
     	{
     		id: 2, 
-    		name: "locals"
+    		name: "sports"
     	},
     	{
     		id: 3,

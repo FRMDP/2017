@@ -7,13 +7,13 @@ export default {
 	getNews() {
 		return JSON.parse(localStorage.getItem('news'));
 	},
-	getNew(id){
+	getNew(id) {
 		return JSON.parse(localStorage.getItem('news')).find(news => news.id == id);
 	},
-	getNewsByCategory(categoryId){
+	getNewsByCategory(categoryId) {
 		return JSON.parse(localStorage.getItem('news')).filter(news => news.category.id == categoryId);
 	},
-	setNewId(){
+	setNewId() {
 		const news = localStorage.getItem('news');
 		if(!news){
 			return 1;
@@ -21,10 +21,10 @@ export default {
 			return JSON.parse(localStorage.getItem('news')).length+1;			
 		}
 	},
-	linkCategory(name){
+	linkCategory(name) {
 		return JSON.parse(localStorage.getItem('categories')).find(category => category.name == name).id;
 	},
-	linkReporter(name){
+	linkReporter(name) {
 		return JSON.parse(localStorage.getItem('reporters')).find(reporter => reporter.name == name).id;
 	}
 }

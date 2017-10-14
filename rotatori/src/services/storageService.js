@@ -12,7 +12,6 @@ export default {
 			return [];
 	},
 	getLastId(){
-		debugger;
 		const news = this.getNews();
 		if(news.length > 0)
 			return news[(news.length-1)].id + 1;
@@ -21,6 +20,19 @@ export default {
 	},
 	getNewById(id){
 		const news = this.getNews();
-		return news.find( r => r.id == id)
+		return news.find( n => n.id == id)
+	},
+	getNewsByCatId(catId){
+		const news = this.getNews();
+		 /* es la única manera que encontre para buscar las noticias
+		 que coincidiera con el id, quise usar el filter con el indexOf
+		 pero no me lo reconocia */
+		let newsCat = [];
+		news.forEach(function(n) { 
+			if(n.category.id == catId)
+				newsCat.push(n);
+		});
+		return newsCat;
+		
 	}
 }

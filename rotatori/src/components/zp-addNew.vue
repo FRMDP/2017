@@ -1,6 +1,8 @@
 <template>
     <div class="paddings">
+         <zp-alert v-if="alert" @changeAlert="changeAlert" :messageAlert='messageAlert' :classAlert='classAlert'></zp-alert>
         <h1>Agregar nueva noticia</h1> 
+       
         <form novalidate @submit.stop.prevent="submit">
             <md-input-container>
                 <label>Titulo de la noticia</label>
@@ -57,15 +59,16 @@
     import categoriesService from '../services/categoriesServices'
     import reporterService from '../services/reporterService'
     import storageService from '../services/storageService'
+    import zpAlert from '../components/zp-alert.vue'
 
     export default {
         components:{
-        
+            zpAlert
         },
         data(){
             return {
                 New: {
-                    id:'',
+                    id: '',
                     title: '',
                     subtitle: '',
                     body: '',
@@ -76,7 +79,10 @@
                 reporterId: '',
                 catId: '',
                 Reporters: [],
-                Categories: [] 
+                Categories: [],
+                alert: false,
+                messageAlert: 'Noticia agregada con éxito',
+                classAlert: 'alert-success' 
             }
         },
         computed:{
@@ -95,6 +101,8 @@
                 this.New.date = this.getDate();
                 storageService.addNew(this.New);
                 this.clearForm();
+                this.changeAlert();
+                setTimeout( () => this.changeAlert(), 5000);
             },
             clearForm(){
                 this.New.title = '';
@@ -105,6 +113,9 @@
                 this.New.date = '';
                 this.catId = '';
                 this.reporterId = '';
+            },
+            changeAlert(){
+                this.alert = !this.alert;
             }
         },
         watch: {

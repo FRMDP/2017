@@ -2,17 +2,17 @@
     <div>
         <md-card md-with-hover class="maxWidth">
             <md-card-header>
-                <div class="md-title">Title goes here</div>
-                <div class="md-subhead">Subtitle here</div>
+                <div class="md-title"> {{ ne.title }} </div>
+                <div class="md-subhead"> {{ ne.date }} </div>
             </md-card-header>
 
             <md-card-content>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
+                {{ ne.subtitle }}
             </md-card-content>
 
             <md-card-actions>
-                <md-button @click="$router.push({ name: 'newById', params: { id: 1 }})"> ver completo</md-button>
-                <md-button><router-link :to="{ name: 'catById', params: { id: 1 }}">Categoria</router-link></md-button>
+                <md-button class="md-primary" @click="$router.push({ name: 'newById', params: { id: ne.id }})">Ver completo</md-button>
+                <md-button class="md-accent" @click="$router.push({ name: 'catById', params: { id: ne.category.id }})"> {{ ne.category.name }} </md-button>
             </md-card-actions>
         </md-card>
     </div>
@@ -20,7 +20,7 @@
 <script>
     
     export default {
-        props: [],
+        props: ['ne'],
         data(){
             return {
                 
@@ -30,7 +30,6 @@
             
         },
         created() {
-            
         }
     }
 </script>

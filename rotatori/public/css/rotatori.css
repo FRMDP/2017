@@ -18,6 +18,12 @@ h1{
     text-shadow: 2px 2px 5px #05239C;
     font-size: 3em;
 }
+
+.alRight{
+    align-content: right;
+    text-align: right;
+    margin-right: 0px;
+}
 .paddings{
     padding-left: 100px;
     padding-right: 100px;
@@ -87,6 +93,8 @@ h1{
     margin-bottom: 1rem;
     border: 1px solid transparent;
     border-radius: .25rem;
+    z-index: 1;
+    position: absolute;
 }
 
 .fade {
@@ -136,4 +144,22 @@ button.close {
   /* .slide-fade-leave-active below version 2.1.8 */ {
     transform: translateX(10px);
     opacity: 0;
+  }
+
+  .bounce-enter-active {
+    animation: bounce-in .5s;
+  }
+  .bounce-leave-active {
+    animation: bounce-in .5s reverse;
+  }
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
   }

@@ -1,9 +1,18 @@
-body {
-	margin-top: 10px;
+div div h1 {
+	padding-top: 17px; 
 }
 
-div div h1 {
-	padding-top: 17px;
+.forPs {
+	font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 17px;
+    font-family: Arial;
+    text-transform: uppercase;
 }
 
 .forP {
@@ -14,6 +23,49 @@ div div h1 {
     margin: 0 0 20px 50px;
 }
 
+.forErrorSpans {
+	color: red;
+	margin-left: 40px;
+}
+
+.forOkSpans {
+	color: green;
+	margin-left: 40px;
+}
+
+.forAlert {
+	display: none;
+}
+
+
+.forErrorIcon {
+	color: red;
+}
+
+.forOkIcon {
+	color: green;
+}
+
+.forLabel {
+	margin-left: 45px;
+}
+
+input::-webkit-input-placeholder {
+    font-style:italic;
+}
+
+.forCards {
+	width: 24rem;
+	margin: 10px;
+	height: 190px;
+	border-color: #333; 
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.forCards:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+}
 
 #entertainment:hover {
 	background-color: #f06292;

@@ -1,6 +1,6 @@
 <template>
     <div class="app">
-    	<div class="navbar">
+    	<div class="navbar navbar-fixed">
     		<nav class="white" role="navigation">
 	    		<div class="nav-wrapper container"><router-link to="/news" class="brand-logo blue-text text-darken-4">Sputnik</router-link>
 	    			<ul class="right hide-on-med-and-down">
@@ -21,6 +21,9 @@
 	    				</li>
 	    				<li>
 	    					<router-link to="/category/6" class="black-text" id="entertainment">Entertainment</router-link>
+	    				</li>
+	    				<li>
+	    					<router-link to="/createNew" class="waves-effect waves-light btn" id="createNews">Create News</router-link>
 	    				</li>
 	    			</ul>
 	    			<router-link to="/particularNew/:id"></router-link>

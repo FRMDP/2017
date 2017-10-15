@@ -32,7 +32,12 @@ export default {
 	getReporterId(name) {
 		let reporters = localStorage.getItem('reporters') || '[]';
 		reporters = JSON.parse(reporters);
-		return reporters.find(r => r.name == name).id;
+		const reporter = reporters.find(r => r.name == name);
+		if (typeof reporter != 'undefined'){
+			return reporter;
+		} else {
+			return -1;
+		}
 	},
 
 	getCategoryId(name) {

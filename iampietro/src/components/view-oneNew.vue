@@ -41,7 +41,6 @@
 		},
 		methods: {
 			getNew(idNew) {
-				debugger;
 				return newsService.getNew(this.id);
 			}
 		},

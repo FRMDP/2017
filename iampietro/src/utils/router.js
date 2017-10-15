@@ -10,6 +10,6 @@ export default new VueRouter({
 	  { path: '/createNew', component: addNew },
 	  { path : '/particularNew/:id', component: viewOneNew, name: 'particular' }, // para pasar parametros, declarar 
 	  { path :  '/news', component: news },										  // el name  SI O SI
-	  { path : '/category/:id', component: newsPerCategory }
+	  { path : '/category/:id', component: newsPerCategory, name: 'genre' }
 	]
 });

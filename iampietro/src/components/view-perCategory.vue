@@ -3,7 +3,7 @@
 			<div class="row">
 				<div v-for="particularNew in news">
 					<div class="col s12 m4 l4">
-						<div class="card">
+						<div class="card forCards">
 							<div class="card-content">
 								<strong><h4 class="card-title black-text">
 									{{ particularNew.title }}

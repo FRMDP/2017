@@ -1,6 +1,7 @@
 <template>
     <div class="app">
-    	<top-menu @cambiarVista="cambiarVista"></top-menu>
+    	<top-menu></top-menu>
+    	<router-view></router-view>
     </div>
 </template>
 
@@ -14,24 +15,7 @@
     	},
     	data() {
     		return {
-                Reporter: {
-                    id: number,
-                    name: string
-                },
 
-                Category: {
-                    id: number,
-                    name: string
-                },
-
-                New: {
-                    id: number,
-                    title: string,
-                    body: string,
-                    category: Category,
-                    reporter: Reporter,
-                    date: number
-                }
             }
         },
 

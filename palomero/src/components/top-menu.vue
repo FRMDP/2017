@@ -4,12 +4,15 @@
     <v-spacer></v-spacer>
     <v-toolbar-side-icon class="hidden-md-and-up"></v-toolbar-side-icon>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat>Sport</v-btn>
-      <v-btn flat>Local</v-btn>
-      <v-btn flat>World</v-btn>
-      <v-btn flat>Economy</v-btn>
-      <v-btn flat>Politics</v-btn>
-      <v-btn flat>Entertainment</v-btn>
+      <router-link to="/all"><v-btn flat>Pagina principal</v-btn></router-link>
+      <router-link to="/add"><v-btn flat>Add News</v-btn></router-link>
+      <router-link to=/news/1><v-btn flat>Ver noticia 1</v-btn></router-link>
+      <router-link to=/category/1><v-btn flat>Sport</v-btn></router-link>
+      <router-link to=/category/2><v-btn flat>Local</v-btn></router-link>
+      <router-link to=/category/3><v-btn flat>World</v-btn></router-link>
+      <router-link to=/category/4><v-btn flat>Economy</v-btn></router-link>
+      <router-link to=/category/5><v-btn flat>Politics</v-btn></router-link>
+      <router-link to=/category/6><v-btn flat>Entertainment</v-btn></router-link>
     </v-toolbar-items>
   </v-toolbar>
 </template>

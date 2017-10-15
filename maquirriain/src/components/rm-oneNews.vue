@@ -18,7 +18,6 @@
         isParticular: true
       }
     },
-
     computed: {
         	params() {
         		return this.$route.params;
@@ -32,12 +31,10 @@
         },
         watch: {
         	'$route.params.name': function() {
-        //  this.idea = this.name;
         		this.news = this.$newsService.oneNews(this.name);
         	}
         },
     created() {
-
       this.news = this.$newsService.oneNews(this.name);
     }
   }

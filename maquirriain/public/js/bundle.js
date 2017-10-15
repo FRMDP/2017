@@ -27184,7 +27184,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -27228,11 +27228,6 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rm_topMenu_vue__ = __webpack_require__(15);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -27584,11 +27579,26 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+const categories = [{ id: 1, name: "sports" }, { id: 2, name: "local" }, { id: 3, name: "world" }, { id: 4, name: "economy" }, { id: 5, name: "politics" }, { id: 6, name: "entertainment" }];
+
 /* harmony default export */ __webpack_exports__["a"] = ({
 
   allCategories() {
+    let auxCategories = [];
     const categories = localStorage.getItem('categories') || '[]';
-    return JSON.parse(categories);
+    auxCategories = JSON.parse(categories);
+
+    return this.checkIfExistCategories(auxCategories);
+  },
+  checkIfExistCategories(auxCategories) {
+    if (!auxCategories.length) {
+      this.createCategories();
+      return this.allCategories();
+    }
+    return auxCategories;
+  },
+  createCategories() {
+    localStorage.setItem('categories', JSON.stringify(categories));
   }
 });
 
@@ -27597,10 +27607,27 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+const reporters = [{ id: 1, name: "John Doe" }, { id: 2, name: "Jane Doe" }, { id: 3, name: "Chuck Norris" }, { id: 4, name: "Barack Obama" }];
+
 /* harmony default export */ __webpack_exports__["a"] = ({
+
   allReporters() {
+    let auxReporters = [];
     const reporters = localStorage.getItem('reporters') || '[]';
-    return JSON.parse(reporters);
+    auxReporters = JSON.parse(reporters);
+
+    return this.checkIfExistReporters(auxReporters);
+  },
+
+  checkIfExistReporters(auxReporters) {
+    if (!auxReporters.length) {
+      this.createReporters();
+      return this.allReporters();
+    }
+    return auxReporters;
+  },
+  createReporters() {
+    localStorage.setItem('reporters', JSON.stringify(reporters));
   }
 
 });
@@ -27642,9 +27669,6 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_rm_oneNews_vue__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_rm_categoryNews_vue__ = __webpack_require__(44);
 
-/*import compUno from '../components/comp-uno.vue'
-import compDos from '../components/comp-dos.vue'
-import compTres from '../components/comp-tres.vue'*/
 
 
 
@@ -28492,7 +28516,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28523,7 +28547,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
       isParticular: true
     };
   },
-
   computed: {
     params() {
       return this.$route.params;
@@ -28535,12 +28558,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
   methods: {},
   watch: {
     '$route.params.name': function () {
-      //  this.idea = this.name;
       this.news = this.$newsService.oneNews(this.name);
     }
   },
   created() {
-
     this.news = this.$newsService.oneNews(this.name);
   }
 });
@@ -28669,7 +28690,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28713,10 +28734,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
       this.news = this.$newsService.categoryNews(this.name);
     }
   },
-  mounted() {
-    //categories = $newsService.categoryNews(aux);
-
-  },
+  mounted() {},
   created() {
     this.news = this.$newsService.categoryNews(this.name);
   }

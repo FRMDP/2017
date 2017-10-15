@@ -33,8 +33,7 @@
         	}
         },
     mounted(){
-      //categories = $newsService.categoryNews(aux);
-
+    
     },
     created() {
       this.news = this.$newsService.categoryNews(this.name);

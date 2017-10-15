@@ -24,16 +24,24 @@ h1{
     text-align: right;
     margin-right: 0px;
 }
+paddBottom{
+    padding-bottom: 100px;
+    margin-bottom: 50px;
+}
 .paddings{
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 150px;
+    padding-bottom: 50px
 }
 .marginTop{
     margin-top: 1rem;
 }
 
 .maxWidth {
-    max-width: 320px;
+    max-width: 340px;
+}
+.cardDimension{
+    height: 340px;
+    width: 340px;
 }
 
 .subindice{

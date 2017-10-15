@@ -7,12 +7,10 @@
 
 <script>
     import zpMenu from './zp-menu.vue';
-    import zpSidemenu from './zp-sidemenu.vue';
     export default {
         name: 'app',
         components: {
-            zpMenu,
-            zpSidemenu
+            zpMenu
         },
         data(){
             return {
@@ -26,7 +24,3 @@
         }
     }
 </script>
-
-<style>
-
-</style>

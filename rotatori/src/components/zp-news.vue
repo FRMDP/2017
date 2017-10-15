@@ -1,7 +1,9 @@
 <template>
     <div class="paddings">
         <h1>Noticias destacadas</h1>
-            <zp-littlenew v-for="ne in news" :key="ne.id" :ne="ne"></zp-littlenew>
+            <div class="three columns" v-for="ne in news" :key="ne.id">
+                <zp-littlenew :ne="ne"></zp-littlenew>
+            </div>
     </div>
    
 </template>
@@ -17,9 +19,6 @@
             return {
                 news: [],
             }
-        },
-        methods:{
-            
         },
         created() {
             this.news = storageService.getNews();

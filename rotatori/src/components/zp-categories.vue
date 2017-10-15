@@ -1,11 +1,9 @@
 <template>
     <div class="paddings">
         <h1>Noticias Categoria: {{ cat.name }} </h1>
-        <div class="row">
             <div class="three columns" v-for="ne in New" :key="ne.id">
                 <zp-littlenew :ne="ne"></zp-littlenew>
             </div>
-        </div>
         <zp-alert v-if="emptyNews" @changeAlert="changeAlert" :messageAlert='messageAlert' :classAlert='classAlert'></zp-alert>
     </div>
 </template>

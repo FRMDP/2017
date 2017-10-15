@@ -13,4 +13,8 @@ export default{
 		news.push(new);
 		localStorage.setItem('news', JSON.stringify(news));
 	}
+	getLastId(){
+		const news = JSON.parse(localStorage.getItem('news') || '[]');
+		return news[news.length-1].id;
+	}
 }

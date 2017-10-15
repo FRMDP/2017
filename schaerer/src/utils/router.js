@@ -9,6 +9,6 @@ export default new VueRouter({
 	 { path: '/new', component: viewAddNew},
 	 { path: '/news', component: viewAllNews},
 	 { path: '/news/:id', component: viewOneNew, name: 'oneNew'},
-	 { path: '/category/:id', component: viewCategoryNews}
+	 { path: '/category/:id', component: viewCategoryNews, name: 'category'}
 	]
 });

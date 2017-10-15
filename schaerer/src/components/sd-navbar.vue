@@ -1,27 +1,18 @@
 <template>
 	<div class="navbar">
 		<nav class="white" role="navigation">
-    		<div class="nav-wrapper container"><router-link to="/news" class="brand-logo blue-text text-darken-4">The newest news in the new world</router-link>
-    			<ul class="left hide-on-med-and-down">
-    				<li>
-    					<router-link to="/category/1" class="black-text" id="sports">Sports</router-link>
-    				</li>
-    				<li>
-    					<router-link to="/category/2" class="black-text" id="local">Local</router-link>
-    				</li>
-    				<li>
-    					<router-link to="/category/3" class="black-text" id="world">World</router-link>
-    				</li>
-    				<li>
-    					<router-link to="/category/4" class="black-text" id="economy">Economy</router-link>
-    				</li>
-    				<li>
-    					<router-link to="/category/5" class="black-text" id="politics">Politics</router-link>
-    				</li>
-    				<li>
-    					<router-link to="/category/6" class="black-text" id="entertainment">Entertainment</router-link>
-    				</li>
-    			</ul>
+    		<div class="nav-wrapper container">
+            <router-link to="/news" class="brand-logo blue-text text-darken-4" id="logo">The newest news in the new world</router-link>
+			<ul class="right hide-on-med-and-down">
+                <li v-for="category in categories">
+                    <router-link :to="{name: 'category', params: {id: category.id}}" class="black-text" v-bind:id="category.name">
+                        {{category.name}}
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/new" class="black-text">Add the newest news</router-link>
+                </li>
+			</ul>
     		</div>
     	</nav>
 	</div>
@@ -29,11 +20,23 @@
 
 <script>
     export default {
-    	name: 'sdNavbar'
+    	name: 'sdNavbar',
+        data(){
+            return{
+                categories: []
+            }
+        },
+        created(){
+            this.categories = this.$categoryStorageService.getAllCategories();
+        }
     }
 </script>
 
 <style>
+    #logo{
+        font-size: 25px;
+    }
+
 	#entertainment:hover {
 		background-color: #f06292;
 	}

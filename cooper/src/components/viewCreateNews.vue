@@ -1,6 +1,7 @@
 <template>
-	<div class="negrita">
-        <form class="ac-custom ac-radio ac-circle" autocomplete="off">
+	<div class="container">
+    <div class="ac-custom ac-radio ac-circle negrita card blue-grey darken-1">
+        <form class="card-content" autocomplete="off">
             <h2>Create news</h2>
             <input v-model="news.title" type="text" placeholder="Insert title">
             <input v-model="news.body" type="text" placeholder="Insert body">
@@ -22,9 +23,11 @@
               </div>
             </div>
         </form>
-        <div v-if="message" class="todo_bien_box">
-            News succesfully created
-        </div>
+    </div> 
+    <br>
+    <div v-if="message" class="todo_bien_box">
+      News succesfully created
+    </div>
   </div>
 </template>
 
@@ -79,10 +82,10 @@
           return serviceReporter.getAllReporters();
         },
         createNews(){
-          debugger;
+          this.news.date = Date();
           this.news.category.id = this.getCategoryID(this.news.category.name);
           $serviceNews.addNews(this.news);
-          this.cleanForm();
+          //this.cleanForm();
           this.message = true;
           setTimeout(this.message_false, 4000);
         },

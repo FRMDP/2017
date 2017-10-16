@@ -1,10 +1,16 @@
 <template>
     <div class="container">
-      <h3> {{ news.title }} </h3>
-      <p> {{ news.body }} </p>
-      {{ news.category.name }}
-      {{ news.reporter.name }}
-      Published: {{ news.date }}
+      <div class="row">
+        <div class="col l10">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <h2> {{ news.title }} </h2>
+              <p> {{ news.body }} </p>
+              <i class="right">Publicado por {{ news.reporter.name }} el {{ news.date }}</i>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 </template>
 

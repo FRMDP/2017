@@ -1,7 +1,14 @@
 body {
-  background: #004749;
-  color: white;
+  background: #9a98f2;
   font-family: 'Lato', Arial, sans-serif;
+}
+
+.naranjita {
+  background-color: #18263d !important;
+}
+
+p, i {
+  color: white !important;
 }
 
 .negrita {
@@ -21,11 +28,11 @@ nav {
 }
 
 nav .brand-logo {
-  color: black;
+  color: white;
 }
 
-h2{
-  color: #00ffa1;
+h2, h3{
+  color: #d3e4ff;
 }
 
 html {
@@ -34,7 +41,7 @@ html {
 
 .todo_bien_box {
     padding: 20px;
-    background-color: #00ff1d; /* Red */
+    background-color: white;
     color: black;
     margin-bottom: 15px;
 

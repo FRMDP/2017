@@ -7,13 +7,27 @@ const reporters=[
 
 
 export default{
-  getReporters(){
-  	const reporters = localStorage.getItem('reporters') || '[]';
-  	return JSON.parse(reporters); 
-  },
+	getReporters(){
+		const reporters = localStorage.getItem('reporters') || '[]';
 
-  addReporters(){
-  	localStorage.setItem('reporters',JSON.stringify(reporters));
-  }
+		if(reporters.lenght<1){
+			this.addReporters();
+			this.getReporters();
+		}
+		return JSON.parse(reporters); 
+	},
+
+	addReporters(){
+		localStorage.setItem('reporters',JSON.stringify(reporters));
+	}
+
+	getReportersById(id){
+		const reporters = localStorage.getItem('reporters') || '[]';
+		if(reporters.lenght<1){
+			this.addReporters();
+			this.getReportersById(id);
+		}
+		return JSON.parse(reporters).find(reporter => reporter.id==id); 
+	}
 
 }

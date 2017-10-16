@@ -11,11 +11,24 @@ const categories=[
 export default{
   getCategories(){
   	const categories = localStorage.getItem('categories') || '[]';
+    if(categories<1){
+      this.addCategories();
+      this.getCategories();
+    }
   	return JSON.parse(categories); 
   },
 
   addCategories(){
   	localStorage.setItem('categories',JSON.stringify(categories));
+  }
+
+  getCategoryById(id){
+    const categories = localStorage.getItem('categories') || '[]';
+        if(categories<1){
+      this.addCategories();
+      this.getCategoryById(id);
+    }
+    return JSON.parse(categories).find(category => category.id==id);
   }
 
 }

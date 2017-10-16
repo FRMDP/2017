@@ -96,6 +96,7 @@
 			  	  <div class="row">
 			  	  	<div class="col s6 m4 l4 offset-s3 offset-m4 offset-l4">
 			  	  		<button :disabled="!newIsOk" class="btn waves-effect waves-light green" type="submit" 
+			  	  			onclick="document.getElementById('newsAlert').style.display='block';"
 			  	  			@click.prevent="addNew" name="action">
 			  	  			<i class="material-icons">publish</i>
 						</button>
@@ -127,7 +128,8 @@
 						name: ''
 					},
 					date: ''
-				}
+				},
+				message: false
 			}
 		},
 		computed: {

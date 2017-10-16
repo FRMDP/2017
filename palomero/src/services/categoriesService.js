@@ -10,17 +10,14 @@ const categories=[
 
 export default{
   getCategories(){
+    this.addCategories();
   	const categories = localStorage.getItem('categories') || '[]';
-    if(categories<1){
-      this.addCategories();
-      this.getCategories();
-    }
   	return JSON.parse(categories); 
   },
 
   addCategories(){
   	localStorage.setItem('categories',JSON.stringify(categories));
-  }
+  },
 
   getCategoryById(id){
     const categories = localStorage.getItem('categories') || '[]';

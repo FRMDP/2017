@@ -7,6 +7,8 @@
 
 <script>
 	import topMenu from './top-menu.vue';
+    import reportersService from '../services/reportersService';
+    import categoriesService from '../services/categoriesService';
 
     export default {
     	name: 'app',

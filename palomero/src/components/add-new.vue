@@ -1,18 +1,19 @@
 <template>
 	<v-form v-model="valid">
     <v-text-field
-      label="Title"
-      v-model="news.title"
-      :rules="titleRules"
-      :counter="50"
-      required
+    label="Title"
+    v-model="news.title"
+    :rules="titleRules"
+    :counter="50"
+    required
     ></v-text-field>
+
     <v-text-field
-      label="Body"
-      v-model="news.body"
-      :rules="bodyRules"
-      :counter="500"
-      required
+    label="Body"
+    v-model="news.body"
+    :rules="bodyRules"
+    :counter="500"
+    required
     ></v-text-field>
 
     <v-btn @click="submit">submit</v-btn>
@@ -21,8 +22,9 @@
 </template>
 
 <script>
+import reportersService from '../services/reportersService';
+import categoriesService from '../services/categoriesService';
 		export default {
-
       name: 'addNew',
 
        data () {
@@ -67,14 +69,21 @@
 
       },
       clear () {
+      },
+      getCategorias(){
+        return categoriesService.getCategories();
+      },
+      getReporters(){
+        return reportersService.getReporters();
       }
+    },
+
+    mounted(){
+      this.categories=this.getCategorias();
+      this.reporters=this.getReporters();
     }
 }
 </script>
 <style>
-  body{
-  background: white;
-  padding-right: 100px;
-  padding-left: 100px;
-}
+
 </style>

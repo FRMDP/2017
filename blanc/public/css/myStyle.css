@@ -7,3 +7,5 @@
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
+.sb-card-alert         { position: absolute; width: 50%; top: 50%; left: 28%; }
+.sb-clickable-area     { cursor: pointer; }

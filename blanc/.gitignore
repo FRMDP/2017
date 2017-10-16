@@ -1,0 +1,9 @@
+#Del Intelli
+.idea/
+*.iml
+
+#De Node
+node_modules/
+
+#Auto Generadas
+public/js/bundle.js

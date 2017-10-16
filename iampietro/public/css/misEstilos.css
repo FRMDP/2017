@@ -32,7 +32,7 @@ input::-webkit-input-placeholder {
     font-style:italic;
 }
 
-#spanNearFilter {
+.spanNearFilter {
 	margin-right: 5px;
 }
 

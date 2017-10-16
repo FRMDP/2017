@@ -3,7 +3,7 @@
   padding-bottom: 10px;
 }
 
-#buscar, #agenda, #contenedor{
+#buscar, #agenda, #contenedor, #publicar{
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
@@ -27,7 +27,7 @@
   background-color: gainsboro;
 }
 
-.navbar-item-a, .card-content>a{
+.navbar-item-a, .card-content>a, a.navbar-item-a-elegido{
   color: #151515;
   display: block;
   line-height: 1.5;
@@ -48,13 +48,19 @@
   display: flex;
 }
 
-a.navbar-item-a:hover, a.navbar-item-a.is-active, .card-content>a:hover{
+a.navbar-item-a:hover, a.navbar-item-a.is-active, .card-content>a:hover, a.navbar-item-a-elegido{
   background-color: whitesmoke;
   color: #FF0000;
 }
 
-div.control>input:focus, select:focus{
+
+
+input:focus, select:focus, textarea:focus{
   border-color:#FF0000 !important;
+}
+
+i {
+  color:#FF0000;
 }
 
 .select:not(.is-multiple)::after {

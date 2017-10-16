@@ -30895,29 +30895,57 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
 
 exports.default = {
+
+  name: 'addNew',
+
   data: function data() {
     return {
       valid: false,
-      name: '',
-      nameRules: [function (v) {
-        return !!v || 'Name is required';
+      news: {
+        id: 0,
+        title: '',
+        body: '',
+        category: {
+          id: 0,
+          name: ''
+        },
+        reporter: {
+          id: 0,
+          name: ''
+        },
+        date: 0
+      },
+
+      titleRules: [function (v) {
+        return !!v || 'Title is required';
       }, function (v) {
-        return v.length <= 10 || 'Name must be less than 10 characters';
+        return v.length <= 50 || 'Title must be less than 50 characters';
       }],
-      email: '',
-      emailRules: [function (v) {
-        return !!v || 'E-mail is required';
+
+      bodyRules: [function (v) {
+        return !!v || 'body is required';
       }, function (v) {
-        return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-        );
-      }]
+        return v.length <= 500 || 'Body must be less than 500 characters';
+      }],
+
+      categories: [],
+      reporters: []
     };
   },
 
-  name: 'addNew',
-  methods: {}
+
+  computed: {},
+
+  methods: {
+    submit: function submit() {},
+    clear: function clear() {}
+  }
 };
 
 /***/ }),
@@ -30943,30 +30971,39 @@ var render = function() {
     [
       _c("v-text-field", {
         attrs: {
-          label: "Name",
-          rules: _vm.nameRules,
-          counter: 10,
+          label: "Title",
+          rules: _vm.titleRules,
+          counter: 50,
           required: ""
         },
         model: {
-          value: _vm.name,
+          value: _vm.news.title,
           callback: function($$v) {
-            _vm.name = $$v
+            _vm.$set(_vm.news, "title", $$v)
           },
-          expression: "name"
+          expression: "news.title"
         }
       }),
       _vm._v(" "),
       _c("v-text-field", {
-        attrs: { label: "E-mail", rules: _vm.emailRules, required: "" },
+        attrs: {
+          label: "Body",
+          rules: _vm.bodyRules,
+          counter: 500,
+          required: ""
+        },
         model: {
-          value: _vm.email,
+          value: _vm.news.body,
           callback: function($$v) {
-            _vm.email = $$v
+            _vm.$set(_vm.news, "body", $$v)
           },
-          expression: "email"
+          expression: "news.body"
         }
-      })
+      }),
+      _vm._v(" "),
+      _c("v-btn", { on: { click: _vm.submit } }, [_vm._v("submit")]),
+      _vm._v(" "),
+      _c("v-btn", { on: { click: _vm.clear } }, [_vm._v("clear")])
     ],
     1
   )
@@ -31049,6 +31086,21 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
       name: 'viewAll',
@@ -31064,7 +31116,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("ver noticias")])
+  return _c(
+    "v-layout",
+    [
+      _c(
+        "v-flex",
+        { attrs: { xs12: "", sm6: "", "offset-sm3": "" } },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", { attrs: { "primary-title": "" } }, [
+                _c("div", [
+                  _c("h3", { staticClass: "headline mb-0" }, [
+                    _vm._v("Kangaroo Valley Safari")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v("Located two hours south of Sydney in the "),
+                    _c("br"),
+                    _vm._v("Southern Highlands of New South Wales, ...")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-btn", { attrs: { flat: "", color: "orange" } }, [
+                    _vm._v("Share")
+                  ]),
+                  _vm._v(" "),
+                  _c("v-btn", { attrs: { flat: "", color: "orange" } }, [
+                    _vm._v("Explore")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

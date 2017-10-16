@@ -667,6 +667,48 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	agregarNoticia: function agregarNoticia(noticia) {
+		var noticias = this.traerNoticias();
+		noticias.push(noticia);
+		localStorage.setItem('news', JSON.stringify(noticias));
+	},
+	traerNoticias: function traerNoticias() {
+		var noticias = localStorage.getItem('news') || '[]';
+		return JSON.parse(noticias);
+	},
+	traerNoticiaById: function traerNoticiaById(id) {
+		var noticias = localStorage.getItem('news') || '[]';
+		return JSON.parse(noticias).parse(function (noticia) {
+			return noticia.id = id;
+		});
+	},
+	getUltimoId: function getUltimoId() {
+		var noticias = traerNoticias();
+		if (noticias.lenght >= 1) {
+			return noticias[lenght - 1].id + 1;
+		} else {
+			return 5;
+		}
+	},
+	traerNoticiaByCategory: function traerNoticiaByCategory(id) {
+		var noticias = traerNoticias();
+		return JSON.parse(noticias).parse(function (noticia) {
+			return noticia.category.id = id;
+		});
+	}
+};
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports) {
 
 var g;
@@ -693,7 +735,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3325,7 +3367,7 @@ if (inBrowser && window.Vue) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3357,7 +3399,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3385,42 +3427,6 @@ exports.default = {
 };
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	agregarNoticia: function agregarNoticia(noticia) {
-		var noticias = this.traerNoticias();
-		noticias.push(noticia);
-		localStorage.setItem('news', JSON.stringify(noticias));
-	},
-	traerNoticias: function traerNoticias() {
-		var noticias = localStorage.getItem('news') || '[]';
-		return JSON.parse(noticias);
-	},
-	traerNoticiaById: function traerNoticiaById(id) {
-		var noticias = localStorage.getItem('news') || '[]';
-		return JSON.parse(noticias).parse(function (noticia) {
-			return noticia.id = id;
-		});
-	},
-	getUltimoId: function getUltimoId() {
-		var noticias = traerNoticias();
-		if (noticias.lenght >= 1) {
-			return noticias[lenght - 1].id + 1;
-		} else {
-			return 5;
-		}
-	}
-};
-
-/***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3431,7 +3437,7 @@ var _vue = __webpack_require__(10);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueRouter = __webpack_require__(5);
+var _vueRouter = __webpack_require__(6);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -3439,7 +3445,7 @@ var _App = __webpack_require__(13);
 
 var _App2 = _interopRequireDefault(_App);
 
-var _storageService = __webpack_require__(8);
+var _storageService = __webpack_require__(4);
 
 var _storageService2 = _interopRequireDefault(_storageService);
 
@@ -14026,7 +14032,7 @@ Vue$3.compile = compileToFunctions;
 
 /* harmony default export */ __webpack_exports__["default"] = (Vue$3);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1), __webpack_require__(4), __webpack_require__(11).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1), __webpack_require__(5), __webpack_require__(11).setImmediate))
 
 /***/ }),
 /* 11 */
@@ -14278,7 +14284,7 @@ exports.clearImmediate = clearImmediate;
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(1)))
 
 /***/ }),
 /* 13 */
@@ -14425,11 +14431,11 @@ var _topMenu = __webpack_require__(18);
 
 var _topMenu2 = _interopRequireDefault(_topMenu);
 
-var _reportersService = __webpack_require__(6);
+var _reportersService = __webpack_require__(7);
 
 var _reportersService2 = _interopRequireDefault(_reportersService);
 
-var _categoriesService = __webpack_require__(7);
+var _categoriesService = __webpack_require__(8);
 
 var _categoriesService2 = _interopRequireDefault(_categoriesService);
 
@@ -14757,7 +14763,7 @@ Object.defineProperty(exports, "__esModule", {
 		value: true
 });
 
-var _vueRouter = __webpack_require__(5);
+var _vueRouter = __webpack_require__(6);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -14891,15 +14897,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reportersService = __webpack_require__(6);
+var _reportersService = __webpack_require__(7);
 
 var _reportersService2 = _interopRequireDefault(_reportersService);
 
-var _categoriesService = __webpack_require__(7);
+var _categoriesService = __webpack_require__(8);
 
 var _categoriesService2 = _interopRequireDefault(_categoriesService);
 
-var _storageService = __webpack_require__(8);
+var _storageService = __webpack_require__(4);
 
 var _storageService2 = _interopRequireDefault(_storageService);
 
@@ -15327,31 +15333,45 @@ if (false) {(function () {
 
 
 Object.defineProperty(exports, "__esModule", {
-      value: true
+  value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+var _storageService = __webpack_require__(4);
+
+var _storageService2 = _interopRequireDefault(_storageService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-      name: 'viewAll',
-      methods: {}
-};
+  name: 'viewAll',
+  data: function data() {
+    return {
+      noticias: []
+    };
+  },
+
+  methods: {},
+  mounted: function mounted() {
+    this.noticias = _storageService2.default.traerNoticias();
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 32 */
@@ -15362,33 +15382,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      { staticClass: "col s12 m6" },
+      [
+        !_vm.noticias.length
+          ? _c("h3", [_vm._v("Looks so empty")])
+          : _vm._l(_vm.noticias, function(noticia, index) {
+              return _c("div", { staticClass: "card blue-grey darken-1" }, [
+                _c("div", { staticClass: "card-content white-text" }, [
+                  _c("span", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(noticia.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Date:" + _vm._s(noticia.date))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Category:" + _vm._s(noticia.category.name))])
+                ]),
+                _vm._v(" "),
+                _vm._m(0, true)
+              ])
+            })
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col s12 m6" }, [
-        _c("div", { staticClass: "card blue-grey darken-1" }, [
-          _c("div", { staticClass: "card-content white-text" }, [
-            _c("span", { staticClass: "card-title" }, [_vm._v("Card Title")]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "I am a very simple card. I am good at containing small bits of information.\n        I am convenient because I require little markup to use effectively."
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-action" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("This is a link")]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [_vm._v("This is a link")])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "card-action" }, [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("This is a link")])
     ])
   }
 ]

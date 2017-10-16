@@ -22,5 +22,10 @@ export default {
 		else{
 			return 5;
 		}
+	},
+
+	traerNoticiaByCategory(id){
+		const noticias=traerNoticias();
+		return JSON.parse(noticias).parse(noticia=>noticia.category.id=id);
 	}
 }

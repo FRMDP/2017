@@ -4,7 +4,7 @@ export default {
 		noticias.push(noticia);
 		localStorage.setItem('news', JSON.stringify(noticias));
 	},
-	traerNumeros() {
+	traerNoticias() {
 		const noticias = localStorage.getItem('news') || '[]';
 		return JSON.parse(noticias);
 	}

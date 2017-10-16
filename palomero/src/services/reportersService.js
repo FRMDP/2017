@@ -9,8 +9,7 @@ const reporters=[
 export default{
 	getReporters(){
 		this.addReporters();
-		const reporters = localStorage.getItem('reporters') || '[]';
-		return JSON.parse(reporters); 
+		return JSON.parse(localStorage.getItem('reporters'));
 	},
 
 	addReporters(){

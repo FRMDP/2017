@@ -11,8 +11,7 @@ const categories=[
 export default{
   getCategories(){
     this.addCategories();
-  	const categories = localStorage.getItem('categories') || '[]';
-  	return JSON.parse(categories); 
+  	return JSON.parse(localStorage.getItem('categories')); 
   },
 
   addCategories(){

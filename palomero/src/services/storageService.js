@@ -1,7 +1,7 @@
 export default {
 	agregarNoticia(noticia) {
 		const noticias = this.traerNoticias();
-		notcia.id=this.getUltimoId();
+		noticia.id=this.getUltimoId();
 		noticias.push(noticia);
 		localStorage.setItem('news', JSON.stringify(noticias));
 	},
@@ -16,10 +16,10 @@ export default {
 	},
 
 	getUltimoId(){
-		const noticas=this.traerNoticias()
+		const noticias=this.traerNoticias()
 		let rta=1;
 		if(noticias.lenght>0){
-			rta=noticias[lenght-1].id+1;
+			rta=noticias[(lenght-1)].id+1;
 		}
 		return rta;
 	}

@@ -50,7 +50,7 @@
         </div>
       </form>
       <div class="row" align="center">
-        <button class="btn waves-effect waves-light" type="submit">Add </button>
+        <button @click="submit" class="btn waves-effect waves-light" type="submit">Add </button>
       </div>
     </form>
   </div> 
@@ -62,6 +62,7 @@
 <script>
 import reportersService from '../services/reportersService';
 import categoriesService from '../services/categoriesService';
+import storageService from '../services/storageService';
 		export default {
       name: 'addNew',
 
@@ -99,12 +100,15 @@ import categoriesService from '../services/categoriesService';
 
     computed:{
       formOk() {
-      return this.persona.nombre && this.persona.apellido && this.persona.edad && this.persona.telefono && this.persona.sexo;
+      return this.news.title && this.news.body && this.news.date && this.news.category.name && this.news.reporter.name;
     }
     },
 
     methods: {
       submit () {
+        this.news.category.id=this.categories.find(category => category.name == this.news.category.name).id;
+        this.news.reporter.id=this.reporters.find(reporter =>reporter.name==this.news.reporter.name).id;
+        this.addNews(this.news);
 
       },
       clear () {
@@ -114,7 +118,13 @@ import categoriesService from '../services/categoriesService';
       },
       getReporters(){
         return reportersService.getReporters();
-      }
+      },
+      getLastId(){
+        return storageService.getUltimoId();
+      },
+      addNews(news){
+        storageService.agregarNoticia(news);
+      }    
     },
 
     mounted(){

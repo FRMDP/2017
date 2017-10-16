@@ -156,8 +156,6 @@
 }
 
 .tituloIngreso{
-	/* No es la forma correcta de centrar el texto
-  padding-left: 45px; */
   font-weight: 300;
   text-align: center;
   margin-top: 30px;

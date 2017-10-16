@@ -14375,7 +14375,10 @@ var render = function() {
     [
       _c(
         "md-card",
-        { staticClass: "cardDimension paddBottom" },
+        {
+          staticClass: "cardDimension paddBottom",
+          staticStyle: { "margin-bottom": "10px" }
+        },
         [
           _c(
             "md-card-media-cover",
@@ -15007,7 +15010,6 @@ var _zpAlert2 = _interopRequireDefault(_zpAlert);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
 //
 //
 //

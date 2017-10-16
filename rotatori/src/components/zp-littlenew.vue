@@ -1,6 +1,6 @@
 <template>
     <div>
-        <md-card class="cardDimension paddBottom"> <!-- No puedo solucionar que deje un espacio entre cada fila de tarjetas -->
+        <md-card class="cardDimension paddBottom" style="margin-bottom : 10px"> <!-- No puedo solucionar que deje un espacio entre cada fila de tarjetas -->
             <md-card-media-cover md-solid>
                 <md-card-media md-ratio="1:1">
                 <img src="img/deportes.jpg" alt="Skyscraper" v-if="ne.category.name == 'sports'">

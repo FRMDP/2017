@@ -40,7 +40,7 @@
             },
             emptyNews(){
                 return this.New.length == 0;
-            }
+            },
         },
         watch: {
             '$route.params.id': function() {
@@ -49,8 +49,12 @@
             }
         },
         created() {
-            this.New = storageService.getNewsByCatId(this.id);
             this.cat = categoriesService.getCatById(this.id);
+            if(this.cat == undefined){
+                this.$router.push('/404');
+            }else{
+                this.New = storageService.getNewsByCatId(this.id);
+            }
         }
     }
 </script>

@@ -17,17 +17,25 @@
                     Diario UTN FRMDP
                 </md-button>
             </div>
-        </md-toolbar> 
+        </md-toolbar>
+        <zp-alert v-if="alert" :messageAlert="messageAlert" :classAlert="classAlert"></zp-alert>
     </div>
 </template>
 
 <script>
     import categoriesService from '../services/categoriesServices'
+    import zpAlert from '../components/zp-alert.vue'
     export default {
-    	name: 'zpMenu',
+        name: 'zpMenu',
+        components: {
+            zpAlert
+        },
         data() {
     		return {
                 categories: [],
+                messageAlert: 'Mire la consola',
+                classAlert: 'alert-info',
+                alert:false,
     		}
     	},
         methods: {
@@ -35,6 +43,8 @@
     			this.$emit('toggleMenu');
             },
             clicli(){
+                this.alert=true;
+                setTimeout(() => this.alert = false, 1000);
                 console.log("  .@@@@.    #+++#    ,@@@@   \n  `@@@@.    @@@@@    ,@@@@   \n   @@@@+    @@@@@    #@@@@   \n   @@@@@    @@@@@    @@@@@   \n   #@@@@'   @@@@@   +@@@@+   \n    @@@@@.  @@@@@  ,@@@@@    \n    @@@@@@' @@@@@ '@@@@@@    \n     @@@@@@@@@@@@@@@@@@@     \n     ,@@@@@@@@@@@@@@@@@`     \n      ,@@@@@@@@@@@@@@@.      \n       `@@@@@@@@@@@@@        \n         :@@@@@@@@@,         \n  :@@@@@@@@@@@@@@@@@@@@@@@,  \n  ,@@@@@@@@@@@@@@@@@@@@@@@.  \n  ,@@@@@@@@@@@@@@@@@@@@@@@.  \n  ,@@@@@@@@@@@@@@@@@@@@@@@.  \n  :@@@@@@@@@@@@@@@@@@@@@@@,  \n         :@@@@@@@@@,         \n       `@@@@@@@@@@@@@        \n      :@@@@@@@@@@@@@@@.      \n     ,@@@@@@@@@@@@@@@@@`     \n     @@@@@@@@@@@@@@@@@@@     \n    @@@@@@; @@@@@ '@@@@@@    \n    @@@@@.  @@@@@  ,@@@@@    \n   #@@@@;   @@@@@   +@@@@#   \n   @@@@@    @@@@@    @@@@@   \n   @@@@+    @@@@@    #@@@@   \n  `@@@@.    @@@@@    ,@@@@   \n  `@@@@`    +++++    .@@@@\nPara agregar noticias /addnew");
             }
         },

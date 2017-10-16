@@ -1,6 +1,6 @@
 <template>
-    <div class="paddings">
-         <zp-alert v-if="alert" @changeAlert="changeAlert" :messageAlert='messageAlert' :classAlert='classAlert'></zp-alert>
+    <div class="paddAdd">
+        <zp-alert v-if="alert" @hideAlert="hideAlert" :messageAlert='messageAlert' :classAlert='classAlert'></zp-alert>
         <h1>Agregar nueva noticia</h1> 
        
         <form novalidate @submit.stop.prevent="submit">
@@ -52,8 +52,7 @@
                 </div>
             </div>    
         </form>
-    </div>
-    
+    </div>  
 </template>
 <script>
     import categoriesService from '../services/categoriesServices'
@@ -96,13 +95,20 @@
                 let dt = new Date();
                 return dt.getDate() + ' de ' + months[dt.getMonth()] + ' de ' + dt.getFullYear();
             },
+            showAlert(){
+                this.alert = true;
+                setTimeout( () => this.hideAlert(),4000);
+
+            },
+            hideAlert(){
+                this.alert = false;
+            },
             addNew(){
                 this.New.id = storageService.getLastId();
                 this.New.date = this.getDate();
                 storageService.addNew(this.New);
                 this.clearForm();
-                this.changeAlert();
-                setTimeout( () => this.changeAlert(), 5000);
+                this.showAlert();
             },
             clearForm(){
                 this.New.title = '';
@@ -114,9 +120,6 @@
                 this.catId = '';
                 this.reporterId = '';
             },
-            changeAlert(){
-                this.alert = !this.alert;
-            }
         },
         watch: {
             catId(){

@@ -30,7 +30,11 @@ paddBottom{
 }
 .paddings{
     padding-left: 150px;
-    padding-bottom: 50px
+    padding-bottom: 50px;
+}
+.paddAdd{
+    padding-left: 150px;
+    padding-right: 150px;
 }
 .marginTop{
     margin-top: 1rem;

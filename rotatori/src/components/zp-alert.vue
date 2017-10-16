@@ -1,7 +1,7 @@
 <template>
     <transition name="bounce">
         <div class="alert marginTop" role="alert" :class="classAlert">
-            <button v-if="classAlert=='alert-success'" type="button" class="close" data-dismiss="alert" @click="changeAlert">
+            <button v-if="classAlert=='alert-success'" type="button" class="close" data-dismiss="alert" @click="hideAlert">
             <i class="material-icons left">remove</i>
             </button>
             {{ messageAlert }}
@@ -19,8 +19,8 @@
             }
         },
         methods: {
-            changeAlert(){
-                this.$emit('changeAlert');
+            hideAlert(){
+                this.$emit('hideAlert');
             }
         }
     }

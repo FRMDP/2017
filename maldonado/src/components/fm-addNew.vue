@@ -33,7 +33,7 @@
 			  	  	<div class="row">
 				  	  	<div class="col s12 m6 l6">
 				  	  		<input name="category" type="radio" value="locals" class="with-gap" 
-				  	  			v-model="oneNew.category.name" id="locals">
+				  	  			v-model="oneNew.category.name" id="local">
 				  	  		<label for="locals">Locales</label>
 				  	  	</div>
 				  	  	<div class="col s12 m6 l6">

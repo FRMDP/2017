@@ -14971,7 +14971,7 @@ var render = function() {
                     name: "category",
                     type: "radio",
                     value: "locals",
-                    id: "locals"
+                    id: "local"
                   },
                   domProps: {
                     checked: _vm._q(_vm.oneNew.category.name, "locals")

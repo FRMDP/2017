@@ -4,7 +4,8 @@
 
 .notification-alert {
     position: absolute;
-    width: 100%;
+    width: 80%;
+    left: 10%;
     top: 190px;
 }
 
@@ -13,4 +14,8 @@
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0
+}
+
+body, button, input, select, textarea {
+    font-family: 'Quicksand', sans-serif;
 }

@@ -2,6 +2,11 @@
 	<div class="section">
 		<div class="container">
 			<h1 class="header black-text">{{ news.title }}</h1>
+			<div class="row">
+				<div class="col 12 m12 l12">
+					<img src="https://picsum.photos/950/350/?random">
+				</div>
+			</div>
 			<p class="black-text"><strong>{{ news.date }}</strong></p>
 			<p class="right-align black-text">By: <strong>{{ news.reporter.name }}</strong></p>
 			<div class="divider"></div>

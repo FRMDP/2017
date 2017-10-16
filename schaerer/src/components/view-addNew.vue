@@ -7,7 +7,6 @@
 		</div>
 		<div class="row">
 			<div class="col s12 m8 l8 offset-m2 offset-l2">
-			<!-- FORMULARIO AGREGAR CONTACTO  -->
 				<form>
 					<div class="row">
 						<div class="col s12 m6 l6">
@@ -41,6 +40,21 @@
 							</select>
 				  	  	</div>
 				  	</div>
+
+
+				  	<!-- TUVE EL MISMO ERROR QUE LA ANTERIOR VEZ, SI LE AGREGAS VUE A UN RADIO BUTTON DE MATERIALIZE, DEJA DE FUNCIONAR, 
+				  			POR ESO HICE SELCTS, SINO LO TENIA QUE HARCODEAR
+				  			
+				  	<div class="row">
+				  		<h5>Select the new's category.</h5>
+				  		<div class="col s6 m6 l6" v-for="c in categories">
+				  			<input class="with-gap" name="categories" type="radio" v-model="news.category.id" v-bind:value="c.id"/>
+				  			<label v-bind:for="c.id">{{c.name}}</label>
+				  		</div>
+				  	</div>
+				  	-->
+
+
 					<div class="row">
 						<div class="col s12 m9 l9 offset-m3 offset-l3">
 						<button class="waves-effect waves-light btn-large botonConLetrasRojitas" :disabled="!formOk" type="submit" @click.prevent="addNews">

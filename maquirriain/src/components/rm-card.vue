@@ -9,7 +9,7 @@
           tag="article"
           style="max-width: 20rem;"
           class="mb-2" bg-variant="dark" text-variant="white" v-bind:title="aux.title" v-bind:sub-title="aux.category.name">
-        <p v-if='!isParticular' class="card-text cortar">
+        <p v-if='!isParticular' class="card-text truncateBody">
           {{aux.body}}
         </p>
         <p v-if="isParticular" class="card-text">

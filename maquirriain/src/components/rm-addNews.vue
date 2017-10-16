@@ -2,12 +2,19 @@
   <div>
       <div class='row justify-content-center'>
         <div class='col-md-4 center'>
+          <b-alert :show="dismissCountDown"
+           dismissible
+           variant="primary"
+           @dismissed="dismissCountdown=0"
+           @dismiss-count-down="countDownChanged">
+           <b>The news was added!!</b>
+           <i>This alert will close in {{dismissCountDown}} seconds</i>
+          </b-alert>
             <label class="sizeSubTitle"><strong>Add a new news</strong></label>
             <br/>
             <label>Title</label>
             <input class="form-control"  type="text" placeholder="Put the title" v-model="news.title">
-            <label>Date</label>
-            <input class="form-control" type="date" placeholder="Put the date"v-model="news.date">
+
             <div class="form-group">
               <label for="exampleFormControlTextarea1">Body</label>
               <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Put the body of the news"rows="3" v-model="news.body"></textarea>
@@ -28,7 +35,7 @@
               <option v-for="reporter in reporters" v-bind:value="reporter.name" >{{reporter.name}}</option>
             </select>
             </br>
-            <router-link to="/"><button :disabled="!formOk" type="submit" class="btn btn-primary" @click="saveNews">Submit</button></router-link>
+            <button :disabled="!formOk" type="submit" class="btn btn-primary"  @click="saveNews">Submit</button>
 
         </div>
       </div>
@@ -55,21 +62,42 @@
             },
             categories: [],
             reporters: [],
-            allNews: []
+            allNews: [],
+            dismissSecs: 10,
+            dismissCountDown: 0,
           }
         },
         computed: {
           formOk(){
-            return this.news.title && this.news.body && this.news.category.name && this.news.reporter.name && this.news.date;
+            return this.news.title && this.news.body && this.news.category.name && this.news.reporter.name;
           }
         },
         methods:{
           saveNews(){
             this.news.category.id = this.categories.find(c => c.name == this.news.category.name).id;
             this.news.reporter.id = this.reporters.find(c => c.name == this.news.reporter.name).id;
+            this.news.date = new Date().toJSON().slice(0,10);
             this.allNews =   this.$newsService.allNews();
             this.news.id = this.allNews.length+1;
             this.$newsService.saveNews(this.news);
+            this.clearInputs();
+            this.showAlert();
+          },
+          clearInputs(){
+            this.news.id = 0,
+            this.news.title = '',
+            this.news.body = '',
+            this.news.category.name = '',
+            this.news.category.id = 0,
+            this.news.reporter.id = 0,
+            this.news.reporter.name = '',
+            this.news.date = ''
+          },
+          countDownChanged(dismissCountDown) {
+            this.dismissCountDown = dismissCountDown;
+          },
+          showAlert() {
+            this.dismissCountDown = this.dismissSecs;
           }
         },
         mounted(){

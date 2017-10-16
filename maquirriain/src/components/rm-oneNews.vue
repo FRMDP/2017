@@ -1,7 +1,7 @@
 <template>
   <div>
       <div v-if='!this.news.length'><label>there are not news</label></div>
-      <rm-card v-else v-for="aux in news" :aux='aux' :isParticular='isParticular'></rm-card>
+      <rm-card v-else v-for="aux in news" :aux='aux' :isParticular='isParticular' :key='aux.id'></rm-card>
   </div>
 </template>
 <script>

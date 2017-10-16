@@ -27768,7 +27768,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -27778,6 +27778,13 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -27835,21 +27842,35 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
       },
       categories: [],
       reporters: [],
-      allNews: []
+      allNews: [],
+      dismissSecs: 10,
+      dismissCountDown: 0
     };
   },
   computed: {
     formOk() {
-      return this.news.title && this.news.body && this.news.category.name && this.news.reporter.name && this.news.date;
+      return this.news.title && this.news.body && this.news.category.name && this.news.reporter.name;
     }
   },
   methods: {
     saveNews() {
       this.news.category.id = this.categories.find(c => c.name == this.news.category.name).id;
       this.news.reporter.id = this.reporters.find(c => c.name == this.news.reporter.name).id;
+      this.news.date = new Date().toJSON().slice(0, 10);
       this.allNews = this.$newsService.allNews();
       this.news.id = this.allNews.length + 1;
       this.$newsService.saveNews(this.news);
+      this.clearInputs();
+      this.showAlert();
+    },
+    clearInputs() {
+      this.news.id = 0, this.news.title = '', this.news.body = '', this.news.category.name = '', this.news.category.id = 0, this.news.reporter.id = 0, this.news.reporter.name = '', this.news.date = '';
+    },
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
     }
   },
   mounted() {
@@ -27873,6 +27894,34 @@ var render = function() {
         "div",
         { staticClass: "col-md-4 center" },
         [
+          _c(
+            "b-alert",
+            {
+              attrs: {
+                show: _vm.dismissCountDown,
+                dismissible: "",
+                variant: "primary"
+              },
+              on: {
+                dismissed: function($event) {
+                  _vm.dismissCountdown = 0
+                },
+                "dismiss-count-down": _vm.countDownChanged
+              }
+            },
+            [
+              _c("b", [_vm._v("The news was added!!")]),
+              _vm._v(" "),
+              _c("i", [
+                _vm._v(
+                  "This alert will close in " +
+                    _vm._s(_vm.dismissCountDown) +
+                    " seconds"
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
           _c("br"),
@@ -27897,30 +27946,6 @@ var render = function() {
                   return
                 }
                 _vm.news.title = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("label", [_vm._v("Date")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.news.date,
-                expression: "news.date"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "date", placeholder: "Put the date" },
-            domProps: { value: _vm.news.date },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.news.date = $event.target.value
               }
             }
           }),
@@ -28038,17 +28063,15 @@ var render = function() {
           _vm._v(" "),
           _c("br"),
           _vm._v(" "),
-          _c("router-link", { attrs: { to: "/" } }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                attrs: { disabled: !_vm.formOk, type: "submit" },
-                on: { click: _vm.saveNews }
-              },
-              [_vm._v("Submit")]
-            )
-          ])
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { disabled: !_vm.formOk, type: "submit" },
+              on: { click: _vm.saveNews }
+            },
+            [_vm._v("Submit")]
+          )
         ],
         2
       )
@@ -28321,7 +28344,7 @@ var render = function() {
                 },
                 [
                   !_vm.isParticular
-                    ? _c("p", { staticClass: "card-text cortar" }, [
+                    ? _c("p", { staticClass: "card-text truncateBody" }, [
                         _vm._v("\n        " + _vm._s(_vm.aux.body) + "\n      ")
                       ])
                     : _vm._e(),
@@ -28406,8 +28429,9 @@ var render = function() {
     [
       !this.allNews.length
         ? _c("div", [_c("label", [_vm._v("there are not news")])])
-        : _vm._l(_vm.allNews, function(aux) {
+        : _vm._l(_vm.allNews, function(aux, key) {
             return _c("rm-card", {
+              key: aux.id,
               attrs: { aux: aux, isParticular: _vm.isParticular }
             })
           })
@@ -28582,6 +28606,7 @@ var render = function() {
         ? _c("div", [_c("label", [_vm._v("there are not news")])])
         : _vm._l(_vm.news, function(aux) {
             return _c("rm-card", {
+              key: aux.id,
               attrs: { aux: aux, isParticular: _vm.isParticular }
             })
           })
@@ -28756,6 +28781,7 @@ var render = function() {
         ? _c("div", [_c("label", [_vm._v("there are not news")])])
         : _vm._l(_vm.news, function(aux) {
             return _c("rm-card", {
+              key: aux.id,
               attrs: { aux: aux, isParticular: _vm.isParticular }
             })
           })

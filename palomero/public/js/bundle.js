@@ -3397,7 +3397,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
 	agregarNoticia: function agregarNoticia(noticia) {
 		var noticias = this.traerNoticias();
-		noticia.id = this.getUltimoId();
 		noticias.push(noticia);
 		localStorage.setItem('news', JSON.stringify(noticias));
 	},
@@ -3412,12 +3411,12 @@ exports.default = {
 		});
 	},
 	getUltimoId: function getUltimoId() {
-		var noticias = this.traerNoticias();
-		var rta = 1;
-		if (noticias.lenght > 0) {
-			rta = noticias[lenght - 1].id + 1;
+		var noticias = traerNoticias();
+		if (noticias.lenght >= 1) {
+			return noticias[lenght - 1].id + 1;
+		} else {
+			return 5;
 		}
-		return rta;
 	}
 };
 
@@ -14876,7 +14875,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -14939,7 +14938,8 @@ exports.default = {
       }],
 
       categories: [],
-      reporters: []
+      reporters: [],
+      noticias: []
     };
   },
 
@@ -14954,6 +14954,8 @@ exports.default = {
     submit: function submit() {
       var _this = this;
 
+      this.noticias = _storageService2.default.traerNoticias();
+      this.news.id = this.noticias.length + 1;
       this.news.category.id = this.categories.find(function (category) {
         return category.name == _this.news.category.name;
       }).id;

@@ -14664,7 +14664,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.form{\n\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n\tborder-radius: 15px;\n}\n", ""]);
+exports.push([module.i, "\n.form{\n\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n\tborder-radius: 15px;\n}\n.alert {\n\tmargin-left: 30px;\n\tmargin-top: 25px;\n\tmargin-bottom: 10px;\n  \tbackground-color: #80ff80;\n  \tpadding: 20px;\n\tcolor: black;\n\tfont-weight: bold;\n\tborder-radius: 5px;\n}\n.closebtn {\n    margin-left: 15px;\n    color: black;\n    font-weight: bold;\n    float: right;\n    font-size: 22px;\n    line-height: 20px;\n    cursor: pointer;\n    transition: 0.3s;\n}\n.closebtn:hover {\n    color: white;\n}\n", ""]);
 
 // exports
 
@@ -14703,7 +14703,8 @@ exports.default = {
 					name: ''
 				},
 				date: ''
-			}
+			},
+			message: false
 		};
 	},
 
@@ -14720,6 +14721,7 @@ exports.default = {
 			this.oneNew.date = new Date().toJSON().slice(0, 10);
 			_newsService2.default.addNew(this.oneNew);
 			this.cleanForm();
+			this.message = true;
 		},
 		cleanForm: function cleanForm() {
 			this.oneNew.title = '';
@@ -14729,6 +14731,11 @@ exports.default = {
 		}
 	}
 }; //
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14850,6 +14857,35 @@ var render = function() {
   return _c("div", { staticClass: "container form" }, [
     _c("div", { staticClass: "row", staticStyle: { "margin-top": "60px" } }, [
       _c("div", { staticClass: "col s12 m8 l6 offset-m2 offset-l3" }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.message == true,
+                expression: "message == true"
+              }
+            ],
+            staticClass: "alert",
+            attrs: { id: "newsAlert" }
+          },
+          [
+            _c(
+              "span",
+              {
+                staticClass: "closebtn",
+                attrs: { onclick: "this.parentElement.style.display='none';" }
+              },
+              [_vm._v("×")]
+            ),
+            _vm._v(
+              " \n                    Holy Guacamole! Noticia agregada con exito.\n                "
+            )
+          ]
+        ),
+        _vm._v(" "),
         _c("h2", { staticClass: "center" }, [_vm._v("Agrega una noticia")]),
         _vm._v(" "),
         _c("form", [
@@ -15254,6 +15290,8 @@ var render = function() {
                     attrs: {
                       disabled: !_vm.newIsOk,
                       type: "submit",
+                      onclick:
+                        "document.getElementById('newsAlert').style.display='block';",
                       name: "action"
                     },
                     on: {

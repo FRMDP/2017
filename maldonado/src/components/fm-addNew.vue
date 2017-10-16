@@ -2,6 +2,10 @@
 	<div class="container form">
 		<div class="row" style="margin-top: 60px;">
 			<div class="col s12 m8 l6 offset-m2 offset-l3">
+				<div class="alert" id="newsAlert" v-show="message == true">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                    Holy Guacamole! Noticia agregada con exito.
+                </div>
 				<h2 class="center">Agrega una noticia</h2>
 				<form>
 					<!-- TITLE -->
@@ -146,6 +150,7 @@
 				this.oneNew.date = new Date().toJSON().slice(0, 10);
 				newsService.addNew(this.oneNew);
 				this.cleanForm();
+				this.message = true;
 			},
 			cleanForm() {
 				this.oneNew.title = '';
@@ -161,5 +166,30 @@
 	.form{
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		border-radius: 15px;
+	}
+	.alert {
+		margin-left: 30px;
+		margin-top: 25px;
+		margin-bottom: 10px;
+	  	background-color: #80ff80;
+	  	padding: 20px;
+		color: black;
+		font-weight: bold;
+		border-radius: 5px;
+	}
+
+	.closebtn {
+	    margin-left: 15px;
+	    color: black;
+	    font-weight: bold;
+	    float: right;
+	    font-size: 22px;
+	    line-height: 20px;
+	    cursor: pointer;
+	    transition: 0.3s;
+	}
+
+	.closebtn:hover {
+	    color: white;
 	}
 </style>

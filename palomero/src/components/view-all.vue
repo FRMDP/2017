@@ -9,7 +9,7 @@
               <p>Category:{{noticia.category.name}}</p>
             </div>
             <div class="card-action">
-              <a href="#">This is a link</a>
+              <a href="#"><router-link v-bind:to="'/news/'+noticia.id">Read</router-link></a>
             </div>
           </div>
         </div>

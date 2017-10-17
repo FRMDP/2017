@@ -6,26 +6,32 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><router-link to="/add">Add News</router-link></li>
         <li><router-link to="/all">Pagina principal</router-link></li>
-        <li><router-link to=/category/1>Sports</router-link></li>
-        <li><router-link to=/category/2>Local</router-link></li>
-        <li><router-link to=/category/3>World</router-link></li>
-        <li><router-link to=/category/4>Economy</router-link></li>
-        <li><router-link to=/category/5>Politics</router-link></li>
-        <li><router-link to=/category/6>Entertainment</router-link></li>
+        <li v-for="c in categories"><router-link v-bind:to="'/category/'+c.id">Sports</router-link></li>
       </ul>
     </div>
   </nav>
 </template>
 
 <script>
+  import categoriesService from '../services/categoriesService';
     export default {
     	name: 'topMenu',
         props: ['vista'],
     	data() {
     		return {
-         mensaje:false
+         mensaje:false,
+         categories:[]
     		}
     	},
+
+      mounted() {
+        this.categories = categoriesService.getCategories();
+      },
+
+      created() {
+        this.categories = categoriesService.getCategories();
+      },
+
     	methods: {
     		cambiarVista(vista) {
                 this.$emit('cambiarVista', vista);

@@ -10,8 +10,8 @@ export default {
 	},
 
 	traerNoticiaById(id){
-		const noticias = localStorage.getItem('news') || '[]';
-		return JSON.parse(noticias).parse(noticia=> noticia.id=id);
+		const noticias=this.traerNoticias();
+		return noticias.find(noticia=> noticia.id==id);
 	},
 
 	getUltimoId(){
@@ -26,6 +26,6 @@ export default {
 
 	traerNoticiaByCategory(id){
 		const noticias=traerNoticias();
-		return JSON.parse(noticias).parse(noticia=>noticia.category.id=id);
+		return noticias.find(noticia=>noticia.category.id==id);
 	}
 }

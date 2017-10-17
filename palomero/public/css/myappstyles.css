@@ -1,5 +1,5 @@
 .nav-wrapper{
-	background: black;
+	background: purple;
 }
 
 h3{
@@ -19,7 +19,7 @@ h5{
 }
 
 body{
-	background: white;
+	background: black;
 	padding-right: 100px;
 	padding-left: 100px;
 }

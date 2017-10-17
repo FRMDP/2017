@@ -12,12 +12,6 @@
              <input v-model="news.body" type="text" placeholder="Body">
            </div>
          </div>
-         <div class="row">
-           <div class="input-field col s12">
-            <input type="number" v-model="news.date" placeholder="Date">
-          </div>
-        </div>
-
         <div class="row">
          <div class="input-field col s12">
           <form action="#">
@@ -49,7 +43,7 @@
           </div>
         </div>
       </form>
-      <div class="row" align="center">
+      <div class="row" align="left">
         <button @click="submit" class="btn waves-effect waves-light" type="submit">Add </button>
       </div>
     </form>

@@ -1,4 +1,6 @@
 <template>
+  <div class="card">
+    <div class="card-content">
       <div class="row">
         <div class="col s12 m6">
           <h3 v-if="!noticias.length">Looks so empty</h3>
@@ -14,6 +16,8 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
 </template>
 
 <script>

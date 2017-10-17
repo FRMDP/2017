@@ -15,17 +15,17 @@ export default {
 	},
 
 	getUltimoId(){
-		const noticias=traerNoticias();
+		const noticias=this.traerNoticias();
 		if(noticias.lenght>=1){
 			return noticias[(lenght-1)].id+1;
 		}
 		else{
-			return 5;
+			return 1;
 		}
 	},
 
 	traerNoticiaByCategory(id){
-		const noticias=traerNoticias();
+		const noticias=this.traerNoticias();
 		return noticias.find(noticia=>noticia.category.id==id);
 	}
 }

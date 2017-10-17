@@ -1,13 +1,17 @@
 <template>
-	<div class="row">
-		<div class="col s12 m5">
-			<div class="card-panel teal">
-				<p>Title: {{news.title}}</p>
-				<p>Category: {{news.category.name}}</p>
-				<p>Date: {{news.date}}</p>
-				<p>Reporter: {{news.reporter.name}}</p>
-				<span class="white-text">{{news.body}}
-				</span>
+	<div class="card">
+		<div class="card-content">
+			<div class="row">
+				<div class="col s12 m5">
+					<div class="card-panel teal">
+						<p>Title: {{news.title}}</p>
+						<p>Category: {{news.category.name}}</p>
+						<p>Date: {{news.date}}</p>
+						<p>Reporter: {{news.reporter.name}}</p>
+						<span class="white-text">{{news.body}}
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

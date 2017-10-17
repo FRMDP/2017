@@ -5,7 +5,7 @@ export default {
         }else return [];
     },
     getNew(id){
-      return getNews().find(New => New.id == id);
+      return this.getNews().find(New => New.id == id);
     },
     saveNew(New){
         let news = this.getNews();
@@ -14,13 +14,14 @@ export default {
         localStorage.setItem('news', JSON.stringify(news));
     },
     getNewByCategoryId(id){
-        return this.getNews().filter(New => New.category.id == id);
+        return this.getNews().filter((New) => New.category.id === id >=0);
     },
     getNewByCategoryName(name){
-        return this.getNews().filter(New => New.category.name == name);
+        const n= this.getNews();
+        return n.filter(New => New.category.name === name);
     },
     getNewByReporterId(id){
-      return this.getNews().filter(New => New.reporter.id == id);
+      return this.getNews().filter((New) => New.reporter.id == id >=0);
     },
 
 }

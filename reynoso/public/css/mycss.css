@@ -1,0 +1,14 @@
+.pad{
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+.truncate{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.md-display-2{
+    font-weight: bold;
+    font-color: black;
+}

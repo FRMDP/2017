@@ -14,8 +14,8 @@ export default{
     getCategories(){
         return JSON.parse(localStorage.getItem('categories'));
     },
-    getCategory(id){
-        return getCategories().find(category => category.id == id);
+    getCategory(name){
+        return this.getCategories().find(category => category.name == name);
     },
     mounted(){
         this.setCategories();

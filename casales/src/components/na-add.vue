@@ -6,7 +6,7 @@
                 <div class="container">
                     <div class="columns">
                         <div class="column is-8-desktop is-offset-2-desktop">
-                            <h1 class="title animated fadeIn">
+                            <h1 class="title title-custom animated fadeIn">
                                 Write an Article
                             </h1>
                             <div class="box animated fadeInUp">

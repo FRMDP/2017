@@ -59,7 +59,6 @@ export default {
         '$route.params.id': function(){
           if (this.id)
           {
-            debugger
             let noti = storageService.traerNoticia(this.id);
             this.category = noti.category.id;
           }

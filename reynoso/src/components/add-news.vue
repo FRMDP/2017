@@ -62,19 +62,21 @@
                 this.New.category= this.Categories.find(cat => cat.id== this.New.category.id);
                 this.New.reporter= this.Reporters.find(rep => rep.id== this.New.reporter.id);
                 this.News= this.$NewService.getNews();
-                console.log(this.New);
                 if (this.News.length>0) this.New.id = this.News[(this.News.length - 1)].id + 1; else this.New.id = 1;
                 this.$NewService.saveNew(this.New);
                 this.cleanForm();
 
             },
             cleanForm(){
-                this.New.id='';
                 this.New.title='';
                 this.New.body='';
-                this.New.category={};
-                this.New.reporter={};
+                this.New.category.id= '';
+                this.New.category.name='';
+                this.New.reporter.name='';
+                this.New.reporter.id='';
                 this.New.date='';
+                this.Categories= this.$CategoryService.getCategories();
+                this.Reporters= this.$ReporterService.getReporters();
             }
         },
         mounted(){

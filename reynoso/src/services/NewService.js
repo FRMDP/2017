@@ -9,7 +9,6 @@ export default {
     },
     saveNew(New){
         let news = this.getNews();
-        console.log(New);
         news.push(New);
         localStorage.setItem('news', JSON.stringify(news));
     },

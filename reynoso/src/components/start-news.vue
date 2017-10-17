@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <div class="row">
             <div v-if="News.length > 0">
                 <div v-for="(New,key) in News" :key="New.id">
                     <div class="six columns">
@@ -9,7 +10,8 @@
                     </div>
                 </div>
             </div>
-            <div v-else><span class="md-display-4">No hay noticias</span></div>
+        <div v-else><span class="md-display-4">No hay noticias</span></div>
+        </div>
     </div>
 </template>
 

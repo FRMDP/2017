@@ -13570,7 +13570,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.content {\n    overflow-y: scroll;\n    top: 35px;\n    bottom: 35px;\n}\n", ""]);
 
 // exports
 
@@ -14283,7 +14283,7 @@ var render = function() {
     [
       _c("top-menu"),
       _vm._v(" "),
-      _c("router-view"),
+      _c("router-view", { staticClass: "content" }),
       _vm._v(" "),
       _c("fm-footer")
     ],

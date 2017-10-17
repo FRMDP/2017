@@ -15,7 +15,13 @@ export default {
 	},
 
 	traerNoticiaByCategory(id){
-		const noticias=this.traerNoticias();
-		return noticias.find(noticia=>noticia.category.id==id);
+		const noticias = this.traerNoticias();
+		let filtro = [];
+		noticias.forEach(function(n) {
+			if(n.category.id == id){
+				filtro.push(n);
+			}
+		});
+		return filtro;
 	}
 }

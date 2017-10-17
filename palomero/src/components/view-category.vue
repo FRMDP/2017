@@ -1,6 +1,7 @@
 <template>
 	<div class="card">
 		<div class="card-content">
+			<h3>You are in our {{category.name}} seccion</h3>
 			<div class="row">
 				<div class="col s12 m6">
 					<h3 v-if="!noticias.length">Looks so empty</h3>
@@ -22,11 +23,16 @@
 
 <script>
 	import storageService from '../services/storageService';
+	import categoriesService from '../services/categoriesService';
 	export default {
 		name: 'viewCategory',
 		data() {
 			return {
-				noticias:[]
+				noticias:[],
+				category: {
+					id: 0,
+					name: ''
+				}
 			}
 		},
 		computed: {
@@ -40,15 +46,21 @@
 		methods: {
 			traer() {
 				return storageService.traerNoticiaByCategory(this.id);
+			},
+
+			traerCategoria(){
+				return categoriesService.getCategoryById(this.id)
 			}
 		},
 		watch: {
 			'$route.params.id': function() {
 				this.noticias=this.traer();
+				this.category=this.traerCategoria();
 			}
 		},
 		created() {
 			this.noticias=this.traer();
+			this.category=this.traerCategoria();
 		}
 	}
 </script>

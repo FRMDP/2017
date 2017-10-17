@@ -200,9 +200,13 @@ exports.default = {
 	},
 	traerNoticiaByCategory: function traerNoticiaByCategory(id) {
 		var noticias = this.traerNoticias();
-		return noticias.find(function (noticia) {
-			return noticia.category.id == id;
+		var filtro = [];
+		noticias.forEach(function (n) {
+			if (n.category.id == id) {
+				filtro.push(n);
+			}
 		});
+		return filtro;
 	}
 };
 
@@ -511,6 +515,34 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var categories = [{ id: 1, name: "sports" }, { id: 2, name: "local" }, { id: 3, name: "world" }, { id: 4, name: "economy" }, { id: 5, name: "politics" }, { id: 6, name: "entertainment" }];
+
+exports.default = {
+  getCategories: function getCategories() {
+    this.addCategories();
+    return JSON.parse(localStorage.getItem('categories'));
+  },
+  addCategories: function addCategories() {
+    localStorage.setItem('categories', JSON.stringify(categories));
+  },
+  getCategoryById: function getCategoryById(id) {
+    var categories = localStorage.getItem('categories') || '[]';
+    return JSON.parse(categories).find(function (category) {
+      return category.id == id;
+    });
+  }
+};
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -698,34 +730,6 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var categories = [{ id: 1, name: "sports" }, { id: 2, name: "local" }, { id: 3, name: "world" }, { id: 4, name: "economy" }, { id: 5, name: "politics" }, { id: 6, name: "entertainment" }];
-
-exports.default = {
-  getCategories: function getCategories() {
-    this.addCategories();
-    return JSON.parse(localStorage.getItem('categories'));
-  },
-  addCategories: function addCategories() {
-    localStorage.setItem('categories', JSON.stringify(categories));
-  },
-  getCategoryById: function getCategoryById(id) {
-    var categories = localStorage.getItem('categories') || '[]';
-    return JSON.parse(categories).find(function (category) {
-      return category.id == id;
-    });
-  }
-};
 
 /***/ }),
 /* 6 */
@@ -3384,7 +3388,7 @@ if (inBrowser && window.Vue) {
 
 /* harmony default export */ __webpack_exports__["default"] = (VueRouter);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5)))
 
 /***/ }),
 /* 8 */
@@ -14024,7 +14028,7 @@ Vue$3.compile = compileToFunctions;
 
 /* harmony default export */ __webpack_exports__["default"] = (Vue$3);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4), __webpack_require__(6), __webpack_require__(11).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5), __webpack_require__(6), __webpack_require__(11).setImmediate))
 
 /***/ }),
 /* 11 */
@@ -14276,7 +14280,7 @@ exports.clearImmediate = clearImmediate;
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(5)))
 
 /***/ }),
 /* 13 */
@@ -14427,7 +14431,7 @@ var _reportersService = __webpack_require__(8);
 
 var _reportersService2 = _interopRequireDefault(_reportersService);
 
-var _categoriesService = __webpack_require__(5);
+var _categoriesService = __webpack_require__(4);
 
 var _categoriesService2 = _interopRequireDefault(_categoriesService);
 
@@ -14566,7 +14570,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _categoriesService = __webpack_require__(5);
+var _categoriesService = __webpack_require__(4);
 
 var _categoriesService2 = _interopRequireDefault(_categoriesService);
 
@@ -14623,9 +14627,7 @@ var render = function() {
       _c(
         "a",
         { staticClass: "brand-logo", attrs: { href: "#" } },
-        [
-          _c("router-link", { attrs: { to: "/all" } }, [_vm._v("News Section")])
-        ],
+        [_c("router-link", { attrs: { to: "/all" } }, [_vm._v("Portal")])],
         1
       ),
       _vm._v(" "),
@@ -14848,7 +14850,7 @@ var _reportersService = __webpack_require__(8);
 
 var _reportersService2 = _interopRequireDefault(_reportersService);
 
-var _categoriesService = __webpack_require__(5);
+var _categoriesService = __webpack_require__(4);
 
 var _categoriesService2 = _interopRequireDefault(_categoriesService);
 
@@ -15444,13 +15446,45 @@ var _storageService = __webpack_require__(1);
 
 var _storageService2 = _interopRequireDefault(_storageService);
 
+var _categoriesService = __webpack_require__(4);
+
+var _categoriesService2 = _interopRequireDefault(_categoriesService);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
 	name: 'viewCategory',
 	data: function data() {
 		return {
-			noticias: []
+			noticias: [],
+			category: {
+				id: 0,
+				name: ''
+			}
 		};
 	},
 
@@ -15465,38 +15499,22 @@ exports.default = {
 	methods: {
 		traer: function traer() {
 			return _storageService2.default.traerNoticiaByCategory(this.id);
+		},
+		traerCategoria: function traerCategoria() {
+			return _categoriesService2.default.getCategoryById(this.id);
 		}
 	},
 	watch: {
 		'$route.params.id': function $routeParamsId() {
 			this.noticias = this.traer();
+			this.category = this.traerCategoria();
 		}
 	},
 	created: function created() {
 		this.noticias = this.traer();
+		this.category = this.traerCategoria();
 	}
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 35 */
@@ -15509,6 +15527,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-content" }, [
+      _c("h3", [
+        _vm._v("You are in our " + _vm._s(_vm.category.name) + " seccion")
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",

@@ -44,7 +44,8 @@
         </div>
       </form>
       <div class="row" align="left">
-        <button @click="submit" class="btn waves-effect waves-light" type="submit">Add </button>
+        <button :disabled="!formOk" @click="submit" class="btn waves-effect waves-light" type="submit">Add </button>
+        <h3 v-if="mensaje==true">Succesfully added</h3>
       </div>
     </form>
   </div> 
@@ -62,6 +63,7 @@ import storageService from '../services/storageService';
 
        data () {
       return {
+        mensaje: false,
         news: {
           id: 0,
           title: '',
@@ -95,7 +97,7 @@ import storageService from '../services/storageService';
 
     computed:{
       formOk() {
-      return this.news.title && this.news.body && this.news.date && this.news.category.name && this.news.reporter.name;
+      return this.news.title && this.news.body && this.news.category.name && this.news.reporter.name;
     }
     },
 
@@ -107,9 +109,15 @@ import storageService from '../services/storageService';
         this.news.category.id=this.categories.find(category => category.name == this.news.category.name).id;
         this.news.reporter.id=this.reporters.find(reporter =>reporter.name==this.news.reporter.name).id;
         this.addNews(this.news);
+        this.mensaje=true;
+        this.clear();
 
       },
       clear () {
+        this.news.title='';
+        this.news.body='';
+        this.news.category.name='';
+        this.news.reporter.name='';
       },
       getCategorias(){
         return categoriesService.getCategories();

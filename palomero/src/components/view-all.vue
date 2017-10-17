@@ -1,6 +1,7 @@
 <template>
   <div class="card">
     <div class="card-content">
+      <h3>All the news</h3>
       <div class="row">
         <div class="col s12 m6">
           <h3 v-if="!noticias.length">Looks so empty</h3>

@@ -1,6 +1,7 @@
 <template>
 	<div class="card">
 		<div class="card-content">
+			<h3>Reading seccion</h3>
 			<div class="row">
 				<div class="col s12 m5">
 					<div class="card-panel teal">

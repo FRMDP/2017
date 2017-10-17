@@ -44,11 +44,11 @@
 		},
 		watch: {
 			'$route.params.id': function() {
-				this.noticias = this.traer();
+				this.noticias=storageService.traerNoticiaByCategory(this.id);
 			}
 		},
 		created() {
-			this.noticias = this.traer();
+			this.noticias=storageService.traerNoticiaByCategory(this.id);
 		}
     }
 </script>

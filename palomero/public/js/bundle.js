@@ -14836,7 +14836,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -14871,6 +14871,7 @@ exports.default = {
 
   data: function data() {
     return {
+      mensaje: false,
       news: {
         id: 0,
         title: '',
@@ -14907,7 +14908,7 @@ exports.default = {
 
   computed: {
     formOk: function formOk() {
-      return this.news.title && this.news.body && this.news.date && this.news.category.name && this.news.reporter.name;
+      return this.news.title && this.news.body && this.news.category.name && this.news.reporter.name;
     }
   },
 
@@ -14925,8 +14926,15 @@ exports.default = {
         return reporter.name == _this.news.reporter.name;
       }).id;
       this.addNews(this.news);
+      this.mensaje = true;
+      this.clear();
     },
-    clear: function clear() {},
+    clear: function clear() {
+      this.news.title = '';
+      this.news.body = '';
+      this.news.category.name = '';
+      this.news.reporter.name = '';
+    },
     getCategorias: function getCategorias() {
       return _categoriesService2.default.getCategories();
     },
@@ -14946,6 +14954,7 @@ exports.default = {
     this.reporters = this.getReporters();
   }
 }; //
+//
 //
 //
 //
@@ -15170,16 +15179,20 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row", attrs: { align: "right" } }, [
+          _c("div", { staticClass: "row", attrs: { align: "left" } }, [
             _c(
               "button",
               {
                 staticClass: "btn waves-effect waves-light",
-                attrs: { type: "submit" },
+                attrs: { disabled: !_vm.formOk, type: "submit" },
                 on: { click: _vm.submit }
               },
               [_vm._v("Add ")]
-            )
+            ),
+            _vm._v(" "),
+            _vm.mensaje == true
+              ? _c("h3", [_vm._v("Succesfully added")])
+              : _vm._e()
           ])
         ])
       ])
@@ -15301,6 +15314,7 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ }),
 /* 32 */
@@ -15313,6 +15327,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-content" }, [
+      _c("h3", [_vm._v("All the news")]),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
@@ -15461,11 +15477,11 @@ exports.default = {
 	},
 	watch: {
 		'$route.params.id': function $routeParamsId() {
-			this.noticias = this.traer();
+			this.noticias = _storageService2.default.traerNoticiaByCategory(this.id);
 		}
 	},
 	created: function created() {
-		this.noticias = this.traer();
+		this.noticias = _storageService2.default.traerNoticiaByCategory(this.id);
 	}
 }; //
 //
@@ -15648,7 +15664,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -15731,6 +15747,7 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ }),
 /* 40 */
@@ -15743,6 +15760,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-content" }, [
+      _c("h3", [_vm._v("Reading seccion")]),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col s12 m5" }, [
           _c("div", { staticClass: "card-panel teal" }, [

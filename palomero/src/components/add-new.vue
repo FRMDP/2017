@@ -109,6 +109,7 @@ import storageService from '../services/storageService';
       submit () {
         this.noticias=storageService.traerNoticias();
         this.news.id=this.noticias.length+1;
+        this.news.date=new Date().toJSON().slice(0,10).replace(/-/g,'/');
         this.news.category.id=this.categories.find(category => category.name == this.news.category.name).id;
         this.news.reporter.id=this.reporters.find(reporter =>reporter.name==this.news.reporter.name).id;
         this.addNews(this.news);

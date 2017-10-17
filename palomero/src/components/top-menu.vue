@@ -2,10 +2,9 @@
 
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
+      <a href="#" class="brand-logo"><router-link to="/all">News Section</router-link></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><router-link to="/add">Add News</router-link></li>
-        <li><router-link to="/all">Pagina principal</router-link></li>
         <li v-for="c in categories"><router-link v-bind:to="'/category/'+c.id">Sports</router-link></li>
       </ul>
     </div>

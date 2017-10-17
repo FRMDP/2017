@@ -2,15 +2,12 @@
 	<div class="row">
 		<div class="col s12 m5">
 			<div class="card-panel teal">
-				<span class="white-text">{{news.title}}
-				</span>
-				<span class="white-text">{{news.date}}
-				</span>
+				<p>Title: {{news.title}}</p>
+				<p>Category: {{news.category.name}}</p>
+				<p>Date: {{news.date}}</p>
+				<p>Reporter: {{news.reporter.name}}</p>
 				<span class="white-text">{{news.body}}
 				</span>
-				<span class="white-text">{{news.category.name}}
-				</span>
-				<p>{{news.category.name}}</p>
 			</div>
 		</div>
 	</div>
@@ -61,3 +58,7 @@
 		}
 	}
 </script>
+
+<style>
+
+</style>

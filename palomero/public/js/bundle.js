@@ -198,14 +198,6 @@ exports.default = {
 			return noticia.id == id;
 		});
 	},
-	getUltimoId: function getUltimoId() {
-		var noticias = this.traerNoticias();
-		if (noticias.lenght >= 1) {
-			return noticias[lenght - 1].id + 1;
-		} else {
-			return 1;
-		}
-	},
 	traerNoticiaByCategory: function traerNoticiaByCategory(id) {
 		var noticias = this.traerNoticias();
 		return noticias.find(function (noticia) {
@@ -15477,11 +15469,11 @@ exports.default = {
 	},
 	watch: {
 		'$route.params.id': function $routeParamsId() {
-			this.noticias = _storageService2.default.traerNoticiaByCategory(this.id);
+			this.noticias = this.traer();
 		}
 	},
 	created: function created() {
-		this.noticias = _storageService2.default.traerNoticiaByCategory(this.id);
+		this.noticias = this.traer();
 	}
 }; //
 //

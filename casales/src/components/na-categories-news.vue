@@ -58,7 +58,7 @@
         watch: {
             '$route.params.id': function () {
                 this.category = this.getCategory();
-                if (this.categories === undefined) {
+                if (this.category === undefined) {
                     this.$router.push({path: `/notFound`});
                 }
             }

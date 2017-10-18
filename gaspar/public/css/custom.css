@@ -177,13 +177,10 @@ i {
 }
 
 #cuerpo {
-  display: block;
-      display: -webkit-box;
+      display: block;
       max-width: 400px;
       height: 109.2px;
       line-height: 1.4;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
 }

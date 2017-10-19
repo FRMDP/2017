@@ -1,0 +1,39 @@
+/* Custom Styles
+-------------------------------------------------- */
+.bg-news {
+    background: linear-gradient(
+            rgba(233, 228, 240, 0.6),
+            rgba(211, 204, 227, 0.6)),
+    linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+    ),
+    url('./../img/bg-news.jpg') no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.drop-shadow {
+    box-shadow: 0 2px 3px #888888;
+}
+
+a.panel-block, label.panel-block {
+    background-color: whitesmoke;
+}
+
+a.panel-block.is-active {
+    background-color: #D1C4E9;
+}
+
+a.panel-block:hover, label.panel-block:hover {
+    background-color: #BDBDBD;
+}

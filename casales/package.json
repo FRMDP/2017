@@ -1,0 +1,32 @@
+{
+  "name": "casales",
+  "version": "0.1.0",
+  "description": "Casales, Ignacio - Trabajo Practico 6 - Programacion Avanzada 2 - Universidad Tecnologica Nacional",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server public/ --port=9876",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "buefy": "^0.5.4",
+    "vue": "^2.5.2",
+    "vue-router": "^2.8.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.7",
+    "live-server": "^1.2.0",
+    "moment": "^2.19.1",
+    "style-loader": "^0.19.0",
+    "url-loader": "^0.6.2",
+    "vue-loader": "^13.3.0",
+    "vue-template-compiler": "^2.5.2",
+    "webpack": "^3.8.1"
+  }
+}

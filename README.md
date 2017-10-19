@@ -1,4 +1,4 @@
-# TP #6, revisar la rama tp6.
+# TP #7, revisar la rama tp7.
 
 ## Listado de alumnos
 

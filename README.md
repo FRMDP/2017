@@ -1,26 +1,19 @@
-# TP #4, revisar la rama tp4.
+### TP #7
 
-## Listado de alumnos
+#### Lineamientos
+*   Tienen que hacer el PR contra la rama TP7, no contra master.
+*   Resuelven la historia de usuario asignada en Taiga. Crean las subtareas que consideren necesarias y trabajan sobre esas tareas. El tablero lo manejan completamente uds, este sprint no toco nada yo.
+*   Tienen tiempo hasta las 18Hs del dia martes 24/10.
+*	Crean una carpeta con su apellido y dentro de esta el contenido de su trabajo.
+*   Utilizando el diario del tp anterior, deben cambiar el servicio de almacenamiento (localStorage) por alguna biblioteca http (como axios o vue-resource)
+*	Se mantendrá toda la estructura de almacenamiento, así como las vistas y payloads. Como backend pueden crear su propia API, utilizar algún servicio web o clonar el proyecto [creado en este repositorio](https://github.com/UTN-MDP/newspaper-api).
+*	Deberá utilizarse todo lo visto en clase.
 
-* [zeratulmdq](https://github.com/zeratulmdq) - Martin Benvenuti
-* [ignaciocasales](https://github.com/ignaciocasales) - Ignacio Casales
-* [SantiBlanc87](https://github.com/SantiBlanc87) - Santiago Blanc
-* [Facundo97Maldonado](https://github.com/Facundo97Maldonado) - Facundo Maldonado
-* [fedealdosivi](https://github.com/fedealdosivi) - Federico Palomero García
-* [maurogsp](https://github.com/maurogsp) - Mauro Gaspar
-* [DanielScha](https://github.com/DanielScha) - Daniel Adrian Schaerer
-* [matirey](https://github.com/matirey) - Reynoso Matias
-* [co0per](https://github.com/co0per) - Lisandro Cooper
-* [Iampietro](https://github.com/Iampietro/2017) - Matias Iampietro
-* [rodrimaqui](https://github.com/rodrimaqui) - Rodrigo Maquirriain
-* [CarlosAndresTambascia](https://github.com/CarlosAndresTambascia) - Carlos Andres Tambascia
-* [Favega89](https://github.com/Favega89) - Facundo Vega Puente
-* [grotatori](https://github.com/grotatori) - Gisela Rotatori
-* [matiramos](https://github.com/matiramos) - Matias Ramos
-* [JuanAbraciano](https://github.com/JuanAbraciano) - Juan Manuel Abraciano
-* [MartinLiut](https://github.com/MartinLiut) - Martin Liut
-* [julian00](https://github.com/julian00) - Alejandro Arizaga
-* [RodolfoSavino](https://github.com/RodolfoSavino) - Rodolfo Savino
-* [kingrag92](https://github.com/kingrag92) - Luciano Perello
-* [yasiotero](https://github.com/yasiotero) - Yasi Otero
-* [ZassoMartin](https://github.com/ZassoMartin) - Zasso Sergio Martin
+#### Qué se evalúa?
+*   Utilización de las herramientas / tecnologías aprendidas en clase.
+*   Prolijidad del código: indentaciones, espacios innecesarios, utilización de convenciones, etc.
+*   Nombres de variables y funciones significativas.
+*   Utilización de las herramientas (Git, Github, Taiga).
+*   ES6, Array#extras, String, Object, Math, Array, etc.
+*   Markup HTML innecesario (no crear elementos de más ni elementos que no correspondan a lo que quieren representar).
+*   Sentido común.

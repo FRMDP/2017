@@ -44,7 +44,13 @@
         },
         methods: {
             getNews() {
-                return newsService.getNewsByCategory(this.id);
+                this.$http.get(this.news.find(category => category.name == this.news[this.id].category.name)._links.self.news.href)
+                     .then((response) => {
+                        console.log(response);
+                     })
+                     .catch((error) => {
+                        console.log(error);
+                     }) 
             }
         },
         watch: {

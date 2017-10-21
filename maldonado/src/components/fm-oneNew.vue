@@ -65,7 +65,6 @@
 		data() {
 			return {
 				oneNew: {
-					id: 0,
 					title: '',
 					body: '',
 					category: {

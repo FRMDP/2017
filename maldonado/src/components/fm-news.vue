@@ -36,7 +36,13 @@
         },
         methods: {
             getNews() {
-                return newsService.getNews(this.id);
+                this.$http.get('http://192.168.99.100:8080/news')
+                     .then((response) => {
+                        this.news = response.data._embedded.news;
+                     })
+                     .catch((error) => {
+                        console.log(error);
+                     })
             }
         },
         computed: {

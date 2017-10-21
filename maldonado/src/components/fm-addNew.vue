@@ -71,16 +71,11 @@
 </template>
 
 <script>
-	import newsService from '../services/newsService';
-	import categorieService from '../services/categorieService';
-	import reporterService from '../services/reporterService';
-
 	export default {
 		name: 'addNew',
 		data() {
 			return {
 				oneNew: {
-					id: 0,
 					title: '',
 					body: '',
 					category: {
@@ -102,17 +97,26 @@
 			newIsOk() {
 				return this.oneNew.title && this.oneNew.body && this.oneNew.category.name
 					&& this.oneNew.reporter.name;
-			},
+			}
 		},
 		methods: {
-			addNew() {
-				this.oneNew.id = newsService.setNewId();
-				this.oneNew.category.id = newsService.linkCategory(this.oneNew.category.name);
-				this.oneNew.reporter.id = newsService.linkReporter(this.oneNew.reporter.name);
-				this.oneNew.date = new Date().toJSON().slice(0, 10);
-				newsService.addNew(this.oneNew);
-				this.cleanForm();
-				this.message = true;
+			addNew() {			
+				this.$http.post('http://192.168.99.100:8080/news', {
+						"title": this.oneNew.title,
+						"body": this.oneNew.body,
+						"category": this.categories.find(category => category.name == this.oneNew.category.name)._links.self.href,
+						"reporter": this.reporters.find(reporter => reporter.name == this.oneNew.reporter.name)._links.self.href,
+						"date": new Date().toJSON().slice(0, 10)
+					})
+					.then((response) => {
+						this.message = true;
+						this.cleanForm();
+						console.log(response);
+					})
+					.catch((error) => {
+						console.log(error);
+					})
+
 			},
 			cleanForm() {
 				this.oneNew.title = '';
@@ -122,8 +126,20 @@
 			}
 		},
 		created() {
-			this.categories = categorieService.getCategories();
-			this.reporters = reporterService.getReporters();
+			this.$http.get('http://192.168.99.100:8080/categories')
+	             .then((response) => {
+	                this.categories = response.data._embedded.categories;
+	             })
+	             .catch((error) => {
+	                console.log(error);
+	             })
+			this.$http.get('http://192.168.99.100:8080/reporters')
+				 .then((response) => {
+	                this.reporters = response.data._embedded.reporters;
+	             })
+	             .catch((error) => {
+	                console.log(error);
+	             })
 		}
 	}
 </script>

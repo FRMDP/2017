@@ -24,7 +24,7 @@
 				</div>
 
 				<select id="category" v-model="particularNew.category.name">
-			        <option v-for="category in cat" value="category.name" :key="category.uid">
+			        <option v-for="category in cat" v-bind:value="category.name">
 			            {{category.name}}
 			        </option>
 			    </select>
@@ -36,7 +36,7 @@
 					<div class="row">
 						<i class="material-icons prefix">account_circle</i>
 						<select id="reporters" v-model="particularNew.reporter.name">
-					        <option v-for="reporter in rep" value="reporter.name" :key="reporter.uid">
+					        <option v-for="reporter in rep" v-bind:value="reporter.name">
 					            {{reporter.name}}
 					        </option>
 					    </select>
@@ -61,7 +61,6 @@
 </template>
 
 <script>
-	import newsService from '../services/newsService';
 
 	export default {
 		data() {
@@ -71,11 +70,9 @@
 		    		title: '',
 		    		body: '',
 		    		category: {
-		    			id: 0,
 		    			name: ''
 		    		},
 		    		reporter: {
-		    			id: 0,
 		    			name: ''
 		    		},
 		    		date: '',
@@ -94,7 +91,7 @@
 	        }
     	},
     	methods: {
-    		createNew() {
+    		/*createNew() {
     			this.particularNew.id = newsService.getCorrectId();
     			this.particularNew.category.id = newsService.getCategoryId(this.particularNew.category.name);
     			this.confirmReporter = newsService.getReporterId(this.particularNew.reporter.name);
@@ -111,7 +108,22 @@
 	    			setTimeout(function(){
 	    				ok.style.display = "none";
 	    			}, 5000);
-    			}
+    			}*/
+    		createNew() {
+    			this.$http.post('https://utn-newspaper-api.herokuapp.com/news',{
+    				"title": this.particularNew.title,
+    				"body": this.particularNew.body,
+    				"date": new Date().toJSON().slice(0,10),
+    				"reporter": this.rep.find(r => r.name == this.particularNew.reporter.name)._links.self.href,
+    				"category": this.cat.find(c => c.name == this.particularNew.category.name)._links.self.href,
+    			})
+    			.then(response => {
+    				console.log(response)
+    			})
+    			.catch(error => {
+    				console.log(error);
+    			})
+    			this.cleanInputs();
     		},
     		cleanInputs() {
     			this.particularNew.title = '';
@@ -137,13 +149,13 @@
     			})
     			.catch(error => {
     				console.log(error);
-    			})
-
+    			})    			
     		const select = document.getElementById("category");
     		select.style.display = "block";
 
     		const reporter = document.getElementById("reporters");
     		reporter.style.display = "block";
+
     	}
 	}
 </script>

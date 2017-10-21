@@ -12,7 +12,7 @@
 									{{ particularNew.title }}
 								</h4></strong>
 
-								
+
 
 								<p class="truncate card-text black-text">
 									{{ particularNew.body }}
@@ -29,7 +29,6 @@
 </template>
 
 <script>
-	import newsService from '../services/newsService';
 
 	export default {
 		data() {
@@ -43,7 +42,7 @@
 				this.$http.get('https://utn-newspaper-api.herokuapp.com/news')
 					.then(response => {
 						this.news = response.data._embedded.news;
-						console.log(response);
+						console.log(this.news);
 					})
 					.catch(error => {
 						console.log(error);	

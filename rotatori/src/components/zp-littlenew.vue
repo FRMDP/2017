@@ -41,11 +41,13 @@
                 this.$http.get (this.ne._links.category.href)
                     .then((response) => {
                         this.cat = response.data;
+                        //console.log('tarjeta', this.cat);
                         const link = this.ne._links.self.href;
                         this.id = link[link.length -1];
                     })
                     .catch((msg) => console.log('Error: ', msg));
-            }
+            },
+            
         },
         created(){
             this.getCatNew();

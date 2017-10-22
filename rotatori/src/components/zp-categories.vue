@@ -2,7 +2,7 @@
     <div class="paddings">
         <h1>Noticias Categoria: {{ cat.name }} </h1>
         <md-progress md-indeterminate v-if="pBar"></md-progress>
-            <div class="three columns" v-for="ne in New" :key="ne.id">
+            <div class="three columns" v-for="ne in New" :key="ne.uid">
                 <zp-littlenew :ne="ne"></zp-littlenew>
             </div>
         <zp-alert v-if="emptyNews && !pBar" @changeAlert="changeAlert" :messageAlert='messageAlert' :classAlert='classAlert'></zp-alert>
@@ -25,6 +25,7 @@
                 classAlert: 'alert-info',
                 Categories: {},
                 pBar: true,
+                nameCat: '',
             }
         },
         methods:{
@@ -35,18 +36,19 @@
                 this.$http.get('http://192.168.99.100:8080/categories')
                     .then((response) => {
                         this.Categories =  response.data._embedded.categories;
-                        this.cat = this.Categories.find( c => c.name == this.name);
+                        this.cat = this.Categories.find( c => c.name == this.nameCat);
+                        //console.log('compo cate', this.cat);
                         const url = this.cat._links.news.href;
                         this.getNews(url);
                     })
-                    .catch((msg) => console.log('Error', msg));
+                    .catch((msg) => console.log('Error: ', msg));
             },
             getNews(url){
                 this.$http.get( url )
                     .then((response) => {
                         this.New = response.data._embedded.news;
                     })
-                    .catch((msg) => console.log('Error', msg));
+                    .catch((msg) => console.log('Error: ', msg));
             }
         },
         computed: {
@@ -62,12 +64,15 @@
         },
         watch: {
             '$route.params.id': function() {
+                this.nameCat = this.name;
                 this.getNewsByCat();
+                
                 
             }
         },
         created() {
-            setTimeout(() => this.pBar = !this.pBar , 500);
+            setTimeout(() => this.pBar = !this.pBar , 800);
+            this.nameCat = this.name;
             this.getNewsByCat();
         }
     }

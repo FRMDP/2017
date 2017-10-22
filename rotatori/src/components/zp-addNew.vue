@@ -10,11 +10,6 @@
             </md-input-container>
 
             <md-input-container>
-                <label>Subtítulo</label>
-                <md-textarea v-model="New.subtitle"></md-textarea>
-            </md-input-container>
-
-            <md-input-container>
                 <label>Cuerpo de la noticia</label>
                 <md-textarea v-model="New.body"></md-textarea>
             </md-input-container>
@@ -25,7 +20,7 @@
                         <md-input-container>
                             <label for="category">Categoria</label>
                             <md-select name="caletogia" id="categoria" v-model="catId">
-                            <md-option v-for="c in Categories" :key="c.uid" :value="c.uid">{{ c.name }} </md-option>
+                            <md-option v-for="c in Categories" :key="c.uid" :value="c._links.self.href[c._links.self.href.length -1]">{{ c.name }} </md-option>
                             </md-select>
                         </md-input-container>
                     </div>
@@ -33,7 +28,7 @@
                         <md-input-container>
                             <label for="reporter">Reportero</label>
                             <md-select name="reportero" id="reportero" v-model="reporterId">
-                            <md-option v-for="r in Reporters" :key="r.uid" :value="r.uid">{{ r.name }} </md-option>
+                            <md-option v-for="r in Reporters" :key="r.uid" :value="r._links.self.href[r._links.self.href.length -1]">{{ r.name }} </md-option>
                             </md-select>
                         </md-input-container>
                     </div>
@@ -41,8 +36,7 @@
             </div>
             <div class="row">
                 <div class="six columns">
-                    <!--<md-button :disabled="!formOk" class="md-raised md-primary" @click="addNew">Guardar -->
-                        <md-button class="md-raised md-primary" @click="addNew">Guardar
+                    <md-button :disabled="!formOk" class="md-raised md-primary" @click="addNew">Guardar
                         <md-icon>save</md-icon>
                     </md-button>
                 </div>
@@ -65,12 +59,10 @@
         data(){
             return {
                 New: {
-                    id: '',
                     title: '',
-                    subtitle: '',
                     body: '',
-                    category: {},
-                    reporter: {},
+                    reporter: '',
+                    category: '',
                     date: ''
                 },
                 reporterId: '',
@@ -83,15 +75,16 @@
             }
         },
         computed:{
-            /*formOk(){
-                return this.New.title && this.New.subtitle && this.New.body && this.reporterId;
-            }*/
+            formOk(){
+                return this.New.title &&  this.New.body && this.reporterId && this.catId;
+            }
         },
         methods:{
             getDate(){
                 const months = new Array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
                 let dt = new Date();
-                return dt.getDate() + ' de ' + months[dt.getMonth()] + ' de ' + dt.getFullYear();
+                //return dt.getDate() + ' de ' + months[dt.getMonth()] + ' de ' + dt.getFullYear();
+                return dt.getFullYear() + '-' + (dt.getMonth() +1) + '-' + dt.getDate();
             },
             showAlert(){
                 this.alert = true;
@@ -102,31 +95,35 @@
                 this.alert = false;
             },
             addNew(){
-                console.log(this.catId);
-                /*this.New.id = storageService.getLastId();
                 this.New.date = this.getDate();
-                storageService.addNew(this.New);
-                this.clearForm();
-                this.showAlert();*/
+                this.New.category = 'http://192.168.99.100:8080/categories/' + this.catId;
+                this.New.reporter = 'http://192.168.99.100:8080/reporters/' + this.reporterId;
+                this.$http.post('http://192.168.99.100:8080/news', {
+                    title: this.New.title,
+                    body: this.New.body,
+                    date: this.New.date,
+                    reporter: this.New.reporter,
+                    category: this.New.category
+                })
+                    .then(response => {
+                        this.clearForm();
+                        this.showAlert();
+                    })
+                    .catch(msg => console.log('Error: ', msg));
             },
             clearForm(){
                 this.New.title = '';
-                this.New.subtitle = '';
                 this.New.body = '';
-                this.New.category = {};
-                this.New.reporter = {};
                 this.New.date = '';
                 this.catId = '';
                 this.reporterId = '';
+                this.reporter = '';
+                this.category = '';
             },
             getAllCat(){
                 this.$http.get('http://192.168.99.100:8080/categories')
                 .then((response) => {
                     this.Categories =  response.data._embedded.categories;
-                   
-                    /*const idCatAux = response.data._embedded.categories[0]._links.category.href
-                    console.log('link cat', idCatAux);
-                    console.log('length string', idCatAux[idCatAux.length -1]);//muestra id categoria*/
                 })
                 .catch((msg) => console.log('Error: ', msg));
             },
@@ -136,25 +133,6 @@
                     this.Reporters = response.data._embedded.reporters;
                 })
                 .catch((msg) => console.log('Error', msg));
-            },
-            getCatById(){
-                id = 0;
-                i = 0;
-                Categories.forEach( c => {
-                    if(c.uid == this.catId){
-                        id = i;
-                    }
-                    i++;
-                });
-                return id;
-            }
-        },
-        watch: {
-            catId(){
-                //this.New.category = categoriesService.getCatById(this.catId);
-            },
-            reporterId(){
-                //this.New.reporter = reporterService.getReporterById(this.reporterId);
             }
         },
         created() {

@@ -15966,6 +15966,7 @@ exports.default = {
 
             this.$http.get(this.ne._links.category.href).then(function (response) {
                 _this.cat = response.data;
+                //console.log('tarjeta', this.cat);
                 var link = _this.ne._links.self.href;
                 _this.id = link[link.length - 1];
             }).catch(function (msg) {
@@ -16249,7 +16250,8 @@ exports.default = {
             messageAlert: 'No hay noticias en esta categoria',
             classAlert: 'alert-info',
             Categories: {},
-            pBar: true
+            pBar: true,
+            nameCat: ''
         };
     },
 
@@ -16263,12 +16265,13 @@ exports.default = {
             this.$http.get('http://192.168.99.100:8080/categories').then(function (response) {
                 _this.Categories = response.data._embedded.categories;
                 _this.cat = _this.Categories.find(function (c) {
-                    return c.name == _this.name;
+                    return c.name == _this.nameCat;
                 });
+                //console.log('compo cate', this.cat);
                 var url = _this.cat._links.news.href;
                 _this.getNews(url);
             }).catch(function (msg) {
-                return console.log('Error', msg);
+                return console.log('Error: ', msg);
             });
         },
         getNews: function getNews(url) {
@@ -16277,7 +16280,7 @@ exports.default = {
             this.$http.get(url).then(function (response) {
                 _this2.New = response.data._embedded.news;
             }).catch(function (msg) {
-                return console.log('Error', msg);
+                return console.log('Error: ', msg);
             });
         }
     },
@@ -16294,6 +16297,7 @@ exports.default = {
     },
     watch: {
         '$route.params.id': function $routeParamsId() {
+            this.nameCat = this.name;
             this.getNewsByCat();
         }
     },
@@ -16302,7 +16306,8 @@ exports.default = {
 
         setTimeout(function () {
             return _this3.pBar = !_this3.pBar;
-        }, 500);
+        }, 800);
+        this.nameCat = this.name;
         this.getNewsByCat();
     }
 };
@@ -16329,7 +16334,7 @@ var render = function() {
       _vm._l(_vm.New, function(ne) {
         return _c(
           "div",
-          { key: ne.id, staticClass: "three columns" },
+          { key: ne.uid, staticClass: "three columns" },
           [_c("zp-littlenew", { attrs: { ne: ne } })],
           1
         )
@@ -16674,12 +16679,10 @@ exports.default = {
     data: function data() {
         return {
             New: {
-                id: '',
                 title: '',
-                subtitle: '',
                 body: '',
-                category: {},
-                reporter: {},
+                reporter: '',
+                category: '',
                 date: ''
             },
             reporterId: '',
@@ -16693,15 +16696,16 @@ exports.default = {
     },
 
     computed: {
-        /*formOk(){
-            return this.New.title && this.New.subtitle && this.New.body && this.reporterId;
-        }*/
+        formOk: function formOk() {
+            return this.New.title && this.New.body && this.reporterId && this.catId;
+        }
     },
     methods: {
         getDate: function getDate() {
             var months = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
             var dt = new Date();
-            return dt.getDate() + ' de ' + months[dt.getMonth()] + ' de ' + dt.getFullYear();
+            //return dt.getDate() + ' de ' + months[dt.getMonth()] + ' de ' + dt.getFullYear();
+            return dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
         },
         showAlert: function showAlert() {
             var _this = this;
@@ -16715,65 +16719,51 @@ exports.default = {
             this.alert = false;
         },
         addNew: function addNew() {
-            console.log(this.catId);
-            /*this.New.id = storageService.getLastId();
+            var _this2 = this;
+
             this.New.date = this.getDate();
-            storageService.addNew(this.New);
-            this.clearForm();
-            this.showAlert();*/
+            this.New.category = 'http://192.168.99.100:8080/categories/' + this.catId;
+            this.New.reporter = 'http://192.168.99.100:8080/reporters/' + this.reporterId;
+            this.$http.post('http://192.168.99.100:8080/news', {
+                title: this.New.title,
+                body: this.New.body,
+                date: this.New.date,
+                reporter: this.New.reporter,
+                category: this.New.category
+            }).then(function (response) {
+                console.log(response);
+                _this2.clearForm();
+                _this2.showAlert();
+            }).catch(function (msg) {
+                return console.log('Error: ', msg);
+            });
         },
         clearForm: function clearForm() {
             this.New.title = '';
-            this.New.subtitle = '';
             this.New.body = '';
-            this.New.category = {};
-            this.New.reporter = {};
             this.New.date = '';
             this.catId = '';
             this.reporterId = '';
+            this.reporter = '';
+            this.category = '';
         },
         getAllCat: function getAllCat() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.$http.get('http://192.168.99.100:8080/categories').then(function (response) {
-                _this2.Categories = response.data._embedded.categories;
-
-                /*const idCatAux = response.data._embedded.categories[0]._links.category.href
-                console.log('link cat', idCatAux);
-                console.log('length string', idCatAux[idCatAux.length -1]);//muestra id categoria*/
+                _this3.Categories = response.data._embedded.categories;
             }).catch(function (msg) {
                 return console.log('Error: ', msg);
             });
         },
         getAllReporters: function getAllReporters() {
-            var _this3 = this;
+            var _this4 = this;
 
             this.$http.get('http://192.168.99.100:8080/reporters').then(function (response) {
-                _this3.Reporters = response.data._embedded.reporters;
+                _this4.Reporters = response.data._embedded.reporters;
             }).catch(function (msg) {
                 return console.log('Error', msg);
             });
-        },
-        getCatById: function getCatById() {
-            var _this4 = this;
-
-            id = 0;
-            i = 0;
-            Categories.forEach(function (c) {
-                if (c.uid == _this4.catId) {
-                    id = i;
-                }
-                i++;
-            });
-            return id;
-        }
-    },
-    watch: {
-        catId: function catId() {
-            //this.New.category = categoriesService.getCatById(this.catId);
-        },
-        reporterId: function reporterId() {
-            //this.New.reporter = reporterService.getReporterById(this.reporterId);
         }
     },
     created: function created() {
@@ -16781,12 +16771,6 @@ exports.default = {
         this.getAllReporters();
     }
 }; //
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -16897,24 +16881,6 @@ var render = function() {
           _c(
             "md-input-container",
             [
-              _c("label", [_vm._v("Subtítulo")]),
-              _vm._v(" "),
-              _c("md-textarea", {
-                model: {
-                  value: _vm.New.subtitle,
-                  callback: function($$v) {
-                    _vm.New.subtitle = $$v
-                  },
-                  expression: "New.subtitle"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "md-input-container",
-            [
               _c("label", [_vm._v("Cuerpo de la noticia")]),
               _vm._v(" "),
               _c("md-textarea", {
@@ -16958,7 +16924,15 @@ var render = function() {
                         _vm._l(_vm.Categories, function(c) {
                           return _c(
                             "md-option",
-                            { key: c.uid, attrs: { value: c.uid } },
+                            {
+                              key: c.uid,
+                              attrs: {
+                                value:
+                                  c._links.self.href[
+                                    c._links.self.href.length - 1
+                                  ]
+                              }
+                            },
                             [_vm._v(_vm._s(c.name) + " ")]
                           )
                         })
@@ -16996,7 +16970,15 @@ var render = function() {
                         _vm._l(_vm.Reporters, function(r) {
                           return _c(
                             "md-option",
-                            { key: r.uid, attrs: { value: r.uid } },
+                            {
+                              key: r.uid,
+                              attrs: {
+                                value:
+                                  r._links.self.href[
+                                    r._links.self.href.length - 1
+                                  ]
+                              }
+                            },
                             [_vm._v(_vm._s(r.name) + " ")]
                           )
                         })
@@ -17019,6 +17001,7 @@ var render = function() {
                   "md-button",
                   {
                     staticClass: "md-raised md-primary",
+                    attrs: { disabled: !_vm.formOk },
                     on: { click: _vm.addNew }
                   },
                   [

@@ -1,0 +1,43 @@
+header{
+        padding-top: 10px;
+      }
+body{
+       background: rgb(177, 187, 172);
+     }
+label{
+      margin: 5px;
+
+      font-weight: bold;
+      font-family: Verdana;
+
+    }
+.center{
+      padding-top: 100px;
+    }
+.card{
+        margin: 10px;
+      }
+.Styletextarea{
+          max-height:100px;
+          min-height:100px;
+        }
+.sizeSubTitle{
+              font-size: 36px;
+            }
+.styleLetter{
+              color: rgb(235, 89, 63);
+              font-weight: bold;
+              font-family: Verdana;
+            }
+.spaceButton{
+              margin: 10px;
+              padding-top: 12px;
+            }
+.truncateBody{
+        width:200px;
+        height:20px;
+        padding:20px;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        overflow:hidden;
+      }

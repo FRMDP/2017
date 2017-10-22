@@ -4,37 +4,13 @@
 		<ul class="menu__list">
 			<li class="menu__item menu__item--current">
 				<router-link to="/news" class="menu__link menu__link_news">
-					Noticias
+					News
 				</router-link>
 			</li>
-			<li class="menu__item">
-				<router-link to="/category/1" class="menu__link menu__link_locals">
-					Locales
-				</router-link>
-			</li>
-			<li class="menu__item">
-				<router-link to="/category/2" class="menu__link menu__link_sports">
-					Deportes
-				</router-link>
-			</li>
-			<li class="menu__item">
-				<router-link to="/category/3" class="menu__link menu__link_world">
-					Mundo
-				</router-link>
-			</li>
-			<li class="menu__item">
-				<router-link to="/category/4" class="menu__link menu__link_economy">
-					Economia
-				</router-link>
-			</li>
-			<li class="menu__item">
-				<router-link to="/category/5" class="menu__link menu__link_politics">
-					Politica
-				</router-link>
-			</li>
-			<li class="menu__item">
-				<router-link to="/category/6" class="menu__link menu__link_entertainment">
-					Entretenimiento
+			<li class="menu__item" v-for="category in categories">
+				<router-link :to="{name: 'category', params: { id: category.uid }}" 
+						class="categoryName menu__link menu__link_locals">
+					{{ category.name }}
 				</router-link>
 			</li>
 		</ul>
@@ -43,7 +19,21 @@
 
 <script>
 	export default {
-		name: 'topMenu'
+		name: 'topMenu',
+		data() {
+			return {
+				categories: []
+			}
+		},
+		created() {
+			this.$http.get('http://192.168.99.100:8080/categories')
+				.then((response) => {
+					this.categories = response.data._embedded.categories;
+				})
+				.catch((error) => {
+					console.log(error);
+				})
+		}
 	}
 </script>
 
@@ -57,5 +47,8 @@
 	nav{
 		background-color: #ffffff;
 		height: 65px;
+	}
+	.categoryName {
+		text-transform: capitalize;
 	}
 </style>

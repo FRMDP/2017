@@ -10,7 +10,7 @@ export default new VueRouter({
   	  { path: '/news', component: fmNews },
   	  { path: '/addNew', component: fmAddNew },
   	  { path: '/oneNew/:id', component: fmOneNew },
-	  { path: '/category/:id', component: fmNewsByCategory },
+	  { path: '/category/:id', component: fmNewsByCategory, name:'category' },
 	  { path: '/reporter/:id', component: fmReporter }
 	]
 });

@@ -1,6 +1,9 @@
 <template>
     <div class="container">
         <div class="row" >
+            <div class="col s12 m12 l12" v-if="!news.length">
+                <h4 class="center-align noNews">No hay noticias aun</h4>
+            </div>
             <div class="col s12 m6 l4" v-for="oneNew in news">
                 <div class="card large hoverable">
                     <div class="card-image">
@@ -13,7 +16,7 @@
                         </p>
                     </div>
                     <div class="card-action">
-                        <router-link v-bind:to="'/oneNew/' + oneNew.id">
+                        <router-link v-bind:to="'/oneNew/' + oneNew.uid">
                             <p>Mas informacion</p>
                         </router-link>
                         <p class="right-align">{{ oneNew.date }}</p>
@@ -56,11 +59,14 @@
             }
         },
         created() {
-            this.news = this.getNews(this.id);
+            this.getNews();
         }
     }
 </script>
 
 <style>
-
+    .noNews {
+        margin-top: 200px;
+        margin-bottom: 100px;
+    }
 </style>

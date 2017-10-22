@@ -968,39 +968,6 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	getNew: function getNew(id) {
-		return JSON.parse(localStorage.getItem('news')).find(function (news) {
-			return news.id == id;
-		});
-	},
-	getNewsByCategory: function getNewsByCategory(categoryId) {
-		return JSON.parse(localStorage.getItem('news')).filter(function (news) {
-			return news.category.id == categoryId;
-		});
-	},
-	linkCategory: function linkCategory(name) {
-		return JSON.parse(localStorage.getItem('categories')).find(function (category) {
-			return category.name == name;
-		}).id;
-	},
-	linkReporter: function linkReporter(name) {
-		return JSON.parse(localStorage.getItem('reporters')).find(function (reporter) {
-			return reporter.name == name;
-		}).id;
-	}
-};
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
@@ -1095,6 +1062,24 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	getNew: function getNew(id) {
+		return JSON.parse(localStorage.getItem('news')).find(function (news) {
+			return news.id == id;
+		});
+	}
+};
 
 /***/ }),
 /* 7 */
@@ -14161,7 +14146,7 @@ module.exports = __webpack_require__(17);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(8);
 var Axios = __webpack_require__(19);
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(5);
 
 /**
  * Create an instance of Axios
@@ -14244,7 +14229,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(5);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(28);
 var dispatchRequest = __webpack_require__(29);
@@ -14776,7 +14761,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(30);
 var isCancel = __webpack_require__(11);
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(5);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -15276,7 +15261,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.logo{\n\tmargin-left: 40px;\n\tcolor: black !important;\n\tmargin-right: 100px;\n\tpadding-top: 15px !important;\n}\nnav{\n\tbackground-color: #ffffff;\n\theight: 65px;\n}\n", ""]);
+exports.push([module.i, "\n.logo{\n\tmargin-left: 40px;\n\tcolor: black !important;\n\tmargin-right: 100px;\n\tpadding-top: 15px !important;\n}\nnav{\n\tbackground-color: #ffffff;\n\theight: 65px;\n}\n.categoryName {\n\ttext-transform: capitalize;\n}\n", ""]);
 
 // exports
 
@@ -15310,33 +15295,23 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 exports.default = {
-	name: 'topMenu'
+	name: 'topMenu',
+	data: function data() {
+		return {
+			categories: []
+		};
+	},
+	created: function created() {
+		var _this = this;
+
+		this.$http.get('http://192.168.99.100:8080/categories').then(function (response) {
+			_this.categories = response.data._embedded.categories;
+		}).catch(function (error) {
+			console.log(error);
+		});
+	}
 };
 
 /***/ }),
@@ -15353,119 +15328,48 @@ var render = function() {
       _vm._v("Maldoff")
     ]),
     _vm._v(" "),
-    _c("ul", { staticClass: "menu__list" }, [
-      _c(
-        "li",
-        { staticClass: "menu__item menu__item--current" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "menu__link menu__link_news",
-              attrs: { to: "/news" }
-            },
-            [_vm._v("\n\t\t\t\tNoticias\n\t\t\t")]
+    _c(
+      "ul",
+      { staticClass: "menu__list" },
+      [
+        _c(
+          "li",
+          { staticClass: "menu__item menu__item--current" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "menu__link menu__link_news",
+                attrs: { to: "/news" }
+              },
+              [_vm._v("\n\t\t\t\tNews\n\t\t\t")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._l(_vm.categories, function(category) {
+          return _c(
+            "li",
+            { staticClass: "menu__item" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "categoryName menu__link menu__link_locals",
+                  attrs: {
+                    to: { name: "category", params: { id: category.uid } }
+                  }
+                },
+                [_vm._v("\n\t\t\t\t" + _vm._s(category.name) + "\n\t\t\t")]
+              )
+            ],
+            1
           )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "menu__item" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "menu__link menu__link_locals",
-              attrs: { to: "/category/1" }
-            },
-            [_vm._v("\n\t\t\t\tLocales\n\t\t\t")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "menu__item" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "menu__link menu__link_sports",
-              attrs: { to: "/category/2" }
-            },
-            [_vm._v("\n\t\t\t\tDeportes\n\t\t\t")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "menu__item" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "menu__link menu__link_world",
-              attrs: { to: "/category/3" }
-            },
-            [_vm._v("\n\t\t\t\tMundo\n\t\t\t")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "menu__item" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "menu__link menu__link_economy",
-              attrs: { to: "/category/4" }
-            },
-            [_vm._v("\n\t\t\t\tEconomia\n\t\t\t")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "menu__item" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "menu__link menu__link_politics",
-              attrs: { to: "/category/5" }
-            },
-            [_vm._v("\n\t\t\t\tPolitica\n\t\t\t")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "menu__item" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "menu__link menu__link_entertainment",
-              attrs: { to: "/category/6" }
-            },
-            [_vm._v("\n\t\t\t\tEntretenimiento\n\t\t\t")]
-          )
-        ],
-        1
-      )
-    ])
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []
@@ -15824,9 +15728,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = {
-    addCategories: function addCategories() {
-        localStorage.setItem('categories', JSON.stringify(categories));
-    },
     getCategory: function getCategory(id) {
         return JSON.parse(localStorage.getItem('categories')).find(function (category) {
             return category.id == id;
@@ -15905,7 +15806,7 @@ var _fmReporter2 = _interopRequireDefault(_fmReporter);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = new _vueRouter2.default({
-  routes: [{ path: '/news', component: _fmNews2.default }, { path: '/addNew', component: _fmAddNew2.default }, { path: '/oneNew/:id', component: _fmOneNew2.default }, { path: '/category/:id', component: _fmNewsByCategory2.default }, { path: '/reporter/:id', component: _fmReporter2.default }]
+  routes: [{ path: '/news', component: _fmNews2.default }, { path: '/addNew', component: _fmAddNew2.default }, { path: '/oneNew/:id', component: _fmOneNew2.default }, { path: '/category/:id', component: _fmNewsByCategory2.default, name: 'category' }, { path: '/reporter/:id', component: _fmReporter2.default }]
 });
 
 /***/ }),
@@ -15998,7 +15899,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.noNews {\n    margin-top: 200px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -16014,7 +15915,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _newsService = __webpack_require__(5);
+var _newsService = __webpack_require__(6);
 
 var _newsService2 = _interopRequireDefault(_newsService);
 
@@ -16050,9 +15951,12 @@ exports.default = {
         }
     },
     created: function created() {
-        this.news = this.getNews(this.id);
+        this.getNews();
     }
 }; //
+//
+//
+//
 //
 //
 //
@@ -16092,46 +15996,59 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      _vm._l(_vm.news, function(oneNew) {
-        return _c("div", { staticClass: "col s12 m6 l4" }, [
-          _c("div", { staticClass: "card large hoverable" }, [
-            _c("div", { staticClass: "card-image" }, [
-              _c("img", {
-                attrs: { src: "https://picsum.photos/200/300/?random" }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "card-title" }, [
-                _c("strong", [_vm._v(_vm._s(oneNew.title))])
+      [
+        !_vm.news.length
+          ? _c("div", { staticClass: "col s12 m12 l12" }, [
+              _c("h4", { staticClass: "center-align noNews" }, [
+                _vm._v("No hay noticias aun")
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-content" }, [
-              _c("p", { staticClass: "truncate" }, [
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(oneNew.body) +
-                    "\n                    "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-action" },
-              [
-                _c("router-link", { attrs: { to: "/oneNew/" + oneNew.id } }, [
-                  _c("p", [_vm._v("Mas informacion")])
-                ]),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm._l(_vm.news, function(oneNew) {
+          return _c("div", { staticClass: "col s12 m6 l4" }, [
+            _c("div", { staticClass: "card large hoverable" }, [
+              _c("div", { staticClass: "card-image" }, [
+                _c("img", {
+                  attrs: { src: "https://picsum.photos/200/300/?random" }
+                }),
                 _vm._v(" "),
-                _c("p", { staticClass: "right-align" }, [
-                  _vm._v(_vm._s(oneNew.date))
+                _c("span", { staticClass: "card-title" }, [
+                  _c("strong", [_vm._v(_vm._s(oneNew.title))])
                 ])
-              ],
-              1
-            )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-content" }, [
+                _c("p", { staticClass: "truncate" }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(oneNew.body) +
+                      "\n                    "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "card-action" },
+                [
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/oneNew/" + oneNew.uid } },
+                    [_c("p", [_vm._v("Mas informacion")])]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "right-align" }, [
+                    _vm._v(_vm._s(oneNew.date))
+                  ])
+                ],
+                1
+              )
+            ])
           ])
-        ])
-      })
+        })
+      ],
+      2
     )
   ])
 }
@@ -16760,7 +16677,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _newsService = __webpack_require__(5);
+var _newsService = __webpack_require__(6);
 
 var _newsService2 = _interopRequireDefault(_newsService);
 
@@ -17109,7 +17026,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.noNews {\n    margin-top: 200px;\n}\n", ""]);
+exports.push([module.i, "\n.noNews {\n    margin-top: 200px;\n    margin-bottom: 100px;\n}\n", ""]);
 
 // exports
 
@@ -17124,18 +17041,43 @@ exports.push([module.i, "\n.noNews {\n    margin-top: 200px;\n}\n", ""]);
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _newsService = __webpack_require__(5);
-
-var _newsService2 = _interopRequireDefault(_newsService);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     name: 'fmNewsByCategory',
     data: function data() {
         return {
-            news: []
+            news: [],
+            categoriesFromAPI: [],
+            newsByCat: []
         };
     },
 
@@ -17146,46 +17088,34 @@ exports.default = {
     },
     methods: {
         getNews: function getNews() {
-            return _newsService2.default.getNewsByCategory(this.id);
+            var _this = this;
+
+            this.newsByCat = this.categoriesFromAPI.filter(function (cat) {
+                return cat.uid == _this.id;
+            });
+            var categoriesHref = this.newsByCat[0]._links.news.href;
+            this.$http.get(categoriesHref).then(function (response) {
+                _this.news = response.data._embedded.news;
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
     },
     watch: {
         '$route.params.id': function $routeParamsId() {
-            this.news = this.getNews(this.id);
+            this.getNews();
         }
     },
     created: function created() {
-        this.news = this.getNews(this.id);
+        var _this2 = this;
+
+        this.$http.get('http://192.168.99.100:8080/categories').then(function (response) {
+            _this2.categoriesFromAPI = response.data._embedded.categories;
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 72 */
@@ -17375,7 +17305,7 @@ var _reporterService = __webpack_require__(77);
 
 var _reporterService2 = _interopRequireDefault(_reporterService);
 
-var _newsService = __webpack_require__(5);
+var _newsService = __webpack_require__(6);
 
 var _newsService2 = _interopRequireDefault(_newsService);
 
@@ -17464,31 +17394,11 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var reporters = [{
-    id: 1,
-    name: "John Doe"
-}, {
-    id: 2,
-    name: "Jane Doe"
-}, {
-    id: 3,
-    name: "Chuck Norris"
-}, {
-    id: 4,
-    name: "Barack Obama"
-}];
-
 exports.default = {
-    addReporters: function addReporters() {
-        localStorage.setItem('reporters', JSON.stringify(reporters));
-    },
     getReporter: function getReporter(id) {
         return JSON.parse(localStorage.getItem('reporters')).find(function (reporter) {
             return reporter.id == id;
         });
-    },
-    getReporters: function getReporters() {
-        return JSON.parse(localStorage.getItem('reporters'));
     }
 };
 

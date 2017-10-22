@@ -28,13 +28,13 @@
 </template>
 
 <script>
-    import newsService from '../services/newsService.js';
-
     export default {
         name: 'fmNewsByCategory',
         data() {
             return {
-                news: []
+                news: [],
+                categoriesFromAPI: [],
+                newsByCat: []
             }
         },
         computed: {
@@ -44,9 +44,11 @@
         },
         methods: {
             getNews() {
-                this.$http.get(this.news.find(category => category.name == this.news[this.id].category.name)._links.self.news.href)
+                this.newsByCat = this.categoriesFromAPI.filter(cat => cat.uid == this.id);
+                const categoriesHref = this.newsByCat[0]._links.news.href;
+                this.$http.get(categoriesHref)
                      .then((response) => {
-                        console.log(response);
+                        this.news = response.data._embedded.news;
                      })
                      .catch((error) => {
                         console.log(error);
@@ -55,11 +57,17 @@
         },
         watch: {
             '$route.params.id': function() {
-                this.news = this.getNews(this.id);
+                this.getNews();
             }
         },
         created() {
-            this.news = this.getNews(this.id);
+            this.$http.get('http://192.168.99.100:8080/categories')
+                .then((response) => {
+                    this.categoriesFromAPI = response.data._embedded.categories;
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
         }
     }
 </script>
@@ -67,5 +75,6 @@
 <style>
     .noNews {
         margin-top: 200px;
+        margin-bottom: 100px;
     }
 </style>

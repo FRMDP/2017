@@ -1,0 +1,73 @@
+body {
+  background: #9a98f2;
+  font-family: 'Lato', Arial, sans-serif;
+}
+
+.naranjita {
+  background-color: #18263d !important;
+}
+
+p, i {
+  color: white !important;
+}
+
+.negrita {
+  font-weight: bold;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: lightgrey;
+}
+
+.costado {
+    display: inline;
+}
+
+nav {
+  margin-bottom: 10px;
+}
+
+nav .brand-logo {
+  color: white;
+}
+
+h2, h3{
+  color: #d3e4ff;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+.todo_bien_box {
+    padding: 20px;
+    background-color: white;
+    color: black;
+    margin-bottom: 15px;
+
+     animation:signup-response 0.5s 1;
+    -webkit-animation:signup-response 0.5s 1;
+    animation-fill-mode: forwards;
+
+    animation-delay:2s;
+    -webkit-animation-delay:3s; /* Safari and Chrome */
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes signup-response{
+    from {opacity :1;}
+    to {opacity :0;}
+}
+
+@-webkit-keyframes signup-response{
+    from {opacity :1;}
+    to {opacity :0;}
+}
+
+th, td {
+    padding: 10px;
+}
+
+select {
+  color: black;
+}

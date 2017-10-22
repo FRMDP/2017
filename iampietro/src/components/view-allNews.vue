@@ -17,13 +17,14 @@
 								<p class="truncate card-text black-text">
 									{{ particularNew.body }}
 								</p>
-								<router-link :to="{name: 'particular', params: {id: particularNew.id}}">
+								<router-link :to="{name: 'particular', params: {id: particularNew.uid}}">
 									<p class="right green-text">Leer más</p>
 								</router-link>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> 
+
 			</div>
 	</div>
 </template>
@@ -31,6 +32,7 @@
 <script>
 
 	export default {
+		name: 'viewAllNews',
 		data() {
 			return {
 		    	news: []
@@ -42,7 +44,6 @@
 				this.$http.get('https://utn-newspaper-api.herokuapp.com/news')
 					.then(response => {
 						this.news = response.data._embedded.news;
-						console.log(this.news);
 					})
 					.catch(error => {
 						console.log(error);	
@@ -50,14 +51,18 @@
 			}
 		},
 		watch: {
-
+			'$route.params.id': function() {
+ 				this.news = this.getNews(this.id);
+ 			}
 		},
 		computed: {
-
+			id() {
+ 				return this.$route.params.id;
+ 			}
 
 		},
 		created() {
-			this.news = this.getNews();
+			this.getNews();
 		}
 	}
 </script>

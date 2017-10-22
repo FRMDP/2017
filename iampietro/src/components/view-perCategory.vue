@@ -28,17 +28,29 @@
 	export default {
 		data() {
 			return {
-		    	news: []
+		    	news: [],
+		    	categories : [],
+		    	c: []
 			}
 		},
 		methods: {
 			getNews() {
-				return newsService.getNewsPerCategory(this.id);
+				//return newsService.getNewsPerCategory(this.id);
+				this.c = this.categories.filter(c => c.uid == this.id);
+				this.$http.get(this.c._links.news.href)
+					.then(response => {
+						this.news = response.data._embedded.news;
+						console.log(response);
+					})
+					.catch(error => {
+						console.log(error);	
+					})
+				
 			}
 		},
 		watch: {
 			'$route.params.id': function() {
-				this.news = this.getNews(this.id);
+				this.getNews();
 			}
 		},
 		computed: {
@@ -48,7 +60,13 @@
 
 		},
 		created() {
-			this.news = this.getNews(this.id);
+			this.$http.get('https://utn-newspaper-api.herokuapp.com/categories')
+					.then(response => {
+						this.categories = response.data._embedded.categories;
+					})
+					.catch(error => {
+						console.log(error);	
+					})
 		}
 	}
 </script>

@@ -2,7 +2,7 @@
 	<div class="section dale">
 			<div class="row">
 				<div class="col s12 m12 l12" v-if="!news.length">
-	                <h4 class="center-align">No hay noticias en esta categoria aun</h4>
+	                <h4 class="center-align">No hay noticias aún</h4>
 	            </div>
 				<div v-for="particularNew in news">
 					<div class="col l4">

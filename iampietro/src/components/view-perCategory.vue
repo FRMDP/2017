@@ -1,6 +1,9 @@
 <template>
 	<div class="section">
 			<div class="row">
+				<div class="col s12 m12 l12" v-if="!news.length">
+	                <h4 class="center-align">No hay noticias en esta categoria aún</h4>
+	            </div>
 				<div v-for="particularNew in news">
 					<div class="col s12 m4 l4">
 						<div class="card forCards">
@@ -11,7 +14,7 @@
 								<p class="truncate card-text black-text">
 									{{ particularNew.body }}
 								</p>
-								<router-link :to="{name: 'particular', params: {id: particularNew.id}}">
+								<router-link :to="{name: 'particular', params: {id: particularNew.uid}}">
 									<p>Leer más</p>
 								</router-link>
 							</div>
@@ -37,7 +40,8 @@
 			getNews() {
 				//return newsService.getNewsPerCategory(this.id);
 				this.c = this.categories.filter(c => c.uid == this.id);
-				this.$http.get(this.c._links.news.href)
+				const aux = this.c[0]._links.news.href;
+				this.$http.get(aux)
 					.then(response => {
 						this.news = response.data._embedded.news;
 						console.log(response);
@@ -45,6 +49,7 @@
 					.catch(error => {
 						console.log(error);	
 					})
+
 				
 			}
 		},

@@ -45,7 +45,7 @@
 		},
 		watch: {
 			'$route.params.id': function() {
-				this.particularNew = this.getNew(this.id);
+				this.getNew();
 			}
 		},
 		created() {

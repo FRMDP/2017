@@ -43,7 +43,7 @@
                              v-model="article.body">
                     </b-input>
                 </b-field>
-                <button @click.prevent="saveNewsArticle" class="button is-primary is-outlined is-pulled-right"
+                <button @click.prevent="saveNews" class="button is-primary is-outlined is-pulled-right"
                         :disabled="!formIsCorrect"> Add
                 </button>
             </div>

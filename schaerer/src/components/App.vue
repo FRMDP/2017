@@ -1,8 +1,9 @@
 <template>
     <div class="app">
-        <sd-navbar @setCategoryNewsHref="setCategoryNewsHref" ></sd-navbar> 
+        <sd-navbar @setCategory="setCategory" ></sd-navbar> 
     	<router-view 
-            :categoryNewsHref="categoryNewsHref">    
+            @setOneNews="setOneNews" @setCategory="setCategory"
+            :category="category" :oneNews="oneNews">    
         </router-view>
         <sd-footer></sd-footer>
     </div>
@@ -19,12 +20,16 @@
         },
         data(){
             return{
-                categoryNewsHref: ''
+                category: {},
+                oneNews: {}
             }
         },
         methods: {
-            setCategoryNewsHref(href){
-                this.categoryNewsHref = href;
+            setCategory(category){
+                this.category = category;
+            },
+            setOneNews(news){
+                this.oneNews = news;
             }
         }
     }

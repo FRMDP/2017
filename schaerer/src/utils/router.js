@@ -6,7 +6,7 @@ import viewCategoryNews from '../components/view-categoryNews.vue';
 
 export default new VueRouter({
   routes: [
-	 { path: '/new', component: viewAddNew},
+	 { path: '/addNews', component: viewAddNew},
 	 { path: '/news', component: viewAllNews},
 	 { path: '/oneNews/', component: viewOneNew},
 	 { path: '/category', component: viewCategoryNews}

@@ -27,16 +27,16 @@
 					<div class="row">
 						<h5>Select the new's category.</h5>
 						<div class="col s12 m6 l6">
-							<select v-model="news.category.name" style="display: block;">
-								<option v-for="category in categories" v-bind:value ="category.name">{{category.name}}</option>
+							<select v-model="news.category" style="display: block;">
+								<option v-for="c in categories" v-bind:value ="c._links.self.href">{{c.name}}</option>
 							</select>
 				  	  	</div>
 				  	</div>
 				  	<div class="row">
 						<h5>Select your name.</h5>
 						<div class="col s12 m6 l6">
-							<select v-model="news.reporter.name" style="display: block;">
-								<option v-for="reporter in reporters" v-bind:value ="reporter.name">{{reporter.name}}</option>
+							<select v-model="news.reporter" style="display: block;">
+								<option v-for="r in reporters" v-bind:value ="r._links.self.href">{{r.name}}</option>
 							</select>
 				  	  	</div>
 				  	</div>
@@ -54,22 +54,14 @@
 
 <script>
 	export default{
-		name: 'viewAllNews',
+		name: 'viewAddNews',
 		data(){
 			return{
 				news: {
-					id: 0,
 					title: '',
 					body: '',
-					category: {
-						id: 0,
-						name: ''
-					},
-					reporter:{
-						id:0,
-						name: ''
-					},
-					date: 0
+					reporter: '',
+					category: ''
 				},
 				categories: [],
 				reporters: []
@@ -77,30 +69,31 @@
 		},
 		computed: {
 	        formOk() {
-	            return this.news.title && this.news.body && this.news.category.id  && this.news.reporter.id;
+	            return this.news.title && this.news.body && this.news.category  && this.news.reporter;
 	        }
 	    },
 	    methods: {
 	    	cleanForm(){
 	    		this.news.title = '';
 	    		this.news.body = '';
-	    		this.news.category = {
-						id: 0,
-						name: ''
-					};
-				this.news.reporter = {
-					id:0,
-					name: ''
-				};
+	    		this.news.category = '',
+				this.news.reporter = ''
 	    	},
-	    	addNews(){
-	    		this.news.category = this.$categoryStorageService.getCategory(this.news.category.id);
-	    		this.news.reporter = this.$reporterStorageService.getReporter(this.news.reporter.id);
-	    		this.news.id = this.$newStorageService.getLastId()+1;
-	    		this.news.date = new Date().toJSON().slice(0, 10);
-	    		this.$newStorageService.addNew(this.news);
-	    		this.cleanForm();
-	    	}
+	    	addNews() {
+    			this.$http.post('http://192.168.99.100:8080/news',{
+    				"title": this.news.title,
+    				"body": this.news.body,
+    				"date": new Date().toJSON().slice(0,10),
+    				"reporter": this.reporter,
+    				"category": this.category,
+    			})
+    			.then(response => {
+    				this.cleanInputs();
+    			})
+    			.catch(error => {
+    				console.log(error);
+    			});
+    		},
 	    },
 	    created(){
 	    	this.cleanForm();

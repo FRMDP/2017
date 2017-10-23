@@ -1,10 +1,10 @@
 <template>
-   <!-- <div v-bind:class="categoryName"> -->
+   <div v-bind:class="category.name">
         <div class="container">
             <div class="row" >
                 <div class="col s12 m6 l4" v-for="news in allCategoryNews">
-                    <div class="card large">
-                    	<router-link to="/oneNews"
+                    <div class="card large" @click="setOneNews(news)">
+                    	<router-link to="/oneNews">
     	                    <div class="card-image">
     	                        <img src="https://picsum.photos/200/150/?random">
     	                        <span class="card-title"><strong>{{ news.title }}</strong></span>
@@ -26,20 +26,26 @@
                 </div>
             </div>
         </div>
-    <!-- </div> -->
+    </div>
 </template>
 
 <script>
 	export default{
-        props: ['categoryNewsHref'],
+        name: 'viewCategoryNews',
+        props: ['category'],
 		data(){
 			return{
 				allCategoryNews: []
 			}
 		},
-       watch: {
-            categoryNewsHref: function() {
-                this.$http.get(this.categoryNewsHref)
+        methods: {
+            setOneNews(news){
+                this.$emit('setOneNews', news);
+            }
+        },
+        watch: {
+            category: function() {
+                this.$http.get(this.category._links.news.href)
                 .then(response => {
                     this.allCategoryNews = response.data._embedded.news;
                     })
@@ -49,7 +55,7 @@
             }
         },
 		created(){
-            this.$http.get(this.categoryNewsHref)
+            this.$http.get(this.category._links.news.href)
                 .then(response => {
                     this.allCategoryNews = response.data._embedded.news;
                     })

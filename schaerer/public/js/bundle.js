@@ -15830,7 +15830,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -15899,6 +15899,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 exports.default = {
     name: 'app',
@@ -15908,13 +15909,17 @@ exports.default = {
     },
     data: function data() {
         return {
-            categoryNewsHref: ''
+            category: {},
+            oneNews: {}
         };
     },
 
     methods: {
-        setCategoryNewsHref: function setCategoryNewsHref(href) {
-            this.categoryNewsHref = href;
+        setCategory: function setCategory(category) {
+            this.category = category;
+        },
+        setOneNews: function setOneNews(news) {
+            this.oneNews = news;
         }
     }
 };
@@ -16056,8 +16061,8 @@ exports.default = {
     },
 
     methods: {
-        setCategoryNewsHref: function setCategoryNewsHref(href) {
-            this.$emit('setCategoryNewsHref', href);
+        setCategory: function setCategory(category) {
+            this.$emit('setCategory', category);
         }
     },
     created: function created() {
@@ -16103,9 +16108,10 @@ var render = function() {
                 return _c(
                   "li",
                   {
+                    attrs: { id: category.name },
                     on: {
                       click: function($event) {
-                        _vm.setCategoryNewsHref(category._links.news.href)
+                        _vm.setCategory(category)
                       }
                     }
                   },
@@ -16131,7 +16137,7 @@ var render = function() {
                 [
                   _c(
                     "router-link",
-                    { staticClass: "black-text", attrs: { to: "/new" } },
+                    { staticClass: "black-text", attrs: { to: "/addNews" } },
                     [_vm._v("Add the newest news")]
                   )
                 ],
@@ -16348,9 +16354,12 @@ var render = function() {
     "div",
     { staticClass: "app" },
     [
-      _c("sd-navbar", { on: { setCategoryNewsHref: _vm.setCategoryNewsHref } }),
+      _c("sd-navbar", { on: { setCategory: _vm.setCategory } }),
       _vm._v(" "),
-      _c("router-view", { attrs: { categoryNewsHref: _vm.categoryNewsHref } }),
+      _c("router-view", {
+        attrs: { category: _vm.category, oneNews: _vm.oneNews },
+        on: { setOneNews: _vm.setOneNews, setCategory: _vm.setCategory }
+      }),
       _vm._v(" "),
       _c("sd-footer")
     ],
@@ -16402,7 +16411,7 @@ var _viewCategoryNews2 = _interopRequireDefault(_viewCategoryNews);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = new _vueRouter2.default({
-		routes: [{ path: '/new', component: _viewAddNew2.default }, { path: '/news', component: _viewAllNews2.default }, { path: '/oneNews/', component: _viewOneNew2.default }, { path: '/category', component: _viewCategoryNews2.default }]
+		routes: [{ path: '/addNews', component: _viewAddNew2.default }, { path: '/news', component: _viewAllNews2.default }, { path: '/oneNews/', component: _viewOneNew2.default }, { path: '/category', component: _viewCategoryNews2.default }]
 });
 
 /***/ }),
@@ -16510,7 +16519,7 @@ exports.push([module.i, "\n.botonConLetrasRojitas{\n    \tcolor: #b71c1c;\n}\n#p
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+				value: true
 });
 //
 //
@@ -16568,70 +16577,62 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-	name: 'viewAllNews',
-	data: function data() {
-		return {
-			news: {
-				id: 0,
-				title: '',
-				body: '',
-				category: {
-					id: 0,
-					name: ''
+				name: 'viewAddNews',
+				data: function data() {
+								return {
+												news: {
+																title: '',
+																body: '',
+																reporter: '',
+																category: ''
+												},
+												categories: [],
+												reporters: []
+								};
 				},
-				reporter: {
-					id: 0,
-					name: ''
+
+				computed: {
+								formOk: function formOk() {
+												return this.news.title && this.news.body && this.news.category && this.news.reporter;
+								}
 				},
-				date: 0
-			},
-			categories: [],
-			reporters: []
-		};
-	},
+				methods: {
+								cleanForm: function cleanForm() {
+												this.news.title = '';
+												this.news.body = '';
+												this.news.category = '', this.news.reporter = '';
+								},
+								addNews: function addNews() {
+												var _this = this;
 
-	computed: {
-		formOk: function formOk() {
-			return this.news.title && this.news.body && this.news.category.id && this.news.reporter.id;
-		}
-	},
-	methods: {
-		cleanForm: function cleanForm() {
-			this.news.title = '';
-			this.news.body = '';
-			this.news.category = {
-				id: 0,
-				name: ''
-			};
-			this.news.reporter = {
-				id: 0,
-				name: ''
-			};
-		},
-		addNews: function addNews() {
-			this.news.category = this.$categoryStorageService.getCategory(this.news.category.id);
-			this.news.reporter = this.$reporterStorageService.getReporter(this.news.reporter.id);
-			this.news.id = this.$newStorageService.getLastId() + 1;
-			this.news.date = new Date().toJSON().slice(0, 10);
-			this.$newStorageService.addNew(this.news);
-			this.cleanForm();
-		}
-	},
-	created: function created() {
-		var _this = this;
+												this.$http.post('http://192.168.99.100:8080/news', {
+																"title": this.news.title,
+																"body": this.news.body,
+																"date": new Date().toJSON().slice(0, 10),
+																"reporter": this.reporter,
+																"category": this.category
+												}).then(function (response) {
+																_this.cleanInputs();
+												}).catch(function (error) {
+																console.log(error);
+												});
+								}
+				},
+				created: function created() {
+								var _this2 = this;
 
-		this.cleanForm();
-		this.$http.get('http://192.168.99.100:8080/categories').then(function (response) {
-			_this.categories = response.data._embedded.categories;
-		}).catch(function (error) {
-			console.log(error);
-		});
-		this.$http.get('http://192.168.99.100:8080/reporters').then(function (response) {
-			_this.reporters = response.data._embedded.reporters;
-		}).catch(function (error) {
-			console.log(error);
-		});
-	}
+								this.cleanForm();
+								this.$http.get('http://192.168.99.100:8080/categories').then(function (response) {
+												_this2.categories = response.data._embedded.categories;
+								}).catch(function (error) {
+												console.log(error);
+								});
+								this.$http.get('http://192.168.99.100:8080/reporters').then(function (response) {
+												_this2.reporters = response.data._embedded.reporters;
+								}).catch(function (error) {
+												console.log(error);
+								});
+				}
 };
 
 /***/ }),
@@ -16717,8 +16718,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.news.category.name,
-                      expression: "news.category.name"
+                      value: _vm.news.category,
+                      expression: "news.category"
                     }
                   ],
                   staticStyle: { display: "block" },
@@ -16733,8 +16734,8 @@ var render = function() {
                           return val
                         })
                       _vm.$set(
-                        _vm.news.category,
-                        "name",
+                        _vm.news,
+                        "category",
                         $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
@@ -16742,10 +16743,12 @@ var render = function() {
                     }
                   }
                 },
-                _vm._l(_vm.categories, function(category) {
-                  return _c("option", { domProps: { value: category.name } }, [
-                    _vm._v(_vm._s(category.name))
-                  ])
+                _vm._l(_vm.categories, function(c) {
+                  return _c(
+                    "option",
+                    { domProps: { value: c._links.self.href } },
+                    [_vm._v(_vm._s(c.name))]
+                  )
                 })
               )
             ])
@@ -16762,8 +16765,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.news.reporter.name,
-                      expression: "news.reporter.name"
+                      value: _vm.news.reporter,
+                      expression: "news.reporter"
                     }
                   ],
                   staticStyle: { display: "block" },
@@ -16778,8 +16781,8 @@ var render = function() {
                           return val
                         })
                       _vm.$set(
-                        _vm.news.reporter,
-                        "name",
+                        _vm.news,
+                        "reporter",
                         $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
@@ -16787,10 +16790,12 @@ var render = function() {
                     }
                   }
                 },
-                _vm._l(_vm.reporters, function(reporter) {
-                  return _c("option", { domProps: { value: reporter.name } }, [
-                    _vm._v(_vm._s(reporter.name))
-                  ])
+                _vm._l(_vm.reporters, function(r) {
+                  return _c(
+                    "option",
+                    { domProps: { value: r._links.self.href } },
+                    [_vm._v(_vm._s(r.name))]
+                  )
                 })
               )
             ])
@@ -16905,7 +16910,7 @@ if (false) {(function () {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 //
 //
@@ -16938,20 +16943,27 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-	data: function data() {
-		return {
-			allNews: []
-		};
-	},
-	created: function created() {
-		var _this = this;
+    name: 'viewAllNews',
+    data: function data() {
+        return {
+            allNews: []
+        };
+    },
 
-		this.$http.get('http://192.168.99.100:8080/news').then(function (response) {
-			_this.allNews = response.data._embedded.news;
-		}).catch(function (error) {
-			console.log(error);
-		});
-	}
+    methods: {
+        setOneNews: function setOneNews(news) {
+            this.$emit('setOneNews', news);
+        }
+    },
+    created: function created() {
+        var _this = this;
+
+        this.$http.get('http://192.168.99.100:8080/news').then(function (response) {
+            _this.allNews = response.data._embedded.news;
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 };
 
 /***/ }),
@@ -16971,7 +16983,14 @@ var render = function() {
         return _c("div", { staticClass: "col s12 m6 l4" }, [
           _c(
             "div",
-            { staticClass: "card large" },
+            {
+              staticClass: "card large",
+              on: {
+                click: function($event) {
+                  _vm.setOneNews(news)
+                }
+              }
+            },
             [
               _c("router-link", { attrs: { to: "/oneNews" } }, [
                 _c("div", { staticClass: "card-image" }, [
@@ -17121,29 +17140,30 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-    date: function date() {
+    name: 'viewOneNew',
+    props: ['oneNews'],
+    data: function data() {
         return {
-            news: {}
+            reporter: {},
+            category: {}
         };
     },
 
-    computed: {
-        newsId: function newsId() {
-            return this.$route.params.id;
-        }
-    },
-    watch: {
-        '$route.params.id': function $routeParamsId() {
-            this.$http.get('http://192.168.99.100:8080/news/' + this.newsId).then(function (response) {
-                news = response.data._embedded.categories.news;
-            }).catch(function (error) {
-                console.log(error);
-            });
+    methods: {
+        setCategory: function setCategory(category) {
+            this.$emit('setCategory', category);
         }
     },
     created: function created() {
-        this.$http.get('http://192.168.99.100:8080/news/' + this.newsId).then(function (response) {
-            news = response.data._embedded.categories.news;
+        var _this = this;
+
+        this.$http.get(this.oneNews._links.reporter.href).then(function (response) {
+            _this.reporter = response.data;
+        }).catch(function (error) {
+            console.log(error);
+        });
+        this.$http.get(this.oneNews._links.category.href).then(function (response) {
+            _this.category = response.data;
         }).catch(function (error) {
             console.log(error);
         });
@@ -17162,25 +17182,25 @@ var render = function() {
   return _c("div", { staticClass: "section" }, [
     _c("div", { staticClass: "container" }, [
       _c("h1", { staticClass: "header black-text" }, [
-        _vm._v(_vm._s(_vm.news.title))
+        _vm._v(_vm._s(_vm.oneNews.title))
       ]),
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
       _c("p", { staticClass: "black-text" }, [
-        _c("strong", [_vm._v(_vm._s(_vm.news.date))])
+        _c("strong", [_vm._v(_vm._s(_vm.oneNews.date))])
       ]),
       _vm._v(" "),
       _c("p", { staticClass: "right-align black-text" }, [
         _vm._v("By: "),
-        _c("strong", [_vm._v(_vm._s(_vm.news.reporter.name))])
+        _c("strong", [_vm._v(_vm._s(_vm.reporter.name))])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "divider" }),
       _vm._v(" "),
       _c("div", { staticClass: "row center" }, [
         _c("p", { staticClass: "light black-text forP" }, [
-          _vm._v("\n\t\t\t\t" + _vm._s(_vm.news.body) + "\n\t\t\t")
+          _vm._v("\n\t\t\t\t" + _vm._s(_vm.oneNews.body) + "\n\t\t\t")
         ])
       ]),
       _vm._v(" "),
@@ -17189,15 +17209,18 @@ var render = function() {
           "p",
           { staticClass: "black-text" },
           [
-            _vm._v("More news like this: \n\t\t\t\t"),
+            _vm._v("More News like this: \n\t\t\t\t"),
             _c(
               "router-link",
               {
-                attrs: {
-                  to: { name: "category", params: { id: _vm.news.category.id } }
+                attrs: { to: "/category" },
+                on: {
+                  click: function($event) {
+                    _vm.setCategory(_vm.category)
+                  }
                 }
               },
-              [_c("strong", [_vm._v(_vm._s(_vm.news.category.name))])]
+              [_c("strong", [_vm._v(_vm._s(_vm.category.name))])]
             )
           ],
           1
@@ -17368,18 +17391,24 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-    props: ['categoryNewsHref'],
+    name: 'viewCategoryNews',
+    props: ['category'],
     data: function data() {
         return {
             allCategoryNews: []
         };
     },
 
+    methods: {
+        setOneNews: function setOneNews(news) {
+            this.$emit('setOneNews', news);
+        }
+    },
     watch: {
-        categoryNewsHref: function categoryNewsHref() {
+        category: function category() {
             var _this = this;
 
-            this.$http.get(this.categoryNewsHref).then(function (response) {
+            this.$http.get(this.category._links.news.href).then(function (response) {
                 _this.allCategoryNews = response.data._embedded.news;
             }).catch(function (error) {
                 console.log(error);
@@ -17389,7 +17418,7 @@ exports.default = {
     created: function created() {
         var _this2 = this;
 
-        this.$http.get(this.categoryNewsHref).then(function (response) {
+        this.$http.get(this.category._links.news.href).then(function (response) {
             _this2.allCategoryNews = response.data._embedded.news;
         }).catch(function (error) {
             console.log(error);
@@ -17406,51 +17435,67 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c(
-      "div",
-      { staticClass: "row" },
-      _vm._l(_vm.allCategoryNews, function(news) {
-        return _c("div", { staticClass: "col s12 m6 l4" }, [
-          _c("div", { staticClass: "card large" }, [
-            _c("div", { staticClass: "card-image" }, [
-              _c("img", {
-                attrs: { src: "https://picsum.photos/200/150/?random" }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "card-title" }, [
-                _c("strong", [_vm._v(_vm._s(news.title))])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-content" }, [
-              _c("p", { staticClass: "truncate" }, [
-                _vm._v(
-                  "\n                             " +
-                    _vm._s(news.body) +
-                    "\n                         "
-                )
-              ])
-            ]),
-            _vm._v(" "),
+  return _c("div", { class: _vm.category.name }, [
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.allCategoryNews, function(news) {
+          return _c("div", { staticClass: "col s12 m6 l4" }, [
             _c(
               "div",
-              { staticClass: "card-action small" },
+              {
+                staticClass: "card large",
+                on: {
+                  click: function($event) {
+                    _vm.setOneNews(news)
+                  }
+                }
+              },
               [
                 _c("router-link", { attrs: { to: "/oneNews" } }, [
-                  _c("p", [_vm._v("Read more")])
+                  _c("div", { staticClass: "card-image" }, [
+                    _c("img", {
+                      attrs: { src: "https://picsum.photos/200/150/?random" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "card-title" }, [
+                      _c("strong", [_vm._v(_vm._s(news.title))])
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("p", { staticClass: "right-align" }, [
-                  _vm._v(_vm._s(news.date))
-                ])
+                _c("div", { staticClass: "card-content" }, [
+                  _c("p", { staticClass: "truncate" }, [
+                    _vm._v(
+                      "\n                             " +
+                        _vm._s(news.body) +
+                        "\n                         "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-action small" },
+                  [
+                    _c("router-link", { attrs: { to: "/oneNews" } }, [
+                      _c("p", [_vm._v("Read more")])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "right-align" }, [
+                      _vm._v(_vm._s(news.date))
+                    ])
+                  ],
+                  1
+                )
               ],
               1
             )
           ])
-        ])
-      })
-    )
+        })
+      )
+    ])
   ])
 }
 var staticRenderFns = []

@@ -4,13 +4,13 @@
     		<div class="nav-wrapper container">
             <router-link to="/news" class="brand-logo blue-text text-darken-4" id="logo">The newest news in the new world</router-link>
 			<ul class="right hide-on-med-and-down">
-                <li v-for="category in categories" @click="setCategoryNewsHref(category._links.news.href)">
+                <li v-for="category in categories" v-bind:id="category.name" @click="setCategory(category)">
                     <router-link to="/category" class="black-text">
                         {{category.name}}
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/new" class="black-text">Add the newest news</router-link>
+                    <router-link to="/addNews" class="black-text">Add the newest news</router-link>
                 </li>
 			</ul>
     		</div>
@@ -27,8 +27,8 @@
             }
         },
         methods:{
-            setCategoryNewsHref(href){
-                this.$emit('setCategoryNewsHref', href);
+            setCategory(category){
+                this.$emit('setCategory', category);
             }
         },
         created(){

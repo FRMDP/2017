@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row" >
             <div class="col s12 m6 l4" v-for="news in allNews">
-                <div class="card large">
+                <div class="card large" @click="setOneNews(news)">
                 	<router-link to="/oneNews">
 	                    <div class="card-image">
 	                        <img src="https://picsum.photos/200/150/?random">
@@ -29,11 +29,17 @@
 
 <script>
 	export default{
+        name: 'viewAllNews',
 		data(){
 			return{
 				allNews: []
 			}
 		},
+        methods: {
+            setOneNews(news){
+                this.$emit('setOneNews', news);
+            }
+        },
 		created(){
             this.$http.get('http://192.168.99.100:8080/news')
                 .then(response => {

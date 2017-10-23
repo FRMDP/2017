@@ -76,23 +76,23 @@
 	    	cleanForm(){
 	    		this.news.title = '';
 	    		this.news.body = '';
-	    		this.news.category = '',
-				this.news.reporter = ''
+	    		this.news.category = '';
+				this.news.reporter = '';
 	    	},
 	    	addNews() {
     			this.$http.post('http://192.168.99.100:8080/news',{
     				"title": this.news.title,
     				"body": this.news.body,
     				"date": new Date().toJSON().slice(0,10),
-    				"reporter": this.reporter,
-    				"category": this.category,
+    				"reporter": this.news.reporter,
+    				"category": this.news.category
     			})
     			.then(response => {
-    				this.cleanInputs();
+    				this.cleanForm();
     			})
     			.catch(error => {
     				console.log(error);
-    			});
+    			})
     		},
 	    },
 	    created(){

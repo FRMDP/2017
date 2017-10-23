@@ -16600,7 +16600,8 @@ exports.default = {
 								cleanForm: function cleanForm() {
 												this.news.title = '';
 												this.news.body = '';
-												this.news.category = '', this.news.reporter = '';
+												this.news.category = '';
+												this.news.reporter = '';
 								},
 								addNews: function addNews() {
 												var _this = this;
@@ -16609,10 +16610,10 @@ exports.default = {
 																"title": this.news.title,
 																"body": this.news.body,
 																"date": new Date().toJSON().slice(0, 10),
-																"reporter": this.reporter,
-																"category": this.category
+																"reporter": this.news.reporter,
+																"category": this.news.category
 												}).then(function (response) {
-																_this.cleanInputs();
+																_this.cleanForm();
 												}).catch(function (error) {
 																console.log(error);
 												});

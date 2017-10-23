@@ -25,3 +25,15 @@
 .drop-shadow {
     box-shadow: 0 2px 3px #888888;
 }
+
+a.panel-block, label.panel-block {
+    background-color: whitesmoke;
+}
+
+a.panel-block.is-active {
+    background-color: #D1C4E9;
+}
+
+a.panel-block:hover, label.panel-block:hover {
+    background-color: #BDBDBD;
+}

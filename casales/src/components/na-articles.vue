@@ -1,16 +1,17 @@
 <template>
     <div>
-        <div v-if="!paginatedArticles.length">
+        <div v-if="!articles.length">
             <p class="title is-1 custom-info animated zoomIn">Couldn't find anything !</p>
-            <a href="/#/categories"><p class="custom-info-sub animated fadeIn">Go to categories?</p></a>
+            <p class="custom-info-sub animated fadeIn">Pick another category</p>
         </div>
-        <div v-if="paginatedArticles.length">
-            <na-articles-item v-for="(article, index) in paginatedArticles" :data="article"
-                              :key="article.id" :article="article" :wrappedText="true"></na-articles-item>
-            <section>
+        <div v-if="articles.length">
+            <na-articles-item v-for="(article, index) in articles" :data="article" :key="article.uid" :article="article"
+                              :wrappedText="wrappedText" @displayArticle="displayArticle"
+                              @displayCategory="displayCategory"></na-articles-item>
+            <!--<section>
                 <p class="has-text-light">
                     <strong class="has-text-light">
-                        Showing {{ paginate().length }} of {{ filteredArticles().length }}
+                        Showing {{ }} of {{ }}
                     </strong> | {{ perPage }} per page.
                 </p>
                 <hr>
@@ -21,26 +22,25 @@
                         :size="size"
                         :simple="isSimple"
                         :per-page="perPage"
-                        @change="paginate">
+                        @change="true">
                 </b-pagination>
-            </section>
+            </section>-->
         </div>
     </div>
 </template>
 
 <script>
-    import articlesService from "./../services/articlesService";
+    // Components
     import naArticlesItem from "./na-articles-item.vue";
 
     export default {
         name: 'naArticles',
-        props: ['filter'],
+        props: ['articles', 'wrappedText'],
         components: {
             naArticlesItem: naArticlesItem
         },
         data() {
             return {
-                articles: [],
                 total: '',
                 current: 1,
                 perPage: 5,
@@ -49,29 +49,13 @@
                 isSimple: false
             }
         },
-        computed: {
-            paginatedArticles() {
-                return this.paginate();
-            }
-        },
         methods: {
-            filteredArticles() {
-                return this.articles.filter(a => a.category.name.indexOf(this.filter) >= 0);
+            displayArticle(url) {
+                this.$emit('displayArticle', url);
             },
-            filteredTotal() {
-                this.total = this.filteredArticles().length;
-            },
-            paginate() {
-                let array = this.filteredArticles();
-                let page_size = this.perPage;
-                let page_number = this.current;
-                --page_number; // because pages logically start with 1, but technically with 0
-                return array.slice(page_number * page_size, (page_number + 1) * page_size);
+            displayCategory(url, name) {
+                this.$emit('displayCategory', url, name);
             }
-        },
-        created() {
-            this.articles = articlesService.getArticles();
-            this.filteredTotal();
         }
     }
 </script>

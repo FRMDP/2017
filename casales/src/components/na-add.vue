@@ -13,9 +13,10 @@
                                 <b-field grouped>
                                     <b-field label="Title" expanded>
                                         <b-field>
-                                            <b-select placeholder="Select a category" v-model="article.category.id">
-                                                <option v-for="category in categories" :value="category.id"
-                                                        :key="category.id">
+                                            <b-select placeholder="Select a category" v-model="article.category">
+                                                <option v-for="category in categories"
+                                                        :value="category._links.self.href"
+                                                        :key="category._links.self.href">
                                                     {{ category.name.toUpperCase() }}
                                                 </option>
                                             </b-select>
@@ -40,8 +41,9 @@
                                     </b-datepicker>
                                 </b-field>
                                 <b-field label="Reporter">
-                                    <b-select placeholder="Select a name" v-model="article.reporter.id">
-                                        <option v-for="reporter in reporters" :value="reporter.id" :key="reporter.id">
+                                    <b-select placeholder="Select a name" v-model="article.reporter">
+                                        <option v-for="reporter in reporters" :value="reporter._links.self.href"
+                                                :key="reporter._links.self.href">
                                             {{ reporter.name }}
                                         </option>
                                     </b-select>
@@ -73,9 +75,12 @@
 </template>
 
 <script>
-    import categoriesService from "./../services/categoriesService";
-    import reportersService from "./../services/reportersService";
-    import articlesService from "./../services/articlesService";
+    // Services
+    import news from "./../services/newsService";
+    import categories from "./../services/categoriesService";
+    import reporters from "./../services/reportersService";
+
+    // Components
     import naFooter from "./na-footer.vue";
 
     export default {
@@ -93,57 +98,63 @@
                 categories: [],
                 reporters: [],
                 article: {
-                    id: '',
                     title: '',
                     body: '',
-                    category: {
-                        id: '',
-                        name: ''
-                    },
-                    reporter: {
-                        id: '',
-                        name: ''
-                    },
+                    category: '',
+                    reporter: '',
                     date: ''
-                }
+                },
+                loadedCategories: false,
+                loadedArticles: false,
+                loadingComponent: ''
             }
         },
         computed: {
             formOk() {
                 return this.article.title &&
                     this.article.body &&
-                    this.article.category.id &&
-                    this.article.reporter.id;
+                    this.article.category &&
+                    this.article.reporter;
             },
             formHasContent() {
                 return this.article.title ||
                     this.article.body ||
-                    this.article.category.id ||
-                    this.article.reporter.id;
+                    this.article.category ||
+                    this.article.reporter;
+            },
+            loadedResources() {
+                return this.loadedCategories && this.loadedArticles
             }
         },
         methods: {
             saveNews() {
-                articlesService.saveArticle(this.article, this.date);
+                this.article.date = this.date;
 
-                this.cleanFields();
+                news.saveArticle(this.article)
+                    .then(() => {
+                        this.cleanFields();
 
-                this.$dialog.alert({
-                    title: 'Article created',
-                    message: 'The article has been created.',
-                    type: 'is-success',
-                    hasIcon: true,
-                    onConfirm: () => {
-                        this.$toast.open('Article created');
-                        this.$router.push({path: `/news`});
-                    }
-                });
+                        this.$dialog.alert({
+                            title: 'Article created',
+                            message: 'The article has been created.',
+                            type: 'is-success',
+                            hasIcon: true,
+                            onConfirm: () => {
+                                this.$toast.open('Article created');
+                                this.$router.push({path: `/news`});
+                            }
+                        });
+                    })
+                    .catch((error) => {
+                        // TODO catch and display dialog
+                        console.log(error);
+                    });
             },
             cleanFields() {
                 this.article.title = '';
                 this.article.body = '';
-                this.article.category.id = '';
-                this.article.reporter.id = '';
+                this.article.category = '';
+                this.article.reporter = '';
             },
             confirmDelete() {
                 if (this.formHasContent) {
@@ -163,11 +174,40 @@
                     this.$toast.open('Nothing to save!');
                     this.$router.push({path: `/news`});
                 }
+            },
+            loadCategories() {
+                categories.getAllCategories()
+                    .then((response) => {
+                        this.categories = response.data._embedded.categories;
+                        this.loadedCategories = true;
+                    })
+                    .catch((error) => {
+                        // TODO catch and display dialog
+                        console.log(error);
+                    })
+            },
+            loadReporters() {
+                reporters.getAllReporters()
+                    .then((response) => {
+                        this.reporters = response.data._embedded.reporters;
+                        this.loadedArticles = true;
+                    })
+                    .catch((error) => {
+                        // TODO catch and display dialog
+                        console.log(error);
+                    })
             }
         },
         created() {
-            this.categories = categoriesService.getCategories();
-            this.reporters = reportersService.getReporters();
+            this.loadingComponent = this.$loading.open();
+
+            this.loadCategories();
+            this.loadReporters();
+        },
+        watch: {
+            loadedResources(){
+                setTimeout(() => this.loadingComponent.close(), 1000);
+            }
         }
     }
 </script>

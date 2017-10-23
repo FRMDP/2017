@@ -18,3 +18,8 @@
 .title-custom {
     color: whitesmoke;
 }
+
+.datepicker > .dropdown > .dropdown-menu {
+    top: unset;
+    bottom: 100%;
+}

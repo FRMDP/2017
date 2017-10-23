@@ -1,11 +1,10 @@
 import VueRouter from "vue-router";
-import home from "../components/na-landing.vue";
-import add from "../components/na-add.vue";
-import news from "../components/na-news.vue";
-import categories from "../components/na-categories.vue";
-import categoriesNews from "../components/na-categories-news.vue";
-import article from "../components/na-article.vue";
-import notFound from "../components/na-not-found.vue";
+
+// Components.
+import notFound from "./../components/na-not-found.vue";
+import home from "./../components/na-landing.vue";
+import add from "./../components/na-add.vue";
+import news from "./../components/na-news.vue";
 
 export default new VueRouter({
     routes: [
@@ -32,18 +31,6 @@ export default new VueRouter({
         {
             path: '/news',
             component: news
-        },
-        {
-            path: '/news/:id',
-            component: article
-        },
-        {
-            path: '/categories',
-            component: categories
-        },
-        {
-            path: '/categories/:id',
-            component: categoriesNews
         }
     ]
 });

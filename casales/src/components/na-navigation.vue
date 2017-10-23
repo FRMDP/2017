@@ -24,15 +24,6 @@
                     </b-icon>
                     &nbsp;News
                 </a>
-                <a id="nav-item-2" class="nav-item animated fadeIn" href="/#/categories">
-                    <b-icon
-                            pack="fa"
-                            icon="th-list"
-                            size="is-small"
-                            :type="'is-' + this.logo">
-                    </b-icon>
-                    &nbsp;Categories
-                </a>
                 <a id="nav-item-1" class="nav-item animated fadeIn" href="/#/add">
                     <b-icon
                             pack="fa"

@@ -1,8 +1,8 @@
 <template>
     <div class="box animated fadeIn">
-        <h1 class="title is-1">{{ article.title }}</h1>
+        <h2 class="title is-2">{{ article.title }}</h2>
         <hr class="custom-hr">
-        <a :href="'/#/categories/' + article.category.id">
+        <a @click.prevent="displayThisCategory">
             <span class="tag" :class="isColor(article.category.name)">{{ article.category.name.toUpperCase() }}</span>
         </a>
         <hr class="custom-hr">
@@ -12,7 +12,7 @@
                 <p class="body-text">
                     {{ article.body.slice(0, 300) + ' ...' }}
                 </p>
-                <a :href="'/#/news/' + article.id">View full article</a>
+                <a @click.prevent="displayThisArticle">View full article</a>
             </div>
             <div v-else>
                 <p class="body-text">
@@ -20,7 +20,7 @@
                 </p>
                 <b-collapse class="card is-fullwidth" :open.sync="isOpen">
                     <div slot="trigger" class="card-header">
-                        <p class="card-header-title">About the author</p>
+                        <p class="card-header-title">About the reporter</p>
                         <a class="card-header-icon">
                             <b-icon :icon="isOpen ? 'angle-down' : 'angle-up'"></b-icon>
                         </a>
@@ -76,6 +76,12 @@
                     default:
                         return 'is-primary';
                 }
+            },
+            displayThisArticle() {
+                this.$emit('displayArticle', this.article._links.self.href);
+            },
+            displayThisCategory() {
+                this.$emit('displayCategory', this.article.category._links.news.href, this.article.category.name);
             }
         },
     }

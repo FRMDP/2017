@@ -1,24 +1,15 @@
-import storageService from "./storageService";
+// Configurations
+import config from "./../config/application";
 
-const reporters = [];
-
-const KEY = 'reporters';
+// Resources
+import resources from "./../resources/resources";
 
 export default {
-    getReporter(id) {
-        this.reporters = this.getReporters();
-        return this.reporters.find(r => r.id == id);
+    getReporter(url){
+        return resources.get(url);
     },
-    getReporters() {
-        return storageService.getFromLocalStorage(KEY);
-    },
-    saveReporter(reporter) {
-        this.reporters = this.getReporters();
-
-        reporter.id = this.reporters.length + 1;
-
-        this.reporters.push(reporter);
-
-        storageService.saveToLocalStorage(KEY, this.reporters);
+    getAllReporters(pUrl){
+        const url = pUrl ? pUrl : config.REPORTERS_ENDPOINT;
+        return resources.get(url)
     }
 }

@@ -11,7 +11,11 @@ export default new VueRouter({
 		{ path: '/', component: zpNews},
 		{ path: '/addnew', component: zpAddnew },
 		{ path: '/news/:id', component: zpNew, name: 'newById'},
-		{ path: '/404', component: zp404 },
-		{ path: '/categories/:id', component: zpCategories, name: 'catById'}
+		{ path: '/categories/:id', component: zpCategories, name: 'catById', subRoutes:{
+			'/*': { component: zp404}
+		}},
+		{ path: '*', component: zp404 },
+		{ path: '/news/*', component: zp404},
+		//{ path: '/categories/*', component: zp404}
 	]
 });

@@ -23,7 +23,6 @@
 </template>
 
 <script>
-    import categoriesService from '../services/categoriesServices'
     import zpAlert from '../components/zp-alert.vue'
     export default {
         name: 'zpMenu',

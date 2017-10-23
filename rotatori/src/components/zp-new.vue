@@ -25,7 +25,7 @@
     </div>
 </template>
 <script>
-import storageService from '../services/storageService'
+
 export default {
     props: [],
     data() {

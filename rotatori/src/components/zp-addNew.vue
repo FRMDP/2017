@@ -83,7 +83,6 @@
             getDate(){
                 const months = new Array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
                 let dt = new Date();
-                //return dt.getDate() + ' de ' + months[dt.getMonth()] + ' de ' + dt.getFullYear();
                 return dt.getFullYear() + '-' + (dt.getMonth() +1) + '-' + dt.getDate();
             },
             showAlert(){

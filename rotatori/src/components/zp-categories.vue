@@ -37,9 +37,9 @@
                     .then((response) => {
                         this.Categories =  response.data._embedded.categories;
                         this.cat = this.Categories.find( c => c.name == this.nameCat);
-                        //console.log('compo cate', this.cat);
                         const url = this.cat._links.news.href;
                         this.getNews(url);
+
                     })
                     .catch((msg) => console.log('Error: ', msg));
             },
@@ -47,6 +47,7 @@
                 this.$http.get( url )
                     .then((response) => {
                         this.New = response.data._embedded.news;
+                        this.pBar = false;
                     })
                     .catch((msg) => console.log('Error: ', msg));
             }
@@ -66,12 +67,9 @@
             '$route.params.id': function() {
                 this.nameCat = this.name;
                 this.getNewsByCat();
-                
-                
             }
         },
         created() {
-            setTimeout(() => this.pBar = !this.pBar , 800);
             this.nameCat = this.name;
             this.getNewsByCat();
         }

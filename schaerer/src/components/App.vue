@@ -1,10 +1,12 @@
 <template>
     <div class="app">
         <sd-navbar @setCategory="setCategory" ></sd-navbar> 
-    	<router-view 
-            @setOneNews="setOneNews" @setCategory="setCategory"
-            :category="category" :oneNews="oneNews">    
-        </router-view>
+        <div class="content">
+        	<router-view 
+                @setOneNews="setOneNews" @setCategory="setCategory"
+                :category="category" :oneNews="oneNews">    
+            </router-view>
+        </div>
         <sd-footer></sd-footer>
     </div>
 </template>
@@ -36,5 +38,10 @@
 </script>
 
 <style>
-
+.content{
+     display: flex;
+     min-height: 63vh;
+     flex-direction: column;
+     flex: 1 0 auto;
+}
 </style>

@@ -2,6 +2,9 @@
    <div v-bind:class="category.name">
         <div class="container">
             <div class="row" >
+                <div class="col s12 m12 l12" v-if="!allCategoryNews.length" >
+                     <h3 class="center-align">There are no news in this category</h3>
+                </div>
                 <div class="col s12 m6 l4" v-for="news in allCategoryNews">
                     <div class="card large" @click="setOneNews(news)">
                     	<router-link to="/oneNews">

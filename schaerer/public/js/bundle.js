@@ -15830,7 +15830,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.content{\r\n     display: flex;\r\n     min-height: 63vh;\r\n     flex-direction: column;\r\n     flex: 1 0 auto;\n}\r\n", ""]);
 
 // exports
 
@@ -15889,6 +15889,8 @@ var _sdFooter2 = _interopRequireDefault(_sdFooter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -16356,10 +16358,17 @@ var render = function() {
     [
       _c("sd-navbar", { on: { setCategory: _vm.setCategory } }),
       _vm._v(" "),
-      _c("router-view", {
-        attrs: { category: _vm.category, oneNews: _vm.oneNews },
-        on: { setOneNews: _vm.setOneNews, setCategory: _vm.setCategory }
-      }),
+      _c(
+        "div",
+        { staticClass: "content" },
+        [
+          _c("router-view", {
+            attrs: { category: _vm.category, oneNews: _vm.oneNews },
+            on: { setOneNews: _vm.setOneNews, setCategory: _vm.setCategory }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("sd-footer")
     ],
@@ -16942,6 +16951,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
 
 exports.default = {
     name: 'viewAllNews',
@@ -16980,60 +16992,71 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      _vm._l(_vm.allNews, function(news) {
-        return _c("div", { staticClass: "col s12 m6 l4" }, [
-          _c(
-            "div",
-            {
-              staticClass: "card large",
-              on: {
-                click: function($event) {
-                  _vm.setOneNews(news)
+      [
+        !_vm.allNews.length
+          ? _c("div", { staticClass: "col s12 m12 l12" }, [
+              _c("h3", { staticClass: "center-align" }, [
+                _vm._v("There are no news in this category")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm._l(_vm.allNews, function(news) {
+          return _c("div", { staticClass: "col s12 m6 l4" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card large",
+                on: {
+                  click: function($event) {
+                    _vm.setOneNews(news)
+                  }
                 }
-              }
-            },
-            [
-              _c("router-link", { attrs: { to: "/oneNews" } }, [
-                _c("div", { staticClass: "card-image" }, [
-                  _c("img", {
-                    attrs: { src: "https://picsum.photos/200/150/?random" }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "card-title" }, [
-                    _c("strong", [_vm._v(_vm._s(news.title))])
+              },
+              [
+                _c("router-link", { attrs: { to: "/oneNews" } }, [
+                  _c("div", { staticClass: "card-image" }, [
+                    _c("img", {
+                      attrs: { src: "https://picsum.photos/200/150/?random" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "card-title" }, [
+                      _c("strong", [_vm._v(_vm._s(news.title))])
+                    ])
                   ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-content" }, [
-                _c("p", { staticClass: "truncate" }, [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(news.body) +
-                      "\n                        "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "card-action" },
-                [
-                  _c("router-link", { attrs: { to: "/oneNews" } }, [
-                    _c("p", [_vm._v("Read more")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "right-align" }, [
-                    _vm._v(_vm._s(news.date))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-content" }, [
+                  _c("p", { staticClass: "truncate" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(news.body) +
+                        "\n                        "
+                    )
                   ])
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ])
-      })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-action" },
+                  [
+                    _c("router-link", { attrs: { to: "/oneNews" } }, [
+                      _c("p", [_vm._v("Read more")])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "right-align" }, [
+                      _vm._v(_vm._s(news.date))
+                    ])
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        })
+      ],
+      2
     )
   ])
 }
@@ -17390,6 +17413,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
 
 exports.default = {
     name: 'viewCategoryNews',
@@ -17441,60 +17467,71 @@ var render = function() {
       _c(
         "div",
         { staticClass: "row" },
-        _vm._l(_vm.allCategoryNews, function(news) {
-          return _c("div", { staticClass: "col s12 m6 l4" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card large",
-                on: {
-                  click: function($event) {
-                    _vm.setOneNews(news)
+        [
+          !_vm.allCategoryNews.length
+            ? _c("div", { staticClass: "col s12 m12 l12" }, [
+                _c("h3", { staticClass: "center-align" }, [
+                  _vm._v("There are no news in this category")
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.allCategoryNews, function(news) {
+            return _c("div", { staticClass: "col s12 m6 l4" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card large",
+                  on: {
+                    click: function($event) {
+                      _vm.setOneNews(news)
+                    }
                   }
-                }
-              },
-              [
-                _c("router-link", { attrs: { to: "/oneNews" } }, [
-                  _c("div", { staticClass: "card-image" }, [
-                    _c("img", {
-                      attrs: { src: "https://picsum.photos/200/150/?random" }
-                    }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "card-title" }, [
-                      _c("strong", [_vm._v(_vm._s(news.title))])
+                },
+                [
+                  _c("router-link", { attrs: { to: "/oneNews" } }, [
+                    _c("div", { staticClass: "card-image" }, [
+                      _c("img", {
+                        attrs: { src: "https://picsum.photos/200/150/?random" }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "card-title" }, [
+                        _c("strong", [_vm._v(_vm._s(news.title))])
+                      ])
                     ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-content" }, [
-                  _c("p", { staticClass: "truncate" }, [
-                    _vm._v(
-                      "\n                             " +
-                        _vm._s(news.body) +
-                        "\n                         "
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "card-action small" },
-                  [
-                    _c("router-link", { attrs: { to: "/oneNews" } }, [
-                      _c("p", [_vm._v("Read more")])
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "right-align" }, [
-                      _vm._v(_vm._s(news.date))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-content" }, [
+                    _c("p", { staticClass: "truncate" }, [
+                      _vm._v(
+                        "\n                             " +
+                          _vm._s(news.body) +
+                          "\n                         "
+                      )
                     ])
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ])
-        })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "card-action small" },
+                    [
+                      _c("router-link", { attrs: { to: "/oneNews" } }, [
+                        _c("p", [_vm._v("Read more")])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "right-align" }, [
+                        _vm._v(_vm._s(news.date))
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
+          })
+        ],
+        2
       )
     ])
   ])

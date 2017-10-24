@@ -35,6 +35,7 @@
     },
     methods:{
       getReporterAndCategory(){
+
         this.$http.get(this.aux._links.reporter.href)
              .then((reporter) => {
              this.reporter = reporter.data.name;
@@ -51,11 +52,13 @@
                 })
       }
     },
-
-    mounted(){
+    created(){
       this.getReporterAndCategory();
 
-    }
+    },
+			updated() {
+            this.getReporterAndCategory();
+			},
   }
 
 </script>

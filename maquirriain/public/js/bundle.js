@@ -29690,7 +29690,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -29737,19 +29737,26 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
   },
   methods: {
     getReporterAndCategory() {
+
       this.$http.get(this.aux._links.reporter.href).then(reporter => {
         this.reporter = reporter.data.name;
+        // console.log(this.aux._links.reporter.href);
       }).catch(error => {
         console.log(error);
       }), this.$http.get(this.aux._links.category.href).then(category => {
         this.category = category.data.name;
+        //console.log(this.aux._links.category.href);
       }).catch(error => {
         console.log(error);
       });
     }
   },
 
-  mounted() {
+  created() {
+    //console.log("Se creo");
+    this.getReporterAndCategory();
+  },
+  updated() {
     this.getReporterAndCategory();
   }
 });

@@ -1,0 +1,30 @@
+.pad{
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
+.truncate{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.md-display-2{
+    font-weight: bold;
+    font-color: black;
+}
+.footer {
+    z-index: 20000;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: indigo;
+    color: white;
+    text-align: center;
+}
+footer-news{
+
+}
+.container{
+    padding-bottom: 500px;
+}

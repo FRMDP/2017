@@ -1,56 +1,12 @@
-### TP #6
+### TP #7
 
 #### Lineamientos
-*   Tienen que hacer el PR contra la rama TP6, no contra master.
+*   Tienen que hacer el PR contra la rama TP7, no contra master.
 *   Resuelven la historia de usuario asignada en Taiga. Crean las subtareas que consideren necesarias y trabajan sobre esas tareas. El tablero lo manejan completamente uds, este sprint no toco nada yo.
-*   Tienen tiempo hasta las 18Hs del dia martes 16/10.
+*   Tienen tiempo hasta las 18Hs del dia martes 24/10.
 *	Crean una carpeta con su apellido y dentro de esta el contenido de su trabajo.
-*   Vamos a crear un diario el cual consistirá al menos de las siguientes vistas:
-    *	Ver todas las noticias
-    *	Ver una noticia
-    *	Ver noticias por categorias
-    *	Agregar noticias
-*	Se utilizará localStorage para el almacenamiento. Las claves para guardar serán: news, categories y reporters.
-*   Las entidades a utilizar tendrán la siguiente estructura:
-```
-    	Reporter: {
-    		id: number,
-    		name: string
-    	}
-
-    	Category: {
-    		id: number,
-    		name: string
-    	}
-
-    	New: {
-    		id: number,
-    		title: string,
-    		body: string,
-    		category: Category,
-    		reporter: Reporter,
-    		date: number
-    	}
-```    
-*   Reporters y categories serán los mismos para todos. Deberán cargarlos a localStorage manualmente.
-```
-    	categories: [
-    		{id: 1, name: "sports"},
-    		{id: 2, name: "local"},
-    		{id: 3, name: "world"},
-    		{id: 4, name: "economy"},
-    		{id: 5, name: "politics"},
-    		{id: 6, name: "entertainment"}
-    	]
-
-    	reporters: [
-    		{id: 1, name: "John Doe"},
-    		{id: 2, name: "Jane Doe"},
-    		{id: 3, name: "Chuck Norris"},
-    		{id: 4, name: "Barack Obama"}
-    	]
-```
-*   No se accederá desde los componentes a localStorage. Deberán crearse servicios que serán importados en los componentes que los necesiten.
+*   Utilizando el diario del tp anterior, deben cambiar el servicio de almacenamiento (localStorage) por alguna biblioteca http (como axios o vue-resource)
+*	Se mantendrá toda la estructura de almacenamiento, así como las vistas y payloads. Como backend pueden crear su propia API, utilizar algún servicio web o clonar el proyecto [creado en este repositorio](https://github.com/UTN-MDP/newspaper-api).
 *	Deberá utilizarse todo lo visto en clase.
 
 #### Qué se evalúa?

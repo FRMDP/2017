@@ -1,17 +1,35 @@
-const categories=[
-{id: 1, name: "sports"},
-{id: 2, name: "local"},
-{id: 3, name: "world"},
-{id: 4, name: "economy"},
-{id: 5, name: "politics"},
-{id: 6, name: "entertainment"}
-]
 
+import axios from 'axios';
 
 export default{
+
+  data(){
+    return{
+      categories:[],
+      category: {
+        id: '',
+        name: ''
+      }
+    }
+  },
+
   getCategories(){
-    this.addCategories();
-    return JSON.parse(localStorage.getItem('categories')); 
+    this.getJson();
+    return this.categories;
+  },
+
+  getJson(){
+    axios.get('localhost:8080/categories')
+    .then((response) => {
+        for(let c in response.data._embedded.categories){
+        this.category.name=c.name;
+        this.category.id=c._links.self.href;
+        this.categories.push(this.category);
+      }
+    })
+    .catch(e=>{
+      console.log(e);
+    })
   },
 
   addCategories(){
@@ -19,7 +37,7 @@ export default{
   },
 
   getCategoryById(id){
-    const categories = localStorage.getItem('categories') || '[]';
+    const categories = getCategories();
     return JSON.parse(categories).find(category => category.id==id);
   }
 

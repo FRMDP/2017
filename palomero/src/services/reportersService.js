@@ -1,28 +1,47 @@
-const reporters=[
-{id: 1, name: "John Doe"},
-{id: 2, name: "Jane Doe"},
-{id: 3, name: "Chuck Norris"},
-{id: 4, name: "Barack Obama"}
-]
 
+import axios from 'axios';
 
 export default{
-	getReporters(){
-		this.addReporters();
-		return JSON.parse(localStorage.getItem('reporters'));
+
+	data(){
+		return{
+			reporters:[],
+			reporter: {
+				id: '',
+				name: ''
+			},
+
+		}
 	},
+
+	getReporters(){
+		this.getJson();
+		return this.reporters;
+	},
+
+	getJson(){
+    axios.get('localhost:8080/reporters')
+    .then((response) => {
+        for(let r in response.data._embedded.reporters){
+        this.reporter.name=r.name;
+        this.reporter.id=r._links.self.href;
+        this.reporters.push(this.reporter);
+      }
+    })
+    .catch(e=>{
+      console.log(e);
+    })
+  },
 
 	addReporters(){
 		localStorage.setItem('reporters',JSON.stringify(reporters));
 	},
 
 	getReportersById(id){
-		const reporters = localStorage.getItem('reporters') || '[]';
-		if(reporters.lenght<1){
-			this.addReporters();
-			this.getReportersById(id);
-		}
+		const reporters = getReporters();
+		if(!reporters.lenght<1){
 		return JSON.parse(reporters).find(reporter => reporter.id==id); 
+	}
 	}
 
 }

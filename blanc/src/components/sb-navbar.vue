@@ -31,7 +31,7 @@
               Categories
             </a>
             <div class="navbar-dropdown is-boxed">
-              <a v-for="category in categories" class="navbar-item " :href="'/#/categories/' + category.id">
+              <a v-for="category in categories" class="navbar-item " :href="'/#/categories/' + category.uid">
                 {{ $stringHelper.firstCharToUpper(category.name) }}
               </a>
             </div>
@@ -60,10 +60,19 @@
       methods: {
           toggleMenu() {
               this.isActive = !this.isActive;
+          },
+          getCategories() {
+            categoriesService.getCategories()
+              .then((response) => {
+                this.categories = response.data._embedded.categories;
+              })
+              .catch((error) => {
+                console.log(error)
+              });
           }
       },
       created() {
-          this.categories = categoriesService.getCategories();
+          this.getCategories();
       }
    }
 </script>

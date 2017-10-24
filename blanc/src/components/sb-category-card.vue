@@ -20,7 +20,7 @@
         props: ['category'],
         computed: {
             linkToCategoryArticles(){
-                return ('/#/categories/' + this.category.id);
+                return ('/#/categories/' + this.category.uid);
             }
         }
     }

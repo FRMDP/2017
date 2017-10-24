@@ -34,7 +34,7 @@ export default new VueRouter({
             component: news
         },
         {
-            path: '/news/:id',
+            path: '/news/:uid',
             component: newsById
         },
         {
@@ -42,7 +42,7 @@ export default new VueRouter({
             component: categories
         },
         {
-            path: '/categories/:id',
+            path: '/categories/:uid',
             component: newsByCategory
         }
     ]

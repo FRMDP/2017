@@ -5,8 +5,8 @@
 
             <div class="container">
                 <br>
-                <div class="column is-10-desktop is-offset-1-desktop">
-                    <p class="title has-text-primary is-size-2-desktop">{{this.$stringHelper.firstCharToUpper(category.name)}}</p>
+                <div v-if="mapOk" class="column is-10-desktop is-offset-1-desktop">
+                    <p class="title has-text-primary is-size-2-desktop">{{this.$stringHelper.firstCharToUpper(filteredCategory.name)}}</p>
                 </div>
             </div>
 
@@ -14,12 +14,12 @@
                 <section class="section">
                     <div class="columns">
                         <div class="column is-10-desktop is-offset-1-desktop">
-                            <div v-if="!categoryArticles.length">
+                            <div v-if="!mapOk">
                                 <p class="title is-size-2">No News have been found!</p>
                                 <a class="button is-primary" href="/#/categories">Back to Categories</a>
                             </div>
                             <div v-else>
-                            <sbNewsCards v-for="article in categoryArticles" :data="article"
+                            <sbNewsCards v-for="article in articles" :data="article"
                                          :key="article.id" :article="article" :shortVersion="true"></sbNewsCards>
                             </div>
                         </div>
@@ -38,6 +38,7 @@
     import sbNewsCards from "./sb-news-card.vue";
     import categoriesService from "./../services/categoriesService";
     import newsService from "./../services/newsService";
+    import reportersService from "./../services/reportersService";
 
     export default {
         name: 'sbNewsByCategory',
@@ -48,46 +49,73 @@
         },
         data() {
             return {
-                category: {},
-                categoryArticles: []
+                categories: [],
+                articles: [],
+                filteredCategory: {},
+                mapOk: false
             }
         },
         computed: {
             params() {
                 return this.$route.params;
             },
-            id() {
-                return this.$route.params.id;
+            uid() {
+                return this.$route.params.uid;
             }
         },
         methods: {
-            getCategory() {
-                return categoriesService.getCategory(this.id);
+            getCategories() {
+              categoriesService.getCategories()
+                .then((response) => {
+                  this.categories = response.data._embedded.categories;
+                  this.getCategoryWithNewsLink(this.uid);
+                  this.getArticles();
+                })
+                .catch((error) => {
+                  console.log(error)
+                });
             },
-            getCategoryName() {
-                return this.category.name;
+            getCategoryWithNewsLink(uid) {
+              this.filteredCategory = this.categories.find(c => c.uid == uid);
             },
-            getNews() {
-                return newsService.getNews();
+            getArticles() {
+              newsService.getArticle(this.filteredCategory._links.news.href)
+                .then((response) => {
+                  return this.articleMapper(response.data._embedded.news);
+                })
+                  .then((response) => {
+                    this.articles = response;
+                    this.mapOk = true;
+                  })
+                .catch((error) => {
+                  console.log(error)
+                });
             },
-            filterArticles() {
-                let articles = this.getNews();
-                let filter = this.getCategoryName();
-                return articles.filter(a => a.category.name.indexOf(filter) >= 0);
+            articleMapper(articles) {
+              const promises = articles.map((article) => {
+              return categoriesService.getCategory(article._links.category.href)
+                      .then((response) => {
+                          article.category = response.data;
+                          return reportersService.getReporter(article._links.reporter.href);
+                      })
+                      .then((response) => {
+                          article.reporter = response.data;
+                          return article;
+                      });
+              });
+              return Promise.all(promises);
             }
         },
         watch: {
-            '$route.params.id': function () {
-                this.category = this.getCategory();
-                this.categoryArticles = this.filterArticles();
-                if (this.category === undefined) {
+            '$route.params.uid': function () {
+                this.categories = this.getCategories();
+                if (this.filteredCategory === undefined) {
                     this.$router.push({path: `/notFound`});
                 }
             }
         },
         created() {
-            this.category = this.getCategory();
-            this.categoryArticles = this.filterArticles();
+            this.getCategories();
         }
     }
 </script>

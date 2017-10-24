@@ -52,8 +52,19 @@
                 categories: []
             }
         },
+        methods: {
+          getCategories() {
+            categoriesService.getCategories()
+              .then((response) => {
+                this.categories = response.data._embedded.categories;
+              })
+              .catch((error) => {
+                console.log(error)
+              });
+          }
+        },
         created() {
-            this.categories = categoriesService.getCategories();
+            this.getCategories();
         }
     }
 </script>

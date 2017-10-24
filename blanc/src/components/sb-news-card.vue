@@ -4,7 +4,7 @@
             <p class="card-header-title">
                 {{ article.title }}
             </p>
-            <a :href="'/#/categories/' + article.category.id" class="card-header-icon">
+            <a :href="'/#/categories/' + article.category.uid" class="card-header-icon">
               <span class="text">
                   <p class="has-text-weight-light">
                       {{ this.$stringHelper.firstCharToUpper(article.category.name) }}
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <footer class="card-footer">
-                <a class="card-footer-item" :href="'/#/news/' + article.id">Read More</a>
+                <a class="card-footer-item" :href="'/#/news/' + article.uid">Read More</a>
             </footer>
         </div>
         <div v-else>
@@ -37,7 +37,7 @@
             </div>
             <footer class="card-footer">
                 <a class="card-footer-item" href="/#/news">Back to All News</a>
-                <a class="card-footer-item"  :href="'/#/categories/' + article.category.id">More Articles like this</a>
+                <a class="card-footer-item"  :href="'/#/categories/' + article.category.uid">More Articles like this</a>
                 <a class="card-footer-item" href="/#/categories">Back to All Categories</a>
             </footer>
         </div>

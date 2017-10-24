@@ -14,7 +14,7 @@
                 <section class="section">
                     <div class="columns">
                         <div class="column is-10-desktop is-offset-1-desktop">
-                            <div v-if="!articles.length">
+                            <div v-if="!mapOk">
                                 <p class="title is-size-2">No News have been found!</p>
                                 <a class="button is-primary" href="/#/categories">Jump to Categories</a>
                             </div>
@@ -37,6 +37,8 @@
     import sbFooter from "./sb-footer.vue";
     import sbNewsCards from "./sb-news-card.vue";
     import newsService from "./../services/newsService";
+    import categoriesService from "./../services/categoriesService";
+    import reportersService from "./../services/reportersService";
 
     export default {
         name: 'sbNews',
@@ -47,11 +49,41 @@
         },
         data() {
             return {
-                articles: []
+                articles: [],
+                mapOk: false
             }
         },
+        methods: {
+          getArticles() {
+            newsService.getNews()
+              .then((response) => {
+                return this.articleMapper(response.data._embedded.news);
+              })
+                .then((response) => {
+                  this.articles = response;
+                  this.mapOk = true;
+                })
+              .catch((error) => {
+                console.log(error)
+              });
+          },
+          articleMapper(articles) {
+            const promises = articles.map((article) => {
+            return categoriesService.getCategory(article._links.category.href)
+                    .then((response) => {
+                        article.category = response.data;
+                        return reportersService.getReporter(article._links.reporter.href);
+                    })
+                    .then((response) => {
+                        article.reporter = response.data;
+                        return article;
+                    });
+            });
+            return Promise.all(promises);
+          }
+        },
         created() {
-            this.articles = newsService.getNews();
+          this.getArticles();
         }
     }
 </script>

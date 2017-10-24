@@ -40,14 +40,6 @@
 					            {{reporter.name}}
 					        </option>
 					    </select>
-						<div id="error" class="forAlert">
-							<i class="material-icons prefix forErrorIcon">cancel</i> 
-							<strong><span class="forErrorSpans">We're sorry, you are not registered</span></strong>
-						</div>
-						<div id="ok" class="forAlert">
-							<i class="material-icons prefix forOkIcon">check_circle</i>
-							<strong><span class="forOkSpans">News created successfully</span></strong> 
-						</div>
 					</div>
 				</div>
 				 <div class="input-field col l7">
@@ -88,24 +80,6 @@
 	        }
     	},
     	methods: {
-    		/*createNew() {
-    			this.particularNew.id = newsService.getCorrectId();
-    			this.particularNew.category.id = newsService.getCategoryId(this.particularNew.category.name);
-    			this.confirmReporter = newsService.getReporterId(this.particularNew.reporter.name);
-    			if(this.confirmReporter == -1){
-    				const span = document.getElementById("error");
-    				span.style.display = "block";
-    			} else {
-    				this.particularNew.reporter.id = this.confirmReporter.id;
-	    			this.particularNew.date = new Date().toJSON().slice(0,10);
-	    			newsService.addNew(this.particularNew);
-	    			this.cleanInputs();
-	    			let ok = document.getElementById("ok");
-	    			ok.style.display = "block";
-	    			setTimeout(function(){
-	    				ok.style.display = "none";
-	    			}, 5000);
-    			}*/
     		createNew() {
     			this.$http.post('https://utn-newspaper-api.herokuapp.com/news',{
     				"title": this.particularNew.title,
@@ -127,8 +101,6 @@
     			this.particularNew.body = '';
     			this.particularNew.category.name = '';
     			this.particularNew.reporter.name = '';
-    			const span = document.getElementById("error");
-    			span.style.display = "none";
     		}
     	},
     	mounted() {

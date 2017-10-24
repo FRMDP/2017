@@ -33,10 +33,6 @@ export default{
     })
   },
 
-	addReporters(){
-		localStorage.setItem('reporters',JSON.stringify(reporters));
-	},
-
 	getReportersById(id){
 		const reporters = getReporters();
 		if(!reporters.lenght<1){

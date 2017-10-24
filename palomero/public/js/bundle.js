@@ -1019,9 +1019,6 @@ exports.default = {
       console.log(e);
     });
   },
-  addCategories: function addCategories() {
-    localStorage.setItem('categories', JSON.stringify(categories));
-  },
   getCategoryById: function getCategoryById(id) {
     var categories = getCategories();
     return JSON.parse(categories).find(function (category) {
@@ -1068,9 +1065,15 @@ exports.default = {
 		};
 	},
 	agregarNoticia: function agregarNoticia(noticia) {
-		var noticias = this.traerNoticias();
-		noticias.push(noticia);
-		localStorage.setItem('news', JSON.stringify(noticias));
+		_axios2.default.post('localhost:8080/news', {
+			"title": noticia.title,
+			"body": noticia.body,
+			"reporter": notica.reporter,
+			"category": noticia.category,
+			"date": new Date().toJSON().slice(0, 10)
+		}).catch(function (e) {
+			console.log(e);
+		});
 	},
 	traerNoticias: function traerNoticias() {
 		this.getJson();
@@ -4190,9 +4193,6 @@ exports.default = {
 		}).catch(function (e) {
 			console.log(e);
 		});
-	},
-	addReporters: function addReporters() {
-		localStorage.setItem('reporters', JSON.stringify(reporters));
 	},
 	getReportersById: function getReportersById(id) {
 		var reporters = getReporters();

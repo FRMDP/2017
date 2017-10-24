@@ -32,10 +32,6 @@ export default{
     })
   },
 
-  addCategories(){
-  	localStorage.setItem('categories',JSON.stringify(categories));
-  },
-
   getCategoryById(id){
     const categories = getCategories();
     return JSON.parse(categories).find(category => category.id==id);

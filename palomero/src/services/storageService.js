@@ -24,9 +24,16 @@ export default {
 
 
 	agregarNoticia(noticia) {
-		const noticias = this.traerNoticias();
-		noticias.push(noticia);
-		localStorage.setItem('news', JSON.stringify(noticias));
+		axios.post('localhost:8080/news',{
+			"title":noticia.title,
+			"body":noticia.body,
+			"reporter":notica.reporter,
+			"category":noticia.category,
+			"date":new Date().toJSON().slice(0,10)
+		})
+		.catch(e =>{
+			console.log(e);
+		})
 	},
 	traerNoticias() {
 		this.getJson();

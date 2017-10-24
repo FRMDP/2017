@@ -1,6 +1,6 @@
-import localStorageService from "./localStorageService";
+import axios from 'axios';
 
-const categories = [];
+let categories = [];
 
 const KEY = 'categories';
 
@@ -19,6 +19,16 @@ export default {
         return this.categories.find(ctg => ctg.id == id);
     },
     getCategories() {
-        return localStorageService.getFromLocalStorage(KEY);
+        axios.get('https://utn-newspaper-api.herokuapp.com/categories')
+            .then(response => {
+                this.mapCategories(response.data);
+            })
+            .catch((error) => {
+                console.log("No Categories have been found!");
+            });
+        return categories;
+    },
+    mapCategories(response) {
+        this.categories = response.data;
     }
 }

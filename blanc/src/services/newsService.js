@@ -1,9 +1,9 @@
-import localStorageService from "./localStorageService";
+import axios from 'axios';
 import categoriesService from "./categoriesService";
 import reportersService from "./reportersService";
 import moment from "moment";
 
-const news = [];
+let news = [];
 
 const KEY = 'news';
 
@@ -31,6 +31,14 @@ export default {
         return this.news.find(n => n.id == id);
     },
     getNews() {
-        return localStorageService.getFromLocalStorage(KEY);
+        axios.get('https://utn-newspaper-api.herokuapp.com/news')
+            .then(response => {
+                this.news = response.data();
+                debugger;
+                return news;
+            })
+            .catch(error => {
+                console.log("No News have been found!");
+            });
     }
 }

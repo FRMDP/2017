@@ -1,6 +1,6 @@
-import localStorageService from "./localStorageService";
+import axios from 'axios';
 
-const reporters = [];
+let reporters = [];
 
 const KEY = 'reporters';
 
@@ -19,6 +19,13 @@ export default {
         return this.reporters.find(rprt => rprt.id == id);
     },
     getReporters() {
-        return localStorageService.getFromLocalStorage(KEY);
+        axios.get('https://utn-newspaper-api.herokuapp.com/reporters')
+            .then(response => {
+                this.reporters = response.data();
+                return reporters;
+            })
+            .catch(error => {
+                console.log("No Reporters have been found!");
+            });
     }
 }

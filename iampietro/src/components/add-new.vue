@@ -82,9 +82,6 @@
 		    	rep: []
 			}
 		},
-		watch: {
-
-		},
 		computed: {
 	        formOk() {
 	            return this.particularNew.title && this.particularNew.body && this.particularNew.category.name && this.particularNew.reporter.name;
@@ -150,8 +147,8 @@
     			.catch(error => {
     				console.log(error);
     			})    			
-    		const select = document.getElementById("category");
-    		select.style.display = "block";
+    		const select = document.getElementById("category"); // Por alguna razon, debo hacer esto para
+    		select.style.display = "block";						// que se muestre el Select.
 
     		const reporter = document.getElementById("reporters");
     		reporter.style.display = "block";

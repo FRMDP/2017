@@ -28,14 +28,6 @@
 				category: {}
 		    }
 		},
-		methods: {
-			
-		},
-		watch: {
-			'$route.params.id': function() {
-				this.getNew();
-			}
-		},
 		created() {
 			this.$http.get(this.particularNew._links.reporter.href)
                 .then(response => {
@@ -51,13 +43,8 @@
                 .catch(error => {
                     console.log(error); 
                 });
-		},
-		computed: {
-			id() {
-				return this.$route.params.id;
-			}
-
 		}
+
 	}
 </script>
 

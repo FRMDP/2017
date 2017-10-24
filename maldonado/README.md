@@ -1,4 +1,8 @@
-Pasos para instalacion y construccion del sitio a utilizar:
+Clonar este repositorio: https://github.com/UTN-MDP/newspaper-api
+
+Y seguir los pasos del README.md.
+
+Luego:
 
 1) Abrir consola y pararse en esta carpeta(en la que se encuentra este README)
 

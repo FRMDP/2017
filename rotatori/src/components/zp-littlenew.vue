@@ -37,13 +37,16 @@
             }
         },
         methods: {
+            getIdNew(link){
+                const arrSplit = link.split("/");
+                this.id = arrSplit[arrSplit.length - 1];
+            },
             getCatNew(){
                 this.$http.get (this.ne._links.category.href)
                     .then((response) => {
                         this.cat = response.data;
-                        //console.log('tarjeta', this.cat);
                         const link = this.ne._links.self.href;
-                        this.id = link[link.length -1];
+                        this.getIdNew(link);
                     })
                     .catch((msg) => console.log('Error: ', msg));
             },

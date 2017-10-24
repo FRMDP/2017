@@ -16101,14 +16101,17 @@ exports.default = {
     },
 
     methods: {
+        getIdNew: function getIdNew(link) {
+            var arrSplit = link.split("/");
+            this.id = arrSplit[arrSplit.length - 1];
+        },
         getCatNew: function getCatNew() {
             var _this = this;
 
             this.$http.get(this.ne._links.category.href).then(function (response) {
                 _this.cat = response.data;
-                //console.log('tarjeta', this.cat);
                 var link = _this.ne._links.self.href;
-                _this.id = link[link.length - 1];
+                _this.getIdNew(link);
             }).catch(function (msg) {
                 return console.log('Error: ', msg);
             });

@@ -2,11 +2,11 @@
 	<div class="section">
 			<div class="row">
 				<div class="col s12 m12 l12" v-if="!news.length">
-	                <h4 class="center-align">No hay noticias en esta categoria aún</h4>
+	                <h4 class="center-align">There are no news in this category... yet</h4>
 	            </div>
 				<div v-for="particularNew in news">
 					<div class="col s12 m4 l4">
-						<div class="card forCards">
+						<div class="card forCards" >
 							<div class="card-content">
 								<strong><h4 class="card-title black-text">
 									{{ particularNew.title }}
@@ -14,8 +14,8 @@
 								<p class="truncate card-text black-text">
 									{{ particularNew.body }}
 								</p>
-								<router-link :to="{name: 'particular', params: {id: particularNew.uid}}">
-									<p>Leer más</p>
+								<router-link to="/particularNew">
+									<p @click="setParticularNew(particularNew)">Read More</p>
 								</router-link>
 							</div>
 						</div>
@@ -29,6 +29,7 @@
 	import newsService from '../services/newsService';
 
 	export default {
+		name:'viewPerCategory',
 		data() {
 			return {
 		    	news: [],
@@ -44,17 +45,20 @@
 				this.$http.get(aux)
 					.then(response => {
 						this.news = response.data._embedded.news;
-						console.log(response);
 					})
 					.catch(error => {
 						console.log(error);	
 					})
-
-				
+			},
+			setParticularNew(news){
+				this.$emit('setParticularNew', news);
 			}
 		},
 		watch: {
 			'$route.params.id': function() {
+				this.getNews();
+			},
+			categories: function() {
 				this.getNews();
 			}
 		},

@@ -8,8 +8,8 @@ import newsPerCategory from '../components/view-perCategory.vue'
 export default new VueRouter({
   routes: [
 	  { path: '/createNew', component: addNew },
-	  { path : '/particularNew/:id', component: viewOneNew, name: 'particular' }, // para pasar parametros, declarar 
-	  { path :  '/news', component: news },										  // el name  SI O SI
+	  { path : '/particularNew', component: viewOneNew}, // para pasar parametros, declarar name
+	  { path :  '/news', component: news },										  
 	  { path : '/category/:id', component: newsPerCategory, name: 'genre' }
 	]
 });

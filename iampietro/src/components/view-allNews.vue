@@ -11,14 +11,11 @@
 								<strong><h4 class="card-title black-text">
 									{{ particularNew.title }}
 								</h4></strong>
-
-
-
 								<p class="truncate card-text black-text">
 									{{ particularNew.body }}
 								</p>
-								<router-link :to="{name: 'particular', params: {id: particularNew.uid}}">
-									<p class="right green-text">Leer más</p>
+								<router-link to="/particularNew">
+									<p class="right green-text" @click="setParticularNew(particularNew)">Read More</p>
 								</router-link>
 							</div>
 						</div>
@@ -48,18 +45,10 @@
 					.catch(error => {
 						console.log(error);	
 					})
+			},
+			setParticularNew(news){
+				this.$emit('setParticularNew', news);
 			}
-		},
-		watch: {
-			'$route.params.id': function() {
- 				this.news = this.getNews(this.id);
- 			}
-		},
-		computed: {
-			id() {
- 				return this.$route.params.id;
- 			}
-
 		},
 		created() {
 			this.getNews();

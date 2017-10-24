@@ -1,7 +1,9 @@
 <template>
     <div class="app">
     	<top-menu></top-menu>
-    	<router-view></router-view>
+    	<router-view
+    		@setParticularNew="setParticularNew" :particularNew="particularNew">
+    	</router-view>
     </div>
 </template>
 
@@ -11,6 +13,16 @@
 		name: 'app',
 		components: {
 			topMenu
+		},
+		data() {
+			return {
+				particularNew: {}
+			}
+		},
+		methods: {
+			setParticularNew(news){
+				this.particularNew = news;
+			}
 		}
 	}
 </script>

@@ -38,39 +38,38 @@
 </template>
 
 <script>
-    import reporterService from '../services/reporterService';
-    import newsService from '../services/newsService';
-
     export default {
         name: 'fmReporter',
         data() {
             return {
-                reporter: {
-                    id: 0,
-                    name: ''
-                }
+                reporter: {}
             }
-        },
-        methods: {
-            getReporter(id) {
-                return reporterService.getReporter(id);
-            }
-        },
-        watch: {
-            '$route.params.id': function() {
-                this.reporter = this.getReporter(this.id);
-            }
-        },
-        created() {
-            this.reporter = this.getReporter(this.id)
         },
         computed: {
             id() {
                 return this.$route.params.id;
             }
+        },
+        methods: {
+            getReporter() {
+                this.$http.get('http://192.168.99.100:8080/reporters')
+                    .then((response) => {
+                        console.log(response);
+                        this.reporter = response.data._embedded.reporters.find(reporter => this.id == reporter.uid);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            }
+        },
+        watch: {
+            '$route.params.id': function() {
+                this.getReporter();
+            }
+        },
+        created() {
+            this.getReporter();
         }
-
-        
     }
 </script>
 

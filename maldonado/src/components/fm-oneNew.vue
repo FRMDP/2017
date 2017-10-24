@@ -3,9 +3,11 @@
 		<div class="row">
 			<div class="col s12 m8 l6">
 				<h6>
-					<router-link v-bind:to="'/category/' + oneNew.category.id" >
-						<i class="fa fa-caret-left"></i> 
-						{{ oneNew.category.name }}
+					<router-link :to="'/category/' + category.uid" >
+						<p class="categoryName" @click="backToCategory(category)">
+							<i class="fa fa-caret-left"></i> 
+							{{ category.name }}
+						</p>
 					</router-link>
 				</h6>
 			</div>
@@ -24,8 +26,8 @@
 			<div class="col s4 m3 l3 center-align">
 				<img class="reporterImage" src="https://picsum.photos/75/75/?random">
 				<br>
-				<router-link v-bind:to="'/reporter/' + oneNew.reporter.id" class="reporterName">
-					{{ oneNew.reporter.name }}
+				<router-link :to="'/reporters/' + reporter.uid" class="reporterName">
+					{{ reporter.name }}
 				</router-link>
 			</div>
 			<div class="col s4 m3 l3">
@@ -58,44 +60,41 @@
 </template>
 
 <script>
-	import newsService from '../services/newsService';
-
 	export default {
 		name: 'oneNew',
+		props: ['oneNew'],
 		data() {
 			return {
-				oneNew: {
-					title: '',
-					body: '',
-					category: {
-						id: 0,
-						name: ''
-					},
-					reporter: {
-						id: 0,
-						name: ''
-					},
-					date: ''
-				}
+				category: {},
+				reporter: {}
 			}
 		},
 		methods: {
-			getNew(id) {
-				return newsService.getNew(id);
-			}
-		},
-		watch: {
-			'$route.params.id': function() {
-				this.oneNew = this.getNew(this.id);
+			backToCategory(category) {
+				this.$emit('backToCategory', category);
+			},
+			getCategory() {
+				this.$http.get(this.oneNew._links.category.href)
+					.then((response) => {
+						this.category = response.data;	
+					})
+					.catch((error) => {
+						console.log(error);
+					})
+			},
+			getReporter() {
+				this.$http.get(this.oneNew._links.reporter.href)
+					.then((response) => {
+						this.reporter = response.data;
+					})
+					.catch((error) => {
+						console.log(error);
+					})
 			}
 		},
 		created() {
-			this.oneNew = this.getNew(this.id)
-		},
-		computed: {
-			id() {
-				return this.$route.params.id;
-			}
+			this.getCategory();
+			this.getReporter();
 		}
 	}
 </script>
@@ -112,5 +111,8 @@
 	}
 	.reporterName {
 		padding-left: 5px;
+	}
+	.categoryName {
+		text-transform: capitalize;
 	}
 </style>

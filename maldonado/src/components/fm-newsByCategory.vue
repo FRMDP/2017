@@ -16,8 +16,8 @@
                         </p>
                     </div>
                     <div class="card-action">
-                        <router-link v-bind:to="'/oneNew/' + oneNew.id">
-                            <p>Mas informacion</p>
+                        <router-link to="/oneNew"> 
+                            <p @click="setNews(oneNew)">Mas informacion</p>
                         </router-link>
                         <p class="right-align">{{ oneNew.date }}</p>
                     </div>
@@ -44,8 +44,8 @@
         },
         methods: {
             getNews() {
-                this.newsByCat = this.categoriesFromAPI.filter(cat => cat.uid == this.id);
-                const categoriesHref = this.newsByCat[0]._links.news.href;
+                this.newsByCat = this.categoriesFromAPI.filter(category => category.uid == this.id);
+                let categoriesHref = this.newsByCat[0]._links.news.href;
                 this.$http.get(categoriesHref)
                      .then((response) => {
                         this.news = response.data._embedded.news;
@@ -53,6 +53,9 @@
                      .catch((error) => {
                         console.log(error);
                      }) 
+            },
+            setNews(oneNew) {
+                this.$emit('setNews', oneNew)
             }
         },
         watch: {
@@ -64,6 +67,7 @@
             this.$http.get('http://192.168.99.100:8080/categories')
                 .then((response) => {
                     this.categoriesFromAPI = response.data._embedded.categories;
+                    this.getNews();
                 })
                 .catch((error) => {
                     console.log(error);

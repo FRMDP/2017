@@ -7,8 +7,8 @@
 					News
 				</router-link>
 			</li>
-			<li class="menu__item" v-for="category in categories">
-				<router-link :to="{name: 'category', params: { id: category.uid }}" 
+			<li id="category" class="menu__item" v-for="category in categories">
+				<router-link :to="{name: 'category' , params: {id: category.uid }}"
 						class="categoryName menu__link menu__link_locals">
 					{{ category.name }}
 				</router-link>

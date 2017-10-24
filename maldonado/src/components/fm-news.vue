@@ -16,8 +16,8 @@
                         </p>
                     </div>
                     <div class="card-action">
-                        <router-link v-bind:to="'/oneNew/' + oneNew.uid">
-                            <p>Mas informacion</p>
+                        <router-link to="/oneNew">
+                            <p @click="setNews(oneNew)">Mas informacion</p>
                         </router-link>
                         <p class="right-align">{{ oneNew.date }}</p>
                     </div>
@@ -28,8 +28,6 @@
 </template>
 
 <script>
-    import newsService from '../services/newsService.js';
-
     export default {
         name: 'fmNew',
         data() {
@@ -46,16 +44,14 @@
                      .catch((error) => {
                         console.log(error);
                      })
-            }
-        },
-        computed: {
-            id() {
-                return this.$route.params.id;
+            },
+            setNews(oneNew) {
+                this.$emit('setNews', oneNew)
             }
         },
         watch: {
             '$route.params.id': function() {
-                this.news = this.getNews(this.id)
+                this.getNews()
             }
         },
         created() {

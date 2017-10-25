@@ -1,26 +1,17 @@
-# TP #8, revisar la rama tp8.
+### TP Final
 
-## Listado de alumnos
+Para aprobar la materia tiene que desarrollar una SPA con Vue.js utilizando la mayor cantidad de herramientas y tecnologías vistas en clase: webpack, babel, npm, Vue.js, vue-router, axios, socket.io, vuex, componentes de terceros, frameworks CSS, ES6. El BE **no es parte** de este trabajo práctico, deben consumir una API pública que ustedes elijan. Si no están seguros donde buscar, [Todd Motto](https://github.com/toddmotto/public-apis) tiene una buena lista de APIs para empezar. Se evaluarán todos los puntos que fueron incluídos en las devoluciones de todos los TP anteriores.
 
-* [zeratulmdq](https://github.com/zeratulmdq) - Martin Benvenuti
-* [ignaciocasales](https://github.com/ignaciocasales) - Ignacio Casales
-* [SantiBlanc87](https://github.com/SantiBlanc87) - Santiago Blanc
-* [Facundo97Maldonado](https://github.com/Facundo97Maldonado) - Facundo Maldonado
-* [fedealdosivi](https://github.com/fedealdosivi) - Federico Palomero García
-* [maurogsp](https://github.com/maurogsp) - Mauro Gaspar
-* [DanielScha](https://github.com/DanielScha) - Daniel Adrian Schaerer
-* [matirey](https://github.com/matirey) - Reynoso Matias
-* [co0per](https://github.com/co0per) - Lisandro Cooper
-* [Iampietro](https://github.com/Iampietro/2017) - Matias Iampietro
-* [rodrimaqui](https://github.com/rodrimaqui) - Rodrigo Maquirriain
-* [CarlosAndresTambascia](https://github.com/CarlosAndresTambascia) - Carlos Andres Tambascia
-* [Favega89](https://github.com/Favega89) - Facundo Vega Puente
-* [grotatori](https://github.com/grotatori) - Gisela Rotatori
-* [matiramos](https://github.com/matiramos) - Matias Ramos
-* [JuanAbraciano](https://github.com/JuanAbraciano) - Juan Manuel Abraciano
-* [MartinLiut](https://github.com/MartinLiut) - Martin Liut
-* [julian00](https://github.com/julian00) - Alejandro Arizaga
-* [RodolfoSavino](https://github.com/RodolfoSavino) - Rodolfo Savino
-* [kingrag92](https://github.com/kingrag92) - Luciano Perello
-* [yasiotero](https://github.com/yasiotero) - Yasi Otero
-* [ZassoMartin](https://github.com/ZassoMartin) - Zasso Sergio Martin
+#### Lineamientos generales
+
+*   Tienen que hacer el PR contra la rama global, no contra master.
+*   Tienen tiempo hasta las 18Hs del dia martes 27/11.
+*	El TP se realiza de a una o dos personas como máximo.
+*	Crean una carpeta con sus apellidos separados por un guión y dentro de esta el contenido de su trabajo.
+*	Deben tener al menos 10 vistas.
+*	Deben manejar errores correctamente.
+*	Deben utilizar transiciones.
+*	Debe ser responsive.
+*	Deben incluirse instrucciones precisas para construir/correr la aplicación.
+*	Deben agregar funcionalidad a las herramientas vistas en clase. Por ejemplo, algún loader de Webpack que no haya sido cubierto, plugins de minificación, Vue en modo producción, SSR.
+*	Entre el martes 27/11 y el miércoles 28/11 deberán defender sus trabajos. Todas las decisiones tomadas deberan ser justificadas.

@@ -5,19 +5,21 @@ let categories = [];
 export default {
     updateNews(){
         axios.get('http://localhost:8090/news')
-            .then(response => newsFromApi.push(response.data._embedded.news))
+            .then(response => newsFromApi.push(...response.data._embedded.news))
             .catch(error => console.log('there was the following error loading news: ' + error ));
     },
     getNews() {
         axios.get('http://localhost:8090/news')
-            .then(response => newsFromApi.push(response.data._embedded.news))
+            .then(response => newsFromApi.push(...response.data._embedded.news))
             .catch(error => console.log('there was the following error loading news: ' + error ));
 
         return newsFromApi;
     },
 
     getNewById(newId){
-        return newsFromApi.find(news => news[0].uid == newId);
+        return newsFromApi.find(article => {
+            return article.uid == newId
+        });
     },
 
     getNewByCategory(categoryId){
@@ -29,12 +31,15 @@ export default {
         //return JSON.parse(localStorage.getItem('news')).filter(news => news.category.id == categoryId);
     },
     addNew(newToadd) {
+        //const reporter = reportersService.getReporters(newToadd.reporter.uid);
+        //const category = categoriesService.getCategory(newToadd.category.uid)
         axios.post('http://localhost:8090/news',{
-            "title": newToadd.title,
-            "body": newToadd.body,
-            "date": new Date().toJSON().slice(0,10),
-            "reporter": reportersService.getReporters(newToadd.reporter.uid),
-            "category": categoriesService.getCategory(newToadd.category.uid)
+                title: newToadd.title,
+                body: newToadd.body,
+                date: Date.now(),
+                reporter: newToadd.reporter,
+                category: newToadd.category
+
         })
             .catch(error => console.log('there was the following error adding news: ' + error ));
 

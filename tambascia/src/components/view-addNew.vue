@@ -10,18 +10,18 @@
                     <input v-model="newToAdd.body" type="text" class="form-control" placeholder="Descripcion">
                 </div>
                 <div class="form-group">
-                    <select class="form-control" v-model="newToAdd.reporter.id">
-                        <option v-for="reporter in reporters[0]" :value="reporter.uid"
+                    <select class="form-control" v-model="newToAdd.reporter">
+                        <option v-for="reporter in reporters[0]" :value="reporter._links.self.href"
                                 :key="reporter.uid"> {{ reporter.name }}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" v-model="newToAdd.category.id">
-                        <option v-for="category in categories[0]" :value="category.uid"
+                    <select class="form-control" v-model="newToAdd.category">
+                        <option v-for="category in categories[0]" :value="category._links.self.href"
                                 :key="category.uid"> {{ category.name }}</option>
                     </select>
                 </div>
-                <button :disabled="!formOk" type="submit" @click.prevent="saveNew"
+                <button :disabled="!formOk" type="submit" @click.prevent="saveNew()"
                         class="btn btn-success marginOfCards">Ingresar
                 </button>
             </form>
@@ -42,14 +42,8 @@
                     id: '',
                     title: '',
                     body: '',
-                    category: {
-                        id: '',
-                        name: ''
-                    },
-                    reporter: {
-                        id: '',
-                        name: ''
-                    },
+                    category: '',
+                    reporter: '',
                 },
                 reporters: [],
                 categories: []

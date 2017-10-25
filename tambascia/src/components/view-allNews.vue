@@ -1,6 +1,6 @@
 <template>
     <div class="row" >
-        <div class="col-md-4" v-for="actualNew in news[0]">
+        <div class="col-md-4" v-for="actualNew in news">
             <div class="card marginOfCars text-center">
                 <div class="card-body" >
                     <h4 class="card-title" >{{ actualNew.title.toUpperCase() }}</h4>

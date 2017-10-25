@@ -3,6 +3,7 @@ let categories = [];
 
 export default {
     getCategory(id) {
+        debugger
         return categories.find(c => c[0].uid == id);
     },
     getAllCategories() {

@@ -1,8 +1,8 @@
 <template>
-    <div class="container" v-model="news">
+    <div class="container" v-if="article">
         <div class="row">
             <div class="mx-auto">
-                <h1>{{ news[0].title.toUpperCase() }}</h1>
+                <h1>{{ article.title.toUpperCase() }}</h1>
             </div>
         </div>
         <div class="row" >
@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="mx-auto">
-                <p>{{ news[0].body}}</p>
+                <p>{{ article.body}}</p>
 
             </div>
         </div>
@@ -28,12 +28,11 @@
 
         data() {
             return {
-                news: {},
+                article: null
             }
         },
         created(){
-            newsService.updateNews();
-            this.news = newsService.getNewById(this.$route.params.id);
+           this.article = newsService.getNewById(this.$route.params.id);
         }
     }
 

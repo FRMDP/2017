@@ -54,7 +54,6 @@
             getReporter() {
                 this.$http.get('http://192.168.99.100:8080/reporters')
                     .then((response) => {
-                        console.log(response);
                         this.reporter = response.data._embedded.reporters.find(reporter => this.id == reporter.uid);
                     })
                     .catch((error) => {

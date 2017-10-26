@@ -16270,7 +16270,6 @@ exports.default = {
 			}).then(function (response) {
 				_this.message = true;
 				_this.cleanForm();
-				console.log(response);
 			}).catch(function (error) {
 				console.log(error);
 			});
@@ -17360,7 +17359,6 @@ exports.default = {
             var _this = this;
 
             this.$http.get('http://192.168.99.100:8080/reporters').then(function (response) {
-                console.log(response);
                 _this.reporter = response.data._embedded.reporters.find(function (reporter) {
                     return _this.id == reporter.uid;
                 });

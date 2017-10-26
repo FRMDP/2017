@@ -111,7 +111,6 @@
 					.then((response) => {
 						this.message = true;
 						this.cleanForm();
-						console.log(response);
 					})
 					.catch((error) => {
 						console.log(error);

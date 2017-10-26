@@ -6,7 +6,7 @@
 
 ```bash
 # entren en la carpeta
-cd utn-chat
+cd tambascia
 
 # instalen las dependencias
 npm install

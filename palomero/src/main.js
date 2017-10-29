@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import App from './components/App.vue'
 import router from './utils/router'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 new Vue({
 	router,

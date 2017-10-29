@@ -24,53 +24,39 @@ export default {
 
 
 	agregarNoticia(noticia) {
-		axios.post('localhost:8080/news',{
+		const promise=axios.post('http://localhost:8080/news',{
 			"title":noticia.title,
 			"body":noticia.body,
-			"reporter":notica.reporter,
+			"reporter":noticia.reporter,
 			"category":noticia.category,
 			"date":new Date().toJSON().slice(0,10)
-		})
-		.catch(e =>{
-			console.log(e);
-		})
+		});
+		return promise;
 	},
 	traerNoticias() {
-		this.getJson();
-		return this.noticias;
+		const promise=axios.get('http://localhost:8080/news');
+		return promise;
 	},
 
-	getJson(){
-    axios.get('localhost:8080/news')
-    .then((response) => {
-        for(let n in response.data._embedded.news){
-        this.news.title=n.title;
-        this.news.body=n.body;
-        this.news.date=n.date;
-        this.news.id=n._links.self.href;
-        this.news.category.id=n._links.category.href;
-        this.news.reporter.id=n._links.reporter.href;
-        this.noticias.push(this.news);
-      }
-    })
-    .catch(e=>{
-      console.log(e);
-    })
-  },
-
-	traerNoticiaById(id){
-		const noticias=traerNoticias();
-		return noticias.find(noticia=> noticia.id==id);
+	traerNoticiaConLink(link){
+		const promise = axios.get(link);
+		return promesa;
+		
 	},
 
-	traerNoticiaByCategory(id){
-		const noticias = this.traerNoticias();
-		let filtro = [];
-		noticias.forEach(function(n) {
-			if(n.category.id == id){
-				filtro.push(n);
-			}
-		});
-		return filtro;
+	traerNoticiaByCategory(link){
+		const promise=axios.get(link);
+		return promise;
+	},
+
+	traerCategoria(link){
+		const promise=axios.get(link);
+		return promise;
+	},
+
+	traerReportero(link){
+		const promise=axios.get(link);
+		return promise;
 	}
+
 }

@@ -14,27 +14,13 @@ export default{
   },
 
   getCategories(){
-    this.getJson();
-    return this.categories;
+    const promise=axios.get('http://localhost:8080/categories');
+    return promise;
   },
 
-  getJson(){
-    axios.get('localhost:8080/categories')
-    .then((response) => {
-        for(let c in response.data._embedded.categories){
-        this.category.name=c.name;
-        this.category.id=c._links.self.href;
-        this.categories.push(this.category);
-      }
-    })
-    .catch(e=>{
-      console.log(e);
-    })
-  },
-
-  getCategoryById(id){
-    const categories = getCategories();
-    return JSON.parse(categories).find(category => category.id==id);
+  getCategoryById(uid){
+    const categories =this.getCategories();
+    return JSON.parse(categories).find(category => category.uid==uid);
   }
 
 }

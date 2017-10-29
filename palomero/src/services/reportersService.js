@@ -15,23 +15,9 @@ export default{
 	},
 
 	getReporters(){
-		this.getJson();
-		return this.reporters;
+		const promise=axios.get('http://localhost:8080/reporters');
+		return promise;
 	},
-
-	getJson(){
-    axios.get('localhost:8080/reporters')
-    .then((response) => {
-        for(let r in response.data._embedded.reporters){
-        this.reporter.name=r.name;
-        this.reporter.id=r._links.self.href;
-        this.reporters.push(this.reporter);
-      }
-    })
-    .catch(e=>{
-      console.log(e);
-    })
-  },
 
 	getReportersById(id){
 		const reporters = getReporters();

@@ -1003,26 +1003,13 @@ exports.default = {
     };
   },
   getCategories: function getCategories() {
-    this.getJson();
-    return this.categories;
+    var promise = _axios2.default.get('http://localhost:8080/categories');
+    return promise;
   },
-  getJson: function getJson() {
-    var _this = this;
-
-    _axios2.default.get('localhost:8080/categories').then(function (response) {
-      for (var c in response.data._embedded.categories) {
-        _this.category.name = c.name;
-        _this.category.id = c._links.self.href;
-        _this.categories.push(_this.category);
-      }
-    }).catch(function (e) {
-      console.log(e);
-    });
-  },
-  getCategoryById: function getCategoryById(id) {
-    var categories = getCategories();
+  getCategoryById: function getCategoryById(uid) {
+    var categories = this.getCategories();
     return JSON.parse(categories).find(function (category) {
-      return category.id == id;
+      return category.uid == uid;
     });
   }
 };
@@ -1065,50 +1052,36 @@ exports.default = {
 		};
 	},
 	agregarNoticia: function agregarNoticia(noticia) {
-		_axios2.default.post('localhost:8080/news', {
+		var promise = _axios2.default.post('http://localhost:8080/news', {
 			"title": noticia.title,
 			"body": noticia.body,
-			"reporter": notica.reporter,
+			"reporter": noticia.reporter,
 			"category": noticia.category,
 			"date": new Date().toJSON().slice(0, 10)
-		}).catch(function (e) {
-			console.log(e);
 		});
+		return promise;
 	},
 	traerNoticias: function traerNoticias() {
-		this.getJson();
-		return this.noticias;
+		var promise = _axios2.default.get('http://localhost:8080/news');
+		return promise;
 	},
-	getJson: function getJson() {
-		var _this = this;
-
-		_axios2.default.get('localhost:8080/news').then(function (response) {
-			for (var n in response.data._embedded.news) {
-				_this.news.title = n.title;
-				_this.news.body = n.body;
-				_this.news.date = n.date;
-				_this.news.id = n._links.self.href;
-				_this.news.category.id = n._links.category.href;
-				_this.news.reporter.id = n._links.reporter.href;
-				_this.noticias.push(_this.news);
-			}
-		}).catch(function (e) {
-			console.log(e);
-		});
-	},
-	traerNoticiaById: function traerNoticiaById(id) {
-		var noticias = traerNoticias();
-		return noticias.find(function (noticia) {
-			return noticia.id == id;
-		});
-	},
-	traerNoticiaByCategory: function traerNoticiaByCategory(id) {
-		var noticias = this.traerNoticias();
+	traerNoticiaById: function traerNoticiaById(uid) {
 		var filtro = [];
-		noticias.forEach(function (n) {
-			if (n.category.id == id) {
-				filtro.push(n);
-			}
+		var noticias = this.traerNoticias().then(function (response) {
+			filtro = noticias.find(function (noticia) {
+				return noticia.uid == uid;
+			});
+		});
+		return filtro;
+	},
+	traerNoticiaByCategory: function traerNoticiaByCategory(uid) {
+		var filtro = [];
+		var noticias = this.traerNoticias().then(function (response) {
+			noticias.forEach(function (n) {
+				if (n.category.uid == uid) {
+					filtro.push(n);
+				}
+			});
 		});
 		return filtro;
 	}
@@ -4178,21 +4151,8 @@ exports.default = {
 		};
 	},
 	getReporters: function getReporters() {
-		this.getJson();
-		return this.reporters;
-	},
-	getJson: function getJson() {
-		var _this = this;
-
-		_axios2.default.get('localhost:8080/reporters').then(function (response) {
-			for (var r in response.data._embedded.reporters) {
-				_this.reporter.name = r.name;
-				_this.reporter.id = r._links.self.href;
-				_this.reporters.push(_this.reporter);
-			}
-		}).catch(function (e) {
-			console.log(e);
-		});
+		var promise = _axios2.default.get('http://localhost:8080/reporters');
+		return promise;
 	},
 	getReportersById: function getReportersById(id) {
 		var reporters = getReporters();
@@ -15331,7 +15291,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -15363,10 +15323,18 @@ exports.default = {
     };
   },
   mounted: function mounted() {
-    this.categories = _categoriesService2.default.getCategories();
+    var _this = this;
+
+    _categoriesService2.default.getCategories().then(function (response) {
+      _this.categories = response.data._embedded.categories;
+    });
   },
   created: function created() {
-    this.categories = _categoriesService2.default.getCategories();
+    var _this2 = this;
+
+    _categoriesService2.default.getCategories().then(function (response) {
+      _this2.categories = response.data._embedded.categories;
+    });
   },
 
 
@@ -16311,7 +16279,7 @@ var render = function() {
             return _c(
               "li",
               [
-                _c("router-link", { attrs: { to: "/category/" + c.id } }, [
+                _c("router-link", { attrs: { to: "/category/" + c.uid } }, [
                   _vm._v(_vm._s(c.name))
                 ])
               ],
@@ -16396,7 +16364,7 @@ var _viewSpecific2 = _interopRequireDefault(_viewSpecific);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = new _vueRouter2.default({
-		routes: [{ path: '/add', component: _addNew2.default }, { path: '/all', component: _viewAll2.default }, { path: '/category/:id', component: _viewCategory2.default }, { path: '/news/:id', component: _viewSpecific2.default }]
+		routes: [{ path: '/add', component: _addNew2.default }, { path: '/all', component: _viewAll2.default }, { path: '/category/:uid', component: _viewCategory2.default }, { path: '/news/:uid', component: _viewSpecific2.default }]
 });
 
 /***/ }),
@@ -16491,7 +16459,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -16571,9 +16539,6 @@ exports.default = {
     submit: function submit() {
       var _this = this;
 
-      this.noticias = _storageService2.default.traerNoticias();
-      this.news.id = this.noticias.length + 1;
-      this.news.date = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
       this.news.category.id = this.categories.find(function (category) {
         return category.name == _this.news.category.name;
       }).id;
@@ -16581,8 +16546,6 @@ exports.default = {
         return reporter.name == _this.news.reporter.name;
       }).id;
       this.addNews(this.news);
-      this.mensaje = true;
-      this.clear();
     },
     clear: function clear() {
       this.news.title = '';
@@ -16590,23 +16553,43 @@ exports.default = {
       this.news.category.name = '';
       this.news.reporter.name = '';
     },
+    getNoticias: function getNoticias() {
+      var _this2 = this;
+
+      _storageService2.default.traerNoticias().then(function (response) {
+        _this2.noticias = response.data._embedded.news;
+      });
+    },
     getCategorias: function getCategorias() {
-      return _categoriesService2.default.getCategories();
+      var _this3 = this;
+
+      _categoriesService2.default.getCategories().then(function (response) {
+        _this3.categories = response.data._embedded.categories;
+      });
     },
     getReporters: function getReporters() {
-      return _reportersService2.default.getReporters();
+      var _this4 = this;
+
+      _reportersService2.default.getReporters().then(function (response) {
+        _this4.reporters = response.data._embedded.reporters;
+      });
     },
     getLastId: function getLastId() {
       return _storageService2.default.getUltimoId();
     },
     addNews: function addNews(news) {
-      _storageService2.default.agregarNoticia(news);
+      var _this5 = this;
+
+      _storageService2.default.agregarNoticia(news).then(function (response) {
+        _this5.mensaje = true;
+        _this5.clear();
+      });
     }
   },
 
   mounted: function mounted() {
-    this.categories = this.getCategorias();
-    this.reporters = this.getReporters();
+    this.getReporters();
+    this.getCategorias();
   }
 }; //
 //
@@ -16943,12 +16926,19 @@ exports.default = {
     };
   },
 
-  methods: {},
+  methods: {
+    getNoticias: function getNoticias() {
+      var _this = this;
+
+      _storageService2.default.traerNoticias().then(function (response) {
+        _this.noticias = response.data._embedded.news;
+      });
+    }
+  },
   mounted: function mounted() {
-    this.noticias = _storageService2.default.traerNoticias();
+    this.getNoticias();
   }
 }; //
-//
 //
 //
 //
@@ -16998,11 +16988,7 @@ var render = function() {
                         _vm._v(_vm._s(noticia.title))
                       ]),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Date:" + _vm._s(noticia.date))]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v("Category:" + _vm._s(noticia.category.name))
-                      ])
+                      _c("p", [_vm._v("Date:" + _vm._s(noticia.date))])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-action" }, [
@@ -17012,7 +16998,7 @@ var render = function() {
                         [
                           _c(
                             "router-link",
-                            { attrs: { to: "/news/" + noticia.id } },
+                            { attrs: { to: "/news/" + noticia.uid } },
                             [_vm._v("Read")]
                           )
                         ],
@@ -17135,7 +17121,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 
 exports.default = {
 	name: 'viewCategory',
@@ -17143,7 +17128,7 @@ exports.default = {
 		return {
 			noticias: [],
 			category: {
-				id: 0,
+				uid: 0,
 				name: ''
 			}
 		};
@@ -17153,20 +17138,20 @@ exports.default = {
 		params: function params() {
 			return this.$route.params;
 		},
-		id: function id() {
-			return this.$route.params.id;
+		uid: function uid() {
+			return this.$route.params.uid;
 		}
 	},
 	methods: {
 		traer: function traer() {
-			return _storageService2.default.traerNoticiaByCategory(this.id);
+			return _storageService2.default.traerNoticiaByCategory(this.uid);
 		},
 		traerCategoria: function traerCategoria() {
-			return _categoriesService2.default.getCategoryById(this.id);
+			return _categoriesService2.default.getCategoryById(this.uid);
 		}
 	},
 	watch: {
-		'$route.params.id': function $routeParamsId() {
+		'$route.params.uid': function $routeParamsUid() {
 			this.noticias = this.traer();
 			this.category = this.traerCategoria();
 		}
@@ -17206,11 +17191,7 @@ var render = function() {
                         _vm._v(_vm._s(noticia.title))
                       ]),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Date:" + _vm._s(noticia.date))]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v("Category:" + _vm._s(noticia.category.name))
-                      ])
+                      _c("p", [_vm._v("Date:" + _vm._s(noticia.date))])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-action" }, [
@@ -17220,7 +17201,7 @@ var render = function() {
                         [
                           _c(
                             "router-link",
-                            { attrs: { to: "/news/" + noticia.id } },
+                            { attrs: { to: "/news/" + noticia.uid } },
                             [_vm._v("Read")]
                           )
                         ],
@@ -17366,15 +17347,15 @@ exports.default = {
 	data: function data() {
 		return {
 			news: {
-				id: 0,
+				uid: 0,
 				title: '',
 				body: '',
 				category: {
-					id: 0,
+					uid: 0,
 					name: ''
 				},
 				reporter: {
-					id: 0,
+					uid: 0,
 					name: ''
 				},
 				date: 0
@@ -17386,17 +17367,17 @@ exports.default = {
 		params: function params() {
 			return this.$route.params;
 		},
-		id: function id() {
-			return this.$route.params.id;
+		uid: function uid() {
+			return this.$route.params.uid;
 		}
 	},
 	methods: {
 		traerNoticia: function traerNoticia() {
-			return _storageService2.default.traerNoticiaById(this.id);
+			return _storageService2.default.traerNoticiaById(this.uid);
 		}
 	},
 	watch: {
-		'$route.params.id': function $routeParamsId() {
+		'$route.params.uid': function $routeParamsUid() {
 			this.news = this.traerNoticia();
 		}
 	},
@@ -17442,11 +17423,7 @@ var render = function() {
           _c("div", { staticClass: "card-panel teal" }, [
             _c("p", [_vm._v("Title: " + _vm._s(_vm.news.title))]),
             _vm._v(" "),
-            _c("p", [_vm._v("Category: " + _vm._s(_vm.news.category.name))]),
-            _vm._v(" "),
             _c("p", [_vm._v("Date: " + _vm._s(_vm.news.date))]),
-            _vm._v(" "),
-            _c("p", [_vm._v("Reporter: " + _vm._s(_vm.news.reporter.name))]),
             _vm._v(" "),
             _c("span", { staticClass: "white-text" }, [
               _vm._v(_vm._s(_vm.news.body) + "\n\t\t\t\t\t")

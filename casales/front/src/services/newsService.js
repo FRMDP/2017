@@ -16,7 +16,7 @@ export default {
     // then map category and reporter to each element
     // and return all promises
     getAllArticles(pUrl) {
-        const url = pUrl ? pUrl : config.NEWS_ENDPOINT;
+        const url = pUrl ? pUrl : config.API_NEWS_ENDPOINT;
         return resources.get(url)
             .then((response) => {
                 let articles = response.data._embedded.news;
@@ -38,7 +38,9 @@ export default {
 
                 return Promise.resolve(null);
             })
-            .catch(() => {
+            .catch((error) => {
+                console.log(error);
+
                 return Promise.reject('WORLD NEWS | Error loading articles.');
             });
     },

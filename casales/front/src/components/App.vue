@@ -5,12 +5,14 @@
 </template>
 
 <script>
-    export default {}
+    export default {
+        name: 'app'
+    }
 </script>
 
 <style>
     @import url('https://fonts.googleapis.com/css?family=Raleway');
-    @import "../assets/css/animate.css";
+    @import "./../assets/css/animate.css";
 
     html {
         overflow-y: auto;

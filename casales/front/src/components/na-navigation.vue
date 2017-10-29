@@ -39,13 +39,18 @@
 </template>
 
 <script>
+    import io from "socket.io-client";
+
+    import config from "./../config/application";
+
     export default {
         name: 'naNavigation',
         props: ['logo', 'subtitle'],
         data() {
-          return {
-              isActive: false
-          }
+            return {
+                isActive: false,
+                socket: ''
+            }
         },
         computed: {
             imageLink(){
@@ -63,6 +68,17 @@
             toggleMenu() {
                 this.isActive = !this.isActive;
             }
+        },
+        created(){
+            this.socket = io(config.WS_URL);
+
+            this.socket.on('notificate', (data) => {
+                    this.$toast.open({
+                        message: 'We have a new article: ' + data.message,
+                        type: 'is-info'
+                    });
+                }
+            );
         }
     }
 </script>

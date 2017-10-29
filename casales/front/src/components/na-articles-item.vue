@@ -1,6 +1,7 @@
 <template>
     <div class="box animated fadeIn">
-        <h2 class="title is-2">{{ article.title }}</h2>
+        <h2 class="title is-size-1-fullhd is-size-2-widescreen is-size-3-desktop is-size-4-touch is-size-4-tablet
+        is-size-5-mobile">{{ article.title }}</h2>
         <hr class="custom-hr">
         <a @click.prevent="displayThisCategory">
             <span class="tag" :class="isColor(article.category.name)">{{ article.category.name.toUpperCase() }}</span>

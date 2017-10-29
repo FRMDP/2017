@@ -1,4 +1,4 @@
-import axios from "axios/dist/axios.min";
+import axios from "axios";
 
 // Configurations
 import config from "./../config/application";
@@ -13,7 +13,7 @@ export default {
             // `baseURL` will be prepended to `url` unless `url` is absolute.
             // It can be convenient to set `baseURL` for an instance of axios to pass relative URLs
             // to methods of that instance.
-            baseURL: config.BASE_URL,
+            baseURL: config.API_BASE_URL,
             headers: {'Content-Type': 'application/hal+json'},
             // `params` are the URL parameters to be sent with the request
             // Must be a plain object or a URLSearchParams object
@@ -37,7 +37,7 @@ export default {
             // `baseURL` will be prepended to `url` unless `url` is absolute.
             // It can be convenient to set `baseURL` for an instance of axios to pass relative URLs
             // to methods of that instance.
-            baseURL: config.BASE_URL,
+            baseURL: config.API_BASE_URL,
             headers: {'Content-Type': 'application/json'},
             // `data` is the data to be sent as the request body
             // Only applicable for request methods 'PUT', 'POST', and 'PATCH'

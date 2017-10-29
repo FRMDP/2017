@@ -9,7 +9,7 @@ export default {
         return resources.get(url);
     },
     getAllReporters(pUrl){
-        const url = pUrl ? pUrl : config.REPORTERS_ENDPOINT;
+        const url = pUrl ? pUrl : config.API_REPORTERS_ENDPOINT;
         return resources.get(url)
     }
 }

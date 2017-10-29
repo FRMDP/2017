@@ -83,6 +83,10 @@
     // Components
     import naFooter from "./na-footer.vue";
 
+    import io from "socket.io-client";
+
+    import config from "./../config/application";
+
     export default {
         name: 'add',
         components: {
@@ -106,7 +110,8 @@
                 },
                 loadedCategories: false,
                 loadedArticles: false,
-                loadingComponent: ''
+                loadingComponent: '',
+                socket: ''
             }
         },
         computed: {
@@ -132,6 +137,8 @@
 
                 news.saveArticle(this.article)
                     .then(() => {
+                        this.socket.emit('notificate', this.article.title);
+
                         this.cleanFields();
 
                         this.$dialog.alert({
@@ -199,6 +206,8 @@
             }
         },
         created() {
+            this.socket = io(config.WS_URL);
+
             this.loadingComponent = this.$loading.open();
 
             this.loadCategories();

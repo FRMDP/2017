@@ -8,7 +8,7 @@
             <div class="container is-fluid">
                 <section class="section">
                     <div class="columns">
-                        <div class="column is-3-desktop">
+                        <div class="column is-3-desktop is-hidden-touch">
                             <nav class="panel">
                                 <p class="panel-heading">
                                     <b-icon
@@ -19,20 +19,21 @@
                                     </b-icon>
                                     &nbsp;Categories
                                 </p>
-                                <a class="panel-block" @click.prevent="displayAllArticles(), activeCategory='all'"
-                                   :class="activeCategory === 'all' ? 'is-active' : ''">
-                                    <span class="panel-icon">
-                                      <i class="fa fa-dot-circle-o"></i>
-                                    </span>
-                                    ALL NEWS
-                                </a>
                                 <div v-if="loadedCategories">
+                                    <a class="panel-block" @click.prevent="displayAllArticles(), activeCategory='all'"
+                                       :class="activeCategory === 'all' ? 'is-active' : ''">
+                                        <span class="panel-icon">
+                                          <i class="fa fa-dot-circle-o"></i>
+                                        </span>
+                                        ALL NEWS
+                                    </a>
                                     <a class="panel-block" v-for="(category, index) in categories"
-                                       @click.prevent="displayCategory(category._links.news.href), activeCategory=category.name"
+                                       @click.prevent="displayCategory(category._links.news.href),
+                                        activeCategory=category.name"
                                        :class="activeCategory === category.name ? 'is-active' : ''">
-                                    <span class="panel-icon">
-                                      <i class="fa fa-dot-circle-o"></i>
-                                    </span>
+                                        <span class="panel-icon">
+                                          <i class="fa fa-dot-circle-o"></i>
+                                        </span>
                                         {{ category.name.toUpperCase() }}
                                     </a>
                                 </div>
@@ -143,7 +144,7 @@
                         setTimeout(() => this.loadingComponent.close(), 1000);
                     })
                     .catch((error) => {
-                        console.debug(error);
+                        console.log(error);
 
                         this.loadedArticles = true;
 

@@ -1,18 +1,23 @@
 {
-  "name": "casales",
+  "name": "front",
   "version": "0.1.0",
-  "description": "Casales, Ignacio - Trabajo Practico 6 - Programacion Avanzada 2 - Universidad Tecnologica Nacional",
-  "main": "index.js",
+  "description": "Casales, Ignacio - Trabajo Practico 8 - Front - Programacion Avanzada 2 - Universidad Tecnologica Nacional",
+  "main": "/src/main.js",
   "scripts": {
     "start": "live-server public/ --port=9876",
     "build": "webpack"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ignacio Casales",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ignaciocasales/UTN-2017-PAII.git"
+  },
   "dependencies": {
     "axios": "^0.16.2",
     "buefy": "^0.5.4",
+    "socket.io-client": "^2.0.4",
     "vue": "^2.5.2",
     "vue-router": "^2.8.1"
   },

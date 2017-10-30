@@ -32,6 +32,7 @@
     import categoriesService from "./../services/categoriesService";
     import newsService from "./../services/newsService";
     import reportersService from "./../services/reportersService";
+    import io from "socket.io-client";
 
     export default {
         name: 'newsById',
@@ -45,7 +46,8 @@
             articles: [],
             article: {},
             filteredArticle: {},
-            mapOk: false
+            mapOk: false,
+            socket: ''
           }
         },
         computed: {
@@ -65,6 +67,7 @@
               })
               .then((response) => {
                 this.getArticleById();
+                this.socket.emit('visited',this.uid);
               })
               .catch((error) => {
                 console.log(error)
@@ -111,7 +114,9 @@
             }
         },
         created() {
-            this.getArticles();
+          this.socket = io('http://localhost:3000/');
+          this.socket.on();
+          this.getArticles();
         }
     }
 </script>

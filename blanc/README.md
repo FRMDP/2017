@@ -6,5 +6,5 @@ npm install
 # build cmd
 npm run build
 
-# live-server at localhost:4567 cmd
+# live-server at localhost:9876 cmd
 npm run start

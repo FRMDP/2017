@@ -74,6 +74,27 @@
           getArticleById() {
             newsService.getArticle(this.filteredArticle._links.self.href)
               .then((response) => {
+                const article = response.data;
+                  const promises = [
+                      this.$http.get(article._links.reporter.href),
+                      this.$http.get(article._links.category.href)
+                  ];
+
+                  Promise.all(promises).then((response) => {
+                      this.article = {
+                          id: article.uid,
+                          body: article.body,
+                          title: article.title,
+                          reporter: {
+                              id: response[0].uid,
+                              name: response[0].name
+                          },
+                          category: {
+                              id: response[1].uid,
+                              name: response[1].name
+                          }
+                      }
+                  })
                 return this.articleMapper(response.data);
               })
                 .then((response) => {
@@ -86,7 +107,7 @@
           },
           articleMapper(article) {
             debugger;
-            const promises =
+            return Promise.all(promises);
              categoriesService.getCategory(article._links.category.href)
                     .then((response) => {
                         article.category = response.data;

@@ -31894,9 +31894,11 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("p", { staticClass: "subtitle is-6" }, [
-                              _vm._v(
-                                "Fecha: " + _vm._s(noticia.date.substr(0, 10))
-                              )
+                              _c("i", [
+                                _vm._v(
+                                  "Fecha: " + _vm._s(noticia.date.substr(0, 10))
+                                )
+                              ])
                             ])
                           ])
                         ])

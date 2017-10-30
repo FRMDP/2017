@@ -25,7 +25,7 @@
                             <p class="title is-6">{{noticia.subtitle}}</p>
                             <div class="content">
                                 <p class="subtitle is-6" id="cuerpo">{{noticia.body}}</p>
-                                <p class="subtitle is-6">Fecha: {{noticia.date.substr(0,10)}}</p>
+                                <p class="subtitle is-6"><i>Fecha: {{noticia.date.substr(0,10)}}</i></p>
                             </div>
                         </div>
                     </div>

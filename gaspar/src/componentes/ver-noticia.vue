@@ -100,28 +100,26 @@ export default {
                 usuario: '',
                 cuerpo: '',
                 id: '',
-                date:'',
-                mg:0,
-                idc:''
+                date: '',
+                mg: 0,
+                idc: ''
             },
-            lista: [],
-            socket: ''
+            lista: []
         }
     },
     sockets: {
         connect: function() {
             console.log('socket connected');
-            this.socket = this.$socket;
         },
         notiComentario: function(val) {
-                this.cargaComentario(val);
-                storageService.storeComentario(this.lista);
-            },
-        comentMegusta: function (val) {
-                  this.lista.find(c => c.idc == val).mg++;
-                  storageService.storeComentario(this.lista);
-            }
+            this.cargaComentario(val);
+            storageService.storeComentario(this.lista);
         },
+        comentMegusta: function(val) {
+            this.lista.find(c => c.idc == val).mg++;
+            storageService.storeComentario(this.lista);
+        }
+    },
     methods: {
         verNoticia() {
                 storageService.traerNoticia('http://localhost:8080/news/' + this.id)
@@ -156,16 +154,16 @@ export default {
             },
             guardaComentario() {
                 this.comentario.id = this.New.uid;
-                this.comentario.date  = new Date();
+                this.comentario.date = new Date();
                 this.$socket.emit('notiComentario', this.comentario);
                 this.limpiarComentario();
             },
-            tiempo(date){
-              moment.locale('es');
-              return moment(date).fromNow();
+            tiempo(date) {
+                moment.locale('es');
+                return moment(date).fromNow();
             },
             meGusta(id) {
-              this.$socket.emit('comentMegusta', id);
+                this.$socket.emit('comentMegusta', id);
             }
     },
     computed: {

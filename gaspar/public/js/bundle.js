@@ -30424,15 +30424,13 @@ exports.default = {
                 mg: 0,
                 idc: ''
             },
-            lista: [],
-            socket: ''
+            lista: []
         };
     },
 
     sockets: {
         connect: function connect() {
             console.log('socket connected');
-            this.socket = this.$socket;
         },
         notiComentario: function notiComentario(val) {
             this.cargaComentario(val);

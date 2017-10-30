@@ -54,16 +54,15 @@ export default {
     },
     methods: {
         notixCategoria(cat) {
-                let link = this.categorias.find(c => c._links.self.href.substr(c._links.self.href.lastIndexOf('/')+1) == cat)._links.news.href;
-                if(link)
-                {
-                  storageService.noticiasCategoria(link)
-                      .then((response) => {
-                          this.noticias = response.data._embedded.news;
-                      })
-                      .catch((error) => {
-                          console.log(error);
-                      })
+                let link = this.categorias.find(c => c._links.self.href.substr(c._links.self.href.lastIndexOf('/') + 1) == cat)._links.news.href;
+                if (link) {
+                    storageService.noticiasCategoria(link)
+                        .then((response) => {
+                            this.noticias = response.data._embedded.news;
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        })
                 }
             },
             verNoticia(id) {

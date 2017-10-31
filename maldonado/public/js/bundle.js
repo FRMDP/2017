@@ -23912,6 +23912,9 @@ exports.default = {
         });
 
         this.socket.on('get.comments', function (comments) {
+            /*Haciendo console log tanto de "comments", como de "this.comments"
+                me muestra los datos que me devuelve el array del server.
+                Pero en "Vue DevTools" no tiene nada el array */
             _this2.comments = comments;
         });
     }

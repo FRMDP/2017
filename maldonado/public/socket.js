@@ -18,10 +18,10 @@ io.on('connection', (socket) => {
 	});
 	socket.on('get.comments', (uidReporter) => {
 		//console.log(comments);
-		//let commentsFiltered = comments.filter(comp => uidReporter == comments.id);
+		const commentsFiltered = comments.filter(comp => uidReporter == comp.id);
 		/*El filtro esta comentado, porque al usar "comments" esta vacio,
 			pero al momento de devolverlo aca abajo, devuelve el array.
 			Lo deje asi para que devuelva algo */
-		socket.emit('get.comments', comments);
+		socket.emit('get.comments', commentsFiltered);
 	});
 });

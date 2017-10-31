@@ -1,9 +1,8 @@
 - **Descargue la app via git clone o descargue el .zip**
+    $ git clone https://github.com/matirey/2017.git
 
 - **Instale NPM**
+    $ npm install
 
->>$ npm install
-
--**Inicie la aplicación**
-
->>$ npm run start
+- **Inicie la aplicaciÃ³n**
+    $ npm run start

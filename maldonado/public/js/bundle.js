@@ -23880,23 +23880,19 @@ exports.default = {
                 _this.reporter = response.data._embedded.reporters.find(function (reporter) {
                     return _this.id == reporter.uid;
                 });
+                _this.socket.emit('get.comments', _this.reporter.uid);
             }).catch(function (error) {
                 console.log(error);
             });
         },
         addComment: function addComment() {
-            this.socket.emit('add.comment', this.comment
-            /*{
+            this.socket.emit('add.comment', {
                 id: this.reporter.uid,
                 comment: this.comment,
                 date: new Date().toJSON().slice(0, 10)
-            }*/);
+            });
             this.comment = '';
             this.message = true;
-        },
-        getComments: function getComments() {
-            console.log(this.comments + " CUANDO GETTEO");
-            this.socket.emit('get.comments', this.comments);
         }
     },
     watch: {
@@ -23914,13 +23910,10 @@ exports.default = {
         this.socket.on('add.comment', function (comments) {
             _this2.comments = comments;
         });
+
         this.socket.on('get.comments', function (comments) {
             _this2.comments = comments;
         });
-    },
-    mounted: function mounted() {
-        console.log(this.getComments());
-        this.getComments();
     }
 }; //
 //
@@ -24103,7 +24096,7 @@ var render = function() {
           _vm._v("Otros comentarios")
         ]),
         _vm._v(" "),
-        !_vm.comments.lenght
+        !_vm.comments.length
           ? _c("h6", { staticClass: "noComments" }, [
               _vm._v("Nadie ha comentado nada aun.")
             ])

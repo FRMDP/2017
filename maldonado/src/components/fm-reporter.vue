@@ -47,7 +47,7 @@
                     <h6 class="alertAdvice">Gracias por tu comentario!</h6>
                 </div>
                 <h5 class="otherComments">Otros comentarios</h5>
-                <h6 class="noComments" v-if="!comments.lenght">Nadie ha comentado nada aun.</h6>
+                <h6 class="noComments" v-if="!comments.length">Nadie ha comentado nada aun.</h6>
                 <ul>
                     <li v-for="com in comments">
                         <p>{{ com.comment }}</p>
@@ -83,6 +83,7 @@
                 this.$http.get('http://192.168.99.100:8080/reporters')
                     .then((response) => {
                         this.reporter = response.data._embedded.reporters.find(reporter => this.id == reporter.uid);
+                        this.socket.emit('get.comments', this.reporter.uid);
                     })
                     .catch((error) => {
                         console.log(error);
@@ -96,10 +97,6 @@
                 });
                 this.comment = '';
                 this.message = true;
-            },
-            getComments() {
-                console.log(this.comments + " CUANDO GETTEO")
-                this.socket.emit('get.comments', this.comments);
             }
         },
         watch: {
@@ -115,13 +112,13 @@
             this.socket.on('add.comment', (comments) => {
                 this.comments = comments;
             });
+
             this.socket.on('get.comments', (comments) => {
+                /*Haciendo console log tanto de "comments", como de "this.comments"
+                    me muestra los datos que me devuelve el array del server.
+                    Pero en "Vue DevTools" no tiene nada el array */
                 this.comments = comments;
             });
-        },
-        mounted() {
-            console.log(this.getComments());
-            this.getComments();
         }
     }
 </script>

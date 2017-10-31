@@ -11,11 +11,17 @@ server.listen(port, () => {
 
 io.on('connection', (socket) => {
 	socket.on('add.comment', (compComments) => {
-		comments.push(compComments);
+		if(compComments){
+			comments.push(compComments);
+		}
 		socket.emit('add.comment', comments);
 	});
-	socket.on('get.comments', (componentComments) => {
-		//let auxComments = comments.filter(com => componentComments.id == com.id)
-		socket.emit('get.comments', componentComments);
+	socket.on('get.comments', (uidReporter) => {
+		//console.log(comments);
+		//let commentsFiltered = comments.filter(comp => uidReporter == comments.id);
+		/*El filtro esta comentado, porque al usar "comments" esta vacio,
+			pero al momento de devolverlo aca abajo, devuelve el array.
+			Lo deje asi para que devuelva algo */
+		socket.emit('get.comments', comments);
 	});
 });

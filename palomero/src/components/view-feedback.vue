@@ -1,15 +1,16 @@
 <template>
 	<div class="card">
 	    <div class="card-content">
+	    	<h3>Leave us some feedback</h3>
 	    	<input v-model="mes.autor" id="autorInput" autocomplete="off" placeholder="Enter your name..." />
-	        <input v-model="mes.message" id="messageInput" autocomplete="off" placeholder="Enter your opinion..." />
+	        <input v-model="mes.text" id="messageInput" autocomplete="off" placeholder="Enter your opinion..." />
 	        <button :disabled="!formOk" @click="addMessage" class="btn waves-effect waves-light" type="submit" id="send">Enviar</button>
 	        <h3 v-if="mensaje==true">Succesfully added</h3>
-            <h3 v-if="!messages.length">Looks so empty</h3>
-		        <div class="card blue-grey darken-1" v-else v-for ="(m,index) in messages">
+            <h3 v-if="!mensajes.length">Looks so empty</h3>
+		        <div class="card blue-grey darken-1" v-else v-for ="(m,index) in mensajes">
 					<div class="card-content white-text">
-						<span class="card-title">{{m.autor}}</span>
-						<p>Mensaje:{{m.text}}</p>
+						<span class="card-title">Author:{{m.autor}}</span>
+						<p>Message:{{m.text}}</p>
 					</div>
 		        </div>
 	    </div>
@@ -23,27 +24,32 @@
           return{
           	mes:{
           		autor:'',
-          		message:''
+          		text:''
           	},
 			sock:'',
 			newMessage: '',
 			send: '',
-			messages: [],
+			mensajes: [],
 			mensaje:false
           }
         },
 		computed:{
 			formOk() {
-			return this.mes.autor && this.mes.message;
+			return this.mes.autor && this.mes.text;
 			}
 		},
         methods: {
 
         	getUpdate(){
-				this.sock.on('messages',function(data){
-				console.log(data);
-				this.messages=data;
+        		let listaAux=[];
+					this.sock.on('messages',function(data){
+					console.log(data);
+					for(let objMensaje in data){
+						let aux=data[objMensaje];
+						listaAux.push(aux);
+					}
 				});
+				return listaAux;	
         	},
 
         	addMessage(){
@@ -54,13 +60,17 @@
 
 			clear () {
 				this.mes.autor='';
-				this.mes.message='';
+				this.mes.text='';
 			}
+        },
+
+        mounted(){
+        	this.mensajes=this.getUpdate();
         },
 
         created() {
 			this.sock = io("http://localhost:3000");
-			this.getUpdate();
+			this.mensajes=this.getUpdate();
 		}
     }
 

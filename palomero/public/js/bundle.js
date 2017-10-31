@@ -24624,27 +24624,32 @@ exports.default = {
 		return {
 			mes: {
 				autor: '',
-				message: ''
+				text: ''
 			},
 			sock: '',
 			newMessage: '',
 			send: '',
-			messages: [],
+			mensajes: [],
 			mensaje: false
 		};
 	},
 
 	computed: {
 		formOk: function formOk() {
-			return this.mes.autor && this.mes.message;
+			return this.mes.autor && this.mes.text;
 		}
 	},
 	methods: {
 		getUpdate: function getUpdate() {
+			var listaAux = [];
 			this.sock.on('messages', function (data) {
 				console.log(data);
-				this.messages = data;
+				for (var objMensaje in data) {
+					var aux = data[objMensaje];
+					listaAux.push(aux);
+				}
 			});
+			return listaAux;
 		},
 		addMessage: function addMessage() {
 			this.sock.emit('new-message', this.mes);
@@ -24653,15 +24658,19 @@ exports.default = {
 		},
 		clear: function clear() {
 			this.mes.autor = '';
-			this.mes.message = '';
+			this.mes.text = '';
 		}
 	},
 
+	mounted: function mounted() {
+		this.mensajes = this.getUpdate();
+	},
 	created: function created() {
 		this.sock = (0, _socket2.default)("http://localhost:3000");
-		this.getUpdate();
+		this.mensajes = this.getUpdate();
 	}
 }; //
+//
 //
 //
 //
@@ -24693,6 +24702,8 @@ var render = function() {
       "div",
       { staticClass: "card-content" },
       [
+        _c("h3", [_vm._v("Leave us some feedback")]),
+        _vm._v(" "),
         _c("input", {
           directives: [
             {
@@ -24723,8 +24734,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.mes.message,
-              expression: "mes.message"
+              value: _vm.mes.text,
+              expression: "mes.text"
             }
           ],
           attrs: {
@@ -24732,13 +24743,13 @@ var render = function() {
             autocomplete: "off",
             placeholder: "Enter your opinion..."
           },
-          domProps: { value: _vm.mes.message },
+          domProps: { value: _vm.mes.text },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.mes, "message", $event.target.value)
+              _vm.$set(_vm.mes, "text", $event.target.value)
             }
           }
         }),
@@ -24757,16 +24768,16 @@ var render = function() {
           ? _c("h3", [_vm._v("Succesfully added")])
           : _vm._e(),
         _vm._v(" "),
-        !_vm.messages.length
+        !_vm.mensajes.length
           ? _c("h3", [_vm._v("Looks so empty")])
-          : _vm._l(_vm.messages, function(m, index) {
+          : _vm._l(_vm.mensajes, function(m, index) {
               return _c("div", { staticClass: "card blue-grey darken-1" }, [
                 _c("div", { staticClass: "card-content white-text" }, [
                   _c("span", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(m.autor))
+                    _vm._v("Author:" + _vm._s(m.autor))
                   ]),
                   _vm._v(" "),
-                  _c("p", [_vm._v("Mensaje:" + _vm._s(m.text))])
+                  _c("p", [_vm._v("Message:" + _vm._s(m.text))])
                 ])
               ])
             })

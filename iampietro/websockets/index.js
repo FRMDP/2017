@@ -19,5 +19,8 @@ io.on('connection', (socket) => {
     	}
         socket.broadcast.emit('countingReads', visitedNews);
     });
+    socket.on('giveMe' ,(nothing) => {
+    	socket.broadcast.emit('giveMe', visitedNews);
+    });
 });
 

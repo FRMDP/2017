@@ -44,7 +44,6 @@
 		sockets: {
 		    connect() {
 		      // Fired when the socket connects.
-		      this.isConnected = true;
 		    },
 
 		    disconnect() {
@@ -54,6 +53,9 @@
 		    // Fired when the server sends something on the "messageChannel" channel.
 		    countingReads(dataAboutNews) {
 		      this.visits = dataAboutNews;
+		    },
+		    giveMe(data){
+		      this.visits = data;
 		    }
 		},
 		methods: {
@@ -69,19 +71,12 @@
 			setParticularNew(news){
 				this.$emit('setParticularNew', news);
 				this.socket.emit('countingReads', news.uid);
-				console.log(this.$refs.reads[0].childNodes[0]);
 			}
 		},
 		created() {
 			this.getNews();
 			this.socket = io("http://localhost:3000");
-							console.log(this.$refs);
-
-		},
-		watch: {
-			news: function() {
-				console.log(this.$refs.reads[0]);
-			}
+			this.socket.emit('giveMe', 0);
 		}
 	}
 </script>

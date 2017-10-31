@@ -22,11 +22,6 @@ io.on('connection', (socket) => {
         socket.emit('heartNews', heartNews[uid]);
     });
     socket.on('loadHearts', (uid) => {
-    //	if(heartNews[uid]){
-    		socket.emit('loadHearts', heartNews[uid]);
-    /*	}
-    	else{
-    		socket.emit('loadHearts', 0);
-    	}*/
+    	socket.emit('loadHearts', heartNews[uid]);
     });
 });

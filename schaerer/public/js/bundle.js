@@ -23559,6 +23559,8 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
 
 exports.default = {
     name: 'viewOneNew',
@@ -23645,9 +23647,22 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("p", { on: { click: _vm.heartNews } }, [
-          _vm._v("MEENCANTAESTANOTICIA " + _vm._s(_vm.heartNumber) + " ")
-        ])
+        _c(
+          "a",
+          {
+            staticClass:
+              "waves-effect waves-light btn-large #e53935 red darken-1",
+            on: { click: _vm.heartNews }
+          },
+          [
+            _c("i", { staticClass: "material-icons right" }, [
+              _vm._v("favorite")
+            ]),
+            _vm._v(
+              "MEENCANTAESTANOTICIA " + _vm._s(_vm.heartNumber) + "\n\t\t\t"
+            )
+          ]
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [

@@ -16,7 +16,9 @@
 				</p>
 			</div>
 			<div class="row">
-				<p class @click="heartNews">MEENCANTAESTANOTICIA {{ heartNumber }} </p>
+				<a class="waves-effect waves-light btn-large #e53935 red darken-1"  @click="heartNews">
+					<i class="material-icons right">favorite</i>MEENCANTAESTANOTICIA {{ heartNumber }}
+				</a>
 			</div>
 			<div class="row">
 				<p class="black-text">More News like this: 

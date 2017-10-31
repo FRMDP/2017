@@ -26,7 +26,6 @@
 </template>
 
 <script>
-	import newsService from '../services/newsService';
 
 	export default {
 		name:'viewPerCategory',

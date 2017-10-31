@@ -1,13 +1,11 @@
 ﻿Pasos para utilizar este sitio:
 
-1) Abrir la consola que utilicéis y pararse en esta carpeta a la altura del README
+1) Abrir 3 consolas y pararse en esta carpeta a la altura del README
 
-2) Tipear npm install y darle enter
+2) Con la primera, tipear npm install y darle enter. Luego tipear npm start.
 
-3) Tipear npm run build y darle enter
+3) Con la segunda, tipear cd websockets y darle enter. A continuación npm install, y cuando finalice, tipear node index.js
 
-4) Tipear npm start server y darle enter
+4) Finalmente, con la tercera npm run build y ya podrá utilizar la aplicacion.
 
-Si efectúa cambios en el código, repita el paso 1 y:
 
-5) Repita el paso 3 tantas veces como cambios realice.

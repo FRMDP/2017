@@ -10,13 +10,21 @@
                 </div>
             </div>
 
+            <div v-if="isLoading" class="container has-text-centered">
+                <br>
+                <p class="title has-text-primary is-size-2-desktop">Loading Categories</p>
+                <b-loading :active.sync="isLoading"></b-loading>
+            </div>
+
             <div class="container">
                 <section class="section">
                     <div class="columns">
                         <div class="column is-10-desktop is-offset-1-desktop">
                             <div v-if="!categories.length">
-                                <p class="title is-size-2">No Categories have been found!</p>
-                                <a class="button is-primary" href="/#/news">Jump to News</a>
+                                <div v-if="!isLoading">
+                                    <p class="title is-size-2">No Categories have been found!</p>
+                                    <a class="button is-primary" href="/#/news">Jump to News</a>
+                                </div>
                             </div>
                             <div v-else>
                                 <div class="columns is-multiline">
@@ -49,7 +57,8 @@
         },
         data() {
             return {
-                categories: []
+                categories: [],
+                isLoading: true
             }
         },
         methods: {
@@ -57,8 +66,10 @@
             categoriesService.getCategories()
               .then((response) => {
                 this.categories = response.data._embedded.categories;
+                this.isLoading = false;
               })
               .catch((error) => {
+                this.isLoading = false;
                 console.log(error)
               });
           }

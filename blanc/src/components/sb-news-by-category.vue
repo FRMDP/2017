@@ -10,15 +10,21 @@
                 </div>
             </div>
 
+            <div v-if="isLoading" class="container has-text-centered">
+                <br>
+                <p class="title has-text-primary is-size-2-desktop">Loading News</p>
+                <b-loading :active.sync="isLoading"></b-loading>
+            </div>
+
             <div class="container has-text-centered">
                 <section class="section">
                     <div class="columns">
                         <div class="column is-10-desktop is-offset-1-desktop">
-                            <div v-if="!mapOk">
+                            <div v-if="!articles.length && !isLoading">
                                 <p class="title is-size-2">No News have been found!</p>
                                 <a class="button is-primary" href="/#/categories">Back to Categories</a>
                             </div>
-                            <div v-else>
+                            <div v-if="mapOk">
                             <sbNewsCards v-for="article in articles" :data="article"
                                          :key="article.id" :article="article" :shortVersion="true"></sbNewsCards>
                             </div>
@@ -52,7 +58,8 @@
                 categories: [],
                 articles: [],
                 filteredCategory: {},
-                mapOk: false
+                mapOk: false,
+                isLoading: true
             }
         },
         computed: {
@@ -72,6 +79,7 @@
                   this.getArticles();
                 })
                 .catch((error) => {
+                  this.isLoading = false;
                   console.log(error)
                 });
             },
@@ -86,8 +94,10 @@
                   .then((response) => {
                     this.articles = response;
                     this.mapOk = true;
+                    this.isLoading = false;
                   })
                 .catch((error) => {
+                  this.isLoading = false;
                   console.log(error)
                 });
             },
@@ -108,6 +118,8 @@
         },
         watch: {
             '$route.params.uid': function () {
+                this.mapOk = false;
+                this.isLoading = true;
                 this.categories = this.getCategories();
                 if (this.filteredCategory === undefined) {
                     this.$router.push({path: `/notFound`});

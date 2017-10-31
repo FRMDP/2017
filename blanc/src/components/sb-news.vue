@@ -3,11 +3,17 @@
         <div>
             <sb-navbar></sb-navbar>
 
-            <div class="container">
+            <div v-if="!isLoading" class="container">
                 <br>
                 <div class="column is-10-desktop is-offset-1-desktop">
                     <p class="title has-text-primary is-size-2-desktop">All News</p>
                 </div>
+            </div>
+
+            <div v-if="isLoading" class="container has-text-centered">
+                <br>
+                <p class="title has-text-primary is-size-2-desktop">Loading News</p>
+                <b-loading :active.sync="isLoading"></b-loading>
             </div>
 
             <div class="container">
@@ -15,8 +21,10 @@
                     <div class="columns">
                         <div class="column is-10-desktop is-offset-1-desktop">
                             <div v-if="!mapOk">
-                                <p class="title is-size-2">No News have been found!</p>
-                                <a class="button is-primary" href="/#/categories">Jump to Categories</a>
+                                <div v-if="!isLoading">
+                                    <p class="title is-size-2">No News have been found!</p>
+                                    <a class="button is-primary" href="/#/categories">Jump to Categories</a>
+                                </div>
                             </div>
                             <div v-else>
                                 <sbNewsCards v-for="article in articles" :data="article"
@@ -50,7 +58,8 @@
         data() {
             return {
                 articles: [],
-                mapOk: false
+                mapOk: false,
+                isLoading: true
             }
         },
         methods: {
@@ -62,8 +71,10 @@
                 .then((response) => {
                   this.articles = response;
                   this.mapOk = true;
+                  this.isLoading = false;
                 })
               .catch((error) => {
+                this.isLoading = false;
                 console.log(error)
               });
           },

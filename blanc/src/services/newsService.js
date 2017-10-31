@@ -18,9 +18,9 @@ export default {
         });
     },
     getArticle(link) {
-        return axios.get(link);
+        return axios.get(link,{'timeout': 5000});
     },
     getNews() {
-        return axios.get('https://utn-newspaper-api.herokuapp.com/news');
+        return axios.get('https://utn-newspaper-api.herokuapp.com/news',{'timeout': 5000});
     }
 }

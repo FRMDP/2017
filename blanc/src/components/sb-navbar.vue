@@ -22,12 +22,18 @@
       <div class="navbar-end">
         <div id="navMenu" class="navbar-menu" :class="isActive ? 'is-active' : ''">
           <div class="navbar-item">
-            <a class="navbar-item has-text-white" href="/#/news">
+            <a v-if="isActive" class="navbar-item has-text-black" href="/#/news">
+              News
+            </a>
+            <a v-if="!isActive" class="navbar-item has-text-white" href="/#/news">
               News
             </a>
           </div>
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link has-text-white" href="/#/categories">
+            <a v-if="isActive" class="navbar-item has-text-black" href="/#/categories">
+              Categories
+            </a>
+            <a v-if="!isActive" class="navbar-link has-text-white" href="/#/categories">
               Categories
             </a>
             <div class="navbar-dropdown is-boxed">
@@ -37,7 +43,10 @@
             </div>
           </div>
           <div class="navbar-item">
-            <a class="navbar-item has-text-white" href="/#/add">
+            <a v-if="isActive" class="navbar-item has-text-black" href="/#/add">
+              New Article
+            </a>
+            <a v-if="!isActive" class="navbar-item has-text-white" href="/#/add">
               New Article
             </a>
           </div>

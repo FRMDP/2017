@@ -81,7 +81,7 @@
                     category: '',
                     reporter:'',
                     date: ''
-                },
+                }
             }
         },
         computed: {

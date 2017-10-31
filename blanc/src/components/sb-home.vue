@@ -36,3 +36,8 @@ import sbFooter from "./sb-footer.vue";
       }
   }
 </script>
+
+<style>
+.hero-foot { height: 80px; }
+.footer { padding: 32px 24px 32px; }
+</style>

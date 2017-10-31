@@ -3,24 +3,39 @@
         <div>
             <sb-navbar></sb-navbar>
 
-            <div class="container">
+            <div v-if="mapOk" class="container">
                 <br>
-                <div v-if="mapOk" class="column is-10-desktop is-offset-1-desktop">
+                <div class="column is-10-desktop is-offset-1-desktop">
                     <p class="title has-text-primary is-size-2-desktop">{{this.$stringHelper.firstCharToUpper(article.category.name)}} Article</p>
                 </div>
             </div>
 
-            <div v-if="mapOk" class="container has-text-centered">
+            <div v-if="isLoading" class="container has-text-centered">
+                <br>
+                <p class="title has-text-primary is-size-2-desktop">Loading</p>
+                <b-loading :active.sync="isLoading"></b-loading>
+            </div>
+
+            <div class="container has-text-centered">
                 <section class="section">
-                    <div class="columns">
-                        <div class="column is-10-desktop is-offset-1-desktop">
-                            <sbNewsCards :article="article" :shortVersion="false"></sbNewsCards>
+                    <div v-if="!mapOk" class="columns">
+                        <div v-if="!isLoading">
+                            <p class="title is-size-2">Article could not be found found!</p>
+                            <a class="button is-primary" href="/#/categories">Back to Categories</a>
+                            <a class="button is-primary" href="/#/news">Back to All News</a>
                         </div>
                     </div>
-                    <div v-if="counter != null || counter != ''" class="container">
-                        <p v-if="counter == 1" class="has-text-primary has-text-right">This article has been viewed <strong>{{this.counter}}</strong> time</p>
-                        <p v-else class="has-text-primary has-text-right">This article has been viewed <strong>{{this.counter}}</strong> times</p>
-                    </div>
+                    <div v-else>
+                        <div class="columns">
+                            <div class="column is-10-desktop is-offset-1-desktop">
+                                <sbNewsCards :article="article" :shortVersion="false"></sbNewsCards>
+                            </div>
+                        </div>
+                        <div v-if="counter != null || counter != ''" class="container">
+                            <p v-if="counter == 1" class="has-text-primary has-text-right">This article has been viewed <strong>{{this.counter}}</strong> time</p>
+                            <p v-else class="has-text-primary has-text-right">This article has been viewed <strong>{{this.counter}}</strong> times</p>
+                        </div>
+                  </div>
                 </section>
             </div>
 
@@ -52,7 +67,8 @@
             filteredArticle: {},
             mapOk: false,
             socket: '',
-            counter: ''
+            counter: '',
+            isLoading: true
           }
         },
         computed: {
@@ -75,6 +91,7 @@
                 this.socket.emit('visited',this.uid);
               })
               .catch((error) => {
+                this.isLoading = false;
                 console.log(error)
               });
           },
@@ -104,6 +121,7 @@
                       }
                   };
                   this.mapOk = true;
+                  this.isLoading = false;
               })
               .catch((error) => {
                 console.log(error)
@@ -112,6 +130,8 @@
         },
         watch: {
             '$route.params.uid': function () {
+                this.mapOk = false;
+                this.isLoading = true;
                 this.article = this.getArticles();
                 if (this.article === undefined) {
                     this.$router.push({path: `/notFound`});

@@ -6,7 +6,6 @@
 	                <h4 class="center-align">(It's because there's no news)</h4>
 	            </div>
 				<div v-for="particularNew in news">
-					<p v-if="isConnected">We're connected to the server!</p>
 					<div class="col l4">
 						<div class="card forCards">
 							<div class="card-content">
@@ -17,14 +16,13 @@
 									{{ particularNew.body }}
 								</p>
 								<router-link to="/particularNew">
-									<p class="right green-text" @click="setParticularNew(particularNew)">Read More</p>
+									<p class="right green-text"  @click="setParticularNew(particularNew)">Read More</p>
 								</router-link>
-								<p class="coldNews center-align">Cold News</p>
+								<p ref="reads" class="News center-align green-text" style="margin-top: 39px;">{{ visits[particularNew.uid]}} visits</p>
 							</div>
 						</div>
 					</div>
 				</div> 
-
 			</div>
 	</div>
 </template>
@@ -40,7 +38,7 @@
 		    	news: [],
 		    	isConnected: false,
 		    	socket: '',
-		    	socketMessage : ''
+		    	visits: []
 			}
 		},
 		sockets: {
@@ -54,8 +52,8 @@
 		    },
 
 		    // Fired when the server sends something on the "messageChannel" channel.
-		    messageChannel(data) {
-		      this.socketMessage = data
+		    countingReads(dataAboutNews) {
+		      this.visits = dataAboutNews;
 		    }
 		},
 		methods: {
@@ -70,17 +68,20 @@
 			},
 			setParticularNew(news){
 				this.$emit('setParticularNew', news);
-				this.socket.emit('countingReads', news.title);
-			},
-			someMethod(){
-				this.visitedNews.forEach(visitedN => {
-					this.news.indexOf(visitedN).visits = visitedN.visits;
-				})
+				this.socket.emit('countingReads', news.uid);
+				console.log(this.$refs.reads[0].childNodes[0]);
 			}
 		},
 		created() {
 			this.getNews();
 			this.socket = io("http://localhost:3000");
+							console.log(this.$refs);
+
+		},
+		watch: {
+			news: function() {
+				console.log(this.$refs.reads[0]);
+			}
 		}
 	}
 </script>

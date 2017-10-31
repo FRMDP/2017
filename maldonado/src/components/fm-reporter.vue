@@ -34,22 +34,36 @@
                 </div>
             </div>
         </div>
+        <div>
+            <input v-model="comment" type="text"/>
+            <button class="btn" @click="addComment()">Share an opinion!</button>
+            <ul>
+                <li v-for="comment in comments">
+                    {{comment}}
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
 <script>
+    import config from './../configuration/application';
+
     export default {
         name: 'fmReporter',
         data() {
             return {
-                reporter: {}
+                reporter: {},
+                socket: '', 
+                comment: '',
+                comments: []
             }
         },
         computed: {
             id() {
                 return this.$route.params.id;
             }
-        },
+        },  
         methods: {
             getReporter() {
                 this.$http.get('http://192.168.99.100:8080/reporters')
@@ -59,6 +73,9 @@
                     .catch((error) => {
                         console.log(error);
                     })
+            },
+            addComment() {
+                this.socket.emit('add.comment', this.comment);
             }
         },
         watch: {
@@ -68,6 +85,10 @@
         },
         created() {
             this.getReporter();
+            this.socket = this.$socket(config.websocket_url);
+            this.socket.on('add.comment', (comment) => {
+                this.comments.push(comment);
+            });
         }
     }
 </script>

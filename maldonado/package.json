@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "live-server public/ --port=9876",
-    "build": "webpack"
+    "build": "webpack",
+    "socket": "node ./public/socket.js"
   },
   "keywords": [],
   "author": "",
@@ -22,8 +23,12 @@
     "webpack": "^3.6.0"
   },
   "dependencies": {
+    "express": "^4.15.3",
+    "socket.io-client": "^2.0.4",
+    "socketio": "^1.0.0",
     "vue": "^2.4.4",
     "vue-material": "^0.7.5",
-    "vue-router": "^2.7.0"
+    "vue-router": "^2.7.0",
+    "vue-socket.io": "^2.1.1-a"
   }
 }

@@ -20,12 +20,11 @@ module.exports = {
 				loaders: {
 				}
 			}
-		}/*,
-		{
-			test: /\.materialize$/,
-			loader:
-		}*/
+		}
       ]
+	},
+	node: {
+		fs: 'empty'
 	},
 	resolve: {
 		alias: {

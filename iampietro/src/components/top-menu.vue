@@ -3,7 +3,7 @@
     		<nav class="white" role="navigation">
 	    		<div class="nav-wrapper container">
 	    			<router-link to="/news" class="brand-logo blue-text text-darken-4">Sputnik</router-link>
-	    			<ul class="right hide-on-med-and-down">
+	    			<ul class="right ">
 	    				<li v-for="category in categories">
 	    					<router-link :to="{ name: 'genre', params: { id: category.uid }}" class="black-text">{{ category.name }}</router-link>
 	    				</li>

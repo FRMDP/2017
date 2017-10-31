@@ -18,7 +18,8 @@
 								<router-link to="/particularNew">
 									<p class="right green-text"  @click="setParticularNew(particularNew)">Read More</p>
 								</router-link>
-								<p ref="reads" class="News center-align green-text" style="margin-top: 39px;">{{ visits[particularNew.uid]}} visits</p>
+								<p v-if="!visits[particularNew.uid]" class="News center-align green-text" 			style="margin-top: 39px;">0 visit</p>
+								<p v-else class="News center-align green-text" style="margin-top: 39px;">{{ visits[particularNew.uid]}} visits</p>
 							</div>
 						</div>
 					</div>
@@ -36,20 +37,11 @@
 		data() {
 			return {
 		    	news: [],
-		    	isConnected: false,
 		    	socket: '',
 		    	visits: []
 			}
 		},
 		sockets: {
-		    connect() {
-		      // Fired when the socket connects.
-		    },
-
-		    disconnect() {
-		      this.isConnected = false;
-		    },
-
 		    // Fired when the server sends something on the "messageChannel" channel.
 		    countingReads(dataAboutNews) {
 		      this.visits = dataAboutNews;

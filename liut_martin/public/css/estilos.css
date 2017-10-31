@@ -1,0 +1,33 @@
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-border-box: box-sizing;
+	-moz-border-box: box-sizing;
+	-ms-border-box: box-sizing;
+	-o-border-box: box-sizing;
+	border-box: box-sizing;
+}
+
+body {
+	font-family: 'Titillium Web' !important;
+	background-image: url('../img/backgrounds/body.svg');
+}
+
+.md-theme-default.md-toolbar, .md-sidenav-content {
+	background-image: url('../img/backgrounds/menu.svg');
+	border-bottom: 1.5px solid green;
+}
+
+.md-list.md-theme-default {
+	background-color: inherit;
+}
+
+h1 {
+	font-weight: 300;
+	font-size: 3em;
+}
+
+a.linkCard {
+	text-decoration: none !important;
+	color: inherit !important;
+}

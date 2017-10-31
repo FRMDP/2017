@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "live-server public/ --port=9876",
     "build": "webpack",
-    "socket": "node ./public/socket.js"
+    "socket": "node ./src/backend/socket.js"
   },
   "keywords": [],
   "author": "",

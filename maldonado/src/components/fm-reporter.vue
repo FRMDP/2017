@@ -11,7 +11,7 @@
         </div>
         <div class="row personal_info">
             <div class="col s6 m6 l6">
-                <h5><strong>Fast Company and BusinessWeek Former Editor</strong></h5>
+                <h5><strong>Fast Company and BusinessWeek Former</strong></h5>
                 <h6>C-Change Media Inc.   University of Missouri-Columbia</h6>
                 <h6>Bahia de San Francisco y alrededores, Estados Unidos</h6>
             </div>
@@ -34,14 +34,27 @@
                 </div>
             </div>
         </div>
-        <div>
-            <input v-model="comment" type="text"/>
-            <button class="btn" @click="addComment()">Share an opinion!</button>
-            <ul>
-                <li v-for="comment in comments">
-                    {{comment}}
-                </li>
-            </ul>
+        <div class="row">
+            <div class="col s12 m10 l8">
+                <h5 class="opinionTitle">Opina que pensas de mi</h5>
+                <input  placeholder="Ej: Que buenos reportajes.." v-model="comment" type="text"/>
+                <button class="waves-effect btn orange darken-2" 
+                    @click="addComment()">
+                    Opina <i class="material-icons right">comment</i>
+                </button>
+                <div class="alert" id="newsAlert" v-show="message == true">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <h6 class="alertAdvice">Gracias por tu comentario!</h6>
+                </div>
+                <h5 class="otherComments">Otros comentarios</h5>
+                <h6 class="noComments" v-if="!comments.lenght">Nadie ha comentado nada aun.</h6>
+                <ul>
+                    <li v-for="com in comments">
+                        <p>{{ com.comment }}</p>
+                        <p class="dateComment">El dia {{ com.date }}</p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -56,7 +69,8 @@
                 reporter: {},
                 socket: '', 
                 comment: '',
-                comments: []
+                comments: [],
+                message: false
             }
         },
         computed: {
@@ -75,9 +89,16 @@
                     })
             },
             addComment() {
-                this.socket.emit('add.comment', this.comment);
+                this.socket.emit('add.comment', {
+                    id: this.reporter.uid,
+                    comment: this.comment,
+                    date: new Date().toJSON().slice(0, 10)
+                });
+                this.comment = '';
+                this.message = true;
             },
             getComments() {
+                console.log(this.comments + " CUANDO GETTEO")
                 this.socket.emit('get.comments', this.comments);
             }
         },
@@ -88,15 +109,18 @@
         },
         created() {
             this.getReporter();
+
             this.socket = this.$socket(config.websocket_url);
+
             this.socket.on('add.comment', (comments) => {
                 this.comments = comments;
             });
             this.socket.on('get.comments', (comments) => {
                 this.comments = comments;
-            })
+            });
         },
         mounted() {
+            console.log(this.getComments());
             this.getComments();
         }
     }
@@ -114,5 +138,46 @@
     }
     .personal_info {
         margin-top: 100px;
+    }
+    .otherComments {
+        text-align: center;
+        margin-top: 30px;
+    }
+    .dateComment {
+        color: grey;
+        margin-top: 5px;
+        text-align: right;
+    }
+    .noComments {
+        margin-top: 25px;
+    }
+    .alert {
+        width: 300px;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        background-color: #f57c00;
+        padding: 20px;
+        color: black;
+        font-weight: bold;
+        border-radius: 2px;
+    }
+    .alertAdvice {
+        color: white;
+    }
+    .closebtn {
+        margin-left: 15px;
+        color: black;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .closebtn:hover {
+        color: white;
+    }
+    .opinionTitle {
+        margin-bottom: 15px;
     }
 </style>

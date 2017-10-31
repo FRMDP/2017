@@ -22684,7 +22684,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "\n.form{\n\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n\tborder-radius: 15px;\n}\n.alert {\n\tmargin-left: 30px;\n\tmargin-top: 25px;\n\tmargin-bottom: 10px;\n  \tbackground-color: #80ff80;\n  \tpadding: 20px;\n\tcolor: black;\n\tfont-weight: bold;\n\tborder-radius: 5px;\n}\n.closebtn {\n    margin-left: 15px;\n    color: black;\n    font-weight: bold;\n    float: right;\n    font-size: 22px;\n    line-height: 20px;\n    cursor: pointer;\n    transition: 0.3s;\n}\n.closebtn:hover {\n    color: white;\n}\n.categoryName {\n\ttext-transform: capitalize;\n}\n.radio-button-css{\n  position: relative !important;\n  z-index: 12;\n  opacity: 1 !important;\n  left: 18px !important;\n}\n", ""]);
+exports.push([module.i, "\n.form{\n\tbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n\tborder-radius: 15px;\n}\n.alert {\n\tmargin-left: 30px;\n\tmargin-top: 25px;\n\tmargin-bottom: 10px;\n  \tbackground-color: #80ff80;\n  \tpadding: 20px;\n\tcolor: black;\n\tfont-weight: bold;\n\tborder-radius: 5px;\n}\n.closebtn {\n    margin-left: 15px;\n    color: black;\n    font-weight: bold;\n    float: right;\n    font-size: 22px;\n    line-height: 20px;\n    cursor: pointer;\n    transition: 0.3s;\n}\n.closebtn:hover {\n    color: white;\n}\n.categoryName {\n\ttext-transform: capitalize;\n}\n", ""]);
 
 // exports
 
@@ -23833,7 +23833,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "\n.reporter {\n    border-radius: 50%;\n}\n.info {\n    padding-top: 40px;\n}\n.icons {\n    margin-top: 40px !important;\n}\n.personal_info {\n    margin-top: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.reporter {\n    border-radius: 50%;\n}\n.info {\n    padding-top: 40px;\n}\n.icons {\n    margin-top: 40px !important;\n}\n.personal_info {\n    margin-top: 100px;\n}\n.otherComments {\n    text-align: center;\n    margin-top: 30px;\n}\n.dateComment {\n    color: grey;\n    margin-top: 5px;\n    text-align: right;\n}\n.noComments {\n    margin-top: 25px;\n}\n.alert {\n    width: 300px;\n    margin-top: 25px;\n    margin-bottom: 10px;\n    background-color: #f57c00;\n    padding: 20px;\n    color: black;\n    font-weight: bold;\n    border-radius: 2px;\n}\n.alertAdvice {\n    color: white;\n}\n.closebtn {\n    margin-left: 15px;\n    color: black;\n    font-weight: bold;\n    float: right;\n    font-size: 22px;\n    line-height: 20px;\n    cursor: pointer;\n    transition: 0.3s;\n}\n.closebtn:hover {\n    color: white;\n}\n.opinionTitle {\n    margin-bottom: 15px;\n}\n", ""]);
 
 // exports
 
@@ -23862,7 +23862,8 @@ exports.default = {
             reporter: {},
             socket: '',
             comment: '',
-            comments: []
+            comments: [],
+            message: false
         };
     },
 
@@ -23884,9 +23885,17 @@ exports.default = {
             });
         },
         addComment: function addComment() {
-            this.socket.emit('add.comment', this.comment);
+            this.socket.emit('add.comment', this.comment
+            /*{
+                id: this.reporter.uid,
+                comment: this.comment,
+                date: new Date().toJSON().slice(0, 10)
+            }*/);
+            this.comment = '';
+            this.message = true;
         },
         getComments: function getComments() {
+            console.log(this.comments + " CUANDO GETTEO");
             this.socket.emit('get.comments', this.comments);
         }
     },
@@ -23899,7 +23908,9 @@ exports.default = {
         var _this2 = this;
 
         this.getReporter();
+
         this.socket = this.$socket(_application2.default.websocket_url);
+
         this.socket.on('add.comment', function (comments) {
             _this2.comments = comments;
         });
@@ -23908,9 +23919,23 @@ exports.default = {
         });
     },
     mounted: function mounted() {
+        console.log(this.getComments());
         this.getComments();
     }
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -23999,49 +24024,104 @@ var render = function() {
     _vm._v(" "),
     _vm._m(1),
     _vm._v(" "),
-    _c("div", [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.comment,
-            expression: "comment"
-          }
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.comment },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col s12 m10 l8" }, [
+        _c("h5", { staticClass: "opinionTitle" }, [
+          _vm._v("Opina que pensas de mi")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.comment,
+              expression: "comment"
             }
-            _vm.comment = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn",
+          ],
+          attrs: { placeholder: "Ej: Que buenos reportajes..", type: "text" },
+          domProps: { value: _vm.comment },
           on: {
-            click: function($event) {
-              _vm.addComment()
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.comment = $event.target.value
             }
           }
-        },
-        [_vm._v("Share an opinion!")]
-      ),
-      _vm._v(" "),
-      _c(
-        "ul",
-        _vm._l(_vm.comments, function(comment) {
-          return _c("li", [
-            _vm._v("\n                " + _vm._s(comment) + "\n            ")
-          ])
-        })
-      )
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "waves-effect btn orange darken-2",
+            on: {
+              click: function($event) {
+                _vm.addComment()
+              }
+            }
+          },
+          [
+            _vm._v("\n                Opina "),
+            _c("i", { staticClass: "material-icons right" }, [
+              _vm._v("comment")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.message == true,
+                expression: "message == true"
+              }
+            ],
+            staticClass: "alert",
+            attrs: { id: "newsAlert" }
+          },
+          [
+            _c(
+              "span",
+              {
+                staticClass: "closebtn",
+                attrs: { onclick: "this.parentElement.style.display='none';" }
+              },
+              [_vm._v("×")]
+            ),
+            _vm._v(" "),
+            _c("h6", { staticClass: "alertAdvice" }, [
+              _vm._v("Gracias por tu comentario!")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("h5", { staticClass: "otherComments" }, [
+          _vm._v("Otros comentarios")
+        ]),
+        _vm._v(" "),
+        !_vm.comments.lenght
+          ? _c("h6", { staticClass: "noComments" }, [
+              _vm._v("Nadie ha comentado nada aun.")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "ul",
+          _vm._l(_vm.comments, function(com) {
+            return _c("li", [
+              _c("p", [_vm._v(_vm._s(com.comment))]),
+              _vm._v(" "),
+              _c("p", { staticClass: "dateComment" }, [
+                _vm._v("El dia " + _vm._s(com.date))
+              ])
+            ])
+          })
+        )
+      ])
     ])
   ])
 }
@@ -24064,7 +24144,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row personal_info" }, [
       _c("div", { staticClass: "col s6 m6 l6" }, [
         _c("h5", [
-          _c("strong", [_vm._v("Fast Company and BusinessWeek Former Editor")])
+          _c("strong", [_vm._v("Fast Company and BusinessWeek Former")])
         ]),
         _vm._v(" "),
         _c("h6", [

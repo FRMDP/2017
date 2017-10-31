@@ -10,11 +10,12 @@ server.listen(port, () => {
 });
 
 io.on('connection', (socket) => {
-	socket.on('add.comment', (data) => {
-		comments.push(data);
-		io.emit('add.comment', comments);
+	socket.on('add.comment', (compComments) => {
+		comments.push(compComments);
+		socket.emit('add.comment', comments);
 	});
 	socket.on('get.comments', (componentComments) => {
-		socket.emit('get.comments', comments)
+		//let auxComments = comments.filter(com => componentComments.id == com.id)
+		socket.emit('get.comments', componentComments);
 	});
 });

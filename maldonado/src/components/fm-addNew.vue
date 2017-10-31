@@ -176,10 +176,4 @@
 	.categoryName {
 		text-transform: capitalize;
 	}
-	.radio-button-css{
-	  position: relative !important;
-	  z-index: 12;
-	  opacity: 1 !important;
-	  left: 18px !important;
-	}
 </style>

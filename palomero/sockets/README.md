@@ -1,17 +1,10 @@
-# UTN Chat
 
-### Para iniciarlo:
-
-```bash
-# clonen el proyecto:
-git clone https://github.com/UTN-MDP/utn-chat.git
-
-# entren en la carpeta
+# entrar a la carpeta sockets
 cd utn-chat
 
-# instalen las dependencias
+# instalar dependencias
 npm install
 
-# inicien un servidor web
+# iniciar servidor
 npm run start
 ```

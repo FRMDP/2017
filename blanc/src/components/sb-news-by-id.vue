@@ -17,6 +17,10 @@
                             <sbNewsCards :article="article" :shortVersion="false"></sbNewsCards>
                         </div>
                     </div>
+                    <div v-if="counter != null || counter != ''" class="container">
+                        <p v-if="counter == 1" class="has-text-primary has-text-right">This article has been viewed <strong>{{this.counter}}</strong> time</p>
+                        <p v-else class="has-text-primary has-text-right">This article has been viewed <strong>{{this.counter}}</strong> times</p>
+                    </div>
                 </section>
             </div>
 
@@ -47,7 +51,8 @@
             article: {},
             filteredArticle: {},
             mapOk: false,
-            socket: ''
+            socket: '',
+            counter: ''
           }
         },
         computed: {
@@ -115,7 +120,11 @@
         },
         created() {
           this.socket = io('http://localhost:3000/');
-          this.socket.on();
+          this.socket.on('update', (data) => {
+            if (data.id === this.uid) {
+              this.counter = data.count;
+            }
+          });
           this.getArticles();
         }
     }

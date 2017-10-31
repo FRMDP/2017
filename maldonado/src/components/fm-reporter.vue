@@ -76,6 +76,9 @@
             },
             addComment() {
                 this.socket.emit('add.comment', this.comment);
+            },
+            getComments() {
+                this.socket.emit('get.comments', this.comments);
             }
         },
         watch: {
@@ -86,9 +89,15 @@
         created() {
             this.getReporter();
             this.socket = this.$socket(config.websocket_url);
-            this.socket.on('add.comment', (comment) => {
-                this.comments.push(comment);
+            this.socket.on('add.comment', (comments) => {
+                this.comments = comments;
             });
+            this.socket.on('get.comments', (comments) => {
+                this.comments = comments;
+            })
+        },
+        mounted() {
+            this.getComments();
         }
     }
 </script>

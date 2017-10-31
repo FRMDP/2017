@@ -23885,6 +23885,9 @@ exports.default = {
         },
         addComment: function addComment() {
             this.socket.emit('add.comment', this.comment);
+        },
+        getComments: function getComments() {
+            this.socket.emit('get.comments', this.comments);
         }
     },
     watch: {
@@ -23897,9 +23900,15 @@ exports.default = {
 
         this.getReporter();
         this.socket = this.$socket(_application2.default.websocket_url);
-        this.socket.on('add.comment', function (comment) {
-            _this2.comments.push(comment);
+        this.socket.on('add.comment', function (comments) {
+            _this2.comments = comments;
         });
+        this.socket.on('get.comments', function (comments) {
+            _this2.comments = comments;
+        });
+    },
+    mounted: function mounted() {
+        this.getComments();
     }
 }; //
 //

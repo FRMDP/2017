@@ -18,6 +18,7 @@ io.on('connection', (socket) => {
 		socket.on('new-message',function(MessagesRecieved){
 			console.log(MessagesRecieved);
 			messages.push(MessagesRecieved);
+			socket.emit('messages',messages);
 		});
 });
 

@@ -24630,7 +24630,7 @@ exports.default = {
 			newMessage: '',
 			send: '',
 			mensajes: [],
-			mensaje: false
+			alerta: false
 		};
 	},
 
@@ -24643,17 +24643,17 @@ exports.default = {
 		getUpdate: function getUpdate() {
 			var listaAux = [];
 			this.sock.on('messages', function (data) {
-				console.log(data);
 				for (var objMensaje in data) {
 					var aux = data[objMensaje];
 					listaAux.push(aux);
 				}
 			});
-			return listaAux;
+			this.mensajes = listaAux;
 		},
 		addMessage: function addMessage() {
 			this.sock.emit('new-message', this.mes);
-			this.mensaje = true;
+			this.getUpdate();
+			this.alerta = true;
 			this.clear();
 		},
 		clear: function clear() {
@@ -24662,12 +24662,9 @@ exports.default = {
 		}
 	},
 
-	mounted: function mounted() {
-		this.mensajes = this.getUpdate();
-	},
 	created: function created() {
 		this.sock = (0, _socket2.default)("http://localhost:3000");
-		this.mensajes = this.getUpdate();
+		this.getUpdate();
 	}
 }; //
 //
@@ -24764,9 +24761,7 @@ var render = function() {
           [_vm._v("Enviar")]
         ),
         _vm._v(" "),
-        _vm.mensaje == true
-          ? _c("h3", [_vm._v("Succesfully added")])
-          : _vm._e(),
+        _vm.alerta == true ? _c("h3", [_vm._v("Succesfully added")]) : _vm._e(),
         _vm._v(" "),
         !_vm.mensajes.length
           ? _c("h3", [_vm._v("Looks so empty")])

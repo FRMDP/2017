@@ -5,7 +5,7 @@
 	    	<input v-model="mes.autor" id="autorInput" autocomplete="off" placeholder="Enter your name..." />
 	        <input v-model="mes.text" id="messageInput" autocomplete="off" placeholder="Enter your opinion..." />
 	        <button :disabled="!formOk" @click="addMessage" class="btn waves-effect waves-light" type="submit" id="send">Enviar</button>
-	        <h3 v-if="mensaje==true">Succesfully added</h3>
+	        <h3 v-if="alerta==true">Succesfully added</h3>
             <h3 v-if="!mensajes.length">Looks so empty</h3>
 		        <div class="card blue-grey darken-1" v-else v-for ="(m,index) in mensajes">
 					<div class="card-content white-text">
@@ -30,7 +30,7 @@
 			newMessage: '',
 			send: '',
 			mensajes: [],
-			mensaje:false
+			alerta:false
           }
         },
 		computed:{
@@ -43,18 +43,18 @@
         	getUpdate(){
         		let listaAux=[];
 					this.sock.on('messages',function(data){
-					console.log(data);
 					for(let objMensaje in data){
 						let aux=data[objMensaje];
 						listaAux.push(aux);
 					}
 				});
-				return listaAux;	
+				this.mensajes=listaAux;	
         	},
 
         	addMessage(){
         		this.sock.emit('new-message',this.mes);
-        		this.mensaje=true;
+				this.getUpdate();
+        		this.alerta=true;
         		this.clear();
         	},
 
@@ -64,13 +64,9 @@
 			}
         },
 
-        mounted(){
-        	this.mensajes=this.getUpdate();
-        },
-
         created() {
 			this.sock = io("http://localhost:3000");
-			this.mensajes=this.getUpdate();
+			this.getUpdate();
 		}
     }
 

@@ -12,7 +12,7 @@ function MacBook() {
 //Decorator 1
 function memory( macbook ){
 	let cost = macbook.cost();
-	macbook.cost = function() {
+	macbook.cost = () => {
 		return cost + 2000;
 	}
 }

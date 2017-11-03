@@ -52,3 +52,8 @@ function armor( character ){
   };
  
 }
+
+const character = new Character();
+sword(character);
+armor(character);
+shield(character);

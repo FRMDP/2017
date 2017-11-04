@@ -31,6 +31,8 @@ animalFactory.prototype.createAnimal = (options) => {
     case 'cat':
       this.animalClass = cat;
       break;
+    case 'kangaroo':
+      this.animalClass = kangaroo;
    }
    return new this.animalClass(options);
 };
@@ -41,7 +43,7 @@ const Cat = catFactory.createAnimal({
   animalType : 'cat',
   legs : 3,
   tail : false,
-  color: 'brown',
+  color: 'White',
   fangs : 4
 });
 

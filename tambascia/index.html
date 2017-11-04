@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Singleton Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body class="changeBackColor">
+<div class="containter">
+    <div class="row">
+        <div class="mx-auto">
+            <h2 class="changeTopMargin">Singleton example checkout the singleton.js code to see whats going on!</h2>
+        </div>
+        <div class="mx-auto">
+            <h5 class="changeTopMargin">In the console when you press the "Aceptar" link you can check that both
+                instance are the same.</h5>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="mx-auto changeTopMargin">
+            <form class="form-inline">
+                <div class="form-group mx-sm-3">
+                    <label for="personName" class="sr-only">Nombre</label>
+                    <input type="text" class="form-control" id="personName" placeholder="Ingrese un nombre">
+                </div>
+                <a href="#"
+                   onclick="consumidor1.setName(document.getElementById('personName').value); consumidor1.getName();consumidor2.getName()">Aceptar</a>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+<script src="singleton.js"></script>
+<link rel="stylesheet" href="customs.css">
+</body>
+</html>

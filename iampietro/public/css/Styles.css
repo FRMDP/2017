@@ -1,0 +1,97 @@
+div div h1 {
+	padding-top: 17px; 
+}
+
+#reporters {
+	margin-left: 35px;
+	margin-top: 33px;
+}
+
+.forPs {
+	font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 17px;
+    font-family: Arial;
+    text-transform: uppercase;
+}
+
+.forP {
+	font-family: Georgia;
+	font-size: 18px;
+    line-height: 27px;
+    max-width: 700px;
+    margin: 0 0 20px 50px;
+}
+
+.forErrorSpans {
+	color: red;
+	margin-left: 40px;
+}
+
+.forOkSpans {
+	color: green;
+	margin-left: 40px;
+}
+
+.forAlert {
+	display: none;
+}
+
+
+.forErrorIcon {
+	color: red;
+}
+
+.forOkIcon {
+	color: green;
+}
+
+.forLabel {
+	margin-left: 45px;
+}
+
+input::-webkit-input-placeholder {
+    font-style:italic;
+}
+
+.forCards {
+	width: 24rem;
+	margin: 10px;
+	height: 190px;
+	border-color: #333; 
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.forCards:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+}
+
+#entertainment:hover {
+	background-color: #f06292;
+}
+
+#sports:hover {
+	background-color: #66bb6a;
+}
+
+#economy:hover {
+	background-color: #d50000;
+}
+
+#world:hover {
+	background-color: #aeea00;
+}
+
+#politics:hover {
+	background-color: #1a237e;
+}
+
+#local:hover {
+	background-color: #1565c0;
+}

@@ -20,7 +20,7 @@ Información a la que se podrá acceder:
     
   * Para correr servidor local para pruebas (genera un servidor en localhost:7890)
     
-    ```npm run server ```
+    ```npm run start ```
   
   * En modo develop se utiliza webpack, para empaquetar utilizar comando:
     

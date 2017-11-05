@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div><md-button>clickme</md-button></div>
-        <paginate name="tracks" :list="cancion" :per="10" v-if="shown">
+        <div>Resultados: {{resultados}} </div>
+        <paginate name="tracks" :list="cancion" :per="50" v-if="shown">
             <div v-for="c in paginated('tracks')" :key="c.id">
                 <h3>Titulo: {{ c.title }}</h3>
                 <div>Artista/Grupo: {{ c.artist }}</div>
@@ -16,6 +16,7 @@
 export default {
     data(){
         return {
+            resultados: '',
             cancion: [],
             paginate: ["tracks"],
             shown: false,
@@ -32,33 +33,47 @@ export default {
     },
     methods: {
         getArtist(){
-            const st = this.$apiRoutes.getRtTrackSearchByArtist(this.name);
-            console.log(st);
-            this.$http.get(st+'&page_size=100')
+            
+            const st = this.$apiRoutes.getRoutes('trackSearch', {name: 'nameArtist', value: this.name});
+             this.$http.get(st+'&page_size=1')
                 .then(response => {
-                    console.log(response);
-                    const ava = response.data.message.header.available;
-                    console.log(ava);
-                    const array = response.data.message.body.track_list; 
-                    console.log(array);
-                    array.forEach( l =>{
-                        const track = l.track;
-                        let date = track.first_release_date.split("T")[0];
-                        if(!date){
-                            date = 'Sin informacion';
-                        }
-                        const ob = {
-                            id: track.track_id,
-                            title: track.track_name,
-                            artist: track.artist_name,
-                            album: track.album_name,
-                            release: date.split("T")[0],
-                        }
-                        this.cancion.push(Object.assign({}, ob));
-                        
-                    })
-                })
+                    const resultados = response.data.message.header.available;
+                    this.resultados = resultados;
+                    let paginas =Math.trunc( resultados / 50);
+                    if(paginas%50 != 0){
+                        paginas++;
+                    }
+                    let prms=[];
+                    for(let i = 1; i<=paginas; i++){
+                        const st1 =this.$apiRoutes.getRoutes('trackSearch', {name: 'NameArtist', value: this.name}, {name:'page', value: i},{name:'pageSize', value: 50})
+                        prms.push(this.$http.get(st1))
+                    }
+                    Promise.all(prms)
+                        .then(values =>{
+                            values.forEach( list => {
+                                const array = list.data.message.body.track_list;
+                                array.forEach( t => {
+                                    const tr = t.track;
+                                    let date = tr.first_release_date.split('T')[0];
+                                    if(!date)
+                                        date = 'Sin informacion'
+                                    const obj = {
+                                        id: tr.track_id,
+                                        title: tr.track_name,
+                                        artist: tr.artist_name,
+                                        album: tr.album_name,
+                                        release: date.split("T")[0],
+                                    }
+                                    this.cancion.push(Object.assign({}, obj));
+                                })
+                            })
+                            console.log(this.cancion);
+                        })
+                        .catch(msg => console.log(msg));
+                })     
                 .catch(msg => console.log(msg));
+          
+           
         },
     },
     watch: {
@@ -71,7 +86,7 @@ export default {
     },
     created(){
         this.getArtist();
-        this.$apiRoutes.getRoutes('hola', 5, {name:'teodor'}, 8);
+        
     },
     mounted () {
         setTimeout(() => {

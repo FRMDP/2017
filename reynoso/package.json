@@ -1,0 +1,11 @@
+{
+  "name": "tp9",
+  "version": "1.0.0",
+  "description": "javascript design patterns",
+  "main": "index.js",
+  "scripts": {
+  	"start": "node index.js"
+  },
+  "author": "mati",
+  "license": "ISC"
+}

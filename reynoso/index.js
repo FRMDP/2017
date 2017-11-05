@@ -64,7 +64,7 @@ const Revealer = (()=> {
 
 console.log("The Revealing Module Pattern");
 
-Revealer.definition;
+console.log(Revealer.definition);
 
 line();
 

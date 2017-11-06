@@ -1,26 +1,36 @@
 <template>
-    <div>
-        <div>Resultados: {{resultados}} </div>
-        <paginate name="tracks" :list="cancion" :per="50" v-if="shown">
-            <div v-for="c in paginated('tracks')" :key="c.id">
-                <h3>Titulo: {{ c.title }}</h3>
-                <div>Artista/Grupo: {{ c.artist }}</div>
-                <div>Album: {{ c.album }}</div>
-                <div>Lanzamiento: {{ c.release }}</div>
+    <div class="template">
+        <div>Resultados: {{cancion.length}} </div>
+        <paginate name="tracks" :list="cancion" :per="50" v-if="shown" class="row">
+            <div v-for="c in paginated('tracks')" :key="c.id" class="three columns margins">
+                <zp-littlecard :track="c"></zp-littlecard>
             </div>
         </paginate>
-        <paginate-links for="tracks" :async="true" :show-step-links="true" :step-links="{next: 'N', prev: 'P'}" v-model="algo"></paginate-links>
+        <div class="row">
+            <paginate-links for="tracks" :async="true" :show-step-links="true" :step-links="{next: '<<', prev: '>>'}" class="pag" ></paginate-links>
+        </div>
     </div>
 </template>
 <script>
+import zpLittlecard from './zp-littlecard.vue'
 export default {
+    components:{
+        zpLittlecard,
+    },
     data(){
         return {
             resultados: '',
             cancion: [],
             paginate: ["tracks"],
             shown: false,
-            algo:'',
+            aux: {
+                id: '',
+                title: '',
+                artist: '',
+                album: '',
+                release: '',
+                snippet: '',
+            }
         }
     },
     computed: {
@@ -40,7 +50,7 @@ export default {
                     const resultados = response.data.message.header.available;
                     this.resultados = resultados;
                     let paginas =Math.trunc( resultados / 50);
-                    if(paginas%50 != 0){
+                    if(paginas%50 != 0 || resultados < 50){
                         paginas++;
                     }
                     let prms=[];
@@ -54,20 +64,30 @@ export default {
                                 const array = list.data.message.body.track_list;
                                 array.forEach( t => {
                                     const tr = t.track;
+                                    let snippet= '';
                                     let date = tr.first_release_date.split('T')[0];
                                     if(!date)
                                         date = 'Sin informacion'
-                                    const obj = {
-                                        id: tr.track_id,
-                                        title: tr.track_name,
-                                        artist: tr.artist_name,
-                                        album: tr.album_name,
-                                        release: date.split("T")[0],
-                                    }
-                                    this.cancion.push(Object.assign({}, obj));
+                                    this.aux.id= tr.track_id,
+                                    this.aux.title= tr.track_name,
+                                    this.aux.artist= tr.artist_name,
+                                    this.aux.album= tr.album_name,
+                                    this.aux.release= date.split("T")[0],
+                                    console.log(this.aux.title);
+                                    this.$http.get(this.$apiRoutes.getRoutes('trackSnippet', {name: 'trackId', value: tr.track_id}))
+                                        .then(resp => {
+                                            snippet = resp.data.message.body.snippet.snippet_body;
+                                            console.log(snippet);
+                                            this.aux.snippet= snippet,
+                                            this.cancion.push(Object.assign({}, this.aux));
+                                        })
+                                        .catch(msg => {
+                                            console.log(msg)
+                                            this.aux.snippet = 'Sin fragmento',
+                                            this.cancion.push(Object.assign({}, this.aux))    
+                                        });
                                 })
                             })
-                            console.log(this.cancion);
                         })
                         .catch(msg => console.log(msg));
                 })     
@@ -95,3 +115,19 @@ export default {
     },
 }
 </script>
+<style scoped>
+.margins{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+.template{
+    margin-left: 10px;
+}
+.pag{
+    float: left;
+    width: 20%;
+    list-style-type:none;
+}
+</style>
+

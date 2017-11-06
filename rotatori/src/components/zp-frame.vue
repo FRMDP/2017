@@ -18,7 +18,7 @@
             <md-button class="butWid" >Gestion de Stock</md-button>
             <md-button class="butWid" >Ayuda</md-button>
         </md-sidenav>
-        <router-view class="relative element hei paddLeftRight"></router-view>
+        <router-view class="relative element hei"></router-view>
     </div>
 </template>
 
@@ -46,8 +46,8 @@
 </script>
 <style scoped>
 .paddLeftRight{
-    padding-left: 150px;
-    padding-right: 150px;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 .hei{
     height: 100%;

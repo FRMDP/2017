@@ -1,0 +1,11 @@
+{
+  "name": "mixin-pattern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mixin-pattern.js",
+  "scripts": {
+    "start": "node mixin-pattern.js"
+  },
+  "author": "",
+  "license": "MIT"
+}

@@ -10,6 +10,19 @@ const receiptTicketModule = (function () {
   const getReceiptNumber = function () {
     return receiptNumber;
   };
+  const getTotalItems = function () {
+    return itemsForPurchase.length;
+  };
+  const getPurchaseTotal = function () {
+    let total = 0;
+    itemsForPurchase.forEach(function (item) {
+      total = total + item.price;
+    });
+    return total;
+  };
+  const getItemsInPurchase = function () {
+    return itemsForPurchase;
+  };
 
   return {
 
@@ -17,26 +30,13 @@ const receiptTicketModule = (function () {
     addItem: function (item) {
     itemsForPurchase.push(item);
     },
-    getTotalItems: function () {
-      return itemsForPurchase.length;
-    },
-    getPurchaseTotal: function () {
-      let total = 0;
-      itemsForPurchase.forEach(function (item) {
-        total = total + item.price;
-      });
-      return total;
-    },
-    getItemsInPurchase: function () {
-      return itemsForPurchase;
-    },
     getReceipt: function () {
       return {
 
         receipt: getReceiptNumber(),
-        items: this.getItemsInPurchase(),
-        totalItems: this.getTotalItems(),
-        amount: this.getPurchaseTotal()
+        items: getItemsInPurchase(),
+        totalItems: getTotalItems(),
+        amount: getPurchaseTotal()
 
       };
     }

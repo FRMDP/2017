@@ -1,13 +1,45 @@
 <html>
     <head>
-
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+        <style>
+            body{
+                margin-left: 100px;
+                margin-right: 100px;
+                margin-top: 50px;
+            }
+            .div{
+                margin-top: 5px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        </style>
     </head>
     <body>
         
-        
-        
-        
-        
-        <script src="js/app.js"></script>
+       <div>
+            <h1  class="title">Busqueda</h1>
+            <div class="div">
+                <input type="radio" onchange="seleccionado(this)" name="tipo" value="q_track" id="rb1" checked="true"> <label for="rb1"> Canciones</label><br>
+                <input type="radio" onchange="seleccionado(this)" name="tipo" value="q_artist" id="rb2"><label for="rb2"> Artistas</label><br>
+                <input type="radio" onchange="seleccionado(this)" name="tipo" value="country" id="rb3"><label for="rb3"> Cancion por país</label><br>
+            </div>
+            <div class="select is-primary">
+                <select class="browser-default" id="combobox" disabled="true">
+                    <option value="" disabled selected>Elija una opcion</option>
+                    <option value="us">EEUU</option>
+                    <option value="ar">Argentina</option>
+                    <option value="it">Italia</option>
+                    <option value="br">Brasil</option>
+                </select>
+            </div><br>
+            <input type="text" id="busqueda" placeholder="ingrese busqueda" class="input is-primary div"><br>
+            <div class="div">
+                <button type="button" id="btnBuscar" class="button is-primary">Buscar</button><br>
+            </div>
+            <label id="lab"></label>
+       </div>
+        <script type="text/javascript" src="js/app.js">
+        </script>
     </body>
 </html>

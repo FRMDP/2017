@@ -42,8 +42,7 @@ function seleccionado(node) {
 
 function busqueda(){
     if(radio1.checked){
-        if(text.value!=""){
-            console.log(rutas.execute('getCanciones',text.value));
+        if(text.value!=""){          
             label.innerHTML = rutas.execute('getCanciones',text.value)
         }else{
             label.innerHTML = 'Debe ingresar algo para buscar'
@@ -51,7 +50,6 @@ function busqueda(){
     }
     if(radio2.checked){
         if(text.value!=""){
-            console.log(rutas.execute('getArtistas', text.value));
             label.innerHTML = rutas.execute('getArtistas',text.value)
         }else{
             label.innerHTML = 'Debe ingresar algo para buscar'
@@ -59,7 +57,6 @@ function busqueda(){
     }
     if(radio3.checked){
         if(combo.value !=""){
-            console.log(rutas.execute('getPorPais', text.value));
             label.innerHTML = rutas.execute('getPorPais',combo.value)
         }else{
             label.innerHTML = 'Debe seleccionar un pais'

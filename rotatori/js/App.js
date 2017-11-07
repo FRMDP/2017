@@ -10,6 +10,7 @@ const text = document.getElementById("busqueda");
 
 let valor;
 
+//Command Patern
 const rutas = {
     getCanciones(dato){
         return url + 'track.search?' + apiKey + '&' + valor + '=' + dato 
@@ -21,6 +22,7 @@ const rutas = {
         return url + 'chart.tracks.get?' + apiKey + '&' + valor + '=' + dato
     }
 };
+//asigancion de la funcion execute
 rutas.execute = function(name){
     return rutas[name] && rutas[name].apply(rutas, [].slice.call(arguments,1));
 }

@@ -21,7 +21,7 @@ function kangaroo(options){
 
 function animalFactory() {}
 
-animalFactory.prototype.animalClass = dog;
+animalFactory.prototype.animalClass = cat;
 
 animalFactory.prototype.createAnimal = (options) => {
   switch(options.animalType){

@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="padd">
         <h1>Busqueda de canciones</h1>
         <div>
             <md-radio v-model="radio" id="my-test4" name="my-test-group2" md-value="1" class="md-primary">Por artista</md-radio>
             <md-radio v-model="radio" id="my-test5" name="my-test-group2" md-value="2" class="md-primary">Por canción</md-radio>
-            <md-radio v-model="radio" id="my-test6" name="my-test-group2" md-value="3" class="md-primary">Por nombre album</md-radio>
+            <md-radio v-model="radio" id="my-test6" name="my-test-group2" md-value="3" class="md-primary">Por País</md-radio>
         </div> 
-        <zp-sartist v-if="radio == '1'" class="padd"></zp-sartist> 
+        <zp-sartist v-if="radio == '1'"></zp-sartist> 
     </div>
 </template>
 <script>

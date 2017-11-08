@@ -5,9 +5,14 @@
             <md-progress class="md-accent"  md-indeterminate></md-progress>
             <h3 >Aguarde mientras se carga la página...</h3 >
         </div>
-        <div v-else>
-            <div>Resultados: {{songs.length}} </div>
-            <paginate name="tracks" :list="songs" :per="50" v-if="shown" class="row">
+        <div v-else class="paddings">
+            <md-input-container>
+                <label>Filtrar</label>
+                <md-input v-model="filter"></md-input>
+            </md-input-container>
+        </div>
+            <div style="padding-left:100px">Resultados: {{trackFilter.length}} </div>
+            <paginate name="tracks" :list="trackFilter" :per="50" v-if="shown" class="row">
                 <div v-for="c in paginated('tracks')" :key="c.id" class="three columns margins">
                     <zp-littlecard :track="c"></zp-littlecard>
                 </div>
@@ -15,14 +20,17 @@
             <div class="row">
                 <paginate-links for="tracks" :async="true" :show-step-links="true" :step-links="{next: '<<', prev: '>>'}" class="pag" ></paginate-links>
             </div>
+            </div>
         </div>
     </div>
 </template>
 <script>
 import zpLittlecard from './zp-littlecard.vue'
+import zpAlert from './zp-alert.vue'
 export default {
     components:{
         zpLittlecard,
+        zpAlert,
     },
     data(){
         return {
@@ -30,14 +38,15 @@ export default {
             songs: [],
             paginate: ["tracks"],
             shown: false,
-            aux: {
-                id: '',
-                title: '',
-                artist: '',
-                album: '',
-                release: '',
-            },
+            filter: '',
             pbar: false,
+            /*const ob= {
+                    id: tr.track_id,
+                    title: tr.track_name,
+                    artist: tr.artist_name,
+                    album: tr.album_name,
+                    release: date.split("T")[0],
+            }*/
         }
     },
     computed: {
@@ -46,6 +55,13 @@ export default {
         },
         name() {
             return this.$route.params.name;
+        },
+        trackFilter(){
+            return this.songs.filter( c => 
+                                            (c.title.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0) ||
+                                            (c.artist.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0) ||
+                                            (c.album.toUpperCase().indexOf(this.filter.toUpperCase())>=0)
+                                    )
         }
     },
     methods: {
@@ -105,9 +121,7 @@ export default {
         
     },
     mounted () {
-        setTimeout(() => {
         this.shown = true
-        }, 1000)
     },
 }
 </script>
@@ -124,6 +138,10 @@ export default {
     float: left;
     width: 20%;
     list-style-type:none;
+}
+.paddings{
+    margin-left: 100px;
+    margin-right: 100px;
 }
 </style>
 

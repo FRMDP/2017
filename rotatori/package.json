@@ -9,7 +9,7 @@
     "build": "webpack"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gisela Rotatori",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",

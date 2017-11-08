@@ -1,0 +1,92 @@
+<template>
+    <div>
+        <form novalidate @submit.stop.prevent="submit">
+            <md-input-container>
+                <label>Nombre</label>
+                <md-input v-model="user.name"></md-input>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Empresa</label>
+                <md-input v-model="user.company"></md-input>
+            </md-input-container>
+
+            <md-input-container>
+                <label>E-mail</label>
+                <md-input v-model="user.email"></md-input>
+            </md-input-container>
+
+           <md-input-container md-has-password>
+                <label>Contraseña</label>
+                <md-input type="password" v-model="user.pass"></md-input>
+            </md-input-container>
+            <md-button class="md-raised md-primary" @click="userRegister" :disabled="!formOk">Registrar</md-button>
+        </form>
+        <zp-alert v-if="alert" class="alert" :messageAlert="messageAlert" :classAlert="classAlert"></zp-alert>
+    </div>
+</template>
+<script>
+import zpAlert from './zp-alert.vue'
+export default {
+    components:{
+        zpAlert,
+    },
+    data(){
+        return {
+            user: {
+                name:'',
+                company: '',
+                email: '',
+                pass: '',
+            },
+            alert: false,
+            messageAlert: 'Ya hay un usuario con ese Mail',
+            classAlert: 'alert-info',
+        }
+    },
+    computed: {
+        formOk(){
+            return this.user.name && this.user.company && this.user.email && this.user.pass;
+        }
+    },
+    methods: {
+        toggleRightSidenav(){
+            this.$emit('toggleRightSidenav');
+        },
+        clearFields(){
+            this.user.name = '';
+            this.user.company = '';
+            this.user.email = '';
+            this.user.pass = '';
+        },
+        userRegister(){
+            /*if(this.$storage.saveUser(this.user)){
+                this.$session.set('login', this.user);
+                this.$emit('putName', this.user.name);
+                this.clearFields();
+                this.toggleRightSidenav();
+            }else{
+                this.showAlert();
+            }*/
+        },
+        showAlert(){
+                this.alert = true;
+                setTimeout( () => this.hideAlert(),4000);
+
+        },
+        hideAlert(){
+            this.alert = false;
+        }
+    }
+}
+</script>
+<style scoped>
+.alert{
+    width: 100%;
+    height: 50px;
+    margin-left: 0px;
+    left: 0px;
+}
+</style>
+
+

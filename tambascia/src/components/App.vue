@@ -1,18 +1,13 @@
 <template>
-    <div class="container-fluid app">
-        <navigation></navigation>
+    <div class="containter-fluid">
         <router-view></router-view>
     </div>
 </template>
 
-<script>
-    import navigation from './co-navigation.vue';
 
+<script>
     export default {
         name: 'app',
-        components: {
-            navigation
-        }
     }
 </script>
 <style>

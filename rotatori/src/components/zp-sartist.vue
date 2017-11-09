@@ -20,6 +20,7 @@ export default {
         send(){
             const st = this.artistName.replace(/\s/g, "%20");
             this.$router.push({ name: 'result', params: { name: st} })
+            this.$store.commit('putTypeSearch', 'nameArtist');
         }
     },
 }

@@ -2,7 +2,7 @@
     <div class="hei">
         <md-toolbar class="md-dense" id="toolbar">
             <md-button md-menu-trigger class="md-icon-button" @click="toggleLeftSidenav"><md-icon>menu</md-icon></md-button>
-            <md-button style="flex: 1">MusicPack</md-button>
+            <md-button style="flex: 1" @click="$router.push({name:'index'})">MusicPack</md-button>
             <div class="alRight">
                 <md-button @click="toggleRightSidenav">
                     Entrar
@@ -16,7 +16,7 @@
                 </div>
             </md-toolbar>
             <md-button class="butWid" @click="routeGo('index')">Volver</md-button>
-            <md-button class="butWid" @click="routeGo('search')" >Buscar</md-button>
+            <md-button class="butWid" @click="routeGo('search')" >Buscar Canciones</md-button>
             <md-button class="butWid" >Menu</md-button>
             <md-button class="butWid" >Ayuda</md-button>
         </md-sidenav>

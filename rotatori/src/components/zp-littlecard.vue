@@ -14,7 +14,7 @@
                 </md-card-header>
 
                 <md-card-actions>
-                    <md-button class="md-accent bold" @click="$router.push({name: 'lyric', params:{id: track.id, name:track.title}})">Ver lyric</md-button>
+                    <md-button class="md-accent bold" @click="ruteGo()">Ver lyric</md-button>
                     <md-button class="md-warn bold" @click="$router.push()"> </md-button>
                 </md-card-actions>
                 </md-card-area>
@@ -32,7 +32,10 @@
             }
         },
         methods: {
-    
+            ruteGo(){
+                const st = this.track.title.replace(/\s/g, "%20");
+                this.$router.push({name: 'lyric', params:{id: this.track.id, name: st}});
+            }
         },
         created(){
 

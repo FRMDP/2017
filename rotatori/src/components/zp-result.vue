@@ -40,13 +40,6 @@ export default {
             shown: false,
             filter: '',
             pbar: false,
-            /*const ob= {
-                    id: tr.track_id,
-                    title: tr.track_name,
-                    artist: tr.artist_name,
-                    album: tr.album_name,
-                    release: date.split("T")[0],
-            }*/
         }
     },
     computed: {
@@ -58,9 +51,9 @@ export default {
         },
         trackFilter(){
             return this.songs.filter( c => 
-                                            (c.title.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0) ||
-                                            (c.artist.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0) ||
-                                            (c.album.toUpperCase().indexOf(this.filter.toUpperCase())>=0)
+                                        (c.title.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0) ||
+                                        (c.artist.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0) ||
+                                        (c.album.toUpperCase().indexOf(this.filter.toUpperCase())>=0)
                                     )
         }
     },
@@ -72,13 +65,13 @@ export default {
                 .then(response => {
                     const result = response.data.message.header.available;
                     this.result = result;
-                    let paginas =Math.trunc( result / 50);
+                    let paginas =Math.trunc(result / 50);
                     if(paginas%50 != 0 || result < 50){
                         paginas++;
                     }
                     let prms=[];
                     for(let i = 1; i<=paginas; i++){
-                        const st1 =this.$apiRoutes.getRoutes('trackSearch', {name: 'NameArtist', value: this.name}, {name:'page', value: i},{name:'pageSize', value: 50})
+                        const st1 =this.$apiRoutes.getRoutes('trackSearch', {name: 'nameArtist', value: this.name}, {name:'page', value: i},{name:'pageSize', value: 50})
                         prms.push(this.$http.get(st1))
                     }
                     Promise.all(prms)
@@ -107,8 +100,6 @@ export default {
                     this.pbar = false;   
                 })     
                 .catch(msg => console.log(msg));
-          
-           
         },
     },
     watch: {

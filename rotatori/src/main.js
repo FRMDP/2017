@@ -4,6 +4,7 @@ import VueMaterial from 'vue-material'
 import VueSession from 'vue-session'
 import axios from 'axios'
 import VuePaginate from 'vue-paginate'
+import store from './utils/store'
 
 Vue.use(VuePaginate)
 Vue.use(VueRouter);
@@ -18,6 +19,7 @@ Vue.prototype.$http = axios
 Vue.prototype.$apiRoutes = apiRoutes
 
 new Vue({
+    store,
     router,
     el: '#app',
     render: h => h(App)

@@ -104,21 +104,13 @@ const methods = [
             {pageSize: '&page_size='}
         ]
     },
-    {
-        name: 'trackSnippet',
-        endpoint: 'track.snippet.get?',
-        parameters: [
-            {trackId: "&track_id="}
-        ]
-    }
-
 ]
 
 export default {
     getMethod(st){
         return methods.find( m => m.name == st);
     },
-    getPosValue(params, nameKey){
+    getIsKey(params, nameKey){
        const p = Object.keys(params);
        return p[0].toUpperCase() == nameKey.toUpperCase()
     },
@@ -130,7 +122,7 @@ export default {
         while(ar<arguments.length){ //recorro resto de argumentos 
             while(i<route.parameters.length){ //recorro los parametros del endpoint
                 const p = route.parameters[i]; //asigno llave/valor de la posicion del parametro
-                if(this.getPosValue(p, arguments[ar].name)) //veo si es el que corresponde
+                if(this.getIsKey(p, arguments[ar].name)) //veo si es el que corresponde
                     break;//si es ya no sigo avanzando, corto el segundo while
                 else{
                     i++; //sigo buscando en el siguiente parametro

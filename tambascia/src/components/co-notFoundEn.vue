@@ -1,17 +1,89 @@
 <template>
-    <p>404 not found</p>
+  <div class="container">
+    <div class="text-wrapper">
+      <div class="title" data-content="404">
+        404
+      </div>
+
+      <div class="subtitle">
+        Oops, the page you're looking for doesn't exist.
+      </div>
+
+      <div class="buttons">
+        <a class="button" href="/#/">Go to homepage</a>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
-    export default {
-        name: 'notFoundEn',
-        data() {
-            return {}
-        },
-        methods: {}
-    }
+  export default {
+    name: 'notFoundEn'
+  }
 </script>
 
 <style>
+  html {
+    height: 100%;
+  }
+
+  body {
+    background-size: cover;
+    font-family: 'Raleway', sans-serif;
+    background-color: #342643;
+    height: 100%;
+  }
+
+  .text-wrapper {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .title {
+    font-size: 6em;
+    font-weight: 700;
+    color: #EE4B5E;
+  }
+
+  .subtitle {
+    font-size: 40px;
+    font-weight: 700;
+    color: #1FA9D6;
+  }
+
+  .buttons {
+    margin: 30px;
+  }
+  .buttons a.button {
+    font-weight: 700;
+    border: 2px solid #EE4B5E;
+    text-decoration: none;
+    padding: 15px;
+    text-transform: uppercase;
+    color: #EE4B5E;
+    border-radius: 26px;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  .buttons a.button:hover {
+    background-color: #EE4B5E;
+    color: white;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+
 
 </style>

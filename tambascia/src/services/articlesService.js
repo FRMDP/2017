@@ -1,6 +1,7 @@
 import storageService from '../services/storageService';
 
 const articlesFromApi = [];
+const articlesByCategory = [];
 
 export default {
     //aca va top latest or popular como parametro
@@ -31,9 +32,19 @@ export default {
     },
     getArticlesByCategory (articleCategory){
         axios.get('https://newsapi.org/v1/sources?category=' +articleCategory)
-            .then(response => articlesFromApi.push(response.data.sources))
+            .then(response => articlesByCategory.push(response.data))
             .catch(error => console.log('There was the following error loading news: ' + error));
-        return articlesFromApi;
+        return articlesByCategory;
+    },
+    getArticleById (articleId){
+      let articleById = articlesFromApi[articleId];
+      return articleById
+    },
+    getArticleByCountry (countryAb) {
+      axios.get('https://newsapi.org/v1/sources?country=' +countryAb)
+        .then(response => articlesFromApi.push(response.data))
+        .catch(error => console.log('There was the following error loading news: ' + error));
+      return articlesFromApi;
     }
 
 

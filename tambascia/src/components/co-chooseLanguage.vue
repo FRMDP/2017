@@ -8,10 +8,10 @@
         <div class="col-md-12">
             <div class="row marginTopFlags">
                 <div class="mx-auto">
-                    <a href="/#/en/ppal"><img src="http://simbologiadelmundo.com/wp-content/uploads/2016/06/r-estados-unidos.png" alt="Flag of USA"></a>
+                    <a href="/#/en/ppal"><img src="../../static/us.png" alt="Flag of USA"></a>
                 </div>
                 <div class="mx-auto">
-                    <a href="/#/de/ppal"><img src="http://simbologiadelmundo.com/wp-content/uploads/2016/06/r-alemania.png" alt="Flag of Germany"></a>
+                    <a href="/#/de/ppal"><img src="../../static/german.png" alt="Flag of Germany"></a>
                 </div>
             </div>
         </div>
@@ -20,6 +20,7 @@
 
 <script>
     export default {
+        name: 'chooseLanguage',
         data() {
             return {}
         },
@@ -28,7 +29,7 @@
     }
 </script>
 
-<style>
+<style lang="scss">
 .marginTopCustom {
     margin-top: 100px;
 }
@@ -37,5 +38,6 @@
 }
 .changeFont{
     font-family: 'Roboto', sans-serif;
+    font-weight: 300;
 }
 </style>

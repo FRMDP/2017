@@ -10,11 +10,7 @@ export default new VueRouter({
 	routes: [
 		{ path: '/', component: zpPortada, name: 'index' },
 		{ path: '/search', component: zpSearch, name: 'search' },
-		{ path: '/result/:name', component: zpResult, name: 'result', beforeEnter: (to, from, next) => {
-			console.log('to', to);
-			console.log('from', from);
-			console.log('next', next);
-		} },
-		{ path: '/lyrics/:id/:name', component: zpLyric, name: 'lyric' }
+		{ path: '/result/:endpoint/:search/:name', component: zpResult, name: 'result' },
+		{ path: '/lyrics/:id/:name', component: zpLyric, name: 'lyric'},
 	]
 });

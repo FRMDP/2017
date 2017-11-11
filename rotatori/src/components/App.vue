@@ -20,7 +20,11 @@ import zpFrame from './zp-frame.vue'
     		
         },
         created(){
-           
+            this.$http.get('https://battuta.medunes.net/api/country/all/?key=2bd3a0ab3aeea1156c6649766caa2373')
+                .then( response => {
+                    this.$store.commit('putCountries', response.data);
+                })
+                .catch(msg => console.log(msg));
         }
     }
 </script>

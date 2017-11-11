@@ -1,6 +1,16 @@
 <template>
     <div>
-        <h1>{{ lyric.title }}</h1>
+        <div class="row">
+            <div class="one columns">
+                <md-button class="md-fab md-warn" @click="goback()">
+                    <md-icon>reply</md-icon>
+                    <md-tooltip md-direction="right">{{ title }}</md-tooltip>
+                </md-button>
+            </div>
+            <div class="eleven columns">
+                <h1>{{ lyric.title }}</h1>
+            </div>
+        </div>
         <div class="margins">
             <div v-html="lyric.body" class="paddingSup"></div>
             <div v-html="lyric.copyright" class="italic"></div>
@@ -19,8 +29,8 @@ export default {
                 body: '',
                 copyright: '',
                 url: '',
-            }
-
+            },
+            title: 'volver al resultado',
         }
     },
     computed: {
@@ -40,15 +50,20 @@ export default {
             this.$http.get(st)
                 .then(response => {
                     const lyric = response.data.message.body.lyrics;
-                    this.lyric.title = this.name;
+                    this.lyric.title = this.name.replace(/%20/g," ");
                     const body = lyric.lyrics_body;
                     this.lyric.body = body.split('*******')[0].replace(/\n/g, '<br>');
                     this.lyric.copyright = lyric.lyrics_copyright;
                     this.lyric.url = lyric.backlink_url;
-
-
                 })
                 .catch(msg => console.log(msg));
+        },
+        goback(){
+            const st = this.$store.state.backPathSearch;
+            if(st != '')
+                this.$router.push(st);
+            else
+                this.title = 'no se puede acceder a la pagina de resultados'
         }
     },
     watch: {

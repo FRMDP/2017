@@ -17,7 +17,7 @@ const methods = [
             {country: '&country='},
             {page: '&page='},
             {pageSize: '&page_size='},
-            {hasLirics: '&f_has_lyrics='} //[1]
+            {hasLyrics: '&f_has_lyrics='} //[1]
         ]
     },
     {

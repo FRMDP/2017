@@ -1,6 +1,5 @@
 <template>
   <div class="container-fluid">
-    <navigation></navigation>
     <div class="row">
       <div class="col-md-12" v-if="articles === null || articles === undefined">
         <div class="alert alert-danger" role="alert" >

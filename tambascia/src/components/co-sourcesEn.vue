@@ -1,7 +1,5 @@
 <template>
-  <div id="wrapper">
-
-    <!-- Sidebar -->
+      <!-- Sidebar -->
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
@@ -32,12 +30,10 @@
         </li>
       </ul>
     </div>
-  </div>
 </template>
 
 <script>
-  import navigation from './co-navigationEn.vue';
-
+  import articleService from '../services/articlesService';
   export default {
     name: 'sources',
     data() {
@@ -46,10 +42,9 @@
       }
     },
     methods: {
-
     },
     created() {
-      this.sources = articleService.getSources();
+      $("#wrapper").toggleClass("toggled");
     }
   }
 </script>

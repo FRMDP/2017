@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import VueRouter from 'vue-router'
+import En from '@/components/Containers/En.vue';
 import ppalEn from '@/components/co-ppalEn.vue';
 import chooseLanguage from '@/components/co-chooseLanguage.vue';
 import categoriesEn from '@/components/co-articlesByCategoryEn.vue';
@@ -17,23 +18,31 @@ export default new Router({
       component: chooseLanguage,
     },
     {
-      path: '/en/ppal',
-      name: 'ppalEn',
-      component: ppalEn
+      path: '/en/',
+      name: 'En',
+      component: En,
+      redirect: { name: 'ppalEn' },
+      children: [
+        {
+          path: 'ppal',
+          name: 'ppalEn',
+          component: ppalEn
+        },
+        {
+          path: 'category/:id',
+          name: 'categoriesEn',
+          component: categoriesEn
+        },
+        {
+          path: 'article/:id',
+          name: 'oneArticleEn',
+          component: oneArticleEn
+        },
+      ]
     },
     {
       path: '/de/',
       //component: ppalDe
-    },
-    {
-      path: '/en/category/:id',
-      name: 'categoriesEn',
-      component: categoriesEn
-    },
-    {
-      path: '/en/article/:id',
-      name: 'oneArticleEn',
-      component: oneArticleEn
     },
     {
       path: '/*',
@@ -42,7 +51,7 @@ export default new Router({
     },
     {
       path: '/*',
-      name: 'notFoundEn',
+      name: 'notFoundRedirect',
       redirect: '/#/notFound'
     }
   ]

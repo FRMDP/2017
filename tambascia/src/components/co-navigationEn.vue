@@ -7,7 +7,7 @@
       <a class="nav-link active" href="/#/en/ppal/">All news</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/#/en/ppal">Sources</a>
+      <a class="nav-link" @click = "showSideBar()" href="/#/en/ppal">Sources</a>
     </li>
     <li class="nav-item">
       <a class="nav-link disabled" href="#">Disabled</a>
@@ -29,9 +29,15 @@
   export default {
     name: 'navigation',
     data() {
-      return {}
+      return {
+        sideBar: false,
+      }
     },
-    methods: {}
+    methods: {
+      showSideBar(data){
+        this.$emit('showSideBar', data);
+      }
+    }
   }
 </script>
 

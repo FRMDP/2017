@@ -1,8 +1,8 @@
 <template>
   <div >
     <navigation @showSideBar="showSideBar"></navigation>
-    <sources v-if="this.showSide"></sources>
-    <router-view></router-view>
+    <sources :show="this.showSide"></sources>
+    <router-view :class="{'toggled': this.showSide}"></router-view>
   </div>
 </template>
 
@@ -28,6 +28,9 @@
     }
 </script>
 
-<style>
-
+<style scoped>
+  .toggled {
+    padding-left: 250px;
+    transition: padding 0.5s;
+  }
 </style>

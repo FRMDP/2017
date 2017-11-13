@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row justify-content-md-center">
     <div class="col-md-12" v-if="articles === null || articles === undefined">
       <div class="alert alert-danger" role="alert" >
         <h4 class="alert-heading">Do oh!</h4>

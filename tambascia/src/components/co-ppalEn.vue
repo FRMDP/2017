@@ -1,5 +1,5 @@
 <template>
-    <div class="container" id="wrapper">
+    <div class="container">
         <allArticlesEn></allArticlesEn>
     </div>
 </template>
@@ -20,6 +20,7 @@
 </script>
 
 <style>
-
-
+.container{
+  transition: all 0.5;
+}
 </style>

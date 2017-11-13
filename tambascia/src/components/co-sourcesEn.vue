@@ -1,6 +1,6 @@
 <template>
       <!-- Sidebar -->
-    <div id="sidebar-wrapper">
+    <div id="sidebar-wrapper" :class="{'show': this.show}">
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
           <a href="#">
@@ -36,20 +36,18 @@
   import articleService from '../services/articlesService';
   export default {
     name: 'sources',
+    props: ['show'],
     data() {
       return {
         sources: {}
       }
     },
     methods: {
-    },
-    created() {
-      $("#wrapper").toggleClass("toggled");
     }
   }
 </script>
 
-<style>
+<style lang="scss">
   /*!
    * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
    * Copyright 2013-2017 Start Bootstrap
@@ -75,9 +73,9 @@
   #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
-    width: 0;
-    height: 100%;
+    left: 0px;
+    width: 250px !important;
+    height: 100vh;
     margin-left: -250px;
     overflow-y: auto;
     background: #000;
@@ -85,6 +83,13 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    &.show{
+      left: 250px !important;
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+    }
   }
 
   #wrapper.toggled #sidebar-wrapper {
@@ -130,6 +135,11 @@
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
   }
+  .sidebar-nav li.active a {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+  }
 
   .sidebar-nav li a:active, .sidebar-nav li a:focus {
     text-decoration: none;
@@ -153,9 +163,6 @@
   @media(min-width:768px) {
     #wrapper {
       padding-left: 0;
-    }
-    #wrapper.toggled {
-      padding-left: 250px;
     }
     #sidebar-wrapper {
       width: 0;

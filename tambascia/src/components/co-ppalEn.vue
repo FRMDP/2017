@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <navigation></navigation>
+        <sources></sources>
         <allArticlesEn></allArticlesEn>
     </div>
 </template>

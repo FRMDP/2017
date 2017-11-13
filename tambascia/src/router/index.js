@@ -5,9 +5,9 @@ import ppalEn from '@/components/co-ppalEn.vue';
 import chooseLanguage from '@/components/co-chooseLanguage.vue';
 import categoriesEn from '@/components/co-articlesByCategoryEn.vue';
 import notFoundEn from '@/components/co-notFoundEn.vue'
-//import oneNewEn from '@/components/co-oneNewEn.vue';
+import oneArticleEn from '@/components/co-oneArticleEn.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 export default new Router({
   routes: [
@@ -31,6 +31,11 @@ export default new Router({
       component: categoriesEn
     },
     {
+      path: '/en/article/:id',
+      name: 'oneArticleEn',
+      component: oneArticleEn
+    },
+    {
       path: '/*',
       name: 'notFoundEn',
       component: notFoundEn
@@ -39,12 +44,6 @@ export default new Router({
       path: '/*',
       name: 'notFoundEn',
       redirect: '/#/notFound'
-    },
-
-    /*{
-      path: '/en/oneNew/:id',
-      name: 'oneArticleEn',
-      component: oneNewEn
-    }*/
+    }
   ]
 })

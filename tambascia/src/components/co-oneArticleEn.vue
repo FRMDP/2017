@@ -23,9 +23,11 @@
         }
       }
     },
-    methods: {},
+    methods: {
+
+    },
     created() {
-      this.articles = articleService.getArticleById();
+      this.articles = articleService.getAllSourcesEnglish();
     }
   }
 </script>

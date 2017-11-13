@@ -17,17 +17,17 @@
           </div>
           <div class="card-body">
             <p class="card-text changeFont">{{actualArticle.description.substring(0, 100)}}</p>
-            <a href="/#/index" class="card-link">Show More</a>
+            <button @click="this.showMore = true" type="button" class="btn btn-outline-info">Show More</button>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
   import articleService from '../services/articlesService';
+  import sources from './co-sourcesEn.vue';
 
   export default {
     name: 'allArticlesEn',
@@ -36,9 +36,13 @@
         articles: {}
       }
     },
-    methods: {},
+    methods: {
+      changeSource(source){
+        this.articles = articlesService.getArticlesBySource(source);
+      }
+    },
     created() {
-      this.articles = articleService.getAllArticles("latest");
+      this.articles = articleService.getArticlesBySource("abc-news-au");
     }
   }
 </script>
@@ -60,4 +64,5 @@
     margin-left: 30px;
     margin-right: 30px;
   }
+
 </style>

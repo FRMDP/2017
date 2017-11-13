@@ -4,10 +4,10 @@
       <a class="nav-link active" href="/#/"><img src="../../static/pageico.png" alt="Web Page icon"></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="#">Active</a>
+      <a class="nav-link active" href="/#/en/ppal/">All news</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="/#/en/ppal">Sources</a>
     </li>
     <li class="nav-item">
       <a class="nav-link disabled" href="#">Disabled</a>

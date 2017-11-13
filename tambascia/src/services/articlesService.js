@@ -1,7 +1,8 @@
 import storageService from '../services/storageService';
 
-const articlesFromApi = [];
-const articlesByCategory = [];
+let articlesFromApi = [];
+let articlesByCategory = [];
+let sources = [];
 
 export default {
     //aca va top latest or popular como parametro
@@ -11,7 +12,7 @@ export default {
             .catch(error => console.log('There was the following error loading news: ' + error));
         return articlesFromApi;
     },
-    getAllArticlesEnglish (){
+    getAllSourcesEnglish (){
         axios.get(' https://newsapi.org/v1/sources?language=en')
             .then(response => articlesFromApi.push(response.data))
             .catch(error => console.log('There was the following error loading news: ' + error));
@@ -25,18 +26,20 @@ export default {
     },
     // aca va las disitntas sources que provee la api
     getArticlesBySource (articleSource){
-        axios.get('https://newsapi.org/v1/articles?' +articleSource+ '=techcrunch&apiKey=37b900c6d7da47c7b6b9c5557cec86ba')
+        axios.get('https://newsapi.org/v1/articles?source=' +articleSource+ '&apiKey=37b900c6d7da47c7b6b9c5557cec86ba')
             .then(response => articlesFromApi.push(response.data))
             .catch(error => console.log('There was the following error loading news: ' + error));
         return articlesFromApi;
     },
     getArticlesByCategory (articleCategory){
+       articlesByCategory = [];
         axios.get('https://newsapi.org/v1/sources?category=' +articleCategory)
             .then(response => articlesByCategory.push(response.data))
             .catch(error => console.log('There was the following error loading news: ' + error));
         return articlesByCategory;
     },
     getArticleById (articleId){
+      debugger;
       let articleById = articlesFromApi[articleId];
       return articleById
     },
@@ -45,6 +48,12 @@ export default {
         .then(response => articlesFromApi.push(response.data))
         .catch(error => console.log('There was the following error loading news: ' + error));
       return articlesFromApi;
+    },
+    getSources (){
+      axios.get('static/sources.json')
+        .then(response => sources.push(response.data))
+        .catch(error => console.log('There was the following error loading sources: ' + error));
+      return sources;
     }
 
 

@@ -1,8 +1,8 @@
 <template>
   <div >
     <navigation @showSideBar="showSideBar"></navigation>
-    <sources :show="this.showSide"></sources>
-    <router-view :class="{'toggled': this.showSide}"></router-view>
+    <sources :show="this.showSide" @changeSource="changeSource"></sources>
+    <router-view :source="changeSource" :class="{'toggled': this.showSide}"></router-view>
   </div>
 </template>
 

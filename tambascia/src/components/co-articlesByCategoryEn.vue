@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-md-12" v-if="articles === null || articles === undefined">
         <div class="alert alert-danger" role="alert" >
           <h4 class="alert-heading">Do oh!</h4>
@@ -10,17 +10,20 @@
         </div>
       </div>
       <div  v-else="" v-for="actualArticle in articles[0].sources">
-        <!--<h1 v-="id()"></h1>-->
         <div  class="col-md-4">
           <div class="card">
-            <div class="card-header">
+            <div class="card-header cardTitle">
                 <h5 class="changeFont customFont">{{validateCountryAb(actualArticle.country)}}</h5>
             </div>
             <div class="card-body">
               <p class="card-text changeFont">{{actualArticle.description.substring(0, 100)}}</p>
-              <a :href="actualArticle.url" class="card-link">Go To</a>
+              <p class="card-text"><small class="text-muted">{{actualArticle.name}}</small></p>
+            </div>
+            <div class="card-footer">
+              <a :href="actualArticle.url" class="btn btn-outline-primary buttonRight buttonLeft" role="button">Show More</a>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -84,6 +87,12 @@
 </script>
 
 <style>
+  .buttonLeft {
+    margin-left:73px;
+  }
+  .cardTitle{
+    text-align: center;
+  }
   .card {
     width: 20rem;
     margin-top: 10px;

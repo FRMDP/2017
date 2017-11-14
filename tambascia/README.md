@@ -8,7 +8,7 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:9071
+# serve with hot reload at localhost:8891
 npm run dev
 
 # build for production with minification

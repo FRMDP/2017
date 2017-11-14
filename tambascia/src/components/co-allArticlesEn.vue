@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-md-center">
     <div class="col-md-12" v-if="articles === null || articles === undefined">
-      <div class="alert alert-danger" role="alert" >
+      <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">Do oh!</h4>
         <p>There was a problem while loading news, please try later</p>
         <hr>
@@ -16,8 +16,14 @@
             <h5 class="changeFont">{{actualArticle.title.substring(0, 30)}}</h5>
           </div>
           <div class="card-body">
-            <p class="card-text changeFont">{{actualArticle.description.substring(0, 100)}}</p>
-            <button @click="this.showMore = true" type="button" class="btn btn-outline-info">Show More</button>
+            <p class="card-text changeFont">{{actualArticle.description.substring(0, 200)}}</p>
+            <p class="card-text">
+              <small class="text-muted">Published at: {{validateDate(actualArticle.publishedAt)}}</small>
+            </p>
+          </div>
+          <div class="card-footer">
+            <a :href="actualArticle.url" class="btn btn-outline-primary buttonRight" role="button">Show More</a>
+            <a :href="actualArticle.author" class="btn btn-outline-info buttonLeft" role="button">Author</a>
           </div>
         </div>
       </div>
@@ -31,23 +37,42 @@
 
   export default {
     name: 'allArticlesEn',
+    props: ['source'],
     data() {
       return {
         articles: {}
       }
     },
     methods: {
-      changeSource(source){
+      changeSource(source) {
         this.articles = articlesService.getArticlesBySource(source);
+      },
+      validateDate(badDate) {
+        let idx = badDate.indexOf("T");
+        let idxZ = badDate.indexOf("Z");
+        let replacement = "-";
+        let replacementZ = " "
+        let newDate = badDate.substr(0, idx) + replacement + badDate.substr(idx + replacement.length);
+        newDate = newDate.substr(0, idxZ) + replacementZ + badDate.substr(idxZ + replacementZ.length);
+        return newDate;
       }
     },
     created() {
       this.articles = articleService.getArticlesBySource("abc-news-au");
-    }
+    },
+
   }
 </script>
 
 <style>
+  .buttonLeft {
+    margin-left: 47px;
+  }
+
+  .buttonRight {
+    margin-left: 12px;
+  }
+
   .card {
     width: 20rem;
     margin-top: 10px;
@@ -59,7 +84,8 @@
   .changeFont {
     font-family: 'Roboto', sans-serif;
   }
-  .alert{
+
+  .alert {
     margin-top: 30px;
     margin-left: 30px;
     margin-right: 30px;

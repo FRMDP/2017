@@ -1,32 +1,21 @@
 <template>
       <!-- Sidebar -->
     <div id="sidebar-wrapper" :class="{'show': this.show}">
-      <ul class="sidebar-nav">
+      <ul class="sidebar-nav changeFont">
         <li class="sidebar-brand">
-          <a href="#">
-            Start Bootstrap
+          <a href="/#/en/ppal/">
+            Sources Avaiable
           </a>
         </li>
-        <li>
-          <a href="#">Dashboard</a>
-        </li>
-        <li>
-          <a href="#">Shortcuts</a>
-        </li>
-        <li>
-          <a href="#">Overview</a>
-        </li>
-        <li>
-          <a href="#">Events</a>
-        </li>
-        <li>
-          <a href="#">About</a>
-        </li>
-        <li>
-          <a href="#">Services</a>
-        </li>
-        <li>
-          <a href="#">Contact</a>
+        <div class="col-md-12" v-if="sources === null || sources === undefined">
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Do oh!</h4>
+            <p>There was a problem while loading sources, please try later</p>
+            <hr>
+          </div>
+        </div>
+        <li v-else ="" v-for="(actualSource, index) in articlesSource[0].sources" :key="index">
+          <a @click="changeSource(actualSource.id)" href="/#/en/ppal/">{{ actualSource.name }}</a>
         </li>
       </ul>
     </div>
@@ -39,23 +28,29 @@
     props: ['show'],
     data() {
       return {
-        sources: {}
+        sources: {
+          changeSource(data) {
+            this.$emit('changeSource', data);
+          },
+          articlesSource: {}
+        }
       }
     },
     methods: {
+
+    },
+    created(){
+      this.articlesSource = articleService.getAllSourcesEnglish();
     }
   }
 </script>
 
 <style lang="scss">
-  /*!
-   * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
-   * Copyright 2013-2017 Start Bootstrap
-   * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
-   */
-
   body {
     overflow-x: hidden;
+  }
+  .changeFont {
+    font-family: 'Roboto', sans-serif;
   }
 
   #wrapper {

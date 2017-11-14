@@ -1,5 +1,4 @@
 import storageService from '../services/storageService';
-
 let articlesFromApi = [];
 let articlesByCategory = [];
 let sources = [];
@@ -14,9 +13,9 @@ export default {
     },
     getAllSourcesEnglish (){
         axios.get(' https://newsapi.org/v1/sources?language=en')
-            .then(response => articlesFromApi.push(response.data))
-            .catch(error => console.log('There was the following error loading news: ' + error));
-        return articlesFromApi;
+            .then(response => sources.push(response.data))
+            .catch(error => console.log('There was the following error loading sources: ' + error));
+        return sources;
     },
     getAllArticlesGerman (){
         axios.get('https://newsapi.org/v1/sources?language=de')

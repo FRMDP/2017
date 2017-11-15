@@ -27,6 +27,7 @@
     },
     created() {
       this.articles = articleService.getAllSourcesEnglish();
+      console.log(this)
     }
   }
 </script>

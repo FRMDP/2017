@@ -7,14 +7,14 @@
             Sources Avaiable
           </a>
         </li>
-        <div class="col-md-12" v-if="sources === null || sources === undefined">
+        <div class="col-md-12">
           <div class="alert alert-danger" role="alert">
             <h4 class="alert-heading">Do oh!</h4>
             <p>There was a problem while loading sources, please try later</p>
             <hr>
           </div>
         </div>
-        <li v-else ="" v-for="(actualSource, index) in articlesSource[0].sources" :key="index">
+        <li v-for="(actualSource, index) in (articlesSource[0] ? articlesSource[0].sources : [])" :key="index">
           <a @click="changeSource(actualSource.id)" href="/#/en/ppal/">{{ actualSource.name }}</a>
         </li>
       </ul>
@@ -29,15 +29,14 @@
     data() {
       return {
         sources: {
-          changeSource(data) {
-            this.$emit('changeSource', data);
-          },
           articlesSource: {}
         }
       }
     },
     methods: {
-
+      changeSource(data) {
+        this.$emit('changeSource', data);
+      },
     },
     created(){
       this.articlesSource = articleService.getAllSourcesEnglish();

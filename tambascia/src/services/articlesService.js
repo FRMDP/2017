@@ -1,4 +1,5 @@
 import storageService from '../services/storageService';
+
 let articlesFromApi = [];
 let articlesByCategory = [];
 let sources = [];
@@ -15,6 +16,7 @@ export default {
         axios.get(' https://newsapi.org/v1/sources?language=en')
             .then(response => sources.push(response.data))
             .catch(error => console.log('There was the following error loading sources: ' + error));
+        console.log(sources);
         return sources;
     },
     getAllArticlesGerman (){
@@ -25,10 +27,10 @@ export default {
     },
     // aca va las disitntas sources que provee la api
     getArticlesBySource (articleSource){
-        axios.get('https://newsapi.org/v1/articles?source=' +articleSource+ '&apiKey=37b900c6d7da47c7b6b9c5557cec86ba')
-            .then(response => articlesFromApi.push(response.data))
-            .catch(error => console.log('There was the following error loading news: ' + error));
-        return articlesFromApi;
+        return axios.get('https://newsapi.org/v1/articles?source=' +articleSource+ '&apiKey=37b900c6d7da47c7b6b9c5557cec86ba')
+            //.then(response => articlesFromApi.push(response.data))
+            //.catch(error => console.log('There was the following error loading news: ' + error));
+        //return articlesFromApi;
     },
     getArticlesByCategory (articleCategory){
        articlesByCategory = [];
@@ -54,6 +56,4 @@ export default {
         .catch(error => console.log('There was the following error loading sources: ' + error));
       return sources;
     }
-
-
 }

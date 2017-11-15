@@ -2,7 +2,8 @@
   <div >
     <navigation @showSideBar="showSideBar"></navigation>
     <sources :show="this.showSide" @changeSource="changeSource"></sources>
-    <router-view :source="changeSource" :class="{'toggled': this.showSide}"></router-view>
+    <footer></footer>
+    <router-view :class="{'toggled': this.showSide}"></router-view>
   </div>
 </template>
 
@@ -19,6 +20,10 @@
         methods: {
           showSideBar(){
             this.showSide = !this.showSide;
+          },
+          changeSource(source){
+            debugger;
+            this.$run('setArticles', source);
           }
         },
       components: {

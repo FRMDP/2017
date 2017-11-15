@@ -8,7 +8,7 @@
         <a href="/#/">Go home</a>
       </div>
     </div>
-    <div v-else="" v-for="(actualArticle, index) in articles[0].articles" :key="index">
+    <div v-else="" v-for="(actualArticle, index) in (getArticles? getArticles.articles : [])" :key="index">
       <div class="col-md-4">
         <div class="card">
           <img class="card-img-top" :src="actualArticle.urlToImage" alt="Image of the article">
@@ -34,6 +34,8 @@
 <script>
   import articleService from '../services/articlesService';
   import sources from './co-sourcesEn.vue';
+  import  articles from '../store/modules/articles/index.js';
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'allArticlesEn',
@@ -43,21 +45,28 @@
         articles: {}
       }
     },
+    computed: {
+      // mix the getters into computed with object spread operator
+      ...mapGetters([
+        'getArticles'
+      ])
+    },
     methods: {
       changeSource(source) {
-        this.articles = articlesService.getArticlesBySource(source);
+        this.articles = articleService.getArticlesBySource(source);
       },
       validateDate(badDate) {
         let idx = badDate.indexOf("T");
         let idxZ = badDate.indexOf("Z");
         let replacement = "-";
-        let replacementZ = " "
+        let replacementZ = " ";
         let newDate = badDate.substr(0, idx) + replacement + badDate.substr(idx + replacement.length);
         newDate = newDate.substr(0, idxZ) + replacementZ + badDate.substr(idxZ + replacementZ.length);
         return newDate;
       }
     },
     created() {
+      this.$run('setArticles', "espn");
       this.articles = articleService.getArticlesBySource("abc-news-au");
     },
 

@@ -11,19 +11,19 @@
     <div v-else="" v-for="(actualArticle, index) in (getArticles? getArticles.articles : [])" :key="index">
       <div class="col-md-4">
         <div class="card">
-          <img class="card-img-top" :src="actualArticle.urlToImage" alt="Image of the article">
-          <div class="card-header">
+          <img class="card-img-top" v-if=(!dataIsNull(actualArticle.urlToImage)) :src="actualArticle.urlToImage" alt="Image of the article">
+          <div class="card-header" v-if=(!dataIsNull(actualArticle.title))>
             <h5 class="changeFont">{{actualArticle.title.substring(0, 30)}}</h5>
           </div>
           <div class="card-body">
-            <p class="card-text changeFont">{{actualArticle.description.substring(0, 200)}}</p>
-            <p class="card-text">
-              <small class="text-muted">Published at: {{validateDate(actualArticle.publishedAt)}}</small>
+            <p class="card-text changeFont" v-if=(!dataIsNull(actualArticle.description))>{{actualArticle.description.substring(0, 200)}}</p>
+            <p class="card-text" v-if="(validateDate(actualArticle.publishedAt))!= null ">
+              <small  class="text-muted">Published at: {{validateDate(actualArticle.publishedAt)}}</small>
             </p>
           </div>
           <div class="card-footer">
             <a :href="actualArticle.url" class="btn btn-outline-primary buttonRight" role="button">Show More</a>
-            <a :href="actualArticle.author" class="btn btn-outline-info buttonLeft" role="button">Author</a>
+            <a v-if=(!dataIsNull(actualArticle.author)) :href="actualArticle.author" class="btn btn-outline-info buttonLeft" role="button">Author</a>
           </div>
         </div>
       </div>
@@ -52,22 +52,31 @@
       ])
     },
     methods: {
+      dataIsNull(data){
+        let itIs = false;
+        if(data=== null || data === undefined){
+          itIs = true;
+        }
+        return itIs;
+      },
       changeSource(source) {
         this.articles = articleService.getArticlesBySource(source);
       },
       validateDate(badDate) {
-        let idx = badDate.indexOf("T");
-        let idxZ = badDate.indexOf("Z");
-        let replacement = "-";
-        let replacementZ = " ";
-        let newDate = badDate.substr(0, idx) + replacement + badDate.substr(idx + replacement.length);
-        newDate = newDate.substr(0, idxZ) + replacementZ + badDate.substr(idxZ + replacementZ.length);
+        let newDate = null;
+        if(badDate!= null  || badDate!= undefined){
+          let idx = badDate.indexOf("T");
+          let idxZ = badDate.indexOf("Z");
+          let replacement = "-";
+          let replacementZ = " ";
+          newDate = badDate.substr(0, idx) + replacement + badDate.substr(idx + replacement.length);
+          newDate = newDate.substr(0, idxZ) + replacementZ + badDate.substr(idxZ + replacementZ.length);
+        }
         return newDate;
       }
     },
     created() {
       this.$run('setArticles', "espn");
-      this.articles = articleService.getArticlesBySource("abc-news-au");
     },
 
   }

@@ -9,18 +9,18 @@
           <a href="/#/">Go home</a>
         </div>
       </div>
-      <div  v-else="" v-for="actualArticle in articles[0].sources">
+      <div  v-else="" v-for="actualArticle in (articles[0] ? articles[0].sources : [])">
         <div  class="col-md-4">
           <div class="card">
             <div class="card-header cardTitle">
-                <h5 class="changeFont customFont">{{validateCountryAb(actualArticle.country)}}</h5>
+                <h5 class="changeFont customFont" v-if=(!dataIsNull(actualArticle.country))>{{validateCountryAb(actualArticle.country)}}</h5>
             </div>
             <div class="card-body">
-              <p class="card-text changeFont">{{actualArticle.description.substring(0, 100)}}</p>
-              <p class="card-text"><small class="text-muted">{{actualArticle.name}}</small></p>
+              <p class="card-text changeFont" v-if=(!dataIsNull(actualArticle.description))>{{actualArticle.description.substring(0, 100)}}</p>
+              <p class="card-text" v-if=(!dataIsNull(actualArticle.name))><small class="text-muted">{{actualArticle.name}}</small></p>
             </div>
             <div class="card-footer">
-              <a :href="actualArticle.url" class="btn btn-outline-primary buttonRight buttonLeft" role="button">Show More</a>
+              <a v-if=(!dataIsNull(actualArticle.url)) :href="actualArticle.url" class="btn btn-outline-primary buttonRight buttonLeft" role="button">Show More</a>
             </div>
           </div>
 
@@ -42,6 +42,13 @@
       }
     },
     methods: {
+      dataIsNull(data){
+        let itIs = false;
+        if(data=== null || data === undefined){
+          itIs = true;
+        }
+        return itIs;
+      },
       resetArticles(){
         this.articles = null;
       },

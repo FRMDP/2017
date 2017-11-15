@@ -1,24 +1,24 @@
 <template>
-      <!-- Sidebar -->
-    <div id="sidebar-wrapper" :class="{'show': this.show}">
-      <ul class="sidebar-nav changeFont">
-        <li class="sidebar-brand">
-          <a href="/#/en/ppal/">
-            Sources Avaiable
-          </a>
-        </li>
-        <div class="col-md-12">
-          <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">Do oh!</h4>
-            <p>There was a problem while loading sources, please try later</p>
-            <hr>
-          </div>
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper" :class="{'show': this.show}">
+    <ul class="sidebar-nav changeFont">
+      <li class="sidebar-brand">
+        <a href="/#/en/ppal/">
+          Sources Avaiable
+        </a>
+      </li>
+      <div class="col-md-12" v-if="sources === null || sources === undefined">
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">Do oh!</h4>
+          <p>There was a problem while loading sources, please try later</p>
+          <hr>
         </div>
-        <li v-for="(actualSource, index) in (articlesSource[0] ? articlesSource[0].sources : [])" :key="index">
-          <a @click="changeSource(actualSource.id)" href="/#/en/ppal/">{{ actualSource.name }}</a>
-        </li>
-      </ul>
-    </div>
+      </div>
+      <li v-else="" v-for="(actualSource, index) in (articlesSource[0] ? articlesSource[0].sources : [])" :key="index">
+        <a @click="changeSource(actualSource.id)" href="/#/en/ppal/">{{ actualSource.name }}</a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -43,6 +43,7 @@
     }
   }
 </script>
+
 
 <style lang="scss">
   body {

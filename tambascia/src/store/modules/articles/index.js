@@ -10,10 +10,9 @@ const mutations = {
 };
 const actions = {
   *setArticles(store, source){
-    let promiseArticles = () => articleService.getArticlesBySource(source)
-    let articles = yield call(promiseArticles)
-    console.log(articles)
-    yield put("setArticles", articles.data)
+    let promiseArticles = () => articleService.getArticlesBySource(source);
+    let articles = yield call(promiseArticles);
+    yield put("setArticles", articles.data);
     return null;
   }
 };

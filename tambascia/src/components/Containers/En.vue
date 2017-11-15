@@ -22,7 +22,6 @@
             this.showSide = !this.showSide;
           },
           changeSource(source){
-            debugger;
             this.$run('setArticles', source);
           }
         },

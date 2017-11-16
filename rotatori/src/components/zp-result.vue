@@ -2,7 +2,7 @@
     <div class="template">
         <h1>Resultados de: {{ nameSearch }} </h1>
         <div v-if="pbar" class="paddings">
-            <md-progress class="md-accent"  md-indeterminate></md-progress>
+            <md-progress class="md-accent" md-indeterminate></md-progress>
             <h3 >Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3 >
         </div>
         <div v-else class="paddings">
@@ -78,22 +78,23 @@ export default {
                     arrayTemp = this.castSongs(list);
                     this.changeStates(arrayTemp); 
                 })
-                .catch(msg => console.log(mgs));
+                .catch(msg => console.log(msg));
         },
         getPromises(){
             let arrayTemp = [];
             if(this.checkStore())
-                this.pbar = true;
+                this.pbar = true; //TODO: mejorar para que no se tenga que hacer una llamada de un elemento solo para saber 
+                                    //la cant de resultados
             this.$http.get(this.$apiRoutes.getRoutes(this.endpoint, {name: this.search, value: this.name})+'&page_size=1')
                 .then(response => {
                     const result = response.data.message.header.available;
                     this.result = result;
-                    let paginas =Math.trunc(result / 50);
-                    if(paginas%50 != 0 || result < 50){
-                        paginas++;
+                    let pages =Math.trunc(result / 50);
+                    if(pages%50 != 0 || result < 50){
+                        pages++;
                     }
                     let prms=[];
-                    for(let i = 1; i<=paginas || i<=10; i++){
+                    for(let i = 1; i<=pages || i<=10; i++){
                         prms.push(this.$http.get(this.$apiRoutes.getRoutes('trackSearch', {name: this.search, value: this.name}, {name:'page', value: i},{name:'pageSize', value: 100}, {name:'trackRating', value:'DESC'})))
                     }
                     Promise.all(prms)
@@ -109,7 +110,7 @@ export default {
                 .catch(msg => console.log(msg));
         },
         checkStore(){
-            if(this.$store.state.songs.length == 0)
+            if(this.$store.state.array.length == 0)
                 this.pbar = true;
         },
         execPromises(){
@@ -126,10 +127,11 @@ export default {
         },
         castSongs(list){
             let arrayTemp = [];
+            let tr;
             if(list){
-                if(list.length > 1){
+                if(list.length > 0){
                     list.forEach(t => {
-                        const tr = t.track;
+                        tr = t.track;
                         if(tr.has_lyrics == 1){
                             let date = tr.first_release_date.split('T')[0];
                             if(!date)
@@ -144,10 +146,9 @@ export default {
                             arrayTemp.push(Object.assign({}, ob));
                         }
                     });
-                }else
-                    arrayTemp = list;
-            }
+                }
             return arrayTemp;
+            }
         }
     },
     watch: {
@@ -156,9 +157,8 @@ export default {
         },
     },
     created(){
-        debugger;
-        if(this.$store.state.songs.length != 0)
-            this.songs = this.$store.state.songs;
+        if(this.$store.state.array.length != 0)
+            this.songs = this.$store.state.array;
         this.execPromises();
         this.nameSearch = this.name.replace(/%20/g, " "); 
         this.$store.commit('putBackPath', this.$route.path);

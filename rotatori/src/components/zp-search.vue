@@ -37,11 +37,9 @@
     </div>
 </template>
 <script>
-import zpSartist from './zp-sartist.vue'
 import zpAlert from './zp-alert.vue'
 export default {
     components: {
-        zpSartist,
         zpAlert,
     },
     data(){

@@ -1,0 +1,23 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter);
+
+import zpPortada from '../../components/zp-portada.vue'
+import zpPruebas from '../../components/zp-pruebas.vue'
+import zpSearch from '../../components/zp-search.vue'
+import zpLyric from '../../components/zp-lyric.vue'
+import zpResult from '../../components/zp-result.vue'
+import zpSearchartist from '../../components/zp-searchartist.vue'
+import zpResultartist from '../../components/zp-resultartist.vue'
+
+export default new VueRouter({
+	routes: [
+		{ path: '/', component: zpPortada, name: 'index' },
+		{ path: '/searchSong', component: zpSearch, name: 'search' },
+		{ path: '/result/:endpoint/:search/:name', component: zpResult, name: 'result' },
+		{ path: '/lyrics/:id/:name', component: zpLyric, name: 'lyric'},
+        { path: '/searchArtist', component: zpSearchartist, name: 'searchArtist'},
+        { path: '/resultArtist/:endpoint/:search/:name', component: zpResultartist, name: 'resultArtist' },
+	]
+});

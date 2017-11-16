@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state:{
         typeSearch: '',
-        songs:[],
+        array:[],
         backPathSearch: '',
         countries: [],
     },
@@ -15,10 +15,10 @@ export default new Vuex.Store({
             state.typeSearch = text;
         },
         putSongs(state, trackList){
-            state.songs = trackList;
+            state.array = trackList;
         },
         clearArray(state){
-            state.songs = [];
+            state.array = [];
         },
         putBackPath(state, path){
             state.backPathSearch = path;
@@ -28,6 +28,6 @@ export default new Vuex.Store({
         }
     },
     getters: {
-        
+        getCountries: state => state.countries
     }
 })

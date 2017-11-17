@@ -7,6 +7,7 @@ import chooseLanguage from '@/components/co-chooseLanguage.vue';
 import categoriesEn from '@/components/co-articlesByCategoryEn.vue';
 import notFoundEn from '@/components/co-notFoundEn.vue'
 import oneArticleEn from '@/components/co-oneArticleEn.vue';
+import search from '@/components/co-search.vue';
 
 Vue.use(VueRouter);
 
@@ -37,6 +38,11 @@ export default new Router({
           path: 'article/:id',
           name: 'oneArticleEn',
           component: oneArticleEn
+        },
+        {
+          path: 'search',
+          name: 'search',
+          component: search
         },
       ]
     },

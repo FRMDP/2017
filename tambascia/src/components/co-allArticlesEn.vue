@@ -35,7 +35,7 @@
   import articleService from '../services/articlesService';
   import sources from './co-sourcesEn.vue';
   import  articles from '../store/modules/articles/index.js';
-  import { mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex';
 
   export default {
     name: 'allArticlesEn',

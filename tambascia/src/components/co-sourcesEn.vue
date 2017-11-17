@@ -161,6 +161,7 @@
     }
     #sidebar-wrapper {
       width: 0;
+      margin-top: -15px;
     }
     #wrapper.toggled #sidebar-wrapper {
       width: 250px;

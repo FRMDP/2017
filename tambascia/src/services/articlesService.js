@@ -3,6 +3,7 @@ import storageService from '../services/storageService';
 let articlesFromApi = [];
 let articlesByCategory = [];
 let sources = [];
+let articlesBySearch = [];
 
 export default {
     //aca va top latest or popular como parametro
@@ -13,7 +14,7 @@ export default {
         return articlesFromApi;
     },
     getAllSourcesEnglish (){
-        axios.get(' https://newsapi.org/v1/sources?language=en')
+        axios.get('https://newsapi.org/v2/sources?language=en&apiKey=37b900c6d7da47c7b6b9c5557cec86ba')
             .then(response => sources.push(response.data))
             .catch(error => console.log('There was the following error loading sources: ' + error));
         return sources;
@@ -26,14 +27,22 @@ export default {
     },
     // aca va las disitntas sources que provee la api
     getArticlesBySource (articleSource){
-        return axios.get('https://newsapi.org/v1/articles?source=' +articleSource+ '&apiKey=37b900c6d7da47c7b6b9c5557cec86ba');
-    },
+        return axios.get('https://newsapi.org/v2/top-headlines?sources=' +articleSource+ '&apiKey=37b900c6d7da47c7b6b9c5557cec86ba');
+        },
     getArticlesByCategory (articleCategory){
        articlesByCategory = [];
-        axios.get('https://newsapi.org/v1/sources?category=' +articleCategory)
+        axios.get('https://newsapi.org/v2/sources?category=' +articleCategory + '&apiKey=37b900c6d7da47c7b6b9c5557cec86ba')
             .then(response => articlesByCategory.push(response.data))
             .catch(error => console.log('There was the following error loading news: ' + error));
         return articlesByCategory;
+    },
+    searchInTheAPI(whatToSearch){
+      articlesBySearch = [];
+      axios.get('https://newsapi.org/v2/everything?q=bitcoin&apiKey=37b900c6d7da47c7b6b9c5557cec86ba')
+        .then(response => articlesBySearch.push(response.data))
+        .catch(error => console.log('There was the following error loading news: ' + error));
+      return articlesBySearch;
+
     },
     getArticleById (articleId){
       let articleById = articlesFromApi[articleId];
@@ -44,11 +53,5 @@ export default {
         .then(response => articlesFromApi.push(response.data))
         .catch(error => console.log('There was the following error loading news: ' + error));
       return articlesFromApi;
-    },
-    getSources (){
-      axios.get('static/sources.json')
-        .then(response => sources.push(response.data))
-        .catch(error => console.log('There was the following error loading sources: ' + error));
-      return sources;
     }
 }

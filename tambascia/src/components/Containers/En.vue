@@ -2,14 +2,13 @@
   <div >
     <navigation @showSideBar="showSideBar"></navigation>
     <sources :show="this.showSide" @changeSource="changeSource"></sources>
-    <footer></footer>
     <router-view :class="{'toggled': this.showSide}"></router-view>
   </div>
 </template>
 
 <script>
   import navigation from '@/components/co-navigationEn.vue';
-  import sources from '@/components/co-sourcesEn.vue'
+  import sources from '@/components/co-sourcesEn.vue';
     export default {
         name: 'En',
         data() {
@@ -27,7 +26,8 @@
         },
       components: {
         navigation,
-        sources
+        sources,
+
       }
     }
 </script>

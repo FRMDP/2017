@@ -5,7 +5,6 @@ window.axios = require('axios');
 window.$ = window.jQuery = require('jquery');
 window.Popper = require('popper.js');
 require('bootstrap');
-
 import Vue from 'vue'
 import App from './App'
 import router from './router'

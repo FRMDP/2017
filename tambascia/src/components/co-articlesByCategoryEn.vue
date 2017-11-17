@@ -58,8 +58,20 @@
       },
       validateCountryAb(countryAb){
         switch(countryAb) {
+          case "ar":
+            return "Argentina";
           case "au":
             return "Australia";
+          case "br":
+            return "Brasil";
+          case "ca":
+            return "Canada";
+          case "cn":
+            return "China";
+          case "es":
+            return "Spain";
+          case "fr":
+            return "France";
           case "de":
             return "Germany";
           case "gb":
@@ -70,6 +82,28 @@
             return "Italy";
           case "us":
             return "United States";
+          case "hk":
+            return "Hong Kong";
+          case "ie":
+            return "Irland";
+          case "is":
+            return "Island";
+          case "nl":
+            return "Holand";
+          case "no":
+            return "Norway";
+          case "pk":
+            return "Pakistan";
+          case "ru":
+            return "Rusia";
+          case "sa":
+            return "Saudi Arabia";
+          case "sv":
+            return "Salvador";
+          case "za":
+            return "South Africa";
+          case "":
+            return "";
         }
       }
     },
@@ -102,10 +136,7 @@
   }
   .card {
     width: 20rem;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
+    margin: 10px;
   }
 
   .changeFont {

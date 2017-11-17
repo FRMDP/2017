@@ -26,6 +26,9 @@
           <a class="dropdown-item" href="/#/en/category/technology">Technology</a>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/#/en/search">Search</a>
+      </li>
     </ul>
   </nav>
 

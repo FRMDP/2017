@@ -38,7 +38,7 @@ export default {
     },
     searchInTheAPI(whatToSearch){
       articlesBySearch = [];
-      axios.get('https://newsapi.org/v2/everything?q=bitcoin&apiKey=37b900c6d7da47c7b6b9c5557cec86ba')
+      axios.get('https://newsapi.org/v2/everything?q=' +whatToSearch+ '&apiKey=37b900c6d7da47c7b6b9c5557cec86ba')
         .then(response => articlesBySearch.push(response.data))
         .catch(error => console.log('There was the following error loading news: ' + error));
       return articlesBySearch;

@@ -16,6 +16,17 @@
             </div>
           </div>
         </div>
+        <div class="card my-4">
+          <h5 class="card-header">Filter by Date</h5>
+          <div class="card-body">
+            <flat-pickr v-model="dateFrom" :config="config" placeholder="Select a date From"></flat-pickr>
+          </div>
+          <div class="card-body">
+            <flat-pickr v-model="dateTo" :config="config" placeholder="Select a date To"></flat-pickr>
+          </div>
+          <button :disabled="checkFilterSearch(this.filterSearch) && checkFilterSearch(this.dateFrom) && checkFilterSearch(this.dateTo)" @click="sendSearchAndFilter()" class="btn btn-secondary"
+                  type="button">Go!</button>
+        </div>
       </div>
       <div class="col-md-9">
         <div class="justify-content-md-center customLeftMargin row container-card">
@@ -60,18 +71,32 @@
 </style>
 <script>
   import articleService from '../services/articlesService';
+  import flatPickr from 'vue-flatpickr-component';
+  import '../../node_modules/flatpickr/dist/flatpickr.css';
 
   export default {
     name: 'search',
     data() {
       return {
         filterSearch: '',
-        articles: {}
+        articles: {},
+        dateFrom: null,
+        dateTo: null,
+        config: {
+          altFormat: "F j, Y",
+          altInput: true
+        }
       }
+    },
+    components: {
+      flatPickr
     },
     methods: {
       sendSearch() {
         this.articles = articleService.searchInTheAPI(this.filterSearch);
+      },
+      sendSearchAndFilter(){
+        this.articles = articleService.searchInTheAPIByDate(this.filterSearch, this.dateFrom, this.dateTo);
       },
       checkFilterSearch() {
         let isFull = false;

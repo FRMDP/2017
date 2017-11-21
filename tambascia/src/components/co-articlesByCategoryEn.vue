@@ -128,6 +128,9 @@
 </script>
 
 <style>
+  body{
+    overflow: auto;
+  }
   .buttonLeft {
     margin-left:73px;
   }

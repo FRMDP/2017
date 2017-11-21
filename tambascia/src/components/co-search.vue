@@ -29,8 +29,10 @@
         </div>
       </div>
       <div class="col-md-9">
+
         <div class="justify-content-md-center customLeftMargin row container-card">
           <div class="col-mx-auto marginOfAdvise" v-if="Object.keys(articles).length === 0">
+            <div class="loader" v-if="this.loading"></div>
             <div class="alert alert-danger" role="alert">
               <h4 class="alert-heading">Do oh!</h4>
               <p>There are no results to your search</p>
@@ -80,6 +82,7 @@
       return {
         filterSearch: '',
         articles: {},
+        loading: null,
         dateFrom: null,
         dateTo: null,
         config: {
@@ -93,7 +96,9 @@
     },
     methods: {
       sendSearch() {
+        this.loading = true;
         this.articles = articleService.searchInTheAPI(this.filterSearch);
+        this.loading = false;
       },
       sendSearchAndFilter(){
         this.articles = articleService.searchInTheAPIByDate(this.filterSearch, this.dateFrom, this.dateTo);
@@ -132,6 +137,26 @@
 </script>
 
 <style>
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
   .topFixFixed {
     margin-top: 68px;
   }

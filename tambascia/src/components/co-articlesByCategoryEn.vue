@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid topFixFixed">
     <div class="row justify-content-center">
       <div class="col-md-12" v-if="articles === null || articles === undefined">
         <div class="alert alert-danger" role="alert" >
@@ -128,6 +128,10 @@
 </script>
 
 <style>
+  .topFixFixed {
+    margin-top: 68px;
+  }
+
   body{
     overflow: auto;
   }

@@ -22,8 +22,7 @@
             </p>
           </div>
           <div class="card-footer">
-            <a :href="actualArticle.url" class="btn btn-outline-primary buttonRight" role="button">Show More</a>
-            <a v-if=(!dataIsNull(actualArticle.author)) :href="actualArticle.author" class="btn btn-outline-info buttonLeft" role="button">Author</a>
+            <a :href="actualArticle.url" class="btn btn-outline-primary buttonRight centerButton" role="button">Show More</a>
           </div>
         </div>
       </div>
@@ -101,6 +100,10 @@
 
   .changeFont {
     font-family: 'Roboto', sans-serif;
+  }
+
+  .centerButton {
+    margin-left: 90px;
   }
 
   .alert {

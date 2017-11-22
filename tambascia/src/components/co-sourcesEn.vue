@@ -14,7 +14,7 @@
           <hr>
         </div>
       </div>
-      <li v-else="" v-for="(actualSource, index) in (articlesSource[0] ? articlesSource[0].sources : [])" :key="index">
+      <li v-else v-for="(actualSource, index) in (articlesSource[0] ? articlesSource[0].sources : [])" :key="index">
         <a @click="changeSource(actualSource.id)" href="/#/en/ppal/">{{ actualSource.name }}</a>
       </li>
     </ul>

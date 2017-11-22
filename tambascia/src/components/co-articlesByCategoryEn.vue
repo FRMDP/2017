@@ -6,7 +6,7 @@
           <h4 class="alert-heading">Do oh!</h4>
           <p>There was a problem while loading news, please try later</p>
           <hr>
-          <a href="/#/">Go home</a>
+          <router-link :to="{ name: 'ppalEn'}">Go home</router-link>
         </div>
       </div>
       <div  v-else="" v-for="actualArticle in (articles[0] ? articles[0].sources : [])">

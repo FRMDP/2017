@@ -8,6 +8,7 @@ import categoriesEn from '@/components/co-articlesByCategoryEn.vue';
 import notFoundEn from '@/components/co-notFoundEn.vue'
 import oneArticleEn from '@/components/co-oneArticleEn.vue';
 import search from '@/components/co-search.vue';
+import myWeather from '@/components/co-myWeather.vue';
 
 Vue.use(VueRouter);
 
@@ -43,6 +44,11 @@ export default new Router({
           path: 'search',
           name: 'search',
           component: search
+        },
+        {
+          path: 'myWeather',
+          name: 'myWeather',
+          component: myWeather
         },
       ]
     },

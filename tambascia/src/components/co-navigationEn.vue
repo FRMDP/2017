@@ -29,6 +29,9 @@
       <li class="nav-item">
         <router-link :to="{ name: 'search' }" class="nav-link">Search</router-link>
       </li>
+      <li class="nav-item">
+        <router-link :to="{ name: 'myWeather' }" class="nav-link">My Forecast</router-link>
+      </li>
     </ul>
   </nav>
 

@@ -5,10 +5,10 @@
         <h4 class="alert-heading">Do oh!</h4>
         <p>There was a problem while loading news, please try later</p>
         <hr>
-        <a href="/#/">Go home</a>
+        <router-link :to="{ name: 'ppalEn'}">Go home</router-link>
       </div>
     </div>
-    <div v-else="" v-for="(actualArticle, index) in (getArticles? getArticles.articles : [])" :key="index">
+    <div v-else v-for="(actualArticle, index) in (getArticles? getArticles.articles : [])" :key="index">
       <div class="col-md-4">
         <div class="card">
           <img class="card-img-top" v-if=(!dataIsNull(actualArticle.urlToImage)) :src="actualArticle.urlToImage" alt="Image of the article">

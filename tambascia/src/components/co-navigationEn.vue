@@ -1,33 +1,33 @@
 <template>
   <!-- Image and text -->
   <nav class="navbar navbar-light  justify-content-center fixed-top backColor">
-    <a class="navbar-brand" href="/#/">
+    <router-link :to="{ name: 'chooseLanguage'}" class="navbar-brand" href="/#/">
       <img src="../../static/pageico.png" width="30" height="30" class="d-inline-block align-top" alt="Web Page icon">
-    </a>
+    </router-link>
     <ul class="nav ">
       <li class="nav-item">
-        <a class="nav-link active" href="/#/en/ppal/">All news</a>
+        <router-link :to="{ name: 'ppalEn'}" class="nav-link active">All news</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" @click="showSideBar()" href="/#/en/ppal">Sources</a>
+        <a class="nav-link" @click="showSideBar()" href="#">Sources</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle backColor" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
            aria-expanded="false">Categories</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="/#/en/category/business">Business</a>
-          <a class="dropdown-item" href="/#/en/category/entertainment">Entertainment</a>
-          <a class="dropdown-item" href="/#/en/category/gaming">Gaming</a>
-          <a class="dropdown-item" href="/#/en/category/general">General</a>
-          <a class="dropdown-item" href="/#/en/category/music">Music</a>
-          <a class="dropdown-item" href="/#/en/category/politics">Politics</a>
-          <a class="dropdown-item" href="/#/en/category/science-and-nature">Science and Nature</a>
-          <a class="dropdown-item" href="/#/en/category/sport">Sport</a>
-          <a class="dropdown-item" href="/#/en/category/technology">Technology</a>
+          <router-link :to="{ name: 'categoriesEn', params: {id:'business'} }" class="dropdown-item">Business</router-link>
+          <router-link class="dropdown-item" :to="{ name: 'categoriesEn', params: {id:'entertainment'} }">Entertainment</router-link>
+          <router-link class="dropdown-item" :to="{ name: 'categoriesEn', params: {id:'gaming'} }">Gaming</router-link>
+          <router-link class="dropdown-item" :to="{ name: 'categoriesEn', params: {id:'general'} }">General</router-link>
+          <router-link class="dropdown-item" :to="{ name: 'categoriesEn', params: {id:'music'} }">Music</router-link>
+          <router-link class="dropdown-item" :to="{ name: 'categoriesEn', params: {id:'politics'} }">Politics</router-link>
+          <router-link class="dropdown-item" :to="{ name: 'categoriesEn', params: {id:'science-and-nature'} }">Science and Nature</router-link>
+          <router-link class="dropdown-item" :to="{ name: 'categoriesEn', params: {id:'sport'} }">Sport</router-link>
+          <router-link class="dropdown-item" :to="{ name: 'categoriesEn', params: {id:'technology'} }">Technology</router-link>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/#/en/search">Search</a>
+        <router-link :to="{ name: 'search' }" class="nav-link">Search</router-link>
       </li>
     </ul>
   </nav>

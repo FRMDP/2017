@@ -1,4 +1,5 @@
 import storageService from '../services/storageService';
+import {ApiKey} from '../config';
 
 let articlesFromApi = [];
 let articlesByCategory = [];

@@ -8,10 +8,10 @@
         <div class="col-md-12">
             <div class="row marginTopFlags">
                 <div class="mx-auto">
-                    <a href="/#/en/ppal"><img src="../../static/us.png" alt="Flag of USA"></a>
+                    <router-link :to="{ name: 'ppalEn' }"><img src="../../static/us.png" alt="Flag of USA"></router-link>
                 </div>
                 <div class="mx-auto">
-                    <a href="/#/de/ppal"><img src="../../static/german.png" alt="Flag of Germany"></a>
+                    <router-link :to="{ name: 'ppalEn' }"><img src="../../static/german.png" alt="Flag of Germany"></router-link>
                 </div>
             </div>
         </div>

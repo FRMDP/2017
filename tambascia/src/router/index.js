@@ -19,7 +19,7 @@ export default new Router({
       component: chooseLanguage,
     },
     {
-      path: '/en/',
+      path: 'en/',
       name: 'En',
       component: En,
       redirect: { name: 'ppalEn' },

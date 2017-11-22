@@ -29,7 +29,6 @@
         </div>
       </div>
       <div class="col-md-9">
-
         <div class="justify-content-md-center customLeftMargin row container-card">
           <div class="col-mx-auto marginOfAdvise" v-if="Object.keys(articles).length === 0">
             <div class="loader" v-if="this.loading"></div>

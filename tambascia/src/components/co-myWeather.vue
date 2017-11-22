@@ -10,11 +10,27 @@
         </div>
       </div>
       <div v-else v-for="(actualData, index) in (forecastData? forecastData : [])" :key="index">
-        <div class="col-mx-auto">
-          <h1 class="flash">{{ actualData.currently.summary }}</h1>
+        <div class="col-md-12">
+          <h1>{{ actualData.currently.summary }}</h1>
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="row">1</th>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
-    </div>
   </div>
 
 </template>

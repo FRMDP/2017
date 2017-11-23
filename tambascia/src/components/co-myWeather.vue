@@ -2,10 +2,10 @@
   <div class="container topFixFixed">
     <div v-show="loading" class="mx-auto loader"></div>
     <div class="row justify-content-md-center">
-      <div class="col-md-12" v-if="forecastData === null  || forecastData === undefined">
+      <div class="col-md-12" v-if="forecastData === null  || forecastData === undefined && loading === false">
         <div class="alert alert-danger" role="alert">
           <h4 class="alert-heading">Do oh!</h4>
-          <p>There was a problem while loading news, please try later</p>
+          <p>There was a problem while loading the forecast, please try later</p>
           <hr>
           <router-link :to="{ name: 'ppalEn'}">Go home</router-link>
         </div>

@@ -9,7 +9,7 @@
         <router-link :to="{ name: 'ppalEn'}" class="nav-link active">Main Page</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" @click.prevent="showSideBar()">Sources</a>
+        <a  href="#" class="nav-link" @click.prevent="showSideBar()">Sources</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle backColor" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"

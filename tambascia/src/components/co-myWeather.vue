@@ -11,25 +11,54 @@
       </div>
       <div v-else v-for="(actualData, index) in (forecastData? forecastData : [])" :key="index">
         <div class="col-md-12">
-          <h1>{{ actualData.currently.summary }}</h1>
+          <h1 class="text-center customMarginTop">{{ actualData.currently.summary }}</h1>
             <table class="table table-hover">
               <thead>
-              <tr>
-                <th>Apparent Temperature</th>
-                <th>Dew Point</th>
-                <th>humidity</th>
+              <tr  class="table-info">
+                <th class="text-center">Apparent Temperature</th>
+                <th class="text-center">Cloud Cover</th>
+                <th class="text-center">Dew Point</th>
+                <th class="text-center">Humidity</th>
+                <th class="text-center">Ozone</th>
+                <th class="text-center">Precipitation Intensity</th>
+                <th class="text-center">Precipitation Probability</th>
               </tr>
               </thead>
               <tbody>
               <tr>
-                <th scope="row">{{actualData.currently.apparentTemperature}}</th>
+                <th scope="row" class="text-center">{{actualData.currently.apparentTemperature}} ºF</th>
+                <th scope="row" class="text-center">{{actualData.currently.cloudCover}} %</th>
+                <th scope="row" class="text-center">{{actualData.currently.dewPoint}} ºF</th>
+                <th scope="row" class="text-center">{{actualData.currently.humidity}} %</th>
+                <th scope="row" class="text-center">{{actualData.currently.ozone}} DU</th>
+                <th scope="row" class="text-center">{{actualData.currently.precipIntensity}} %</th>
+                <th scope="row" class="text-center">{{actualData.currently.precipProbability}} %</th>
               </tr>
-              <tr>
-
-              </tr>
-
               </tbody>
             </table>
+
+          <table class="table table-hover">
+            <thead>
+            <tr  class="table-info">
+              <th class="text-center">Pressure</th>
+              <th class="text-center">Temperature</th>
+              <th class="text-center">Visibility</th>
+              <th class="text-center">Wind Bearing</th>
+              <th class="text-center">WindGust</th>
+              <th class="text-center">Wind Speed</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row" class="text-center">{{actualData.currently.pressure}} MB</th>
+              <th scope="row" class="text-center">{{actualData.currently.temperature}} ºF</th>
+              <th scope="row" class="text-center">{{actualData.currently.visibility}} MI</th>
+              <th scope="row" class="text-center">{{actualData.currently.windBearing}} ºF</th>
+              <th scope="row" class="text-center">{{actualData.currently.windGust}} MPH</th>
+              <th scope="row" class="text-center">{{actualData.currently.windSpeed}} MPH</th>
+            </tr>
+            </tbody>
+          </table>
           </div>
 
         </div>
@@ -66,6 +95,9 @@
 <style>
   .topFixFixed {
     margin-top: 68px;
+  }
+  .customMarginTop {
+    margin-top: 13px;
   }
 
 

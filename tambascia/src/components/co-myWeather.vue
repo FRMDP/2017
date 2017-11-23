@@ -1,5 +1,6 @@
 <template>
   <div class="container topFixFixed">
+    <div v-show="loading" class="mx-auto loader"></div>
     <div class="row justify-content-md-center">
       <div class="col-md-12" v-if="forecastData === null  || forecastData === undefined">
         <div class="alert alert-danger" role="alert">
@@ -74,12 +75,15 @@
         name: 'myWeather',
         data() {
             return {
-              forecastData: {}
+              forecastData: {},
+              loading: false
             }
         },
         methods: {
           getLocation(position){
+            this.loading = true;
             this.forecastData = weatherService.getMyWeather(position);
+            this.loading = false;
           }
         },
       created (){

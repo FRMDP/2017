@@ -1,5 +1,6 @@
 <template>
   <div class="row justify-content-md-center">
+    <div v-show="loading" class="mx-auto loader"></div>
     <div class="col-md-12" v-if="articles === null || articles === undefined">
       <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">Do oh!</h4>
@@ -41,7 +42,8 @@
     props: ['source'],
     data() {
       return {
-        articles: {}
+        articles: {},
+        loading: false
       }
     },
     computed: {
@@ -59,7 +61,9 @@
         return itIs;
       },
       changeSource(source) {
+        this.loading = true;
         this.articles = articleService.getArticlesBySource(source);
+        this.loading = false;
       },
       validateDate(badDate) {
         let newDate = null;
@@ -75,7 +79,9 @@
       }
     },
     created() {
+      this.loading  = true;
       this.$run('setArticles', "espn");
+      this.loading = false;
     },
 
   }
@@ -110,6 +116,25 @@
     margin-top: 30px;
     margin-left: 30px;
     margin-right: 30px;
+  }
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
 </style>

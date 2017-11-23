@@ -7,6 +7,7 @@
           Sources Avaiable
         </a>
       </li>
+      <div v-show="loading" class="mx-auto loader"></div>
       <div class="col-md-12" v-if="sources === null || sources === undefined">
         <div class="alert alert-danger" role="alert">
           <h4 class="alert-heading">Do oh!</h4>
@@ -29,7 +30,8 @@
     data() {
       return {
         sources: {
-          articlesSource: {}
+          articlesSource: {},
+          loading: false
         }
       }
     },
@@ -39,7 +41,9 @@
       },
     },
     created(){
+      this.loading = true;
       this.articlesSource = articleService.getAllSourcesEnglish();
+      this.loading = false;
     }
   }
 </script>
@@ -173,6 +177,25 @@
     #wrapper.toggled #page-content-wrapper {
       position: relative;
       margin-right: 0;
+    }
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   }
 </style>

@@ -9,6 +9,7 @@ import notFoundEn from '@/components/co-notFoundEn.vue'
 import oneArticleEn from '@/components/co-oneArticleEn.vue';
 import search from '@/components/co-search.vue';
 import myWeather from '@/components/co-myWeather.vue';
+import forecastByLL from '@/components/co-forecastByLL.vue'
 
 Vue.use(VueRouter);
 
@@ -50,6 +51,11 @@ export default new Router({
           name: 'myWeather',
           component: myWeather
         },
+        {
+          path: 'forecastByLL',
+          name: 'forecastByLL',
+          component: forecastByLL
+        }
       ]
     },
     {

@@ -27,10 +27,13 @@
         </div>
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'search' }" class="nav-link">Search</router-link>
+        <router-link :to="{ name: 'search' }" class="nav-link">News Search</router-link>
       </li>
       <li class="nav-item">
         <router-link :to="{ name: 'myWeather' }" class="nav-link">My Forecast</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link :to="{ name: 'forecastByLL'}" class="nav-link active">Forecast Search</router-link>
       </li>
     </ul>
   </nav>

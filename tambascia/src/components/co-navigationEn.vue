@@ -6,10 +6,10 @@
     </router-link>
     <ul class="nav ">
       <li class="nav-item">
-        <router-link :to="{ name: 'ppalEn'}" class="nav-link active">All news</router-link>
+        <router-link :to="{ name: 'ppalEn'}" class="nav-link active">Main Page</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" @click="showSideBar()" href="#">Sources</a>
+        <a class="nav-link" @click.prevent="showSideBar()">Sources</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle backColor" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"

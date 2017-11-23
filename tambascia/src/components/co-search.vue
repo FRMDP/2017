@@ -1,7 +1,7 @@
 <template>
   <div class="container topFixFixed">
     <div class="row justify-content-md-center">
-      <div class="col-md-3">
+      <div class="col-sm-12 col-md-3">
         <div class="card my-4">
           <h5 class="card-header">Search</h5>
           <div class="card-body">
@@ -136,6 +136,7 @@
 </script>
 
 <style>
+
   .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;

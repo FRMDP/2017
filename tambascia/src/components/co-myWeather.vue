@@ -15,16 +15,19 @@
             <table class="table table-hover">
               <thead>
               <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
+                <th>Apparent Temperature</th>
+                <th>Dew Point</th>
+                <th>humidity</th>
               </tr>
               </thead>
               <tbody>
               <tr>
-                <th scope="row">1</th>
+                <th scope="row">{{actualData.currently.apparentTemperature}}</th>
               </tr>
+              <tr>
+
+              </tr>
+
               </tbody>
             </table>
           </div>

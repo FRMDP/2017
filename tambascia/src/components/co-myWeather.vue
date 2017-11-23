@@ -11,8 +11,9 @@
       </div>
       <div v-else v-for="(actualData, index) in (forecastData? forecastData : [])" :key="index">
         <div class="col-md-12">
-          <h1 class="text-center customMarginTop">{{ actualData.currently.summary }}</h1>
-            <table class="table table-hover">
+          <!-- lo que me retorna la api como 'icon' lo concateno con el directorio donde almaceno las imagenes que descargue yo-->
+          <img class="mx-auto d-block" :src="'../../static/wetherIcons/' +actualData.currently.icon+ '.png'" alt="Summary icon day">
+            <table class="table table-hover customMarginTop">
               <thead>
               <tr  class="table-info">
                 <th class="text-center">Apparent Temperature</th>
@@ -37,7 +38,7 @@
               </tbody>
             </table>
 
-          <table class="table table-hover">
+          <table class="table table-hover customMarginTop">
             <thead>
             <tr  class="table-info">
               <th class="text-center">Pressure</th>
@@ -80,7 +81,6 @@
           getLocation(position){
             this.forecastData = weatherService.getMyWeather(position);
           }
-
         },
       created (){
         if (navigator.geolocation) {
@@ -97,7 +97,27 @@
     margin-top: 68px;
   }
   .customMarginTop {
-    margin-top: 13px;
+    margin: 13px;
+  }
+
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
 

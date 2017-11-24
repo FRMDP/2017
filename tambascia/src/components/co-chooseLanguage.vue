@@ -1,20 +1,11 @@
 <template>
-    <div>
-        <div class="row marginTopCustom">
-            <div class="mx-auto">
-                <h1 class="changeFont">Please select your preferred language</h1>
-            </div>
+    <div class="container bgimg">
+      <div class="row">
+        <div class="mx-auto">
+          <router-link :to="{ name: 'ppalEn'}">Enter</router-link>
         </div>
-        <div class="col-md-12">
-            <div class="row marginTopFlags">
-                <div class="mx-auto">
-                    <router-link :to="{ name: 'ppalEn' }"><img src="../../static/us.png" alt="Flag of USA"></router-link>
-                </div>
-                <div class="mx-auto">
-                    <router-link :to="{ name: 'ppalEn' }"><img src="../../static/german.png" alt="Flag of Germany"></router-link>
-                </div>
-            </div>
-        </div>
+      </div>
+
     </div>
 </template>
 
@@ -30,6 +21,11 @@
 </script>
 
 <style lang="scss">
+  body {
+    background-image: url('../../static/fondoImagen.jpeg');
+    background-size: 1920px 1080px;
+    background-repeat: no-repeat;
+  }
 .marginTopCustom {
     margin-top: 100px;
 }

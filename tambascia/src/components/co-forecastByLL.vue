@@ -1,5 +1,5 @@
 <template>
-  <div class="containter topFixFixed">
+  <div class="containter topFixFixed changeFont">
     <div class="row">
       <div class="mx-auto">
         <form>
@@ -114,6 +114,9 @@
 </script>
 
 <style>
+  .changeFont {
+    font-family: 'Roboto', sans-serif;
+  }
   .topFixFixed {
     margin-top: 68px;
   }

@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer changeFont">
     <div class="container justify-content-center">
 
       <span class="text-muted text-center">© Tambascia Carlos</span>
@@ -20,5 +20,8 @@
 </script>
 
 <style>
+  .changeFont{
+    font-family: 'Roboto', sans-serif;
+  }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container topFixFixed">
+  <div class="container topFixFixed changeFont">
     <div class="row justify-content-md-center">
       <div class="col-sm-12 col-md-3">
         <div class="card my-4">

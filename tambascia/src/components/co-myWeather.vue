@@ -1,5 +1,5 @@
 <template>
-  <div class="container topFixFixed">
+  <div class="container topFixFixed changeFont">
     <div v-show="loading" class="mx-auto loader"></div>
     <div class="row justify-content-md-center">
       <div class="col-md-12" v-if="forecastData === null  || forecastData === undefined && loading === false">
@@ -152,6 +152,9 @@
     100% {
       transform: rotate(360deg);
     }
+  }
+  .changeFont {
+    font-family: 'Roboto', sans-serif;
   }
 
 

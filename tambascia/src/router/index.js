@@ -6,7 +6,6 @@ import ppalEn from '@/components/co-ppalEn.vue';
 import chooseLanguage from '@/components/co-chooseLanguage.vue';
 import categoriesEn from '@/components/co-articlesByCategoryEn.vue';
 import notFoundEn from '@/components/co-notFoundEn.vue'
-import oneArticleEn from '@/components/co-oneArticleEn.vue';
 import search from '@/components/co-search.vue';
 import myWeather from '@/components/co-myWeather.vue';
 import forecastByLL from '@/components/co-forecastByLL.vue';
@@ -37,11 +36,6 @@ export default new Router({
           path: 'category/:id',
           name: 'categoriesEn',
           component: categoriesEn
-        },
-        {
-          path: 'article/:id',
-          name: 'oneArticleEn',
-          component: oneArticleEn
         },
         {
           path: 'search',

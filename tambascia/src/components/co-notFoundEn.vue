@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid changeFont">
     <div class="text-wrapper">
       <div class="title" data-content="404">
         404
@@ -24,6 +24,9 @@
 </script>
 
 <style>
+  .changeFont {
+    font-family: 'Roboto', sans-serif;
+  }
   html {
     height: 100%;
   }

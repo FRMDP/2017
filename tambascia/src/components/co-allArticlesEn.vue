@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-md-center">
+  <div class="row justify-content-md-center changeFont">
     <div v-show="loading" class="mx-auto loader"></div>
     <div class="col-md-12" v-if="articles === null || articles === undefined">
       <div class="alert alert-danger" role="alert">
@@ -14,10 +14,10 @@
         <div class="card">
           <img class="card-img-top" v-if=(!dataIsNull(actualArticle.urlToImage)) :src="actualArticle.urlToImage" alt="Image of the article">
           <div class="card-header" v-if=(!dataIsNull(actualArticle.title))>
-            <h5 class="changeFont">{{actualArticle.title.substring(0, 30)}}</h5>
+            <h5 >{{actualArticle.title.substring(0, 30)}}</h5>
           </div>
           <div class="card-body">
-            <p class="card-text changeFont" v-if=(!dataIsNull(actualArticle.description))>{{actualArticle.description.substring(0, 200)}}</p>
+            <p class="card-text" v-if=(!dataIsNull(actualArticle.description))>{{actualArticle.description.substring(0, 200)}}</p>
             <p class="card-text" v-if="(validateDate(actualArticle.publishedAt))!= null ">
               <small  class="text-muted">Published at: {{validateDate(actualArticle.publishedAt)}}</small>
             </p>

@@ -1,6 +1,6 @@
 <template>
   <!-- Image and text -->
-  <nav class="navbar navbar-light  justify-content-center fixed-top backColor">
+  <nav class="navbar navbar-light  justify-content-center fixed-top backColor changeFont">
     <router-link :to="{ name: 'chooseLanguage'}" class="navbar-brand" href="/#/">
       <img src="../../static/pageico.png" width="30" height="30" class="d-inline-block align-top" alt="Web Page icon">
     </router-link>

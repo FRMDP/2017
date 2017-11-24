@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid topFixFixed">
+  <div class="container-fluid topFixFixed changeFont">
     <div class="row justify-content-center">
       <div class="col-md-12" v-if="articles === null || articles === undefined">
         <div class="alert alert-danger" role="alert" >
@@ -13,10 +13,10 @@
         <div  class="col-md-4">
           <div class="card">
             <div class="card-header cardTitle">
-                <h5 class="changeFont customFont" v-if=(!dataIsNull(actualArticle.country))>{{validateCountryAb(actualArticle.country)}}</h5>
+                <h5 class="customFont" v-if=(!dataIsNull(actualArticle.country))>{{validateCountryAb(actualArticle.country)}}</h5>
             </div>
             <div class="card-body">
-              <p class="card-text changeFont" v-if=(!dataIsNull(actualArticle.description))>{{actualArticle.description.substring(0, 100)}}</p>
+              <p class="card-text" v-if=(!dataIsNull(actualArticle.description))>{{actualArticle.description.substring(0, 100)}}</p>
               <p class="card-text" v-if=(!dataIsNull(actualArticle.name))><small class="text-muted">{{actualArticle.name}}</small></p>
             </div>
             <div class="card-footer">

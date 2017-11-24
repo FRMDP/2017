@@ -71,11 +71,13 @@
         </div>
         <div class="row">
           <div class="col-md-6 text-center">
-            <router-link class="btn btn-outline-primary buttonRight changeMarginButton centerButton" :to="{ name: 'forecastDaily'}">Daily
+            <router-link class="btn btn-outline-primary buttonRight changeMarginButton centerButton"
+                         :to="{ name: 'ppalEn'}">Daily
             </router-link>
           </div>
           <div class="col-md-6 text-center">
-            <router-link class="btn btn-outline-primary changeMarginButton buttonRight centerButton" :to="{ name: 'forecastHourly'}">Hourly
+            <router-link class="btn btn-outline-primary changeMarginButton buttonRight centerButton"
+                         :to="{ name: 'ppalEn'}">Hourly
             </router-link>
           </div>
         </div>
@@ -83,14 +85,13 @@
 
     </div>
   </div>
-
 </template>
 
 <script>
   import weatherService from '../services/weatherService';
 
   export default {
-    name: 'myWeather',
+    name: 'forecastDaily',
     data() {
       return {
         forecastData: {},
@@ -115,44 +116,5 @@
 </script>
 
 <style>
-  .topFixFixed {
-    margin-top: 68px;
-  }
-
-  .customMarginTop {
-    margin: 13px;
-  }
-  .changeMarginButton {
-    margin-top: 10px;
-  }
-
-  .loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-  }
-
-  @-webkit-keyframes spin {
-    0% {
-      -webkit-transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-    }
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
 
 </style>

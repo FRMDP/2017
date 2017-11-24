@@ -16,10 +16,7 @@
       </div>
       <div v-else>
         <div class="col-md-12">
-          <h3 class="changeMarginButton">{{ forecastData[0].daily.summary}}</h3>
-          <!-- lo que me retorna la api como 'icon' lo concateno con el directorio donde almaceno las imagenes que descargue yo-->
-          <!--<img class="mx-auto d-block" :src="'../../static/wetherIcons/' +actualData.icon+ '.png'"
-               alt="Summary icon day">-->
+          <h3 class="changeMarginButton text-center">{{ forecastData[0].daily.summary}}</h3>
           <table class="table table-hover customMarginTop">
             <thead>
             <tr class="table-info">
@@ -45,6 +42,16 @@
             </tr>
             </tbody>
           </table>
+        </div>
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <router-link class="btn btn-outline-primary buttonRight changeMarginButton centerButton" :to="{ name: 'myWeather'}">Today
+            </router-link>
+          </div>
+          <div class="col-md-6 text-center">
+            <router-link class="btn btn-outline-primary changeMarginButton buttonRight centerButton" :to="{ name: 'forecastHourly'}">Hourly
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -108,7 +115,6 @@
           currentDate.setDate(startDate.getDate() + i);
           aryDates.push(this.DayAsString(currentDate.getDay()) + ", " + currentDate.getDate() + " " + this.MonthAsString(currentDate.getMonth()) + " " + currentDate.getFullYear());
         }
-          debugger;
         return aryDates;
       },
 

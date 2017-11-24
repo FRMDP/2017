@@ -46,14 +46,17 @@ export default {
             this.user.pass = '';
         },
         loginUser(){
-            /*const userL = this.$storage.logUser(this.user);
+            const userL = this.$users.logUser(this.user);
             if(userL.name){
+                this.$session.start();
+                userL.pass = '@$%&"·$%&&%'
                 this.$session.set('login', userL);
+                this.$store.commit('putUser', userL);
                 this.clearField();
                 this.toggleRightSidenav();
             }else{
                 this.showAlert();
-            }*/
+            }
             
         },
         showAlert(){

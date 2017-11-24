@@ -12,9 +12,13 @@ Vue.use(VueSession);
 
 import App from './components/App.vue'
 import apiRoutes from './utils/apiRoutes'
+import user from './utils/storage/userStorage'
+import tracks from './utils/storage/trackStorage'
 
 Vue.prototype.$http = axios
 Vue.prototype.$apiRoutes = apiRoutes
+Vue.prototype.$users = user
+Vue.prototype.$tracks = tracks
 
 new Vue({
     store,

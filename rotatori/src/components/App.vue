@@ -1,9 +1,13 @@
 <template>
-    <div class="app hei">
+    <div class="app hei" style="padding-bottom:60px">
         <md-toolbar class="md-dense" id="toolbar">
             <md-button md-menu-trigger class="md-icon-button" @click="toggleLeftSidenav"><md-icon>menu</md-icon></md-button>
             <md-button style="flex: 1" @click="$router.push({name:'index'})">MusicPack</md-button>
-            <div class="alRight">
+            <h4 class="md-title alRight" v-if="isLogin.name">Bienvenido, {{ isLogin.name }}</h4>
+            <md-button class="md-icon-button" v-if="isLogin.name" @click="logout">
+                <md-icon>close</md-icon>
+            </md-button>
+            <div class="alRight" v-else>
                 <md-button @click="toggleRightSidenav">
                     Entrar
                 </md-button>
@@ -55,7 +59,16 @@ import zpRegister from "./zp-register.vue";
                 register: false,
     		}
         },
-       methods: {
+        computed: {
+            isLogin(){
+                return this.$store.getters.getUser;
+            }
+        },
+        methods: {
+            logout(){
+                this.$session.destroy();
+                this.$store.commit('clearUser');
+            },
             toggleLeftSidenav() {
                 this.$refs.leftSidenav.toggle();
             },
@@ -74,13 +87,17 @@ import zpRegister from "./zp-register.vue";
                 this.register = true;
                 this.login = false;
             },
-       },
+        },
         created(){
-            this.$http.get('https://battuta.medunes.net/api/country/all/?key=2bd3a0ab3aeea1156c6649766caa2373')
+            this.$http.get('https://battuta.medunes.net/api/country/all/?key=9ebe49685e52dcbae992854c8a60a1b5')
                 .then( response => {
                     this.$store.commit('putCountries', response.data);
                 })
                 .catch(msg => console.log(msg));
+            this.$users.putFirstUser();
+            if(this.$session.has('login')){
+                this.$store.commit('putUser', this.$session.get('login'));
+            }
         }
     }
 </script>

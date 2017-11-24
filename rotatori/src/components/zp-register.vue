@@ -7,11 +7,6 @@
             </md-input-container>
 
             <md-input-container>
-                <label>Empresa</label>
-                <md-input v-model="user.company"></md-input>
-            </md-input-container>
-
-            <md-input-container>
                 <label>E-mail</label>
                 <md-input v-model="user.email"></md-input>
             </md-input-container>
@@ -34,8 +29,7 @@ export default {
     data(){
         return {
             user: {
-                name:'',
-                company: '',
+                name: '',
                 email: '',
                 pass: '',
             },
@@ -46,7 +40,7 @@ export default {
     },
     computed: {
         formOk(){
-            return this.user.name && this.user.company && this.user.email && this.user.pass;
+            return this.user.name && this.user.email && this.user.pass;
         }
     },
     methods: {
@@ -60,14 +54,14 @@ export default {
             this.user.pass = '';
         },
         userRegister(){
-            /*if(this.$storage.saveUser(this.user)){
+            if(this.$users.saveUser(this.user)){
                 this.$session.set('login', this.user);
                 this.$emit('putName', this.user.name);
                 this.clearFields();
                 this.toggleRightSidenav();
             }else{
                 this.showAlert();
-            }*/
+            }
         },
         showAlert(){
                 this.alert = true;

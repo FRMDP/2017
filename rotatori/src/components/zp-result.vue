@@ -13,14 +13,15 @@
         </div>
         <zp-alert v-if="trackFilter.length ==0 && !pbar" :messageAlert="messageAlert" :classAlert="classAlert"></zp-alert>
         <div v-if="songs.length != 0">
-            <div style="padding-left:100px">Resultados: {{trackFilter.length}} 
+            <div style="padding-left:100px">
+                Resultados: {{trackFilter.length}} 
             </div>
             <paginate name="tracks" :list="trackFilter" :per="50" v-if="shown" class="row">
                 <div v-for="c in paginated('tracks')" :key="c.id" class="three columns margins">
                     <zp-littlecard :track="c"></zp-littlecard>
                 </div>
             </paginate>
-            <div class="row">
+            <div class="row" style="justify-content: center;">
                 <paginate-links for="tracks" :async="true" :show-step-links="true" :step-links="{next: '<<', prev: '>>'}" class="pag" ></paginate-links>
             </div>
         </div>
@@ -88,12 +89,12 @@ export default {
             this.$http.get(this.$apiRoutes.getRoutes(this.endpoint, {name: this.search, value: this.name})+'&page_size=1')
                 .then(response => {
                     const result = response.data.message.header.available;
-                    this.result = result;
-                    let pages =Math.trunc(result / 50);
-                    if(pages%50 != 0 || result < 50){
+                    this.result = result;//cantidad de resultados
+                    let pages = Math.trunc(result / 100);//cantidad de paginas
+                    if(result%100 != 0 || result < 100){//Si hay menos de 100 resultados el truc da 0;
                         pages++;
                     }
-                    let prms=[];
+                    let prms = [];
                     for(let i = 1; i<=pages || i<=10; i++){
                         prms.push(this.$http.get(this.$apiRoutes.getRoutes('trackSearch', {name: this.search, value: this.name}, {name:'page', value: i},{name:'pageSize', value: 100}, {name:'trackRating', value:'DESC'})))
                     }
@@ -162,9 +163,6 @@ export default {
         this.execPromises();
         this.nameSearch = this.name.replace(/%20/g, " "); 
         this.$store.commit('putBackPath', this.$route.path);
-    },
-    mounted () {
-        
     },
 }
 </script>

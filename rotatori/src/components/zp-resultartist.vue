@@ -7,7 +7,7 @@
         </div>
         <div v-else class="paddings">
             <md-input-container>
-                <label>Filtrar</label>
+                <label>Filtrar por Nombre o Pais (inglés)</label>
                 <md-input v-model="filter"></md-input>
             </md-input-container>
         </div>
@@ -21,7 +21,7 @@
                     <zp-artistcard :artist="a"></zp-artistcard>
                 </div>
             </paginate>
-            <div class="row">
+            <div class="center">
                 <paginate-links for="artists" :async="true" :show-step-links="true" :step-links="{next: '<<', prev: '>>'}" class="pag" ></paginate-links>
             </div>
         </div>
@@ -63,9 +63,7 @@ export default {
         artistFilter(){
             return this.artist.filter( a => 
                                         (a.name.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0) ||
-                                        (a.country.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0) ||
-                                        (a.primGenre.toUpperCase().indexOf(this.filter.toUpperCase())>=0) ||
-                                        (a.secGenre.toUpperCase().indexOf(this.filter.toUpperCase())>=0)
+                                        (a.country.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0)
                                     )
         }
     },
@@ -75,8 +73,29 @@ export default {
             let st = this.$apiRoutes.getRoutes(this.endpoint, {name: this.search, value: this.name},{name: 'pageSize', value: '100'});
             this.$http.get(st)
                 .then(response =>{
+                    this.countries = this.$store.getters.getCountries;
+                    const result = response.data.message.header.available;
                     const array = response.data.message.body.artist_list;
                     this.artist = this.cast(array);
+                    let pages = Math.trunc(result / 100);
+                    if(result%100 != 0 || result < 100){
+                        pages++;
+                    }
+                    let prms = [];
+                    for(let i = 2; i<=pages; i++){
+                        let st = this.$apiRoutes.getRoutes(this.endpoint, {name: this.search, value: this.name}, {name: 'pageSize', value: '100'}, {name: 'page', value: i});
+                        prms.push(this.$http.get(st));
+                    }
+                    if(prms){
+                        Promise.all(prms)
+                            .then(values => {
+                                values.forEach(list => {
+                                    const array = list.data.message.body.artist_list;
+                                    this.artist = this.artist.concat(this.cast(array))
+                                })
+                            })
+                            .catch(msg => console.log(msg));
+                    }
                     this.pbar = false;
                 })
                 .catch(msg => console.log(msg));
@@ -86,30 +105,18 @@ export default {
             if(list){
                 list.forEach(ar =>{
                     const aux = ar.artist;
-                    let twitt = 'Sin datos';
-                    if(aux.artist_twitter_url)
-                        twitt = aux.artist_twitter_url;
-                    let primGenre = 'Sin datos';
-                    let secGenre = 'Sin datos';
-                    const count = this.countries.find( c => c.code.toUpperCase() == aux.artist_country.toUpperCase());
-                    let country = 'Sin datos';
-                    if(count)
-                        country = count.name;
-                    if(aux.primary_genres.music_genre_list.length > 0)
-                        primGenre = aux.primary_genres.music_genre_list[0].music_genre.music_genre_name;
-                    if(aux.secondary_genres.music_genre_list.length > 0)
-                        secGenre = aux.secondary_genres.music_genre_list[0].music_genre.music_genre_name;
-                    if(!twitt)
-                        twitt = 'Sin datos';
-                    const ob = {
-                        id : aux.artist_id,
-                        country: country,
-                        twitter: twitt,
-                        name: aux.artist_name,
-                        primaryGen: primGenre,
-                        secondGenre: secGenre,
+                    if(aux.artist_name.length < 80){
+                        const count = this.countries.find( c => c.code.toUpperCase() == aux.artist_country.toUpperCase());
+                        let country = 'Sin datos';
+                        if(count)
+                            country = count.name;
+                        const ob = {
+                            id : aux.artist_id,
+                            country: country,
+                            name: aux.artist_name,
+                        }
+                        arrayTemp.push(Object.assign({}, ob));
                     }
-                    arrayTemp.push(Object.assign({}, ob));
                 })
                 return arrayTemp;
             }
@@ -119,27 +126,44 @@ export default {
 
     },
     created(){
-        //this.countries = this.$store.state.countries;
+        //this.countries = this.$store.state.countries; no se porque no me deja levantarlo del store, me devuelve un array vacio
         this.pbar = true;
-        this.$http.get('https://battuta.medunes.net/api/country/all/?key=2bd3a0ab3aeea1156c6649766caa2373')
+        /*this.$http.get('https://battuta.medunes.net/api/country/all/?key=2bd3a0ab3aeea1156c6649766caa2373')
             .then( response => {
-                this.countries = response.data;
+                    this.countries = response.data;
             })
             .catch(msg => console.log(msg));
+        this.$store.commit('putBackPath', this.$route.path);*/
+        /*console.log(this.$store.state.countries);
+        console.log(this.$store.getters.getCountries);*/
         setTimeout(() => {
             this.getPromises();
-        }, 2000);
-        
+        }, 2000);        
     },
 }
 </script>
 <style scoped>
-.padd{
-    padding-left: 200px;
-    padding-right: 2500px;
+.margins{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+.center{
+    margin-left: auto;
+    margin-right: auto;
 }
 .template{
     margin-left: 10px;
+}
+.pag{
+    float: left;
+    width: 20%;
+    list-style-type:none;
+}
+.paddings{
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-right: 150px;
 }
 </style>
 

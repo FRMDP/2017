@@ -120,6 +120,7 @@ export default {
         let ar = 1;
         let i = 0;
         while(ar<arguments.length){ //recorro resto de argumentos 
+            i = 0;
             while(i<route.parameters.length){ //recorro los parametros del endpoint
                 const p = route.parameters[i]; //asigno llave/valor de la posicion del parametro
                 if(this.getIsKey(p, arguments[ar].name)) //veo si es el que corresponde

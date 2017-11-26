@@ -10,7 +10,7 @@
                     <md-card-area>
                     <md-card-header>
                         <div class="md-title"> {{artist.name}} </div>
-                        <div class="md-subhead"> {{artist.country}} </div>
+                        <div class="md-subhead"> {{artist.country.name}} </div>
                     </md-card-header>
 
                     <md-card-actions>

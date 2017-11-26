@@ -1,28 +1,32 @@
 <template>
     <div class="template">
-        <h1>Resultados de: {{ nameSearch }} </h1>
-        <div v-if="pbar" class="paddings">
-            <md-progress class="md-accent" md-indeterminate></md-progress>
-            <h3 >Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3 >
-        </div>
-        <div v-else class="paddings">
-            <md-input-container>
-                <label>Filtrar por título, artista o album</label>
-                <md-input v-model="filter"></md-input>
-            </md-input-container>
-        </div>
-        <zp-alert v-if="trackFilter.length ==0 && !pbar" :messageAlert="messageAlert" :classAlert="classAlert"></zp-alert>
-        <div v-if="songs.length != 0">
-            <div style="padding-left:100px">
-                Resultados: {{trackFilter.length}} 
+        <zp-error v-if="error"></zp-error>
+        <div v-else>
+            <h1>Resultados de: {{ nameSearch }} </h1>
+            <zp-alert v-if="showA" :messageAlert="'Agregado a favoritos correctamente'" :classAlert="'alert-success'"></zp-alert>
+            <div v-if="pbar" class="paddings">
+                <md-progress class="md-accent" md-indeterminate></md-progress>
+                <h3 >Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3 >
             </div>
-            <paginate name="tracks" :list="trackFilter" :per="50" v-if="shown" class="row">
-                <div v-for="c in paginated('tracks')" :key="c.id" class="three columns margins">
-                    <zp-littlecard :track="c"></zp-littlecard>
+            <div v-else class="paddings">
+                <md-input-container>
+                    <label>Filtrar por título, artista o album</label>
+                    <md-input v-model="filter"></md-input>
+                </md-input-container>
+            </div>
+            <zp-alert v-if="trackFilter.length ==0 && !pbar" :messageAlert="messageAlert" :classAlert="classAlert"></zp-alert>
+            <div v-if="songs.length != 0">
+                <div style="padding-left:100px">
+                    Resultados: {{trackFilter.length}} 
                 </div>
-            </paginate>
-            <div class="row" style="justify-content: center;">
-                <paginate-links for="tracks" :async="true" :show-step-links="true" :step-links="{next: '<<', prev: '>>'}" class="pag" ></paginate-links>
+                <paginate name="tracks" :list="trackFilter" :per="50" v-if="shown" class="row">
+                    <div v-for="c in paginated('tracks')" :key="c.id" class="three columns margins">
+                        <zp-littlecard :track="c" @showAlert="showAlert"></zp-littlecard>
+                    </div>
+                </paginate>
+                <div class="row" style="justify-content: center;">
+                    <paginate-links for="tracks" :async="true" :show-step-links="true" :step-links="{next: '<<', prev: '>>'}" class="pag" ></paginate-links>
+                </div>
             </div>
         </div>
     </div>
@@ -30,10 +34,12 @@
 <script>
 import zpLittlecard from './zp-littlecard.vue'
 import zpAlert from './zp-alert.vue'
+import zpError from './zp-error.vue'
 export default {
     components:{
         zpLittlecard,
         zpAlert,
+        zpError,
     },
     data(){
         return {
@@ -46,6 +52,8 @@ export default {
             messageAlert: 'No hay resultados en la busqueda',
             classAlert: 'alert-info',
             nameSearch: '',
+            error: false,
+            showA: false,
         }
     },
     computed: {
@@ -79,14 +87,16 @@ export default {
                     arrayTemp = this.castSongs(list);
                     this.changeStates(arrayTemp); 
                 })
-                .catch(msg => console.log(msg));
+                .catch(msg => {
+                    this.error = true;
+                });
         },
         getPromises(){
             let arrayTemp = [];
             if(this.checkStore())
                 this.pbar = true; //TODO: mejorar para que no se tenga que hacer una llamada de un elemento solo para saber 
                                     //la cant de resultados
-            this.$http.get(this.$apiRoutes.getRoutes(this.endpoint, {name: this.search, value: this.name})+'&page_size=1')
+            this.$http.get(this.$apiRoutes.getRoutes(this.endpoint, {name: this.search, value: this.name})+'&page_size=100')
                 .then(response => {
                     const result = response.data.message.header.available;
                     this.result = result;//cantidad de resultados
@@ -95,7 +105,7 @@ export default {
                         pages++;
                     }
                     let prms = [];
-                    for(let i = 1; i<=pages || i<=10; i++){
+                    for(let i=2; i<=pages && i<=10; i++){//cuando son mas de 10 paginas se complica al mostrar la información
                         prms.push(this.$http.get(this.$apiRoutes.getRoutes('trackSearch', {name: this.search, value: this.name}, {name:'page', value: i},{name:'pageSize', value: 100}, {name:'trackRating', value:'DESC'})))
                     }
                     Promise.all(prms)
@@ -106,9 +116,13 @@ export default {
                             });
                             this.changeStates(arrayTemp);
                         })
-                        .catch(msg => console.log(msg));
+                        .catch(msg => {
+                            this.error = true;
+                        });
                 })     
-                .catch(msg => console.log(msg));
+                .catch(msg => {
+                    this.error = true;
+                });
         },
         checkStore(){
             if(this.$store.state.array.length == 0)
@@ -130,26 +144,30 @@ export default {
             let arrayTemp = [];
             let tr;
             if(list){
-                if(list.length > 0){
-                    list.forEach(t => {
-                        tr = t.track;
-                        if(tr.has_lyrics == 1){
-                            let date = tr.first_release_date.split('T')[0];
-                            if(!date)
-                                date = 'Sin informacion'
-                            const ob= {
-                                id: tr.track_id,
-                                title: tr.track_name,
-                                artist: tr.artist_name,
-                                album: tr.album_name,
-                                release: date.split("T")[0],
-                            }
-                            arrayTemp.push(Object.assign({}, ob));
+                list.forEach(t => {
+                    tr = t.track;
+                    if(tr.has_lyrics == 1){
+                        let date = tr.first_release_date.split('T')[0];
+                        if(!date)
+                            date = 'Sin informacion'
+                        const ob= {
+                            id: tr.track_id,
+                            title: tr.track_name,
+                            artist: tr.artist_name,
+                            album: tr.album_name,
+                            release: date.split("T")[0],
                         }
-                    });
-                }
-            return arrayTemp;
+                        arrayTemp.push(Object.assign({}, ob));
+                    }
+                });
             }
+            return arrayTemp;
+        },
+        showAlert(){
+            this.showA = true;
+            setTimeout(() => {
+                this.showA = false;
+            }, 3500);
         }
     },
     watch: {

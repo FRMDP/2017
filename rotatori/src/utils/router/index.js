@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 import zpPortada from '../../components/zp-portada.vue'
-import zpPruebas from '../../components/zp-pruebas.vue'
 import zpSearch from '../../components/zp-search.vue'
 import zpLyric from '../../components/zp-lyric.vue'
 import zpResult from '../../components/zp-result.vue'
@@ -12,6 +11,7 @@ import zpSearchartist from '../../components/zp-searchartist.vue'
 import zpResultartist from '../../components/zp-resultartist.vue'
 import zpInfoartist from '../../components/zp-infoartist.vue'
 import zpLyricid from '../../components/zp-lyricsid.vue'
+import zpTracklist from '../../components/zp-tracklist.vue'
 
 export default new VueRouter({
 	routes: [
@@ -22,6 +22,7 @@ export default new VueRouter({
         { path: '/searchArtist', component: zpSearchartist, name: 'searchArtist'},
 		{ path: '/resultArtist/:endpoint/:search/:name', component: zpResultartist, name: 'resultArtist' },
 		{ path: '/infoArtist/:id', component: zpInfoartist, name: 'infoAr'},
-		{ path: '/lyricById/:id/:name', component: zpLyricid, name: 'lyricsId'}
+		{ path: '/lyricById/:id/:name', component: zpLyricid, name: 'lyricsId'},
+		{ path: '/myTrackList', component: zpTracklist, name: 'myList' }
 	]
 });

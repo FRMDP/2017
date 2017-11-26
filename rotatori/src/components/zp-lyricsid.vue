@@ -1,28 +1,32 @@
 <template>
     <div class="template">
-        <h1>Canciones de: {{name.replace(/\%20/g, " ")}} </h1>
-        <div v-if="pbar" class="paddings">
-            <md-progress class="md-accent" md-indeterminate></md-progress>
-            <h3 >Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3 >
-        </div>
-        <div v-else class="paddings">
-            <md-input-container>
-                <label>Filtrar por título</label>
-                <md-input v-model="filter"></md-input>
-            </md-input-container>
-        </div>
-        <zp-alert v-if="trackFilter.length == 0 && !pbar" :messageAlert="messageAlert" :classAlert="classAlert"></zp-alert>
-        <div v-else-if="!pbar">
-            <div style="padding-left:100px">
-                Resultados: {{trackFilter.length}}
+        <zp-error v-if="error"></zp-error>
+        <div v-else>
+            <h1>Canciones de: {{name.replace(/\%20/g, " ")}} </h1>
+            <zp-alert v-if="showA" :messageAlert="'Agregado a favoritos correctamente'" :classAlert="'alert-success'"></zp-alert>
+            <div v-if="pbar" class="paddings">
+                <md-progress class="md-accent" md-indeterminate></md-progress>
+                <h3 >Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3 >
             </div>
-            <paginate name="tracks" :list="trackFilter" :per="50" class="row">
-                <div v-for="c in paginated('tracks')" :key="c.id" class="three columns margins">
-                    <zp-littlecard :track="c"></zp-littlecard>
+            <div v-else class="paddings">
+                <md-input-container>
+                    <label>Filtrar por título</label>
+                    <md-input v-model="filter"></md-input>
+                </md-input-container>
+            </div>
+            <zp-alert v-if="trackFilter.length == 0 && !pbar" :messageAlert="messageAlert" :classAlert="classAlert"></zp-alert>
+            <div v-else-if="!pbar">
+                <div style="padding-left:100px">
+                    Resultados: {{trackFilter.length}}
                 </div>
-            </paginate>
-            <div class="row">
-                <paginate-links for="tracks" :async="true" :show-step-links="true" :step-links="{next: '<<', prev: '>>'}" class="pag" ></paginate-links>
+                <paginate name="tracks" :list="trackFilter" :per="50" class="row">
+                    <div v-for="c in paginated('tracks')" :key="c.id" class="three columns margins">
+                        <zp-littlecard :track="c" @showAlert="showAlert"></zp-littlecard>
+                    </div>
+                </paginate>
+                <div class="row">
+                    <paginate-links for="tracks" :async="true" :show-step-links="true" :step-links="{next: '<<', prev: '>>'}" class="pag" ></paginate-links>
+                </div>
             </div>
         </div>
     </div>
@@ -30,10 +34,12 @@
 <script>
 import zpAlert from './zp-alert.vue'
 import zpLittlecard from './zp-littlecard.vue'
+import zpError from './zp-error.vue'
 export default {
     components: {
         zpAlert,
         zpLittlecard,
+        zpError,
     },
     data() {
         return {
@@ -43,6 +49,8 @@ export default {
             classAlert: 'alert-info',
             paginate: ["tracks"],
             tracks: [],
+            error: false,
+            showA: false,
         }
     },
     computed: {
@@ -90,7 +98,6 @@ export default {
                                 this.pbar = false;
                             })
                     }
-                    
                 })  
                 .catch(msg => console.log(msg)); 
         },
@@ -121,6 +128,12 @@ export default {
             this.tracks = arrayTemp;
             this.$store.commit('putBackPath', this.$route.path);
             this.pbar = false;
+        },
+        showAlert(){
+            this.showA = true;
+            setTimeout(() => {
+                this.showA = false;
+            }, 3500);
         }
     },
     created(){

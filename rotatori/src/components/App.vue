@@ -22,6 +22,7 @@
             <md-button class="butWid" @click="routeGo('index')">Volver</md-button>
             <md-button class="butWid" @click="routeGo('search')" >Buscar Canciones</md-button>
             <md-button class="butWid" @click="routeGo('searchArtist')">Buscar Artistas</md-button>
+            <md-button class="butWid" v-if="isLogin.name" @click="routeGo('myList')">Mi Track List</md-button>
             <md-button class="butWid" >Ayuda</md-button>
         </md-sidenav>
         <md-sidenav class="md-right" ref="rightSidenav">
@@ -66,6 +67,8 @@ import zpRegister from "./zp-register.vue";
         },
         methods: {
             logout(){
+                if(this.$route.path == '/myTrackList')
+                    this.$router.push({name: 'index'});
                 this.$session.destroy();
                 this.$store.commit('clearUser');
             },
@@ -87,13 +90,34 @@ import zpRegister from "./zp-register.vue";
                 this.register = true;
                 this.login = false;
             },
+            getCountries(){
+                this.$http.get('https://restcountries.eu/rest/v2/all')
+                    .then(response => {
+                        let arrayTemp = [];
+                        const array = response.data;
+                        array.forEach( c => {
+                            arrayTemp.push(this.castCountry(c));
+                        });
+                        arrayTemp = arrayTemp.sort( (a, b) =>{
+                            return a.name.localeCompare(b.name);
+                        });
+                        this.$store.commit('putCountries', arrayTemp);
+                    })
+                    .catch(msg => console.log(msg));
+            },
+            castCountry(country){
+                let name = country.translations.es;
+                if(!name)
+                    name = country.name;
+                return {
+                    name: name,
+                    code: country.alpha2Code,
+                    flag: country.flag,
+                }
+            }
         },
         created(){
-            this.$http.get('https://battuta.medunes.net/api/country/all/?key=9ebe49685e52dcbae992854c8a60a1b5')
-                .then( response => {
-                    this.$store.commit('putCountries', response.data);
-                })
-                .catch(msg => console.log(msg));
+            this.getCountries();
             this.$users.putFirstUser();
             if(this.$session.has('login')){
                 this.$store.commit('putUser', this.$session.get('login'));

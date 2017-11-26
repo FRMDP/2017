@@ -1,26 +1,33 @@
 <template>
     <div>
-        <div class="row">
-            <div class="one columns">
-                <md-button class="md-fab md-warn" @click="goback()">
-                    <md-icon>reply</md-icon>
-                    <md-tooltip md-direction="right">{{ title }}</md-tooltip>
-                </md-button>
+        <zp-error v-if="error"></zp-error>
+        <div v-else>
+            <div class="row">
+                <div class="one columns">
+                    <md-button class="md-fab md-warn" @click="goback()">
+                        <md-icon>reply</md-icon>
+                        <md-tooltip md-direction="right">{{ title }}</md-tooltip>
+                    </md-button>
+                </div>
+                <div class="eleven columns">
+                    <h1>{{ lyric.title }}</h1>
+                </div>
             </div>
-            <div class="eleven columns">
-                <h1>{{ lyric.title }}</h1>
+            <div class="margins">
+                <div v-html="lyric.body" class="paddingSup"></div>
+                <div v-html="lyric.copyright" class="italic"></div>
+                <md-button :href="lyric.url" target="_blank" class="md-raised md-primary">Ver Completa en Musixmatch</md-button>
             </div>
-        </div>
-        <div class="margins">
-            <div v-html="lyric.body" class="paddingSup"></div>
-            <div v-html="lyric.copyright" class="italic"></div>
-            <md-button :href="lyric.url" target="_blank" class="md-raised md-primary">Ver Completa en Musixmatch</md-button>
         </div>
     </div>
 </template>
 <script>
+import zpError from './zp-error.vue'
 export default {
     props: [],
+    components: {
+        zpError,
+    },
     data(){
         return {
             trackLyrics: [],
@@ -31,6 +38,7 @@ export default {
                 url: '',
             },
             title: 'volver al resultado',
+            error: false,
         }
     },
     computed: {
@@ -56,7 +64,9 @@ export default {
                     this.lyric.copyright = lyric.lyrics_copyright;
                     this.lyric.url = lyric.backlink_url;
                 })
-                .catch(msg => console.log(msg));
+                .catch(msg => {
+                    this.error = true;
+                });
         },
         goback(){
             const st = this.$store.state.backPathSearch;

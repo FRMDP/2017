@@ -35,7 +35,7 @@ export default {
     computed: {
         formOk(){
             return this.user.email && this.user.pass;      
-        }
+        },
     },
     methods: {
         toggleRightSidenav(){

@@ -15,8 +15,13 @@
                     </md-card-header>
 
                     <md-card-actions>
-                        <md-button class="md-accent bold" @click="ruteGo()">Ver lyric</md-button>
-                        <md-button class="md-warn bold" @click="$router.push()"> </md-button>
+                        <md-button class="md-warn bold" @click="ruteGo()">Ver lyric</md-button>
+                        <md-button class="md-icon-button md-accent" @click="changeFavorite">
+                            <md-icon v-if="!track.userId">favorite</md-icon>
+                            <md-tooltip md-direction="right" v-if="!track.userId">Agregar a Favorito</md-tooltip>
+                            <md-icon v-if="track.userId">favorite_border</md-icon>
+                            <md-tooltip md-direction="right" v-if="track.userId">Quitar Favorito</md-tooltip>
+                        </md-button>
                     </md-card-actions>
                     </md-card-area>
                 </md-card-media-cover>
@@ -25,22 +30,51 @@
     </transition-group>
 </template>
 <script>
-    
-    export default {
-        props: ['track'],
-        data(){
-            return {
-                
-            }
-        },
-        methods: {
-            ruteGo(){
-                const st = this.track.title.replace(/\s/g, "%20");
-                this.$router.push({name: 'lyric', params:{id: this.track.id, name: st}});
-            }
-        },
-        created(){
-
+export default {
+    props: ['track'],
+    data(){
+        return {
+            agregado: false,
         }
+    },
+    computed: {
+        trackAgr(){
+            console.log(this.track.userId);
+            if(this.track.userId) 
+                this.agregado = true;
+        }
+    },
+    watch: {
+
+    },
+    methods: {
+        ruteGo(){
+            const st = this.track.title.replace(/\s/g, "%20");
+            this.$router.push({name: 'lyric', params:{id: this.track.id, name: st}});
+        },
+        changeFavorite(){
+            if(this.$session.has('login')){
+                if(this.track.userId){
+                    this.quitTrack()
+                }else{
+                    debugger;
+                    this.track.userId = this.$session.get('login').id;
+                    this.$tracks.saveTrack(this.track);
+                    this.showAlert();
+                }
+            }else{
+                console.log('debe estar logueado');
+            }
+        },
+        showAlert(){
+            this.$emit('showAlert');
+        },
+        quitTrack(){
+            this.$emit('quitTrack', this.track);
+        }
+    },
+    created(){
+
     }
+}
 </script>

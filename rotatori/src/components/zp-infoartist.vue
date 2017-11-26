@@ -1,35 +1,52 @@
 <template>
     <div>
-        <div class="row">
-            <div class="one columns">
-                <md-button class="md-fab md-warn" @click="goBack()">
-                    <md-icon>reply</md-icon>
-                    <md-tooltip md-direction="right">{{ title }}</md-tooltip>
-                </md-button>
+        <zp-error v-if="error"></zp-error>
+        <div v-else>
+            <div v-if="pbar" class="paddings">
+                    <md-progress class="md-accent" md-indeterminate></md-progress>
+                    <h3 >Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3 >
             </div>
-            <div class="eleven columns">
-                <h1>Información sobre: {{artist.name}} </h1>
+            <div v-else>
+                <div class="row">
+                    <div class="one columns">
+                        <md-button class="md-fab md-warn" @click="goBack()">
+                            <md-icon>reply</md-icon>
+                            <md-tooltip md-direction="right">{{ title }}</md-tooltip>
+                        </md-button>
+                    </div>
+                    <div class="eleven columns">
+                        <h1>Información sobre: {{artist.name}} </h1>
+                    </div>
+                </div>
+                <div class="padd">
+                    <h3>Pais: {{artist.country.name}} </h3> <img :src="artist.country.flag" width="40px" height="40px"/>
+                    <h3>Genero primario: {{artist.primaryGen}} </h3>
+                    <h3>Genero secundario: {{artist.secondGen}} </h3>
+                    <a :href="artist.twitter" target="_blank"><img v-if="artist.twitter!='Sin datos'" src="/img/twitter.png" width="50" height="50"></a>
+                </div>
             </div>
-        </div>
-        <div class="padd">
-            <h3>Pais: {{artist.country}} </h3>
-            <h3>Genero primario: {{artist.primaryGen}} </h3>
-            <h3>Genero secundario: {{artist.secondGen}} </h3>
-            <a :href="artist.twitter" target="_blank"><img v-if="artist.twitter!='Sin datos'" src="/img/twitter.png" width="50" height="50"></a>
         </div>
     </div>
 </template>
 <script>
+import zpError from "./zp-error.vue";
 export default {
     components: {
-
+        zpError,
     },
     data() {
         return {
             countries: [],
-            artist: {},
+            artist: {
+                name: '',
+                primaryGen: '',
+                secondGen: '',
+                country:{},
+            },
             title: 'volver al resultado',
             prms:[],
+            pbar: false,
+            error: false,
         }
     },
     computed: {
@@ -46,28 +63,26 @@ export default {
             if(st != '')
                 this.$router.push(st);
             else
-                this.title = 'no se puede acceder a la pagina de resultados'
+                this.title = 'No se puede acceder a la pagina de resultados'
         },
         getPromises(){
             const st = this.$apiRoutes.getRoutes('artistGet',{name: 'artistId', value: this.id});
-            this.prms.push(this.$http.get(st))
-
-            Promise.all(this.prms)
-                .then(values => {
-                    if(values[0].status == 403)
-                        console.log('no funciona api');
-                    else
-                        this.countries = values[0].data
-                    const aux = values[1].data.message.body.artist;
+            this.$http.get(st)
+                .then(response => {
+                    const aux = response.data.message.body.artist;
                     this.artist = this.castArtist(aux);
+                    this.pbar = false;
                 })
-                .catch(msg => console.log(msg));
+                .catch(msg => {
+                    this.pbar = false;
+                    this.error = true;
+                });
         },
         castArtist(artist){
-            let countr = 'Sin datos';
+            let countr = {name: 'Sin datos'};
             const con = this.countries.find( c => c.code.toUpperCase() == artist.artist_country.toUpperCase());
             if(con)
-                countr = con.name;
+                countr = con;
             let primG = 'Sin datos';
             if(artist.primary_genres.music_genre_list.length > 0)
                 primG = artist.primary_genres.music_genre_list[0].music_genre.music_genre_name;
@@ -86,11 +101,19 @@ export default {
                 twitter: twit,
             }
             return ob;
+        },
+        putCountries(){
+            this.countries = this.$store.getters.getCountries;
         }
     },
     created(){
-        this.prms.push(this.$http.get('https://battuta.medunes.net/api/country/all/?key=2bd3a0ab3aeea1156c6649766caa2373'));
-        this.getPromises();   
+        this.pbar = true;
+        
+        setTimeout(() => {  
+            this.putCountries();
+            this.getPromises();    
+        }, 2000);
+           
     }
 }
 </script>

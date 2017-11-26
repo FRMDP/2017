@@ -1,28 +1,31 @@
 <template>
     <div class="template">
-        <h1>Resultados de: {{ name.replace(/\%20/g," ") }} </h1>
-        <div v-if="pbar" class="paddings">
-            <md-progress class="md-accent" md-indeterminate></md-progress>
-            <h3 >Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3 >
-        </div>
-        <div v-else class="paddings">
-            <md-input-container>
-                <label>Filtrar por Nombre o Pais (inglés)</label>
-                <md-input v-model="filter"></md-input>
-            </md-input-container>
-        </div>
-        <zp-alert v-if="artistFilter.length == 0 && !pbar" :messageAlert="messageAlert" :classAlert="classAlert"></zp-alert>
-        <div v-if="artist.length != 0">
-            <div style="padding-left:100px">
-                Resultados: {{artistFilter.length}} 
+        <zp-error v-if="error"></zp-error>
+        <div v-else>
+            <h1>Resultados de: {{ name.replace(/\%20/g," ") }} </h1>
+            <div v-if="pbar" class="paddings">
+                <md-progress class="md-accent" md-indeterminate></md-progress>
+                <h3 >Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3 >
             </div>
-            <paginate name="artists" :list="artistFilter" :per="50" v-if="shown" class="row">
-                <div v-for="a in paginated('artists')" :key="a.id" class="three columns margins">
-                    <zp-artistcard :artist="a"></zp-artistcard>
+            <div v-else class="paddings">
+                <md-input-container>
+                    <label>Filtrar por Nombre o Pais</label>
+                    <md-input v-model="filter"></md-input>
+                </md-input-container>
+            </div>
+            <zp-alert v-if="artistFilter.length == 0 && !pbar" :messageAlert="messageAlert" :classAlert="classAlert"></zp-alert>
+            <div v-if="artist.length != 0">
+                <div style="padding-left:100px">
+                    Resultados: {{artistFilter.length}} 
                 </div>
-            </paginate>
-            <div class="center">
-                <paginate-links for="artists" :async="true" :show-step-links="true" :step-links="{next: '<<', prev: '>>'}" class="pag" ></paginate-links>
+                <paginate name="artists" :list="artistFilter" :per="50" v-if="shown" class="row">
+                    <div v-for="a in paginated('artists')" :key="a.id" class="three columns margins">
+                        <zp-artistcard :artist="a"></zp-artistcard>
+                    </div>
+                </paginate>
+                <div class="center">
+                    <paginate-links for="artists" :async="true" :show-step-links="true" :step-links="{next: '<<', prev: '>>'}" class="pag" ></paginate-links>
+                </div>
             </div>
         </div>
     </div>
@@ -30,10 +33,12 @@
 <script>
 import zpArtistcard from './zp-artistcard.vue'
 import zpAlert from './zp-alert.vue'
+import zpError from './zp-error.vue'
 export default {
     components: {
         zpArtistcard,
         zpAlert,
+        zpError,
     },
     data(){
         return {
@@ -45,6 +50,7 @@ export default {
             filter: '',
             messageAlert: 'No hay resultados en la busqueda',
             classAlert: 'alert-info',
+            error: false,
         }
     },
     computed: {
@@ -63,7 +69,7 @@ export default {
         artistFilter(){
             return this.artist.filter( a => 
                                         (a.name.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0) ||
-                                        (a.country.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0)
+                                        (a.country.name.toUpperCase().indexOf(this.filter.toUpperCase()) >= 0)
                                     )
         }
     },
@@ -82,7 +88,7 @@ export default {
                         pages++;
                     }
                     let prms = [];
-                    for(let i = 2; i<=pages; i++){
+                    for(let i = 2; i<=pages && i < 10; i++){
                         let st = this.$apiRoutes.getRoutes(this.endpoint, {name: this.search, value: this.name}, {name: 'pageSize', value: '100'}, {name: 'page', value: i});
                         prms.push(this.$http.get(st));
                     }
@@ -94,11 +100,15 @@ export default {
                                     this.artist = this.artist.concat(this.cast(array))
                                 })
                             })
-                            .catch(msg => console.log(msg));
+                            .catch(msg => {
+                                this.error = true;
+                            });
                     }
                     this.pbar = false;
                 })
-                .catch(msg => console.log(msg));
+                .catch(msg => {
+                    this.error = true;
+                });
         },
         cast(list){
             let arrayTemp = [];
@@ -107,9 +117,9 @@ export default {
                     const aux = ar.artist;
                     if(aux.artist_name.length < 80){
                         const count = this.countries.find( c => c.code.toUpperCase() == aux.artist_country.toUpperCase());
-                        let country = 'Sin datos';
+                        let country = {name: 'Sin datos'};
                         if(count)
-                            country = count.name;
+                            country = count;
                         const ob = {
                             id : aux.artist_id,
                             country: country,
@@ -126,19 +136,9 @@ export default {
 
     },
     created(){
-        //this.countries = this.$store.state.countries; no se porque no me deja levantarlo del store, me devuelve un array vacio
         this.pbar = true;
-        /*this.$http.get('https://battuta.medunes.net/api/country/all/?key=2bd3a0ab3aeea1156c6649766caa2373')
-            .then( response => {
-                    this.countries = response.data;
-            })
-            .catch(msg => console.log(msg));
-        this.$store.commit('putBackPath', this.$route.path);*/
-        /*console.log(this.$store.state.countries);
-        console.log(this.$store.getters.getCountries);*/
-        setTimeout(() => {
-            this.getPromises();
-        }, 2000);        
+        this.$store.commit('putBackPath', this.$route.path);
+        this.getPromises();        
     },
 }
 </script>

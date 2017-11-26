@@ -49,14 +49,16 @@ export default {
         },
         clearFields(){
             this.user.name = '';
-            this.user.company = '';
             this.user.email = '';
             this.user.pass = '';
         },
         userRegister(){
             if(this.$users.saveUser(this.user)){
-                this.$session.set('login', this.user);
-                this.$emit('putName', this.user.name);
+                const userL = this.$users.logUser(this.user);
+                userL.pass = '#@€€¬€¬@#~@|@#';
+                this.$session.start();
+                this.$session.set('login', userL);
+                this.$store.commit('putUser', userL);
                 this.clearFields();
                 this.toggleRightSidenav();
             }else{

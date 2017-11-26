@@ -12,7 +12,7 @@ export default {
             });
         }
         if(!exist){ //es falso
-            user.id = allUser[allUser.length -1] + 1 || 1;
+            user.id = allUser[allUser.length -1].id + 1 || 1;
             allUser.push(user);
             localStorage.setItem('users', JSON.stringify(allUser));
         }

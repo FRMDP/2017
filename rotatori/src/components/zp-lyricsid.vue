@@ -3,7 +3,7 @@
         <zp-error v-if="error"></zp-error>
         <div v-else>
             <h1>Canciones de: {{name.replace(/\%20/g, " ")}} </h1>
-            <zp-alert v-if="showA" :messageAlert="'Agregado a favoritos correctamente'" :classAlert="'alert-success'"></zp-alert>
+            <zp-alert v-if="showA" :messageAlert="messageFav" :classAlert="'alert-success'"></zp-alert>
             <div v-if="pbar" class="paddings">
                 <md-progress class="md-accent" md-indeterminate></md-progress>
                 <h3 >Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3 >
@@ -47,6 +47,7 @@ export default {
             filter: '',
             messageAlert: 'No hay resultados en la busqueda',
             classAlert: 'alert-info',
+            messageFav: '',
             paginate: ["tracks"],
             tracks: [],
             error: false,
@@ -117,6 +118,11 @@ export default {
                             artist: aux.artist_name,
                             release: date,
                         }
+                        if(this.$session.has('login')){
+                            if(this.$tracks.checkTrack(ob.id, this.$session.get('login').id)){
+                                ob.userId = this.$session.get('login').id;
+                            }
+                         }
                         arrayTemp.push(Object.assign({}, ob));
                     }
                 });
@@ -129,7 +135,8 @@ export default {
             this.$store.commit('putBackPath', this.$route.path);
             this.pbar = false;
         },
-        showAlert(){
+        showAlert(payload){
+            this.messageFav = payload;
             this.showA = true;
             setTimeout(() => {
                 this.showA = false;

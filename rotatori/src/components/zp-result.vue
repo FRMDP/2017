@@ -2,11 +2,11 @@
     <div class="template">
         <zp-error v-if="error"></zp-error>
         <div v-else>
-            <h1>Resultados de: {{ nameSearch }} </h1>
-            <zp-alert v-if="showA" :messageAlert="'Agregado a favoritos correctamente'" :classAlert="'alert-success'"></zp-alert>
+            <h1>Resultados de: {{ name.replace(/%20/g, " ") }} </h1> <!-- No puedo hacer que el alert de abajo siga el scroll -->
+            <zp-alert v-if="showA" :messageAlert="messageFav" :classAlert="'alert-success'" class="fix"></zp-alert>
             <div v-if="pbar" class="paddings">
                 <md-progress class="md-accent" md-indeterminate></md-progress>
-                <h3 >Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3 >
+                <h3>Aguarde mientras se cargan los resultados. Esta operación puede demorar...</h3>
             </div>
             <div v-else class="paddings">
                 <md-input-container>
@@ -51,9 +51,9 @@ export default {
             pbar: false,
             messageAlert: 'No hay resultados en la busqueda',
             classAlert: 'alert-info',
-            nameSearch: '',
             error: false,
             showA: false,
+            messageFav: '',
         }
     },
     computed: {
@@ -150,20 +150,26 @@ export default {
                         let date = tr.first_release_date.split('T')[0];
                         if(!date)
                             date = 'Sin informacion'
-                        const ob= {
+                        let ob= {
                             id: tr.track_id,
                             title: tr.track_name,
                             artist: tr.artist_name,
                             album: tr.album_name,
                             release: date.split("T")[0],
                         }
+                        if(this.$session.has('login')){
+                            if(this.$tracks.checkTrack(ob.id, this.$session.get('login').id)){
+                                ob.userId = this.$session.get('login').id;
+                            }
+                         }
                         arrayTemp.push(Object.assign({}, ob));
                     }
                 });
             }
             return arrayTemp;
         },
-        showAlert(){
+        showAlert(payload){
+            this.messageFav = payload;
             this.showA = true;
             setTimeout(() => {
                 this.showA = false;
@@ -178,8 +184,7 @@ export default {
     created(){
         if(this.$store.state.array.length != 0)
             this.songs = this.$store.state.array;
-        this.execPromises();
-        this.nameSearch = this.name.replace(/%20/g, " "); 
+        this.execPromises(); 
         this.$store.commit('putBackPath', this.$route.path);
     },
 }
@@ -202,6 +207,9 @@ export default {
     margin-left: 100px;
     margin-right: 100px;
     padding-right: 150px;
+}
+.fix{
+    position: absolute;
 }
 </style>
 

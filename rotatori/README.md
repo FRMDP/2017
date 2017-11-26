@@ -5,7 +5,10 @@ MusicPack es un sistema destinado a la busqueda de canciones y letras utilizando
 El sistema contará con:
   - Busqueda de canciones por artista.
   - Busqueda de canciones por nombre.
-  - Busqueda de canciones por album.
+  - Busqueda de canciones por país (en este caso trae el top 100 de temas más escuchados).
+  - Busqueda de artistas.
+  - Registro y Login de usuario
+    - El usuario logueado podrá agregar canciones a su lista de favoritos, para encontrarlas más facilmente
 
 Información a la que se podrá acceder:
   - Información básica del artista.
@@ -25,8 +28,13 @@ Información a la que se podrá acceder:
   * En modo develop se utiliza webpack, para empaquetar utilizar comando:
     
     ``` npm run build ```
+
+  * La API utilizada no viene con encabezado CORS por lo que para que el sistema funcione correctamente, hay que instalar una extención:
+    - Para Chrome:
+     [**Allow-Control-Allow-Origin:***](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=es-419) 
+    - Para Firefox:
+    [**CORS Everywhere**](https://addons.mozilla.org/es/firefox/addon/cors-everywhere/)
     
     
 **TODO**
-  - En caso que el tiempo alcance, agregar login y registro
   - Buscar alguna manera o API para poder reproducir la música ademas de poder ver la letra

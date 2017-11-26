@@ -13,14 +13,13 @@
                         <div class="md-subhead"> {{track.artist}} - {{track.album}} </div>
                         <div class="md-subhead">Lanzamiento: {{ track.release }} </div>
                     </md-card-header>
-
                     <md-card-actions>
                         <md-button class="md-warn bold" @click="ruteGo()">Ver lyric</md-button>
                         <md-button class="md-icon-button md-accent" @click="changeFavorite">
-                            <md-icon v-if="!track.userId">favorite</md-icon>
-                            <md-tooltip md-direction="right" v-if="!track.userId">Agregar a Favorito</md-tooltip>
-                            <md-icon v-if="track.userId">favorite_border</md-icon>
-                            <md-tooltip md-direction="right" v-if="track.userId">Quitar Favorito</md-tooltip>
+                            <md-icon v-if="!agregado">favorite</md-icon>
+                            <md-tooltip md-direction="right" v-if="!agregado">Agregar a Favorito</md-tooltip>
+                            <md-icon v-if="agregado">favorite_border</md-icon>
+                            <md-tooltip md-direction="right" v-if="agregado">Quitar Favorito</md-tooltip>
                         </md-button>
                     </md-card-actions>
                     </md-card-area>
@@ -38,11 +37,6 @@ export default {
         }
     },
     computed: {
-        trackAgr(){
-            console.log(this.track.userId);
-            if(this.track.userId) 
-                this.agregado = true;
-        }
     },
     watch: {
 
@@ -55,26 +49,30 @@ export default {
         changeFavorite(){
             if(this.$session.has('login')){
                 if(this.track.userId){
-                    this.quitTrack()
+                    this.quitTrack();
+                    this.showAlert('Quitado de favoritos correctamente');
+                    delete this.track.userId;
+                    this.agregado = false;
                 }else{
-                    debugger;
                     this.track.userId = this.$session.get('login').id;
                     this.$tracks.saveTrack(this.track);
-                    this.showAlert();
+                    this.showAlert('Agregado a favoritos correctamente');
+                    this.agregado = true;
                 }
             }else{
-                console.log('debe estar logueado');
+                this.showAlert('Debe estar logueado para agregar a favoritos');
             }
         },
-        showAlert(){
-            this.$emit('showAlert');
+        showAlert(message){
+            this.$emit('showAlert', message);
         },
         quitTrack(){
             this.$emit('quitTrack', this.track);
         }
     },
     created(){
-
+        if(this.track.userId)
+            this.agregado = true;
     }
 }
 </script>

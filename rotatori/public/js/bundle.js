@@ -24686,7 +24686,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.margins[data-v-7b258a5b]{\r\n    margin-left: 5px;\r\n    margin-right: 5px;\r\n    margin-bottom: 10px;\n}\n.template[data-v-7b258a5b]{\r\n    margin-left: 10px;\n}\n.pag[data-v-7b258a5b]{\r\n    float: left;\r\n    width: 20%;\r\n    list-style-type:none;\n}\n.paddings[data-v-7b258a5b]{\r\n    margin-left: 100px;\r\n    margin-right: 100px;\r\n    padding-right: 150px;\n}\r\n", ""]);
+exports.push([module.i, "\n.margins[data-v-7b258a5b]{\r\n    margin-left: 5px;\r\n    margin-right: 5px;\r\n    margin-bottom: 10px;\n}\n.template[data-v-7b258a5b]{\r\n    margin-left: 10px;\n}\n.pag[data-v-7b258a5b]{\r\n    float: left;\r\n    width: 20%;\r\n    list-style-type:none;\n}\n.paddings[data-v-7b258a5b]{\r\n    margin-left: 100px;\r\n    margin-right: 100px;\r\n    padding-right: 150px;\n}\n.fix[data-v-7b258a5b]{\r\n    position: absolute;\n}\r\n", ""]);
 
 // exports
 
@@ -24732,9 +24732,9 @@ exports.default = {
             pbar: false,
             messageAlert: 'No hay resultados en la busqueda',
             classAlert: 'alert-info',
-            nameSearch: '',
             error: false,
-            showA: false
+            showA: false,
+            messageFav: ''
         };
     },
 
@@ -24818,6 +24818,8 @@ exports.default = {
             this.pbar = false;
         },
         castSongs: function castSongs(list) {
+            var _this4 = this;
+
             var arrayTemp = [];
             var tr = void 0;
             if (list) {
@@ -24833,18 +24835,24 @@ exports.default = {
                             album: tr.album_name,
                             release: date.split("T")[0]
                         };
+                        if (_this4.$session.has('login')) {
+                            if (_this4.$tracks.checkTrack(ob.id, _this4.$session.get('login').id)) {
+                                ob.userId = _this4.$session.get('login').id;
+                            }
+                        }
                         arrayTemp.push(Object.assign({}, ob));
                     }
                 });
             }
             return arrayTemp;
         },
-        showAlert: function showAlert() {
-            var _this4 = this;
+        showAlert: function showAlert(payload) {
+            var _this5 = this;
 
+            this.messageFav = payload;
             this.showA = true;
             setTimeout(function () {
-                _this4.showA = false;
+                _this5.showA = false;
             }, 3500);
         }
     },
@@ -24856,7 +24864,6 @@ exports.default = {
     created: function created() {
         if (this.$store.state.array.length != 0) this.songs = this.$store.state.array;
         this.execPromises();
-        this.nameSearch = this.name.replace(/%20/g, " ");
         this.$store.commit('putBackPath', this.$route.path);
     }
 }; //
@@ -24933,7 +24940,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
 
 exports.default = {
     props: ['track'],
@@ -24943,12 +24949,7 @@ exports.default = {
         };
     },
 
-    computed: {
-        trackAgr: function trackAgr() {
-            console.log(this.track.userId);
-            if (this.track.userId) this.agregado = true;
-        }
-    },
+    computed: {},
     watch: {},
     methods: {
         ruteGo: function ruteGo() {
@@ -24959,24 +24960,29 @@ exports.default = {
             if (this.$session.has('login')) {
                 if (this.track.userId) {
                     this.quitTrack();
+                    this.showAlert('Quitado de favoritos correctamente');
+                    delete this.track.userId;
+                    this.agregado = false;
                 } else {
-                    debugger;
                     this.track.userId = this.$session.get('login').id;
                     this.$tracks.saveTrack(this.track);
-                    this.showAlert();
+                    this.showAlert('Agregado a favoritos correctamente');
+                    this.agregado = true;
                 }
             } else {
-                console.log('debe estar logueado');
+                this.showAlert('Debe estar logueado para agregar a favoritos');
             }
         },
-        showAlert: function showAlert() {
-            this.$emit('showAlert');
+        showAlert: function showAlert(message) {
+            this.$emit('showAlert', message);
         },
         quitTrack: function quitTrack() {
             this.$emit('quitTrack', this.track);
         }
     },
-    created: function created() {}
+    created: function created() {
+        if (this.track.userId) this.agregado = true;
+    }
 };
 
 /***/ }),
@@ -25058,11 +25064,11 @@ var render = function() {
                             on: { click: _vm.changeFavorite }
                           },
                           [
-                            !_vm.track.userId
+                            !_vm.agregado
                               ? _c("md-icon", [_vm._v("favorite")])
                               : _vm._e(),
                             _vm._v(" "),
-                            !_vm.track.userId
+                            !_vm.agregado
                               ? _c(
                                   "md-tooltip",
                                   { attrs: { "md-direction": "right" } },
@@ -25070,11 +25076,11 @@ var render = function() {
                                 )
                               : _vm._e(),
                             _vm._v(" "),
-                            _vm.track.userId
+                            _vm.agregado
                               ? _c("md-icon", [_vm._v("favorite_border")])
                               : _vm._e(),
                             _vm._v(" "),
-                            _vm.track.userId
+                            _vm.agregado
                               ? _c(
                                   "md-tooltip",
                                   { attrs: { "md-direction": "right" } },
@@ -25131,13 +25137,18 @@ var render = function() {
             "div",
             [
               _c("h1", [
-                _vm._v("Resultados de: " + _vm._s(_vm.nameSearch) + " ")
+                _vm._v(
+                  "Resultados de: " +
+                    _vm._s(_vm.name.replace(/%20/g, " ")) +
+                    " "
+                )
               ]),
               _vm._v(" "),
               _vm.showA
                 ? _c("zp-alert", {
+                    staticClass: "fix",
                     attrs: {
-                      messageAlert: "Agregado a favoritos correctamente",
+                      messageAlert: _vm.messageFav,
                       classAlert: "alert-success"
                     }
                   })
@@ -26584,6 +26595,7 @@ exports.default = {
             filter: '',
             messageAlert: 'No hay resultados en la busqueda',
             classAlert: 'alert-info',
+            messageFav: '',
             paginate: ["tracks"],
             tracks: [],
             error: false,
@@ -26641,6 +26653,8 @@ exports.default = {
             });
         },
         castSong: function castSong(list) {
+            var _this3 = this;
+
             var arrayTemp = [];
             if (list) {
                 list.forEach(function (s) {
@@ -26655,6 +26669,11 @@ exports.default = {
                             artist: aux.artist_name,
                             release: date
                         };
+                        if (_this3.$session.has('login')) {
+                            if (_this3.$tracks.checkTrack(ob.id, _this3.$session.get('login').id)) {
+                                ob.userId = _this3.$session.get('login').id;
+                            }
+                        }
                         arrayTemp.push(Object.assign({}, ob));
                     }
                 });
@@ -26667,12 +26686,13 @@ exports.default = {
             this.$store.commit('putBackPath', this.$route.path);
             this.pbar = false;
         },
-        showAlert: function showAlert() {
-            var _this3 = this;
+        showAlert: function showAlert(payload) {
+            var _this4 = this;
 
+            this.messageFav = payload;
             this.showA = true;
             setTimeout(function () {
-                _this3.showA = false;
+                _this4.showA = false;
             }, 3500);
         }
     },
@@ -26743,7 +26763,7 @@ var render = function() {
               _vm.showA
                 ? _c("zp-alert", {
                     attrs: {
-                      messageAlert: "Agregado a favoritos correctamente",
+                      messageAlert: _vm.messageFav,
                       classAlert: "alert-success"
                     }
                   })
@@ -27022,6 +27042,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 exports.default = {
     components: {
@@ -27051,6 +27072,15 @@ exports.default = {
     methods: {
         quitTrack: function quitTrack(track) {
             this.myTracks = this.$tracks.quitTrack(track);
+            this.showAlert();
+        },
+        showAlert: function showAlert() {
+            var _this2 = this;
+
+            this.showA = true;
+            setTimeout(function () {
+                _this2.showA = false;
+            }, 3500);
         }
     },
     created: function created() {
@@ -27072,91 +27102,37 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", [_vm._v("Mi track list")]),
-      _vm._v(" "),
-      _c(
+  return _vm.$session.has("login")
+    ? _c(
         "div",
-        { staticClass: "paddings" },
         [
-          _c(
-            "md-input-container",
-            [
-              _c("label", [_vm._v("Filtrar por título")]),
-              _vm._v(" "),
-              _c("md-input", {
-                model: {
-                  value: _vm.filter,
-                  callback: function($$v) {
-                    _vm.filter = $$v
-                  },
-                  expression: "filter"
+          _c("h1", [_vm._v("Mi track list")]),
+          _vm._v(" "),
+          _vm.showA
+            ? _c("zp-alert", {
+                attrs: {
+                  messageAlert: "Quitado de favoritos correctamente",
+                  classAlert: "alert-success"
                 }
               })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm.filterTracks.length == 0
-        ? _c("zp-alert", {
-            attrs: {
-              messageAlert: _vm.messageAlert,
-              classAlert: _vm.classAlert
-            }
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.filterTracks.length != 0
-        ? _c(
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
             "div",
+            { staticClass: "paddings" },
             [
-              _c("div", { staticStyle: { "padding-left": "100px" } }, [
-                _vm._v(
-                  "\n            resultados: " +
-                    _vm._s(_vm.filterTracks.length) +
-                    "\n        "
-                )
-              ]),
-              _vm._v(" "),
               _c(
-                "paginate",
-                {
-                  staticClass: "row",
-                  attrs: { name: "tracks", list: _vm.filterTracks, per: 50 }
-                },
-                _vm._l(_vm.paginated("tracks"), function(c) {
-                  return _c(
-                    "div",
-                    { key: c.id, staticClass: "three columns margins" },
-                    [
-                      _c("zp-littlecard", {
-                        attrs: { track: c },
-                        on: { quitTrack: _vm.quitTrack }
-                      })
-                    ],
-                    1
-                  )
-                })
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "row",
-                  staticStyle: { "justify-content": "center" }
-                },
+                "md-input-container",
                 [
-                  _c("paginate-links", {
-                    attrs: {
-                      for: "tracks",
-                      async: true,
-                      "show-step-links": true,
-                      "step-links": { next: "<<", prev: ">>" }
+                  _c("label", [_vm._v("Filtrar por título")]),
+                  _vm._v(" "),
+                  _c("md-input", {
+                    model: {
+                      value: _vm.filter,
+                      callback: function($$v) {
+                        _vm.filter = $$v
+                      },
+                      expression: "filter"
                     }
                   })
                 ],
@@ -27164,11 +27140,76 @@ var render = function() {
               )
             ],
             1
-          )
-        : _vm._e()
-    ],
-    1
-  )
+          ),
+          _vm._v(" "),
+          _vm.filterTracks.length == 0
+            ? _c("zp-alert", {
+                attrs: {
+                  messageAlert: _vm.messageAlert,
+                  classAlert: _vm.classAlert
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.filterTracks.length != 0
+            ? _c(
+                "div",
+                [
+                  _c("div", { staticStyle: { "padding-left": "100px" } }, [
+                    _vm._v(
+                      "\n            resultados: " +
+                        _vm._s(_vm.filterTracks.length) +
+                        "\n        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "paginate",
+                    {
+                      staticClass: "row",
+                      attrs: { name: "tracks", list: _vm.filterTracks, per: 50 }
+                    },
+                    _vm._l(_vm.paginated("tracks"), function(c) {
+                      return _c(
+                        "div",
+                        { key: c.id, staticClass: "three columns margins" },
+                        [
+                          _c("zp-littlecard", {
+                            attrs: { track: c },
+                            on: { quitTrack: _vm.quitTrack }
+                          })
+                        ],
+                        1
+                      )
+                    })
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "row",
+                      staticStyle: { "justify-content": "center" }
+                    },
+                    [
+                      _c("paginate-links", {
+                        attrs: {
+                          for: "tracks",
+                          async: true,
+                          "show-step-links": true,
+                          "step-links": { next: "<<", prev: ">>" }
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            : _vm._e()
+        ],
+        1
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -27832,7 +27873,7 @@ exports.default = {
                 pass: ''
             },
             alert: false,
-            messageAlert: 'Ya hay un usuario con ese Mail',
+            messageAlert: 'Ya hay un usuario registrado con ese Mail',
             classAlert: 'alert-info'
         };
     },
@@ -28395,7 +28436,7 @@ exports.default = {
         return result;
     },
     saveTrack: function saveTrack(track) {
-        if (!this.checkTrack(track)) {
+        if (!this.checkTrack(track.id, track.userId)) {
             var arrayTemp = this.getAllTracks();
             arrayTemp.push(track);
             localStorage.setItem('songs', JSON.stringify(arrayTemp));
@@ -28403,10 +28444,10 @@ exports.default = {
         }
         return false;
     },
-    checkTrack: function checkTrack(track) {
+    checkTrack: function checkTrack(trackId, userId) {
         var arrayTemp = this.getAllTracks();
         return arrayTemp.find(function (t) {
-            return t.id == track.id && t.userId == track.userId;
+            return t.id == trackId && t.userId == userId;
         });
     },
     quitTrack: function quitTrack(track) {

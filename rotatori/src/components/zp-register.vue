@@ -34,7 +34,7 @@ export default {
                 pass: '',
             },
             alert: false,
-            messageAlert: 'Ya hay un usuario con ese Mail',
+            messageAlert: 'Ya hay un usuario registrado con ese Mail',
             classAlert: 'alert-info',
         }
     },

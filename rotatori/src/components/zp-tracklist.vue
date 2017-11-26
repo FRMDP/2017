@@ -1,6 +1,7 @@
 <template>
-    <div>
+    <div v-if="$session.has('login')">
         <h1>Mi track list</h1>
+        <zp-alert v-if="showA" :messageAlert="'Quitado de favoritos correctamente'" :classAlert="'alert-success'"></zp-alert>
         <div class="paddings">
             <md-input-container>
                 <label>Filtrar por título</label>
@@ -51,6 +52,13 @@ export default {
     methods:{
         quitTrack(track){
             this.myTracks = this.$tracks.quitTrack(track);
+            this.showAlert();
+        },
+        showAlert(){
+            this.showA = true;
+            setTimeout(() => {
+                this.showA = false;
+            }, 3500);
         }
     },
     created() {

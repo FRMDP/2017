@@ -16,7 +16,7 @@ export default {
         return result;
     },
     saveTrack(track){
-        if(!this.checkTrack(track)){
+        if(!this.checkTrack(track.id, track.userId)){
             const arrayTemp = this.getAllTracks();
             arrayTemp.push(track);
             localStorage.setItem('songs', JSON.stringify(arrayTemp));
@@ -24,9 +24,9 @@ export default {
         }
         return false;
     },
-    checkTrack(track){
+    checkTrack(trackId, userId){
         const arrayTemp = this.getAllTracks();
-        return arrayTemp.find(t => (t.id == track.id && t.userId == track.userId));
+        return arrayTemp.find(t => (t.id == trackId && t.userId == userId));
     },
     quitTrack(track){
         const arrayTemp = this.getAllTracks();
@@ -40,5 +40,5 @@ export default {
         arrayTemp.splice(index, 1);
         localStorage.setItem('songs', JSON.stringify(arrayTemp));
         return this.getTracksById(track.userId);
-    }
+    },
 }

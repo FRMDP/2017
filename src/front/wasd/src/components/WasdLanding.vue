@@ -1,8 +1,7 @@
 <template>
   <div>
+    <!-- This tag is only to place the background image -->
     <div class="background"></div>
-
-
     <div class="row">
       <div class="absolute-center">
         <div class="col-12">

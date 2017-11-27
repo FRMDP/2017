@@ -35,47 +35,79 @@ export default new VueRouter({
       children: [
         {
           path: '/home',
+
           component: load('WasdLanding')
         },
         {
           path: '/login',
+
           component: load('Error404')
         },
         {
           path: '/discover',
-          component: load('Error404')
+
+          component: load('WasdDiscover')
         },
         {
           path: '/genres',
-          component: load('Error404')
+
+          component: load('WasdGenres')
         },
         {
           path: '/platforms',
-          component: load('Error404')
+
+          component: load('WasdPlatforms')
         },
         {
           path: '/soon',
+
           component: load('Error404')
         },
         {
           path: '/releases',
+
           component: load('Error404')
         },
         {
           path: '/ratings',
+
           component: load('Error404')
         },
         {
           path: '/engines',
-          component: load('Error404')
+
+          component: load('WasdGameEngines')
         },
         {
           path: '/news',
-          component: load('Error404')
+
+          component: load('WasdNews')
         },
         {
           path: '/search',
+
           component: load('Error404')
+        },
+        {
+          path: '/game/:id',
+
+          name: 'game',
+
+          component: load('WasdGameInfosite')
+        },
+        {
+          path: '/platforms/:id',
+
+          name: 'platforms',
+
+          component: load('WasdGamesByPlatform')
+        },
+        {
+          path: '/engines/:id',
+
+          name: 'engine',
+
+          component: load('WasdGameEngineInfosite')
         }
       ]
     },

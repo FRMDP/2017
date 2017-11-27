@@ -21,7 +21,7 @@
                alt="Summary icon day">-->
           <h3 class="changeMarginButton text-center">{{ forecastData[0].hourly.summary}}</h3>
 
-          <table class="table table-hover customMarginTop">
+          <table class="table table-hover customMarginTop customBackColorTable">
             <thead>
             <tr class="table-info">
               <th class="text-center">Hour </th>
@@ -92,6 +92,9 @@
 <style>
   .changeFont {
     font-family: 'Roboto', sans-serif;
+  }
+  .customBackColorTable{
+    background-color: rgba( 255,255,255, 0.7);
   }
 
   .topFixFixed {

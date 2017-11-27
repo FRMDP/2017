@@ -20,7 +20,7 @@
             <!-- lo que me retorna la api como 'icon' lo concateno con el directorio donde almaceno las imagenes que descargue yo-->
             <img class="mx-auto d-block" :src="'../../static/wetherIcons/' +actualData.currently.icon+ '.png'"
                  alt="Summary icon day">
-            <table class="table table-hover customMarginTop">
+            <table class="table table-hover customMarginTop customBackColorTable">
               <thead>
               <tr class="table-info">
                 <th class="text-center">Apparent Temperature</th>
@@ -45,7 +45,7 @@
               </tbody>
             </table>
 
-            <table class="table table-hover customMarginTop">
+            <table class="table table-hover customMarginTop customBackColorTable">
               <thead>
               <tr class="table-info">
                 <th class="text-center">Pressure</th>
@@ -156,6 +156,8 @@
   .changeFont {
     font-family: 'Roboto', sans-serif;
   }
-
+  .customBackColorTable{
+    background-color: rgba( 255,255,255, 0.7);
+  }
 
 </style>

@@ -29,7 +29,7 @@
         <div class="col-md-12">
           <!-- lo que me retorna la api como 'icon' lo concateno con el directorio donde almaceno las imagenes que descargue yo-->
           <img class="mx-auto d-block" :src="'../../static/wetherIcons/' +actualData.currently.icon+ '.png'" alt="Summary icon day">
-          <table class="table table-hover customMarginTop">
+          <table class="table table-hover customMarginTop customBackColorTable">
             <thead>
             <tr  class="table-info">
               <th class="text-center">Apparent Temperature</th>
@@ -122,6 +122,9 @@
   }
   .customMarginTopButton{
     margin-top:5px;
+  }
+  .customBackColorTable{
+    background-color: rgba( 255,255,255, 0.7);
   }
 
 </style>

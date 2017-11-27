@@ -17,7 +17,7 @@
       <div v-else>
         <div class="col-md-12">
           <h3 class="changeMarginButton text-center">{{ forecastData[0].daily.summary}}</h3>
-          <table class="table table-hover customMarginTop">
+          <table class="table table-hover customMarginTop customBackColorTable">
             <thead>
             <tr class="table-info">
               <th class="text-center">Days </th>
@@ -153,6 +153,9 @@
     height: 120px;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
+  }
+  .customBackColorTable{
+    background-color: rgba( 255,255,255, 0.7);
   }
 
   @-webkit-keyframes spin {

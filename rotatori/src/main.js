@@ -5,10 +5,15 @@ import axios from 'axios'
 import VuePaginate from 'vue-paginate'
 import store from './utils/store'
 import router from './utils/router'
+import VueSocketIO from 'vue-socket.io'
+import socketio from 'socket.io-client'
+
+export const socketInstance = socketio('http://127.0.0.1:3000');
 
 Vue.use(VuePaginate)
 Vue.use(VueMaterial);
 Vue.use(VueSession);
+Vue.use(VueSocketIO, socketInstance);
 
 import App from './components/App.vue'
 import apiRoutes from './utils/apiRoutes'

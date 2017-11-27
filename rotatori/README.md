@@ -21,20 +21,35 @@ Información a la que se podrá acceder:
     
     ``` npm install ```
     
-  * Para correr servidor local para pruebas (genera un servidor en localhost:7890)
+  * Para correr servidor local para pruebas (genera un servidor en 127.0.0.1:7890)
     
     ```npm run start ```
   
   * En modo develop se utiliza webpack, para empaquetar utilizar comando:
     
     ``` npm run build ```
+  
+#### WebSocket
+  * Para hacerlo funcionar:
+    
+    * Primero ir a la carpeta socket:
+      
+      ``` cd socket ```  
 
-  * La API utilizada no viene con encabezado CORS por lo que para que el sistema funcione correctamente, hay que instalar una extención:
+    * Instalar dependencias:
+
+      ``` npm install ```
+    
+    * Para correr el servidor localmente (genera un servidor en localhost:3000)
+
+      ``` npm run start ```
+
+  * La API utilizada no cuenta con encabezado CORS por lo que para que el sistema funcione correctamente, hay que instalar una extención:
     - Para Chrome:
      [**Allow-Control-Allow-Origin:***](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=es-419) 
     - Para Firefox:
     [**CORS Everywhere**](https://addons.mozilla.org/es/firefox/addon/cors-everywhere/)
-    
-    
-**TODO**
-  - Buscar alguna manera o API para poder reproducir la música ademas de poder ver la letra
+  
+#### Importante!!
+  - Al Agregar WebSocket, en el navegador Chrome no me tomaba el servidor, por el ya famoso error de CORS, no pude hacerlo funcionar ni con los addons. O me funcionaba la api o me funcionaba WebSocket pero no los dos. Pero sí funciona en **FireFox** 
+  - Por cuestión de tiempo, no llego a encontrar una solución para Chrome.

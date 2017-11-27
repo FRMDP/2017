@@ -12,6 +12,8 @@ import zpResultartist from '../../components/zp-resultartist.vue'
 import zpInfoartist from '../../components/zp-infoartist.vue'
 import zpLyricid from '../../components/zp-lyricsid.vue'
 import zpTracklist from '../../components/zp-tracklist.vue'
+import zpPruebas from '../../components/zp-prueba.vue'
+import zpComments from '../../components/zp-comments.vue'
 
 export default new VueRouter({
 	routes: [
@@ -23,6 +25,7 @@ export default new VueRouter({
 		{ path: '/resultArtist/:endpoint/:search/:name', component: zpResultartist, name: 'resultArtist' },
 		{ path: '/infoArtist/:id', component: zpInfoartist, name: 'infoAr'},
 		{ path: '/lyricById/:id/:name', component: zpLyricid, name: 'lyricsId'},
-		{ path: '/myTrackList', component: zpTracklist, name: 'myList' }
+		{ path: '/myTrackList', component: zpTracklist, name: 'myList' },
+		{ path: '/prueba', component: zpComments},
 	]
 });

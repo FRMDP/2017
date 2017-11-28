@@ -1,0 +1,44 @@
+header{
+        padding-top: 10px;
+      }
+ body{
+      background-image: url('http://www.pcmrace.com/wp-content/uploads/2017/07/F1_2017_July_screenshot_08.jpg');
+
+       }
+label{
+      margin: 5px;
+
+      font-weight: bold;
+      font-family: Verdana;
+
+    }
+.center{
+      padding-top: 100px;
+    }
+.card{
+        margin: 10px;
+      }
+.Styletextarea{
+          max-height:100px;
+          min-height:100px;
+        }
+.sizeSubTitle{
+              font-size: 36px;
+            }
+.styleLetter{
+              color: rgb(235, 89, 63);
+              font-weight: bold;
+              font-family: Verdana;
+            }
+.spaceButton{
+              margin: 10px;
+              padding-top: 12px;
+            }
+.truncateBody{
+        width:200px;
+        height:20px;
+        padding:20px;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        overflow:hidden;
+      }

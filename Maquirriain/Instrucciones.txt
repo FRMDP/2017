@@ -1,0 +1,8 @@
+Manual de uso:
+		1-Abrir una terminal
+		2-Ubicarte en la carpeta 'maquirriain'
+		3-Poner 'node serverNode.js'
+		4-Repetir pasos 1 y 2
+		5-Poner 'npm run dev'
+		6-Abrir cualquier navegador y entrar a la direccion que nos indica en la ultima terminal
+

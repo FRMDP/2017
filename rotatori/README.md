@@ -52,4 +52,5 @@ Información a la que se podrá acceder:
   
 #### Importante!!
   - Al Agregar WebSocket, en el navegador Chrome no me tomaba el servidor, por el ya famoso error de CORS, no pude hacerlo funcionar ni con los addons. O me funcionaba la api o me funcionaba WebSocket pero no los dos. Pero sí funciona en **FireFox** 
-  - Por cuestión de tiempo, no llego a encontrar una solución para Chrome.
+  
+  - En algún momento con menos estres, buscaré la solución, ya por ahora suficiente.

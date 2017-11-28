@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="mx-auto">
-        <h1 class="customPpalFont">
-          <br class="lightSpeedOut">Your favourite
-          <br class="lightSpeedIn">news site</h1>
+        <h1 class="customPpalFont lightSpeedIn">
+          <br>Your favourite
+          <br>news site</h1>
       </div>
     </div>
     <div class="row">

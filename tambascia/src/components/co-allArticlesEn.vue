@@ -93,9 +93,6 @@
 </script>
 
 <style>
-  .buttonLeft {
-    margin-left: 47px;
-  }
 
   .buttonRight {
     margin-left: 12px;

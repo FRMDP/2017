@@ -1,0 +1,101 @@
+<template>
+    <div>
+        <zp-error v-if="error"></zp-error>
+        <div v-else>
+            <div class="row">
+                <div class="one columns">
+                    <md-button class="md-fab md-warn" @click="goback()">
+                        <md-icon>reply</md-icon>
+                        <md-tooltip md-direction="right">{{ title }}</md-tooltip>
+                    </md-button>
+                </div>
+                <div class="eleven columns">
+                    <h1>{{ lyric.title }}</h1>
+                </div>
+            </div>
+            <div class="margins">
+                <div v-html="lyric.body" class="paddingSup"></div>
+                <div v-html="lyric.copyright" class="italic"></div>
+                <md-button :href="lyric.url" target="_blank" class="md-raised md-primary">Ver Completa en Musixmatch</md-button>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import zpError from './zp-error.vue'
+export default {
+    props: [],
+    components: {
+        zpError,
+    },
+    data(){
+        return {
+            trackLyrics: [],
+            lyric: {
+                title:'',
+                body: '',
+                copyright: '',
+                url: '',
+            },
+            title: 'volver al resultado',
+            error: false,
+        }
+    },
+    computed: {
+        params() {
+            return this.$route.params;
+        },
+        id() {
+            return this.$route.params.id;
+        },
+        name() {
+            return this.$route.params.name;
+        }
+    },
+    methods: {
+        getLyric(){
+            const st = this.$apiRoutes.getRoutes('lyricGetId',{name:'trackId', value: this.id});
+            this.$http.get(st)
+                .then(response => {
+                    const lyric = response.data.message.body.lyrics;
+                    this.lyric.title = this.name.replace(/%20/g," ");
+                    const body = lyric.lyrics_body;
+                    this.lyric.body = body.split('*******')[0].replace(/\n/g, '<br>');
+                    this.lyric.copyright = lyric.lyrics_copyright;
+                    this.lyric.url = lyric.backlink_url;
+                })
+                .catch(msg => {
+                    this.error = true;
+                });
+        },
+        goback(){
+            const st = this.$store.state.backPathSearch;
+            if(st != '')
+                this.$router.push(st);
+            else
+                this.title = 'no se puede acceder a la pagina de resultados'
+        }
+    },
+    watch: {
+        '$route.params.id': function() {
+            this.getArtist();
+        },
+    },
+    created(){
+        this.getLyric();
+    }
+}
+</script>
+<style scoped>
+.margins{
+    margin-left: 150px;
+}
+.paddingSup{
+    padding-top: 50px;
+}
+.italic{
+    font-style: italic;
+}
+</style>
+
+

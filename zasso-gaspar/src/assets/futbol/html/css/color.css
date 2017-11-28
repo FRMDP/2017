@@ -1,0 +1,243 @@
+/*
+	  ============================================================
+		   Font Color
+	  ============================================================
+*/
+.icon_tag,
+.price_tag,
+.shop_icons,
+.btn_2:hover,
+.kf_hd2 span,
+.copy_right2 a,
+.ticket_date b,
+.kf_cart:hover i,
+.kf_404_thumb h5,
+.kf_ticker > span,
+.kf_cart .text em,
+.banner_caption p,
+.kf_news_dec2 span,
+.team_logo a:hover,
+.text_2 h6:hover a,
+.shop_icons a:hover,
+.banner_caption h1 b,
+.banner_caption span,
+.recentpost_dec span,
+.nextmatch_dec > span,
+.kf_404_thumb h4 span,
+.links_dec li a:hover,
+.copy_right3 p a:hover,
+.comment_hd h5 a:hover,
+.links_dec li a:before,
+.blog_meta li a:hover i,
+.kf_plyer_rating span b,
+.admin_thumb h6:hover a,
+.kf_news_dec2:hover h6 a,
+.kf_lung .dropdown button,
+.blog_meta li span:hover i,
+.kf_result_thumb:hover > a,
+.breadcrumb li.active span,
+.kf_right_dec ul li a:hover,
+.kf_featured_thumb .text h6,
+.recentpost_dec span:before,
+.tranding_tab ul li a:hover,
+.tranding_tab ul li.active a,
+.shop_thumb .text h5 a:hover,
+.text_wrper .text h2 a:hover,
+.kf_featured_thumb .text span,
+.kf_featured_thumb4 .text span,
+.kf_recentnews:hover .text h6 a,
+.kf_roster_dec .text h3 a:hover,
+.kf_table2 .versus div p a:hover,
+.kf_roster_dec .text_overflow span,
+.tranding_tab ul li.active a:hover,
+.kf_opponents_dec .text h6 a:hover,
+.slider_widget .slick-arrow:before,
+.kf_featured_thumb4:hover .text h6 a,
+.kode_header_2 .kode_navigation li:hover > a,
+.kf_comingsoon .input_dec input[type="button"],
+.comment_hd ul li a:hover, .comment_hd ul li span:hover,
+.kf_opponents_wrap2 .kf_opponents_gols h5,
+.kode_header_2 .kode_navigation li ul li:hover > a,
+.kode_header_2 .kode_navigation li ul li:hover > a:before
+{
+	color:#ffbe00;
+}
+.canvasjs-chart-tooltip span{
+	color:#ffbe00 !important;
+}
+/*
+	  ============================================================
+		   Background Color
+	  ============================================================
+*/
+.rss,
+.lable_1,
+.btn_icon,
+.input-btn,
+.copy_right,
+.btn-1:hover,
+.btn_3:hover,
+.text_2 span,
+.kf_h5:before,
+.kf_map:before,
+.twitter_ticker,
+.filter_btn:hover,
+.kode_search:hover,
+.kf_tags li a:hover,
+.kf_404_text .btn-1,
+.widget_instagram a,
+.widget_ul li:hover,
+.kf_hd1 span::before,
+.list_meta li:before,
+.kf_contct_thumb:hover,
+.kf_social3 li a:hover,
+.kf_social2 li a:hover,
+.kf_top_bar .kode_search,
+.kode-gallery figcaption a,
+.roster .slick-arrow:hover,
+.kf_overview_nav .active a,
+.kode_header_2 .logo:before,
+.kode_navigation li:hover > a,
+.team_comparison_wrap2 button,
+.kf_contact_meta li:hover span,
+.kf_roster_dec:hover .text > span,
+.featured_slider .slick-arrow:hover,
+.kode-pagination .page-numbers:hover,
+.kode-pagination .page-numbers.current,
+.radio_dec input:checked + .radio-value,
+.input_label input[type="button"]:hover,
+.kf_ticket2_wrap ul li:hover .ticket_date,
+.radio_style3 input:checked + .radio-value,
+.kf_progress1 .progressbars.progress_single,
+.kf_rangeslider .ui-slider .ui-slider-range,
+.kf_progress_wrap .kf_progress .progress-bar,
+.kode_header_2 .kode_navigation li ul li a:hover,
+.kf_ticket2_wrap ul li:hover .ticket_button button
+{
+	background-color:#ffbe00;
+}
+.kf_progress1 .progressbars.progress_single
+{
+	background-color:#ffbe00 !important;
+}
+/*
+	  ============================================================
+		   Border Color
+	  ============================================================
+*/
+.megamenu_dec,
+.btn-1:hover,
+.label2:before,
+.filter_btn:hover,
+.kf_tags li a:hover,
+.kf_social3 li a:hover,
+.kf_social2 li a:hover,
+.kf_contct_thumb:hover,
+.select_dec select:focus,
+.kode_navigation .nav ul,
+.kf_overview_nav .active a,
+.kode_footer_2 .go-up:before,
+.input_textarea textarea:focus,
+.kf_overview_nav .active a:before,
+.input_dec input[type="text"]:focus,
+.kode-pagination .page-numbers:hover,
+.kode-pagination .page-numbers.current,
+.radio_style3 input:checked + .radio-value,
+.kode_header_2 .kode_navigation li ul li:hover a,
+.kf_ticket2_wrap ul li:hover .ticket_button button
+{
+	border-color:#ffbe00;
+}
+/*
+	  ============================================================
+		   Trandition
+	  ============================================================
+*/
+.btn-1,
+.btn_2,
+.btn_3,
+.btn_icon,
+.kf_cart i,
+.input-btn,
+.price_tag,
+.filter_btn,
+.shop_thumb,
+.shop_icons,
+.kode_search,
+.ticket_date,
+.text_2 h6 a,
+.shop_icons a,
+.kf_tags li a,
+.links_dec li,
+.widget_ul li,
+.ticket_date b,
+.kf_tip > span,
+.kf_table li a,
+.widget_ul li a,
+.links_dec li a,
+.blog_meta li a,
+.copy_right p a,
+.kf_table li div,
+.copy_right3 p a,
+.kf_contct_thumb,
+.widget_social a,
+.kf_social2 li a,
+.comment_hd h5 a,
+.kf_social3 li a,
+.shop_thumb .text,
+.blog_meta li a i,
+.admin_thumb h6 a,
+.kf_table2 li div,
+.kf_news_dec2 h6 a,
+.kf_overview_nav a,
+.kf_table2 div p a,
+.blog_meta li span,
+.ticket_date small,
+.kf_prdthumb figure,
+.kode_navigation ul,
+.kf_hd8 span:before,
+.widget_instagram a,
+.blog_meta li span i,
+.kf_result_thumb > a,
+.shop_thumb .text h6,
+.kode_navigation li a,
+.kf_right_dec ul li a,
+.tranding_tab ul li a,
+.ticket_button button,
+.kf_overview_nav a em,
+.shop_thumb .text h5 a,
+.text_wrper .text h2 a,
+.links_dec li a:before,
+.shop_thumb .thumb img,
+.widget_instagram a img,
+.kf_prdthumb figure img,
+.kf_overview_nav a span,
+.input_textarea textarea,
+.kf_contact_meta li span,
+.kf_recentnews .text h6 a,
+.kf_roster_dec .text span,
+.kf_roster_dec .text h3 a,
+.kf_recentnews figure img,
+.select_dec select option,
+.kf_prdthumb figure a:before,
+.kf_opponents_dec .text h6 a,
+.kf_featured_thumb figure img,
+.input_dec input[type="text"],
+.kode-pagination .page-numbers,
+.kf_contct_thumb:hover .kf_hd8,
+.kf_featured_thumb4 .text h6 a,
+.kf_contct_thumb:hover .text em,
+.input_label input[type="button"],
+.kf_contct_thumb:hover .text address,
+.comment_hd ul li a, .comment_hd ul li span,
+.kode-gallery figure,.kode-gallery figure figcaption,
+.kode-gallery figcaption a,.kode-gallery figure img,
+.kode_header_2 .kode_navigation li ul li a:before,
+.kode-gallery figure:before
+{
+	-webkit-transition:all 0.3s ease-in-out;
+		-moz-transition:all 0.3s ease-in-out;
+			-ms-transition:all 0.3s ease-in-out;
+				-o-transition:all 0.3s ease-in-out;
+					transition:all 0.3s ease-in-out;	
+}

@@ -1,0 +1,1003 @@
+
+
+/*
+=================================================
+				UP FROM 1200PX
+=================================================
+*/
+@media (min-width: 1200px) {
+
+}
+/*
+=================================================
+			FROM 992PX TO 1199PX
+=================================================
+*/
+@media (min-width: 992px) and (max-width: 1199px) {
+	.kode_header_2 .kode_navigation .nav > li{
+		margin-right: 10px;
+	}
+	.kode_header_2 .kode_navigation .nav > li:last-child{
+		margin-right: 0;
+	}
+	.kode_navigation li a{
+		font-size: 12px;
+	}
+	.kf_ticker > span{
+		width: 20%;
+	}
+	.kf_ticker_slider{
+		width: 80%;
+	}
+	.ticker p{
+		padding-right: 60px;
+	}
+	.text_wrper .text{
+		padding: 20px 20px;
+	}
+	.thumb_footer{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	.blog_meta li{
+		margin-right: 6px;
+	}
+	.text_2{
+		padding: 20px;
+	}
+	.widget_league_table .team_logo img{
+		display: none;
+	}
+	.widget_league_table .team_logo a{
+		margin: 0;
+	}
+	.widget_nextmatch .match_teams{
+		padding: 0 25px;
+	}
+	.kf_countdown li span::before{
+		right: -4px;
+	}
+	.radio_style2 .radio_dec{
+		margin-right: 12px;
+	}
+	.radio_style2 .radio_dec:last-child{
+		margin: 0;
+	}
+	/*team overview page*/
+	.kf_opponents_gols h5{
+		font-size: 30px;
+	}
+	.kf_progress_wrap{
+		width: 15%;
+	}
+	.kf_table2 li > div:first-child {
+	    padding-left: 15px;
+	}
+	.kf_opponents_dec .text h6{
+		font-size: 13px;
+	}
+	.input_dec_divider .input_dec{
+		width: 47.5%;
+	}
+	.widget_social a{
+		width: 29.9%;
+	}
+	.roster .slick-prev{
+		left: 0;
+	}
+	.roster .slick-next{
+		right: 0;
+	}
+	.kf_topscores li div:last-child,
+	.kf_tabs .kf_table li div:last-child,
+	.match_comparison2 .kf_table li div:last-child,
+	.match_comparison .kf_table li div:last-child {
+	    padding-right: 15px;
+	}
+	.kf_topscores li div:first-child,
+	.kf_tabs .kf_table li div:first-child,
+	.match_comparison2 .kf_table li div:first-child,
+	.match_comparison .kf_table li div:first-child {
+	    padding-left: 15px;
+	}
+	.kf_tabs_nav .nav-tabs li a{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.kf_table li .match_win{
+		display: none;
+	}
+	.widget_product li{
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+}
+/*
+=================================================
+			FROM 0PX TO 979PX
+=================================================
+*/
+@media (max-width: 991px) {
+	.kode_navigation{
+		position: relative;
+	}
+	.kode_navigation .nav{
+		display: none;
+	}
+	.kf_top_bar .kode_search{
+		margin-left: 15px;
+	}
+	.dl-menuwrapper{
+		display: block;
+	}
+	.kode_navigation .kf_cart{
+		margin: 0 50px 0 0;
+		padding: 25px 0;
+	}
+	.kode_header_2 .logo{
+		padding-top: 18px;
+		padding-bottom: 18px;
+	}
+	.banner_caption h1{
+		font-size: 26px;
+	}
+	.banner_caption span{
+		font-size: 20px;
+	}
+	.kf_ticker > span{
+		width: 25%;
+	}
+	.kf_ticker_slider{
+		width: 75%;
+	}
+	.text_wrper .text{
+		padding-top: 19px;
+		padding-bottom: 19px;
+	}
+	.ticker p{
+		padding-right:50px;
+	}
+	.kf_progress_wrap{
+		width: 19%;
+	}
+	.kf_overview_schedule .kf_table2 li > div:last-child {
+	    padding-right: 15px;
+	}
+	.kf_overview_schedule .kf_table2 li > div:first-child {
+	    padding-right: 15px;
+	}
+	.team_schedule_page .kf_table2 .tb2_time,
+	.team_schedule_page .kf_table2 .tb2_status{
+		display: none;
+	}
+	.input_dec_divider .input_dec{
+		width: 47.9%;
+	}
+	.widget_social a{
+		width: 31.9%;
+	}
+	.kf_overview_nav li {
+	    float: left;
+	    width: 16.6%;
+	    padding: 0 10px;
+	}
+	.kf_overview_nav a span{
+		font-size: 10px;
+	}
+	.kf_progress1 .skill-progress:last-child{
+		margin-bottom: 30px;
+	}
+	.kf_progress1 .skill-progress2:last-child{
+		margin-bottom: 0px;
+	}
+	.kf_table2 li .tb2_time,
+	.kf_table2 li .tb2_status{
+		display: none;
+	}
+	.roster .slick-prev{
+		left: 0;
+	}
+	.roster .slick-next{
+		right: 0;
+	}
+	.kf_roster_dec .text_overflow{
+		padding-left: 9px;
+	}
+	.kf_roster_dec .text > span{
+		width: 50px;
+	}
+	.roster_sidebar .kf_roster_dec .text{
+		padding: 100px 0;
+	}
+	.kf_roster_wrap .kf_progress1 .skill-progress:last-child{
+		margin-bottom: 0;
+	}
+	.kf_roster_wrap .kf_progress1{
+		margin-bottom: 30px;
+	}
+
+	.table_style3 li .table_info:nth-child(3),
+	.team_st_table .tb2_ppg,
+	.team_st_table .tb2_home,
+	.team_st_table .tb2_road,
+	.team_st_table .tb2_div{
+		display: none;
+	}
+	.kf_table2 li > div:first-child,
+	.kf_table4 li > div:first-child,
+	.table_style3 li div:first-child{
+		padding-left: 15px;
+	}
+	.kf_table2 li > div:last-child,
+	.kf_table4 li > div:last-child,
+	.table_style3 li div:last-child{
+		padding-right: 15px;
+	}
+	.kf_table4 li .tb2_hirebounds{
+		display: none;
+	}
+	.kf_plyer_rating2 .kf_progress1 .skill-progress:last-child{
+		margin-bottom: 0;
+	}
+	.kf_shop_wrap{
+		float: left;
+	}
+	.kf_ticketdetail .kf_table2 .input-btn{
+		min-width: 100px;
+	}
+	.kf_ticketdetail .tkt_price em{
+		font-size: 20px;
+	}
+	.kf_ticketdetail .kf_table2 li > div{
+		padding-top: 16px;
+		padding-bottom: 19px;
+	}
+	.nextmatch_wrap .nextmatch_dec{
+		width: 70%;
+	}
+	.kf_404_thumb{
+		background-size: 100%;
+	}
+	.kf_404_thumb h4{
+		font-size: 130px;
+		line-height: 130px;
+	}
+	.kf_contct_thumb{
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+	.kf_hd8 span{
+		margin-right: 10px;
+	}
+	.kf_form .input_dec {
+	    margin-bottom: 22px;
+	}
+}
+
+/*
+=================================================
+			FROM 768PX TO 979PX
+=================================================
+*/
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+
+}
+/*
+=================================================
+			FROM 0PX TO 767PX
+=================================================
+*/
+@media (max-width: 767px) {
+	.kode_header_2 .logo{
+		min-width: 235px;
+	}
+	.kode_header_2 .logo a{
+		width: 180px;
+	}
+	.kode_navigation .kf_cart{
+		padding: 16px 0;
+	}
+	.kf_ticker > span{
+		width: 30%;
+		font-size: 14px;
+	}
+	.kf_ticker_slider{
+		width: 70%;
+	}
+	.ticker p{
+		padding-right: 70px;
+	}
+	.kf_right_dec ul{
+		padding: 10px 0 15px;
+	}
+	.kf_right_dec > ul li{
+		padding: 0 10px;
+	}
+	.kf_top_bar .container{
+		position: relative;
+	}
+	.kf_top_bar .kf_right_dec{
+		width: 100%;
+		text-align: center;
+	}
+	.kf_top_bar .kf_right_dec > ul{
+		float: none;
+		display: inline-block;
+		margin-bottom: -5px;
+	}
+	.kf_top_bar .kode_search{
+		position: absolute;
+		top: 0;
+		right: 15px;
+		margin: 0;
+		height: 35px;
+		line-height: 35px;
+	}
+	.kf_top_bar .kf_social2 li a{
+		height: 35px;
+		line-height: 35px;
+	}
+	.banner_caption{
+		padding: 0 15px;
+	}
+	.banner_caption h1{
+		font-size: 16px;
+		line-height: 16px;
+	}
+	.banner_caption span {
+	    font-size: 14px;
+	    line-height: 14px;
+	}
+	.banner_caption p{
+		font-size: 14px;
+		line-height: 14px;
+		margin-bottom: 10px;
+	}
+	.banner_caption .btn-1{
+		padding: 3px 15px 4px;
+	}
+	.kf_featured_wrap2 .kf_featured_thumb figure{
+		width: 100%;
+	}
+	.kf_featured_wrap2 .kf_featured_thumb .text_wrper{
+		width: 100%;
+	}
+	.kf_opponents_outerwrap .kf_opponents_dec{
+		width: 30%;
+	}
+	.kf_opponents_outerwrap .kf_opponents_dec span{
+		width: 100%;
+		margin-bottom: 10px;
+		height: auto;
+	}
+	.kf_opponents_outerwrap .kf_opponents_dec.span_right .text,
+	.kf_opponents_outerwrap .kf_opponents_dec .text{
+		float: left;
+		width: 100%;
+		padding: 0;
+		text-align: center;
+	}
+	.kf_opponents_outerwrap .kf_opponents_gols{
+		width: 40%;
+		text-align: center;
+		padding: 50px 0;
+	}
+	.kf_opponents_gols h5{
+		font-size: 30px;
+	}
+	.kf_progress_wrap{
+		width: 100%;
+	}
+	.kf_scorecard .kf_table2{
+		margin:15px 0;
+		width: 100%;
+	}
+	.skill-progress:last-child{
+		margin-bottom: 30px;
+	}
+	.skill-progress2:last-child{
+		margin-bottom: 0px;
+	}
+	.kf_overview_roster .tb2_height,
+	.kf_overview_roster .tb2_weight,
+	.kf_overview_roster .tb2_collage{
+		display: none !important;
+	}
+	.kf_overview_schedule .tb2_time,
+	.kf_overview_schedule .tb2_date{
+		display: none !important;
+	}
+	.kf_table2 .input-btn{
+		min-width: 127px;
+		font-size: 11px;
+	}
+	.widget_player .kf_opponents_dec .text{
+		float: none;
+		width: auto;
+	}
+	.team_schedule_page .kf_table2 .tb2_comatition{
+		display: none;
+	}
+	.kf_blockquote{
+		padding-right: 30px;
+		padding-left: 30px;
+	}
+	.kf_blockquote::after, .kf_blockquote::before{
+		font-size: 50px;
+	}
+	.comment_hd ul li{
+		padding:0 5px;
+	}
+	.comment_hd ul li:first-child{
+		padding-left:0;
+	}
+	.comment_form li ul li .comment_dec{
+		padding-left: 50px;
+	}
+	.input_dec_divider .input_dec {
+	    width: 46.5%;
+	}
+	.widget_social a {
+	    width: 31%;
+	}
+	.kf_overview_nav li {
+	    float: left;
+	    margin-bottom: 15px;
+	    padding: 0 15px;
+	    width: 33.3%;
+	}
+	.kf_overview_nav li a:before{
+		display: none;
+	}
+	.kf_roster_wrap .kf_table2 li .tb2_weight,
+	.kf_roster_wrap .kf_table2 li .tb2_height {
+		display: none !important;
+	}
+	.kf_roster_dec .text h3{
+		line-height: 26px;
+	}
+	.roster_sidebar .kf_roster_dec .text {
+	    padding: 30px 0;
+	}
+	.table_style3 li .table_info:nth-child(2),
+	.team_st_table li .tb2_l10,
+	.team_st_table li .tb2_strk,
+	.team_st_table li .tb2_diff,
+	.team_st_table li .tb2_oppg{
+		display:none;
+	}
+	.match_comparison .kf_table li .kf_prd,
+	.match_comparison .kf_table li .kf_name{
+		display: none;
+	}
+	.kf_roster_wrap .kf_table2 li > div:last-child,
+	.match_comparison2 .kf_table li div:last-child,
+	.match_comparison .kf_table li div:last-child,
+	.kf_table li div:last-child{
+		padding-right: 15px;
+	}
+	.kf_roster_wrap .kf_table2 li > div:first-child,
+	.match_comparison2 .kf_table li div:first-child,
+	.match_comparison .kf_table li div:first-child,
+	.kf_table li div:first-child{
+		padding-left: 15px;
+	}
+	.match_comparison2 li .kf_tbhome{
+		display: none;
+	}
+	.match_comparison2.kf_statics2 .kf_tbresult,
+	.match_comparison2 .kf_tbresult{
+		width: auto;
+	}
+	.kf_topscores .kf_table{
+		width: 100%;
+	}
+	.kf_topscores .kf_table:first-child{
+		border-bottom:1px solid #d7d8d8;
+	}
+	.kf_table4 li .tb2_hiassists,
+	.kf_table4 li .tb2_histeals{
+		display: none;
+	}
+	.kf_table4 li .versus {
+	    min-width: 153px;
+	}
+	.kf_searchbar{
+		text-align: center;
+	}
+	.kf_searchbar.kf_h5 h5{
+		float: none;
+		display: inline-block;
+		margin-bottom: 15px;
+	}
+	.kf_searchbar .searchbar_list{
+		width: 100%;
+	}
+	.kf_searchbar .searchbar_list .select_dec{
+		width: 50%;
+		margin: 0;
+		padding: 0 15px;
+	}
+	.kf_opponents_wrap2 .kf_opponents_wrap{
+		min-width: auto;
+		width: 100%;
+	}
+	.ticket_date{
+		width: 100%;
+		padding: 10px 0;
+		min-height: auto;
+	}
+	.kf_opponents_wrap2{
+		padding-right: 15px;
+		padding-left: 15px;
+		width: 100%;
+	}
+	.ticket_dec2 .kf_opponents_dec .text{
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+	.ticket_dec2 .kf_opponents_dec > span{
+		display: none;
+	}
+	.ticket_dec2 .kf_opponents_dec .icon_tag i{
+		margin: 0 10px 0 0px;
+	}
+	.ticket_dec2 .kf_opponents_dec.span_right .icon_tag i{
+		margin:  0 0px 0 10px;
+	}
+	.ticket_dec2 .ticket_button{
+		width: 100%;
+		text-align: center;
+	}
+	.ticket_button button{
+		float: none;
+		display: inline-block;
+		margin-bottom: -5px;
+	}
+	.kf_opponents_wrap2 .kf_opponents_dec{
+		width: 40%;
+	}
+	.kf_opponents_wrap2 .kf_opponents_gols{
+		width: 20%;
+	}
+	.ticketdetail_hd .tkt_date{
+		width: 50%;
+	}
+	.kf_ticketdetail .kf_table2 li .tkt_price{
+		display: none;
+	}
+	.kf_ticketdetail .tkt_qty > label{
+		margin:0 0 10px 0;
+	}
+	.kf_ticketdetail .tkt_pkg span{
+		padding: 0;
+	}
+	.kf_ticketdetail .tkt_pkg span i{
+		display: none;
+	}
+	.nextmatch_wrap .match_teams > div{
+		width: 40%;
+	}
+	.nextmatch_wrap .nextmatch_dec{
+		width: 100%;
+	}
+	.kf_404_thumb h4 {
+	    font-size: 70px;
+	    line-height: 70px;
+	}
+	.kf_404_thumb {
+	    margin-bottom: -20px;
+	    padding-top: 188px;
+	}
+	.kf_404_text h6, .kf_404_text h5{
+		font-size: 25px;
+	}
+	.kf_404_text form{
+		float: left;
+		width: 100%;
+	}
+	.kf_comingsoon h4{
+		font-size: 50px;
+		line-height: 50px;
+		margin-bottom: 40px;
+	}
+	.kf_comingsoon .kf_countdown2{
+		margin-bottom: 40px;
+	}
+	.kf_countdown2 li{
+		width: 97px;
+	}
+	.kf_countdown2 li span{
+		font-size: 44px;
+	}
+	.kf_comingsoon form{
+		width: 100%;
+		float: left;
+	}
+	.kf_comingsoon{
+		padding: 0 15px;
+		margin: -230px auto 0;
+	}
+	.kf_map{
+		margin-bottom: 30px;
+	}
+	.kf_map #map-canvas{
+		height: 200px;
+	}
+	#search .modal-dialog{
+		margin: 0;
+		padding: 15px;
+		width: 100%;
+	}
+	.add_banner a img{
+		min-height: auto;
+	}
+}
+/*
+=================================================
+			FROM 0PX TO 0PX
+=================================================
+*/
+@media (min-width: 360px) and (max-width: 640px) {
+	.kf_table2 .tb2_ticket {
+	    min-width: auto;
+	}
+	.kf_table2 .input-btn{
+		min-width: auto;
+	}
+	.kf_table2 .versus {
+	    min-width: 160px;
+	}
+	.kf_scorecard .kf_table2 li div:nth-child(5){
+		display: none;
+	}
+	.team_st_table li .tb2_pct{
+		display: none;
+	}
+	.team_st_table li .versus div > span{
+		display: none;
+	}
+	.team_st_table li .versus{
+		min-width: 142px;
+	}
+	.team_st_table li .versus p{
+		padding: 0;
+	}
+
+}
+/*
+=================================================
+			FROM 0PX TO 0PX
+=================================================
+*/
+@media (max-width: 480px) {
+	.kode_header_2 .logo{
+		width: 100%;
+		text-align: center;
+		padding-right: 0;
+	}
+	.kode_header_2 .logo a{
+		width: auto;
+		float: none;
+		display: inline-block;
+		margin-bottom: -5px;
+	}
+
+	.kode_header_2 .logo::before {
+	    left: 0;
+	    right: 0 !important;
+	    transform: skewX(0deg);
+	    width: auto;
+	}
+	.kode_navigation{
+		width: 100%;
+	}
+	.kode_navigation .kf_cart{
+		float: left;
+		margin: 0;
+	}
+	.banner_caption p{
+		display: none;
+	}
+	.kf_ticker > span{
+		width: 100%;
+		text-align: center;
+	}
+	.kf_ticker_slider{
+		width: 100%;
+		padding-right: 0;
+		padding-left: 0;
+		text-align: center;
+	}
+	.kf_ticker > span::before{
+		left: -100%;
+	}
+	.kf_featured_thumb .text{
+		padding: 15px;
+	}
+	.text_2{
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.kf_featured_thumb .text h2{
+		font-size: 20px;
+		line-height: 20px;
+	}
+	.thumb_footer{
+		padding-right:15px;
+		padding-left: 15px;
+	}
+	.thumb_footer .blog_meta li{
+		margin-right: 7px;
+	}
+	.blog_meta li:last-child{
+		margin: 0;
+	}
+	.widget_league_table .team_logo img{
+		display: none;
+	}
+	.widget_league_table .team_logo a{
+		margin: 0;
+	}
+	.widget_nextmatch .match_teams{
+		padding: 0 25px;
+	}
+	.radio_style2 .radio_dec{
+		margin-right: 10px;
+	}
+	.radio_style2 .radio_dec:last-child{
+		margin: 0;
+	}
+	.twitter_ticker .kf_ticker > span{
+		width: 100%;
+	}
+	.twitter_ticker .kf_ticker_slider{
+		width: 100%;
+		padding-left: 0;
+	}
+	.twitter_ticker .ticker p{
+		padding-right: 50px;
+	}
+	.copy_right3 p{
+		font-size: 11px;
+		line-height: 11px;
+	}
+	.prv_btn{
+		display: none;
+	}
+	.kf_opponents_gols h5 {
+	    font-size: 20px;
+	}
+	.kf_hd1 span{
+		font-size: 18px;
+	}
+	.kf_overview_schedule .kf_table2 .versus div > span{
+		display: none;
+	}
+	.kf_overview_schedule .kf_table2 .versus div p{
+		padding: 0;
+		display: inline-block;
+	}
+	.innner_banner h3{
+		font-size: 26px;
+	}
+	.kf_opponents_dec .text h6 {
+	    float: left;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    width: 100%;
+	}
+	.tags_wrap{
+		text-align: center;
+	}
+	.tags_wrap .kf_social2,
+	.tags_wrap .kf_tags2{
+		float: none;
+		width: auto;
+		display: inline-block;
+	}
+	.tags_wrap .kf_social2{
+		margin-bottom: -5px;
+	}
+	.comment_dec .text{
+		float: left;
+		width: 100%;
+		padding: 20px 0 0 0;
+	}
+	.comment_hd ul li a, .comment_hd ul li span{
+		font-size: 13px;
+	}
+	.comment_form li ul li .comment_dec {
+	    padding-left: 20px;
+	}
+	.input_dec_divider .input_dec{
+		width: 100%;
+		margin-right: 0;
+	}
+	.widget_social a {
+	    width: 29.8%;
+	}
+	.tags_wrap .kf_tags2 li{
+		margin-bottom: 10px;
+	}
+	.kf_plyer_rating2 .kf_table2 li > div:first-child{
+		padding-left: 15px;
+	}
+	.kf_plyer_rating2 .kf_table2 li > div:last-child{
+		padding-right: 15px;
+	}
+	.kf_plyer_rating span{
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+	.comment_hd ul li a i, .comment_hd ul li span i{
+		display: none;
+	}
+	.kf_overview_nav li{
+		width: 100%;
+	}
+	.roster_sidebar .kf_roster_dec figure{
+		width: 100%;
+	}
+	.roster_sidebar .kf_roster_dec .text{
+		width: 100%;
+	}
+	.roster_sidebar .kf_roster_dec .text > span{
+		width: 100px;
+	}
+	.roster_sidebar .kf_roster_dec .text_overflow{
+		float: none;
+		width: auto;
+		padding: 0 0 0 25px;
+	}
+	.roster_sidebar .kf_tableaside li > div{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.kf_roster_wrap .kf_table2 li > div:last-child{
+		padding-right: 15px;
+	}
+	.match_comparison .kf_table li .kf_time,
+	.match_comparison .kf_table li .kf_date3{
+		display: none;
+	}
+	.kf_tabs_nav .kf_table li .match_win,
+	.match_comparison2 li .kf_tbaway {
+	    display: none;
+	}
+	.kf_overview_roster .tb2_age{
+		display: none !important;
+	}
+	.kf_roster_wrap .kf_table2 li .tb2_age,
+	.kf_roster_wrap .kf_table2 li .tb2_nbr{
+		display: none;
+	}
+	.kf_table4 li .tb2_hipoints,
+	.kf_table4 li .versus div > span{
+		display: none;
+	}
+	.kf_table4 li .versus {
+	    min-width: 129px;
+	}
+	.kf_table4 li .versus p{
+		padding: 0;
+	}
+	.ticketdetail_hd .tkt_date{
+		width: 100%;
+		text-align: left;
+		margin-bottom: 15px;
+	}
+	.ticketdetail_hd .tkt_date:last-child{
+		margin: 0;
+	}
+	.ticketdetail_hd .tkt_date > span{
+		float: left;
+		text-align: left;
+	}
+	.ticketdetail_hd .tkt_date > span i{
+		margin-right: 10px;
+		float: left;
+	}
+	.ticketdetail_hd{
+		padding-right: 15px;
+		padding-left: 15px;
+		text-align: left;
+	}
+	.kf_ticketdetail .kf_table2 li > div{
+		float: left;
+		width: 100%;
+	}
+	.kf_ticketdetail .kf_table2 li div.tkt_pkg{
+		text-align: center;
+	}
+	.kf_404_thumb {
+	    background-color: #c7c7c7;
+	    background-image: none;
+	    margin: 0 0 20px;
+	    min-height: auto;
+	    padding: 20px 0 26px;
+	}
+	.kf_404_text h6, .kf_404_text h5 {
+	    font-size: 16px;
+	    margin-bottom: 5px;
+	}
+	.kf_comingsoon h4 {
+	    font-size: 30px;
+	    line-height: 30px;
+	    margin-bottom: 30px;
+	}
+	.kf_countdown2 li {
+	    margin: 0;
+	    width: 25%;
+	}
+	.kf_countdown2 li span{
+		font-size: 24px;
+	}
+	.kf_countdown2 li p{
+		font-size: 14px;
+	}
+	.kf_comingsoon .kf_countdown2{
+		margin-bottom: 20px;
+	}
+	.kf_comingsoon .kf_social2{
+		margin: 0;
+	}
+	.kf_comingsoon .input_dec{
+		margin-bottom: 10px;
+	}
+	.kf_comingsoon .input_dec input[type="text"]{
+		min-height: 30px;
+		padding: 0 ;
+	}
+	.kf_comingsoon{
+		margin-top: -166px;
+	}
+	.kf_form_hd h3{
+		font-size: 19px;
+	}
+
+}
+@media (max-width: 320px){
+	.kf_teamcomparison_page {
+	    overflow: hidden;
+	}
+	.kf_table2 li .table_info:nth-child(2),
+	.kf_table2 li .table_info:nth-child(3),
+	.kf_table2 li .table_info:nth-child(4)
+	{
+		display: none;
+	}
+	.kf_overview_schedule .tb2_Vanu{
+		display: none;
+	}
+	.kf_overview_schedule .kf_table2 .versus{
+		min-width: auto;
+	}
+	.team_schedule_page .kf_table2 .tb2_date{
+		display: none;
+	}
+	.team_schedule_page .kf_table2 .versus div > span{
+		display: none;
+	}
+	.team_schedule_page .kf_table2 .versus{
+		min-width: auto;
+	}
+	.team_schedule_page .kf_table2 .versus div p{
+		padding: 0;
+	}
+	.team_schedule_page .kf_table2 li > div:last-child{
+		padding-right: 15px;
+	}
+
+	.team_st_table li .versus{
+		min-width: auto;
+	}
+	.team_st_table li .versus div > span,
+	.team_st_table .tb2_pct,
+	.team_st_table .tb2_gb{
+		display: none;
+	}
+}

@@ -1,0 +1,868 @@
+/* Button 1*/
+.btn-1{
+	width: auto;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	display: inline-block;
+	border: 2px solid #fff;
+	padding: 13px 25px 14px;
+	text-transform: uppercase;
+}
+.btn-1:hover{
+	color: #fff;
+}
+/* Button 2*/
+.btn_2{
+	width: auto;
+	color: #333;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	display: inline-block;
+	text-transform: uppercase;
+}
+/*Button 3*/
+.btn_3{
+	float: left;
+	width: 100%;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	padding: 14px 0 16px;
+	text-transform: uppercase;
+}
+.btn_3:hover{
+	color: #fff;
+}
+/*Input Button*/
+.input-btn{
+	float: left;
+	width: auto;
+	color: #fff;
+	border: none;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	padding: 10px 20px 11px;
+	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+}
+.btn_1:hover,
+.input-btn:hover{
+	background-color: #000;
+	color: #fff;
+}
+.filter_btn{
+	color: #666;
+	float: right;
+	font-weight: bold;
+	padding: 0 10px 1px;
+	line-height: normal;
+	border: 1px solid #e3e3e3;
+	text-transform: uppercase;
+	background-color: transparent;
+	font-family: 'Open Sans', sans-serif;
+}
+.filter_btn:hover{
+	color: #fff;
+}
+/*
+	  ============================================================
+		   Heading 1 Css Start
+	  ============================================================
+*/
+.kf_hd1{
+	float: left;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	background: #e7eaf0;
+	margin-bottom: 30px;
+}
+.kf_hd1 span{
+	z-index: 1;
+	float: left;
+	width: auto;
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	position: relative;
+	line-height: normal;
+	text-transform: uppercase;
+	padding: 11px 35px 12px 20px;
+}
+.kf_hd1 span::before {
+    top: 0;
+    right: 0;
+    z-index: -1;
+    content: "";
+    bottom: auto;
+    height: 100%;
+    width: 2000%;
+    position: absolute;
+    -webkit-transform: skew(-30deg);
+    	-moz-transform: skew(-30deg);
+    		-ms-transform: skew(-30deg);
+			    -o-transform: skew(-30deg);
+			    	transform: skew(-30deg);
+}
+/*Heading 2*/
+.kf_hd2{
+	float: left;
+	width: 100%;
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: normal;
+	margin: -7px 0 33px;
+	text-transform: uppercase;
+}
+/*Heading 3*/
+.kf_hd3{
+	float: left;
+	width: 100%;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+	text-align: center;
+	margin: 0 0 25px 0;
+	text-transform: uppercase;
+}
+/*Heading 4*/
+.kf_h4{
+	float: left;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 30px;
+}
+.kf_h4 span{
+	float: left;
+	width: 100%;
+	font-size: 14px;
+	line-height: 14px;
+	font-weight: bold;
+	margin: -3px 0 9px 0;
+	text-transform: uppercase;
+}
+.kf_h4 em{
+	float: left;
+	width: 100%;
+	color: #989ba4;
+	font-size: 10px;
+	line-height: 10px;
+	font-weight: bold;
+	font-style: normal;
+	text-transform: uppercase;
+}
+/*HEADING 5*/
+.kf_h5{
+	float: left;
+	width: 100%;
+	padding: 20px 25px;
+	position: relative;
+	border: 1px solid #f1f1f1;
+}
+.kf_h5:before{
+	top: -1px;
+	left: -1px;
+	width: 7px;
+	content: "";
+	bottom: -1px;
+	position: absolute;
+}
+.kf_h5 h5{
+	float: left;
+	width: auto;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: normal;
+	text-transform: uppercase;
+}
+/*Heading 6*/
+.kf_hd6{
+	float: left;
+	width: 100%;
+	color: #333;
+	font-size: 26px;
+	font-weight: bold;
+	line-height: normal;
+	margin-bottom: 22px;
+	text-transform: uppercase;
+
+}
+/*Heading 7*/
+.kh_hd7{
+	float: left;
+	width: 100%;
+	font-size: 30px;
+	line-height: 30px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.kf_hd7{
+    color: #fff;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    line-height:normal;
+    margin: -7px 0 30px;
+    text-transform: uppercase;
+    width: 100%;
+    padding-bottom: 28px;
+    position: relative;
+}
+.kf_hd7:before{
+	height: 4px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 44px;
+	content: "";
+	background-color: #373737;
+}
+/*HEADING 8*/
+.kf_hd8{
+	float: left;
+	width: 100%;
+	font-size: 16px;
+	line-height: 16px;
+	font-weight: bold;
+	text-align: left;
+	padding-bottom: 18px;
+	text-transform: uppercase;
+	position: relative;
+	border-bottom: 1px solid #e4e4e4;
+}
+.kf_hd8 span{
+	float: left;
+	width: auto;
+	margin-right: 40px;
+	padding-right: 60px;
+	position: relative;
+}
+.kf_hd8 span:before{
+	position: absolute;
+	right: 0;
+	bottom: 4px;
+	height: 1px;
+	width: 50px;
+	content: "";
+	background-color: #333;
+}
+/*
+	  ============================================================
+		   Heading 1 Css End
+	  ============================================================
+*/
+.blog_meta{
+	float: left;
+	width: auto;
+}
+.blog_meta li{
+	float: left;
+	width: auto;
+	margin-right: 25px;
+}
+.blog_meta li:last-child{
+	margin: 0;
+}
+.blog_meta li a,
+.blog_meta li span{
+	float: left;
+	width: 100%;
+	color: #666;
+	font-size: 13px;
+	line-height: normal;
+	text-transform: uppercase;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+.blog_meta li a i,
+.blog_meta li span i{
+	margin-right: 10px;
+}
+.blog_meta .heart i{
+	color: #fe0000;
+}
+/*
+  	============================================================
+		   Lables Style  Start
+   	============================================================
+*/
+/*Lable 1*/
+.lable_1{
+	width: auto;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	display: inline-block;
+	padding: 7px 17px 8px;
+	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+}
+/*Lable 2*/
+.label2{
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	position: relative;
+	line-height: normal;
+	padding: 5px 12px 6px;
+	display: inline-block;
+	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+}
+.label2:before{
+	top: 0;
+	bottom: 0;
+	left: 100%;
+	content: "";
+	position: absolute;
+	border-top:15px  solid;
+	border-left: 10px solid;
+	border-bottom: 15px solid transparent !important;
+	border-right: 10px solid transparent !important;
+}
+/*
+  	============================================================
+		   Date Tag  Start
+   	============================================================
+*/
+.kf_date{
+	float: left;
+	width: 100%;
+	color: #666;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: normal;
+	line-height: normal;
+	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+}
+/*
+  	============================================================
+		   Input Style 1  Start
+   	============================================================
+*/
+.select_dec,
+.input_dec{
+	float: left;
+	width: 100%;
+	position: relative;
+	margin-bottom: 20px;
+}
+.select_dec{
+	float: left;
+	width: 100%;
+	position: relative;
+	margin-bottom: 30px;
+}
+.select_dec::before {
+    top: 50%;
+    right: 25px;
+    color: #a4a3a3;
+    font-size: 24px;
+    content: "\f107";
+    font-weight: bold;
+    margin-top: -16px;
+    position: absolute;
+    font-family: "FontAwesome";
+}
+.input_textarea textarea,
+.select_dec select,
+.input_dec input[type="text"]{
+	float: left;
+	width: 100%;
+	text-align: left;
+	min-height: 53px;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	padding: 14px 25px 15px;
+	border: 1px solid #d7d8d8;
+	text-transform: capitalize;
+}
+.select_dec select {
+    border-radius:0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+}
+.select_dec select option{
+	color: #666;
+	font-size: 14px;
+	line-height: normal;
+	text-transform: capitalize;
+}
+.input_textarea{
+	float: left;
+	width: 100%;
+	margin-bottom: 30px;
+}
+.input_textarea textarea{
+	height: 170px;
+	resize:none;
+}
+.input_dec_divider{
+	float: left;
+	width: 100%;
+}
+.input_dec_divider .input_dec{
+	float: left;
+	width: 48%;
+	margin-right: 30px;
+}
+.input_dec_divider .input_dec:last-child{
+	float: right;
+	margin-right: 0;
+}
+.input_label{
+	overflow: hidden;
+	position: relative;
+}
+.input_label input[type="button"]{
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	color: #fff;
+	height: 100%;
+	border: none;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 15px 30px;
+	position: absolute;
+	line-height: normal;
+	display: inline-block;
+	vertical-align: middle;
+	background-color: #333;
+	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+}
+/*
+=================================================
+		CHECKBOX AND RADIO BUTTON CSS
+=================================================
+*/
+label {
+  cursor: pointer;
+}
+label span{
+	float: left;
+	line-height: 20px;
+}
+/* hide the "real" radios visually */
+.radio input {
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+  clip: rect(0 0 0 0);
+}
+/* style the "fake" radios */
+.radio-value {
+  height:28px;
+  width: 28px;
+  margin-right:5px;
+  position: relative;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: -0.5em;
+  background-color: #fff;
+  border: 2px solid #d7dfe7;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+input:checked + .radio-value {
+  background-color: red;
+}
+.checkbox, .radio{
+	margin: 0;
+}
+/*
+  	============================================================
+		   Radio Style 2  Start
+   	============================================================
+*/
+.radio_style2{
+	float: left;
+	width: 100%;
+	position: relative;
+	margin-bottom: 20px;
+}
+.radio_style2 .radio_dec{
+	width: auto;
+	clear: right;
+	margin: 0 25px 0 0;
+}
+.radio_style2 .radio_dec .radio-value{
+	margin:0 10px 0 0;
+	box-shadow: 0.5px 0px 0px 1px #d7d8d8;
+}
+.radio_style2 .radio_dec > span{
+	color: #666;
+	font-weight: normal;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+/**/
+.radio_style3{
+	float: left;
+	width: 100%;
+}
+.radio_style3 label{
+	margin: 0;
+	float: left;
+	width: 100%;
+}
+.radio_style3 .radio-value{
+	width: 13px;
+	height: 13px;
+	border-radius: 0;
+	margin: 0 15px 0 0;
+	border: 1px solid #dfdfdf;
+}
+.radio_style3 label > span{
+	font-size: 13px;
+	line-height: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+}
+.radio_style3 input:checked + .radio-value:before{
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: #fff;
+	font-size: 8px;
+	content: "\f00c";
+	line-height: 10px;
+	text-align: center;
+	position: absolute;
+	font-family: 'FontAwesome';
+}
+/*
+  	============================================================
+		   Count Down Start
+   	============================================================
+*/
+.kf_countdown{
+	float: left;
+	width: 100%;
+}
+.kf_countdown li{
+	float: left;
+	width: 25%;
+	text-align: center;
+	position: relative;
+}
+.kf_countdown li span:before{
+	right: 0;
+	top: 50%;
+	color: #333;
+	content: ":";
+	font-size: 25px;
+	margin-top: -2px;
+	font-weight: bold;
+	position: absolute;
+	-webkit-transform:translateY(-50%);
+		-moz-transform:translateY(-50%);
+			-ms-transform:translateY(-50%);
+				-o-transform:translateY(-50%);
+					transform:translateY(-50%);
+}
+.kf_countdown li:last-child span:before{
+	display: none;
+}
+.kf_countdown li span{
+	float: left;
+	width: 100%;
+	color: #333;
+	font-size: 26px;
+	font-weight: bold;
+	position: relative;
+	line-height: normal;
+	font-family: 'Open Sans', sans-serif;
+}
+.kf_countdown li p{
+	margin: 0;
+	font-size: 11px;
+	line-height: normal;
+	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+}
+/*countdown2*/
+.kf_countdown2{
+	float: none;
+	width: auto;
+	display: inline-block;
+}
+.kf_countdown2 li{
+	float: left;
+	width: 121px;
+	border: 1px solid #ffffff;
+	margin-right: 20px;
+	border-radius: 3px;
+}
+.kf_countdown2 li:last-child{
+	margin: 0;
+}
+.kf_countdown2 li span{
+	float: left;
+	width: 100%;
+	color: #fff;
+	padding: 6px 0 10px;
+	font-size: 55px;
+	font-weight: 600;
+	line-height: normal;
+	background-color: transparent;
+	font-family: 'Open Sans', sans-serif;
+}
+.kf_countdown2 li p{
+	margin: 0;
+	float: left;
+	width: 100%;
+	color: #333;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: normal;
+	padding: 6px 0 10px;
+	background-color: #fff;
+	text-transform: capitalize;
+	font-family: 'Open Sans', sans-serif;
+}
+.kf_countdown2 li span:before{
+	display: none;
+}
+/*
+  	============================================================
+		   Pagination Start
+   	============================================================
+*/
+.kode-pagination{
+	float: left;
+	width: 100%;
+	margin: 0 0 30px;
+}
+.kode-pagination .page-numbers{
+	width: 27px;
+	height: 34px;
+	color: #717171;
+	font-size: 17px;
+	line-height: 32px;
+	margin: 0 3px 0 0;
+	border-radius: 9px;
+	text-align: center;
+	display: inline-block;
+	border: 2px solid #d7d8d8;
+
+}
+.kode-pagination .page-numbers:last-child{
+	margin: 0;
+}
+.kode-pagination .page-numbers:hover,
+.kode-pagination .page-numbers.current{
+	color: #fff;
+}
+.kode-pagination  .page-numbers.border_none:hover,
+.kode-pagination  .page-numbers.border_none{
+	border: none;
+	color: #717171;
+	cursor: inherit;
+	background: transparent;
+}
+/*Progress Bar*//*progress bar*/
+.kf_progress1{
+	float: left;
+	width: 100%;
+	position: relative;
+	margin: -1px 0 0 0;
+	padding: 21px 20px 25px;
+	border: 1px solid #d7d8d8;
+}
+.skill-progress{
+	float: left;
+	width: 100%;
+	margin: 0 0 10px;
+	position: relative;
+}
+.skill-progress:last-child{
+	margin: 0;
+}
+.skill-progress > span{
+	float: left;
+	width: 100%;
+	color: #333;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0 0 4px 0;
+	line-height: normal;
+	text-transform: capitalize;
+}
+.progress_single_wrapper{
+	float: left;
+	width: 100%;
+	height: 11px;
+	background-color: #eaeff5;
+}
+.kf_progress1 .progressbars.progress_single{
+	height: 11px;
+}
+.kf_progress1 .progressbars.progress_single > span{
+	top: 0px;
+	right: 0;
+	color: #999;
+	font-size: 12px;
+	font-weight: normal;
+	position: absolute;
+	line-height: normal;
+}
+/*Images Effect Start*/
+.kf_recentnews figure img,
+.kf_featured_thumb > figure img {
+    max-width: none;
+    -webkit-transform: scale(1.1);
+    	-moz-transform: scale(1.1);
+    		-ms-transform: scale(1.1);
+			    -o-transform: scale(1.1);
+			    	transform: scale(1.1);
+}
+.kf_recentnews:hover figure img,
+.kf_featured_thumb:hover > figure img {
+    opacity: 0.6;
+        -webkit-transform: scale(1);
+	    	-moz-transform: scale(1);
+	    		-ms-transform: scale(1);
+				    -o-transform: scale(1);
+				    	transform: scale(1);
+}
+
+
+
+.kf_tip{
+	width: 19px;
+	height: 19px;
+	color: #dedfdf;
+	font-size: 12px;
+	line-height: 17px;
+	text-align: center;
+	margin-right: 10px;
+	position: relative;
+	border-radius: 100%;
+	display: inline-block;
+	border: 1px solid #dedfdf;
+}
+.kf_tip:last-child{
+	margin: 0;
+}
+.kf_tip > span {
+    opacity: 0;
+    top: -100%;
+    color: #fff;
+    width: auto;
+    right: -36px;
+    font-size: 12px;
+    min-width: 90px;
+    padding: 2px 8px;
+    visibility: hidden;
+    border-radius: 4px;
+    position: absolute;
+    line-height: normal;
+    margin: -15px auto 0;
+    text-transform: capitalize;
+    background: rgba(51, 51, 51, 0.5) none repeat scroll 0 0;
+}
+.kf_tip:hover > span{
+	opacity: 1;
+	visibility: visible;
+}
+.kf_tip > span:before{
+	left: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	content: "";
+	opacity: 0.5;
+	bottom: -6px;
+	margin: 0 auto;
+	position: absolute;
+	border-style: solid;
+	border-width: 6px 4.5px 0 4.5px;
+	border-color: #333333 transparent transparent transparent;
+}
+
+
+
+.rating_down {
+    float: left;
+    height: 16px;
+    width: 80px;
+    text-align: left;
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    background-image: url("../images/stars.png");
+}
+.rating_up {
+    float: left;
+    height: 100%;
+    text-align: left;
+    background-repeat: repeat-x;
+    background-position: 0 -16px;
+    background-image: url("../images/stars.png");
+}
+
+
+
+.kf_social2{
+	float:right;
+	width: auto;
+}
+.kf_social2 li{
+	float: left;
+	width: auto;
+}
+.kf_social2 li a{
+	float: left;
+	width: 100%;
+	width: 34px;
+	color: #7d8386;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+	border: 1px solid #d7d8d8;
+}
+.kf_social2 li a:hover{
+	color: #fff;
+}
+/*kf_social 3*/
+.kf_social3{
+	display: inline-block;
+	width: auto;
+	margin-bottom: -5px;
+}
+.kf_social3 li{
+	float: left;
+	width: auto;
+	margin-right: 15px;
+}
+.kf_social3 li:last-child{
+	margin: 0;
+}
+.kf_social3 li a{
+	float: left;
+	width: 35px;
+	height: 35px;
+	color: #acacac;
+	font-size: 16px;
+	line-height: 33px;
+	border-radius: 100%;
+	text-align: center;
+	border:1px solid #acacac;
+}
+.kf_social3 li a:hover{
+	color: #fff;
+}

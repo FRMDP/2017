@@ -67,7 +67,7 @@ import zpRegister from "./zp-register.vue";
         },
         methods: {
             logout(){
-                if(this.$route.path == '/myTrackList')
+                if(this.$route.path == '/myTrackList' ||this.$route.path =='/profile')
                     this.$router.push({name: 'index'});
                 this.$session.destroy();
                 this.$store.commit('clearUser');
@@ -119,6 +119,8 @@ import zpRegister from "./zp-register.vue";
         created(){
             this.getCountries();
             //this.$users.putFirstUser(); utilizado para ya tener un usario
+            //this.$http.headers.common['Access-Control-Allow-Origin'] = '*://*/*'
+            //this.$http.headers.common['Authorization'] = 'Basic ' + btoa(camera.username + ':' + camera.password);
             if(this.$session.has('login')){
                 this.$store.commit('putUser', this.$session.get('login').name);
             }

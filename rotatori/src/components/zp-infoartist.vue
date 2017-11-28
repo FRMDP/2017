@@ -23,6 +23,7 @@
                     <h3>Genero primario: {{artist.primaryGen}} </h3>
                     <h3>Genero secundario: {{artist.secondGen}} </h3>
                     <a :href="artist.twitter" target="_blank"><img v-if="artist.twitter!='Sin datos'" src="/img/twitter.png" width="50" height="50"></a>
+                    <md-button class="md-raised md-primary bold" @click="routeGoSong">Canciones</md-button>
                 </div>
             </div>
         </div>
@@ -77,6 +78,10 @@ export default {
                     this.pbar = false;
                     this.error = true;
                 });
+        },
+        routeGoSong(){
+            const st = this.artist.name.replace(/\s/g, "%20");
+            this.$router.push({name: 'lyricsId', params: {id: this.artist.id, name: st}});
         },
         castArtist(artist){
             let countr = {name: 'Sin datos'};

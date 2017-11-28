@@ -45,5 +45,17 @@ export default {
             }
         });
         localStorage.setItem('users', JSON.stringify(allUser));
+    },
+    changePass(user, mypass, userMod){
+        const allUser = this.getAllUsers();
+        let change = false;
+        allUser.forEach(u =>{
+            if(u.email == userMod.email && u.pass == mypass){
+                u.pass = userMod.pass;
+                change = true;
+            }
+        })
+        localStorage.setItem('users', JSON.stringify(allUser));
+        return change;
     }
 }

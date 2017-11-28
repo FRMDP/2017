@@ -15,6 +15,7 @@ Vue.use(VueMaterial);
 Vue.use(VueSession);
 Vue.use(VueSocketIO, socketInstance);
 
+
 import App from './components/App.vue'
 import apiRoutes from './utils/apiRoutes'
 import user from './utils/storage/userStorage'

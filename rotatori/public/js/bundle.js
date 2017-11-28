@@ -34048,6 +34048,10 @@ exports.default = {
                 _this.error = true;
             });
         },
+        routeGoSong: function routeGoSong() {
+            var st = this.artist.name.replace(/\s/g, "%20");
+            this.$router.push({ name: 'lyricsId', params: { id: this.artist.id, name: st } });
+        },
         castArtist: function castArtist(artist) {
             var countr = { name: 'Sin datos' };
             var con = this.countries.find(function (c) {
@@ -34085,6 +34089,7 @@ exports.default = {
         }, 2000);
     }
 }; //
+//
 //
 //
 //
@@ -34188,51 +34193,67 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "padd" }, [
-                    _c("h3", [
-                      _vm._v("Pais: " + _vm._s(_vm.artist.country.name) + " ")
-                    ]),
-                    _vm._v(" "),
-                    _c("img", {
-                      attrs: {
-                        src: _vm.artist.country.flag,
-                        width: "40px",
-                        height: "40px"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("h3", [
-                      _vm._v(
-                        "Genero primario: " +
-                          _vm._s(_vm.artist.primaryGen) +
-                          " "
+                  _c(
+                    "div",
+                    { staticClass: "padd" },
+                    [
+                      _c("h3", [
+                        _vm._v("Pais: " + _vm._s(_vm.artist.country.name) + " ")
+                      ]),
+                      _vm._v(" "),
+                      _c("img", {
+                        attrs: {
+                          src: _vm.artist.country.flag,
+                          width: "40px",
+                          height: "40px"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("h3", [
+                        _vm._v(
+                          "Genero primario: " +
+                            _vm._s(_vm.artist.primaryGen) +
+                            " "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h3", [
+                        _vm._v(
+                          "Genero secundario: " +
+                            _vm._s(_vm.artist.secondGen) +
+                            " "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: _vm.artist.twitter, target: "_blank" }
+                        },
+                        [
+                          _vm.artist.twitter != "Sin datos"
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/twitter.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "md-button",
+                        {
+                          staticClass: "md-raised md-primary bold",
+                          on: { click: _vm.routeGoSong }
+                        },
+                        [_vm._v("Canciones")]
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c("h3", [
-                      _vm._v(
-                        "Genero secundario: " +
-                          _vm._s(_vm.artist.secondGen) +
-                          " "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      { attrs: { href: _vm.artist.twitter, target: "_blank" } },
-                      [
-                        _vm.artist.twitter != "Sin datos"
-                          ? _c("img", {
-                              attrs: {
-                                src: "/img/twitter.png",
-                                width: "50",
-                                height: "50"
-                              }
-                            })
-                          : _vm._e()
-                      ]
-                    )
-                  ])
+                    ],
+                    1
+                  )
                 ])
           ])
     ],
@@ -35240,23 +35261,73 @@ if (false) {(function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
+
+var _zpAlert = __webpack_require__(6);
+
+var _zpAlert2 = _interopRequireDefault(_zpAlert);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
+    components: {
+        zpAlert: _zpAlert2.default
+    },
     data: function data() {
         return {
-            profile: {}
+            profile: {},
+            mypass: '',
+            newPass: '',
+            repitNewPass: '',
+            clss: '',
+            classAlert: '',
+            messageAlert: '',
+            showA: false
         };
     },
 
-    methods: {},
+    computed: {
+        passOK: function passOK() {
+            if (this.newPass != this.repitNewPass || this.newPass == '' && this.repitNewPass == '') return 'md-input-invalid';else return '';
+        }
+    },
+    methods: {
+        changePass: function changePass() {
+            if (this.mypass != '') {
+                if (this.passOK == '') {
+                    var userMod = {
+                        email: this.profile.email,
+                        pass: this.newPass
+                    };
+
+                    if (this.$users.changePass(this.profile, this.mypass, userMod)) {
+                        this.messageAlert = 'Contraseña cambiada con exito!';
+                        this.classAlert = 'alert-success';
+                    } else {
+                        this.messageAlert = 'Contraseña incorrecta';
+                        this.classAlert = 'alert-info';
+                    }
+                    this.clearField();
+                    this.showAlert();
+                }
+            } else {
+                this.clss = 'md-input-invalid';
+            }
+        },
+        showAlert: function showAlert() {
+            var _this = this;
+
+            this.showA = true;
+            setTimeout(function () {
+                _this.showA = false;
+            }, 3500);
+        },
+        clearField: function clearField() {
+            this.mypass = '';
+            this.newPass = '';
+            this.repitNewPass = '';
+            this.clss = '';
+        }
+    },
     created: function created() {
         if (!this.$session.has('login')) {
             this.$router.push({ name: "index" });
@@ -35264,7 +35335,40 @@ exports.default = {
             this.profile = this.$session.get('login');
         }
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 159 */
@@ -35275,15 +35379,140 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "paddings" }, [
-    _c("h2", [_vm._v("Mi Información")]),
-    _vm._v(" "),
-    _c("p", [_vm._v(" " + _vm._s(_vm.profile.name) + " ")]),
-    _vm._v(" "),
-    _c("p", [_vm._v(" " + _vm._s(_vm.profile.email) + " ")]),
-    _vm._v(" "),
-    _c("p", [_vm._v(" " + _vm._s(_vm.profile.pass) + " ")])
-  ])
+  return _c(
+    "div",
+    { staticClass: "paddings" },
+    [
+      _vm.showA
+        ? _c("zp-alert", {
+            attrs: {
+              messageAlert: _vm.messageAlert,
+              classAlert: _vm.classAlert
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _c("h2", [_vm._v("Mi Información")]),
+      _vm._v(" "),
+      _c("h3", [_vm._v("Nombre:")]),
+      _vm._v(" "),
+      _c(
+        "md-input-container",
+        [
+          _c("label"),
+          _vm._v(" "),
+          _c("md-input", {
+            model: {
+              value: _vm.profile.name,
+              callback: function($$v) {
+                _vm.profile.name = $$v
+              },
+              expression: "profile.name"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("h3", [_vm._v("E-mail: ")]),
+      _vm._v(" "),
+      _c(
+        "md-input-container",
+        [
+          _c("label"),
+          _vm._v(" "),
+          _c("md-input", {
+            attrs: { disabled: "" },
+            model: {
+              value: _vm.profile.email,
+              callback: function($$v) {
+                _vm.profile.email = $$v
+              },
+              expression: "profile.email"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("h3", [_vm._v("Pass:")]),
+      _vm._v(" "),
+      _c(
+        "md-input-container",
+        { class: _vm.clss, attrs: { "md-has-password": "" } },
+        [
+          _c("label", [_vm._v("Contraseña")]),
+          _vm._v(" "),
+          _c("md-input", {
+            attrs: { type: "password" },
+            model: {
+              value: _vm.mypass,
+              callback: function($$v) {
+                _vm.mypass = $$v
+              },
+              expression: "mypass"
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "md-error" }, [_vm._v("Requerido")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "md-input-container",
+        { attrs: { "md-has-password": "" } },
+        [
+          _c("label", [_vm._v("Nueva contraseña")]),
+          _vm._v(" "),
+          _c("md-input", {
+            attrs: { type: "password" },
+            model: {
+              value: _vm.newPass,
+              callback: function($$v) {
+                _vm.newPass = $$v
+              },
+              expression: "newPass"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "md-input-container",
+        { class: _vm.passOK, attrs: { "md-has-password": "" } },
+        [
+          _c("label", [_vm._v("Repita nueva contraseña")]),
+          _vm._v(" "),
+          _c("md-input", {
+            attrs: { required: "", type: "password" },
+            model: {
+              value: _vm.repitNewPass,
+              callback: function($$v) {
+                _vm.repitNewPass = $$v
+              },
+              expression: "repitNewPass"
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "md-error" }, [_vm._v("No coinciden")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "md-button",
+        {
+          staticClass: "md-raised md-accent",
+          attrs: { disabled: _vm.passOK != "" },
+          on: { click: _vm.changePass }
+        },
+        [_vm._v("Cambiar Contraseña")]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -35486,7 +35715,7 @@ exports.default = {
     },
     methods: {
         logout: function logout() {
-            if (this.$route.path == '/myTrackList') this.$router.push({ name: 'index' });
+            if (this.$route.path == '/myTrackList' || this.$route.path == '/profile') this.$router.push({ name: 'index' });
             this.$session.destroy();
             this.$store.commit('clearUser');
         },
@@ -35538,6 +35767,8 @@ exports.default = {
     created: function created() {
         this.getCountries();
         //this.$users.putFirstUser(); utilizado para ya tener un usario
+        //this.$http.headers.common['Access-Control-Allow-Origin'] = '*://*/*'
+        //this.$http.headers.common['Authorization'] = 'Basic ' + btoa(camera.username + ':' + camera.password);
         if (this.$session.has('login')) {
             this.$store.commit('putUser', this.$session.get('login').name);
         }
@@ -36529,6 +36760,18 @@ exports.default = {
             }
         });
         localStorage.setItem('users', JSON.stringify(allUser));
+    },
+    changePass: function changePass(user, mypass, userMod) {
+        var allUser = this.getAllUsers();
+        var change = false;
+        allUser.forEach(function (u) {
+            if (u.email == userMod.email && u.pass == mypass) {
+                u.pass = userMod.pass;
+                change = true;
+            }
+        });
+        localStorage.setItem('users', JSON.stringify(allUser));
+        return change;
     }
 };
 

@@ -1,0 +1,24 @@
+
+h3{
+	color: red;
+}
+
+h4{
+	word-spacing: 5 px;
+	size: 3 px;
+	color: black;
+}
+
+h5{
+	word-spacing: 10 px;
+	size: 5 px;
+	color: grey;
+}
+
+body{
+	background: white;
+}
+
+label{
+	color: purple;
+}

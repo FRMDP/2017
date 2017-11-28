@@ -65,10 +65,6 @@ export default new Router({
       ]
     },
     {
-      path: '/de/',
-      //component: ppalDe
-    },
-    {
       path: '/*',
       name: 'notFoundEn',
       component: notFoundEn

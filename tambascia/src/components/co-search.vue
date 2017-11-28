@@ -24,15 +24,18 @@
           <div class="card-body">
             <flat-pickr v-model="dateTo" :config="config" placeholder="Select a date To"></flat-pickr>
           </div>
-          <button :disabled="checkFilterSearch(this.filterSearch) && checkFilterSearch(this.dateFrom) && checkFilterSearch(this.dateTo)" @click="sendSearchAndFilter()" class="btn btn-secondary"
-                  type="button">Go!</button>
+          <button
+            :disabled="checkFilterSearch(this.filterSearch) && checkFilterSearch(this.dateFrom) && checkFilterSearch(this.dateTo)"
+            @click="sendSearchAndFilter()" class="btn btn-secondary"
+            type="button">Go!
+          </button>
         </div>
       </div>
       <div class="col-md-9">
         <div class="justify-content-md-center customLeftMargin row container-card">
+          <div class="loader" v-show="loading"></div>
           <div class="col-mx-auto marginOfAdvise" v-if="Object.keys(articles).length === 0">
-            <div class="loader" v-if="this.loading"></div>
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger" role="alert" v-if="!loading">
               <h4 class="alert-heading">Do oh!</h4>
               <p>There are no results to your search</p>
               <hr>
@@ -66,7 +69,7 @@
 
 </template>
 <style>
-  body{
+  body {
     overflow: hidden;
   }
 </style>
@@ -81,12 +84,13 @@
       return {
         filterSearch: '',
         articles: {},
-        loading: null,
+        loading: false,
         dateFrom: null,
         dateTo: null,
         config: {
           altFormat: "F j, Y",
-          altInput: true
+          altInput: true,
+          maxDate:"today"
         }
       }
     },
@@ -99,8 +103,10 @@
         this.articles = articleService.searchInTheAPI(this.filterSearch);
         this.loading = false;
       },
-      sendSearchAndFilter(){
+      sendSearchAndFilter() {
+        this.loading = true;
         this.articles = articleService.searchInTheAPIByDate(this.filterSearch, this.dateFrom, this.dateTo);
+        this.loading = false;
       },
       checkFilterSearch() {
         let isFull = false;
@@ -128,10 +134,7 @@
         }
         return newDate;
       }
-    }/*,
-    created(){
-      this.articles = articleService.searchInTheAPI(this.filterSearch);
-    }*/
+    }
   }
 </script>
 
@@ -148,13 +151,21 @@
   }
 
   @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
   }
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   .topFixFixed {
@@ -177,28 +188,29 @@
   .changeFont {
     font-family: 'Roboto', sans-serif;
   }
+
   .customLeftMargin {
     margin-left: 72px;
   }
-  .container-card{
+
+  .container-card {
     max-height: 88vh;
     overflow: auto;
   }
-  .container-card::-webkit-scrollbar
-  {
+
+  .container-card::-webkit-scrollbar {
     width: 12px;
     background-color: #F5F5F5;
   }
 
-  .container-card::-webkit-scrollbar-thumb
-  {
+  .container-card::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #555;
   }
-  .container-card::-webkit-scrollbar-track
-  {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+
+  .container-card::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     background-color: #F5F5F5;
   }

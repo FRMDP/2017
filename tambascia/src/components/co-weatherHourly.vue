@@ -19,7 +19,7 @@
           <!-- lo que me retorna la api como 'icon' lo concateno con el directorio donde almaceno las imagenes que descargue yo-->
           <!--<img class="mx-auto d-block" :src="'../../static/wetherIcons/' +{{ forecastData[0].hourly.icon}} + '.png'"
                alt="Summary icon day">-->
-          <h3 class="changeMarginButton text-center">{{ forecastData[0].hourly.summary}}</h3>
+          <h3 class="changeMarginButton text-center customColorFont">{{ forecastData[0].hourly.summary}}</h3>
 
           <table class="table table-hover customMarginTop customBackColorTable">
             <thead>
@@ -106,6 +106,9 @@
   }
   .changeMarginButton {
     margin-top: 10px;
+  }
+  .customColorFont {
+    color: #999999;
   }
 
   .loader {

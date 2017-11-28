@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import VueRouter from 'vue-router';
 import En from '@/components/Containers/En.vue';
 import ppalEn from '@/components/co-ppalEn.vue';
-import chooseLanguage from '@/components/co-chooseLanguage.vue';
+import chooseLanguage from '@/components/co-startingPage.vue';
 import categoriesEn from '@/components/co-articlesByCategoryEn.vue';
 import notFoundEn from '@/components/co-notFoundEn.vue'
 import search from '@/components/co-search.vue';

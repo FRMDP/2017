@@ -82,8 +82,7 @@
       this.loading  = true;
       this.$run('setArticles', "espn");
       this.loading = false;
-    },
-
+    }
   }
 </script>
 

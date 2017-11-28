@@ -17,6 +17,7 @@
       <div v-else>
         <div v-for="(actualData, index) in (forecastData? forecastData : [])" :key="index">
           <div class="col-md-12">
+            <h3 class="changeMarginButton text-center customColorFont">{{ validateNameOfCity(actualData.timezone)}}</h3>
             <!-- lo que me retorna la api como 'icon' lo concateno con el directorio donde almaceno las imagenes que descargue yo-->
             <img class="mx-auto d-block" :src="'../../static/wetherIcons/' +actualData.currently.icon+ '.png'"
                  alt="Summary icon day">
@@ -80,7 +81,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -88,7 +88,7 @@
 
 <script>
   import weatherService from '../services/weatherService';
-
+  import coFooter from './co-footer.vue';
   export default {
     name: 'myWeather',
     data() {
@@ -97,11 +97,26 @@
         loading: false
       }
     },
+    components: {
+      coFooter
+    },
     methods: {
       getLocation(position) {
         this.loading = true;
         this.forecastData = weatherService.getMyWeather(position);
         this.loading = false;
+      },
+      validateNameOfCity(badCityName) {
+        let newName = null;
+        if(badCityName!= null  || badCityName!= undefined){
+          let idx = badCityName.indexOf("/");
+          let idxZ = badCityName.indexOf("_");
+          let replacement = "-";
+          let replacementZ = " ";
+          newName = badCityName.substr(0, idx) + replacement + badCityName.substr(idx + replacement.length);
+          newName = newName.substr(0, idxZ) + replacementZ + badCityName.substr(idxZ + replacementZ.length);
+        }
+        return newName;
       }
     },
     created() {
@@ -118,7 +133,6 @@
   .topFixFixed {
     margin-top: 68px;
   }
-
   .customMarginTop {
     margin: 13px;
   }
@@ -134,6 +148,9 @@
     height: 120px;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
+  }
+  .customColorFont {
+    color: #999999;
   }
 
   @-webkit-keyframes spin {

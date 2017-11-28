@@ -16,7 +16,7 @@
         </div>
       </div>
       <li v-else v-for="(actualSource, index) in (articlesSource[0] ? articlesSource[0].sources : [])" :key="index">
-        <a @click.prevent="changeSource(actualSource.id)" href="/#/en/ppal/">{{ actualSource.name }}</a>
+        <a @click="changeSource(actualSource.id)" href="/#/en/ppal/">{{ actualSource.name }}</a>
       </li>
     </ul>
   </div>
@@ -77,7 +77,7 @@
     height: 100vh;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #292c2f;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;

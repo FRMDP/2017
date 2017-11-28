@@ -28,12 +28,6 @@
 </script>
 
 <style lang="scss">
-  body {
-    background-image: url('../../static/fondoImagen.jpeg');
-    background-size: 1920px 1080px;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
 .marginTopCustom {
     margin-top: 100px;
 }

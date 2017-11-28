@@ -9,7 +9,7 @@
           <router-link :to="{ name: 'ppalEn'}">Go home</router-link>
         </div>
       </div>
-      <div  v-else="" v-for="actualArticle in (articles[0] ? articles[0].sources : [])">
+      <div  v-else v-for="actualArticle in (articles[0] ? articles[0].sources : [])">
         <div  class="col-md-4">
           <div class="card">
             <div class="card-header cardTitle">
@@ -23,7 +23,6 @@
               <a v-if=(!dataIsNull(actualArticle.url)) :href="actualArticle.url" class="btn btn-outline-primary buttonRight buttonLeft" role="button">Show More</a>
             </div>
           </div>
-
         </div>
       </div>
     </div>

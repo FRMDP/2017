@@ -73,7 +73,7 @@
     },
     computed:{
       dateOk(){
-        return true;//this.date >= 1950 && this.date <= 2017;
+        return this.date >= 1950 && this.date <= 2017;
       }
     },
     methods:{
@@ -92,9 +92,7 @@
             this.calendarObj.locality = n.Circuit.Location.locality;
             this.calendarObj.circuitName = n.Circuit.circuitName;
             this.calendarObj.url = n.Circuit.url;
-            //this.searchPhotografy(n.Circuit.Location.country);
             this.calendar.push(Object.assign({}, this.calendarObj));
-            //this.clearObject();
             this.loading = false;
           });
 

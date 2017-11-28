@@ -13,7 +13,9 @@
           <q-infinite-scroll
             :handler="loadMore"
           >
-            <wasd-card v-for="(game, index) in popularGames" :data="game" :key="game.id" :game="game"></wasd-card>
+            <div class="row justify-center" style="margin-bottom: 50px;">
+              <wasd-card v-for="(game, index) in popularGames" :data="game" :key="game.id" :game="game"></wasd-card>
+            </div>
             <div class="row justify-center" style="margin-bottom: 50px;">
               <q-spinner-dots slot="message" :size="40" />
             </div>
@@ -53,7 +55,7 @@
     beforeRouteEnter (to, from, next) {
       igdb.getPopularGames(0)
         .then((response) => {
-          next(vm => vm.setPopularGames(response.data))
+          next(vm => vm.setGameList(response.data))
         })
         .catch((error) => {
           console.error(error)
@@ -63,7 +65,7 @@
     beforeRouteUpdate (to, from, next) {
       igdb.getPopularGames(0)
         .then((response) => {
-          this.setPopularGames(response.data)
+          this.setGameList(response.data)
           next()
         })
         .catch((error) => {
@@ -72,7 +74,7 @@
     },
 
     methods: {
-      setPopularGames (gamesList) {
+      setGameList (gamesList) {
         this.popularGames = gamesList
         this.popularGamesLoaded = true
       },

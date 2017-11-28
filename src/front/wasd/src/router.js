@@ -66,7 +66,7 @@ export default new VueRouter({
         {
           path: '/releases',
 
-          component: load('Error404')
+          component: load('WasdNewReleases')
         },
         {
           path: '/ratings',
@@ -82,6 +82,11 @@ export default new VueRouter({
           path: '/news',
 
           component: load('WasdNews')
+        },
+        {
+          path: '/companies',
+
+          component: load('WasdGameCompanies')
         },
         {
           path: '/search',
@@ -108,6 +113,13 @@ export default new VueRouter({
           name: 'engine',
 
           component: load('WasdGameEngineInfosite')
+        },
+        {
+          path: '/companies/:id',
+
+          name: 'company',
+
+          component: load('WasdCompanyInfosite')
         }
       ]
     },

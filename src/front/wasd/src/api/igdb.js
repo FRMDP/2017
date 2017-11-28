@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const ENDPOINT = '/igdb'
-const API_KEY = 'api-key'
+const API_KEY = ''
 const TIMEOUT = 10000
 
 const randomDate = () => {
@@ -47,11 +47,11 @@ export default {
     })
   },
 
-  getPlatform (ids) {
+  getPlatform (id) {
     return axios({
       baseURL: ENDPOINT,
 
-      url: '/platforms/' + ids + '/?fields=id,name',
+      url: '/platforms/' + id + '/?fields=id,name',
 
       method: 'get',
 
@@ -174,7 +174,7 @@ export default {
     return axios({
       baseURL: ENDPOINT,
 
-      url: '/pulses/?fields=id,title,image,author,summary,url&limit=50&offset=' + offset,
+      url: '/pulses/?fields=id,title,image,author,summary,url&limit=50&order=created_at:desc&offset=' + offset,
 
       method: 'get',
 
@@ -260,6 +260,57 @@ export default {
       baseURL: ENDPOINT,
 
       url: '/companies/' + companiesList.join() + '/?fields=*',
+
+      method: 'get',
+
+      headers: {
+        'user-key': API_KEY,
+        'Accept': 'application/json'
+      },
+
+      timeout: TIMEOUT
+    })
+  },
+
+  getNewReleases (offset) {
+    return axios({
+      baseURL: ENDPOINT,
+
+      url: '/games/?fields=*&limit=50&order=first_release_date:desc&offset=' + offset,
+
+      method: 'get',
+
+      headers: {
+        'user-key': API_KEY,
+        'Accept': 'application/json'
+      },
+
+      timeout: TIMEOUT
+    })
+  },
+
+  getGameCompanies (offset) {
+    return axios({
+      baseURL: ENDPOINT,
+
+      url: '/companies/?fields=*&limit=50&offset=' + offset,
+
+      method: 'get',
+
+      headers: {
+        'user-key': API_KEY,
+        'Accept': 'application/json'
+      },
+
+      timeout: TIMEOUT
+    })
+  },
+
+  getCompany (id) {
+    return axios({
+      baseURL: ENDPOINT,
+
+      url: '/companies/' + id + '/?fields=*',
 
       method: 'get',
 

@@ -51,12 +51,12 @@
             <q-item-main label="Coming Soon"/>
           </q-item>
         </q-side-link>-->
-        <!--<q-side-link item to="/releases">
+        <q-side-link item to="/releases">
           <q-item>
             <q-item-side icon="new releases"/>
             <q-item-main label="New Releases"/>
           </q-item>
-        </q-side-link>-->
+        </q-side-link>
         <!--<q-side-link item to="/ratings">
           <q-item>
             <q-item-side icon="trending up"/>
@@ -73,6 +73,12 @@
           <q-item>
             <q-item-side icon="rate review"/>
             <q-item-main label="News"/>
+          </q-item>
+        </q-side-link>
+        <q-side-link item to="/companies">
+          <q-item>
+            <q-item-side icon="business"/>
+            <q-item-main label="Game Companies"/>
           </q-item>
         </q-side-link>
         <!--<q-side-link item to="/search">

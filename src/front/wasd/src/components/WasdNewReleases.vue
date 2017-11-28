@@ -3,7 +3,7 @@
     <div class="row justify-center">
       <div class="col-12" style="max-width: 1800px">
         <div class="row justify-center">
-          <h4 class="text-primary">Games for {{ platform.name }}</h4>
+          <h4 class="text-primary">New Releases</h4>
         </div>
       </div>
     </div>
@@ -30,12 +30,12 @@
     QSpinnerDots
   } from 'quasar'
 
+  import igdb from './../api/igdb.js'
+
   import WasdCard from './child/WasdCard.vue'
 
-  import igdb from './../api/igdb'
-
   export default {
-    name: 'WasdGamesByPlatform',
+    name: 'WasdDiscover',
 
     components: {
       WasdCard,
@@ -46,22 +46,14 @@
     data () {
       return {
         gameList: [],
-        gameListLoaded: false,
-        platform: '',
-        platformLoaded: false
+        gameListLoaded: false
       }
     },
 
     beforeRouteEnter (to, from, next) {
-      Promise.all([
-        igdb.getGamesByPlatform(to.params.id, 0),
-        igdb.getPlatform(to.params.id)
-      ])
+      igdb.getNewReleases(0)
         .then((response) => {
-          next(vm => {
-            vm.setGameList(response[0].data)
-            vm.setPlatform(response[1].data[0])
-          })
+          next(vm => vm.setGameList(response.data))
         })
         .catch((error) => {
           console.error(error)
@@ -69,13 +61,9 @@
     },
 
     beforeRouteUpdate (to, from, next) {
-      Promise.all([
-        igdb.getGamesByPlatform(to.params.id, 0),
-        igdb.getPlatform(to.params.id)
-      ])
+      igdb.getNewReleases(0)
         .then((response) => {
-          this.setGameList(response[0].data)
-          this.setPlatform(response[1].data[0])
+          this.setGameList(response.data)
           next()
         })
         .catch((error) => {
@@ -84,14 +72,9 @@
     },
 
     methods: {
-      setGameList (gameList) {
-        this.gameList = gameList
+      setGameList (gamesList) {
+        this.gameList = gamesList
         this.gameListLoaded = true
-      },
-
-      setPlatform (platform) {
-        this.platform = platform
-        this.platformLoaded = true
       },
 
       loadMore: function (index, done) {
@@ -106,7 +89,7 @@
         //        DO NOT forget to call it otherwise your loading message
         //        will continue to be displayed
         // make some Ajax call then call done()
-        igdb.getGamesByPlatform(this.$route.params.id, 50 * index)
+        igdb.getNewReleases(50 * index)
           .then((response) => {
             response.data.forEach((currentGame) => {
               this.gameList.push(currentGame)

@@ -7,7 +7,7 @@
            gameDetails.screenshots[0].url.replace('t_thumb','t_screenshot_big') :
             'http://via.placeholder.com/1020x250'"
           :height="300"
-          :speed="0.5"
+          :speed="0.3"
         >
           <div slot="loading">
             <q-spinner color="secondary"/>
@@ -84,12 +84,18 @@
                       </a>
                     </dd>
                   </div>
+                  <div v-if="gamePrice">
+                    <dt class="capitalize">current steam price</dt>
+                    <dd class="text-justify text-bold text-secondary">
+                      {{ gamePrice.currency }}&nbsp;{{ getGamePrice(gamePrice.final.toString()) }}
+                    </dd>
+                  </div>
                 </dl>
               </div>
             </div>
           </div>
         </div>
-        <hr>
+        <hr style="margin-bottom: 32px; margin-top: 32px;">
         <wasd-navigation-buttons></wasd-navigation-buttons>
       </div>
     </div>
@@ -117,6 +123,8 @@
 
   import WasdNavigationButtons from './child/WasdNavigationButtons.vue'
 
+  import steam from './../api/steam'
+
   export default {
     name: 'WasdGameInfosite',
 
@@ -138,14 +146,31 @@
         gamePlatforms: [],
         platformsLoading: true,
         gameGenres: [],
-        genresLoading: true
+        genresLoading: true,
+        gamePrice: ''
       }
     },
 
     beforeRouteEnter (to, from, next) {
       igdb.getGame(to.params.id)
         .then((response) => {
-          next(vm => vm.setGame(response.data[0]))
+          next(vm => {
+            let getGamePricePromise
+            let steamid
+            if ('external' in response.data[0]) {
+              if ('steam' in response.data[0].external) {
+                steamid = response.data[0].external.steam
+                getGamePricePromise = steam.getGame(response.data[0].external.steam)
+              }
+            }
+            Promise.all([getGamePricePromise])
+              .then((response) => {
+                if (response[0]) {
+                  vm.setGamePrice(response[0].data[steamid].data.price_overview)
+                }
+              })
+            vm.setGame(response.data[0])
+          })
         })
         .catch((error) => {
           console.error(error)
@@ -156,6 +181,20 @@
       igdb.getGame(to.params.id)
         .then((response) => {
           this.setGame(response.data[0])
+          let steamid
+          let getGamePricePromise
+          if ('external' in response.data[0]) {
+            if ('steam' in response.data[0].external) {
+              steamid = response.data[0].external.steam
+              getGamePricePromise = steam.getGame(response.data[0].external.steam)
+            }
+          }
+          Promise.all([getGamePricePromise])
+            .then((response) => {
+              if (response[0]) {
+                this.setGamePrice(response[0].data[steamid].data.price_overview)
+              }
+            })
           next()
         })
         .catch((error) => {
@@ -179,26 +218,38 @@
       setGame (game) {
         this.gameDetails = game
         this.gameDetailsLoaded = true
-        this.loadPlatforms(this.gameDetails.platforms)
-          .then(() => {
-            this.gamePlatforms = this.gameDetails.platforms.map((id) => {
-              return this.platforms.filter(all => (all.id === id))[0]
+        if ('platforms' in game) {
+          this.loadPlatforms(this.gameDetails.platforms)
+            .then(() => {
+              this.gamePlatforms = this.gameDetails.platforms.map((id) => {
+                return this.platforms.filter(all => (all.id === id))[0]
+              })
+              this.platformsLoading = false
             })
-            this.platformsLoading = false
-          })
-          .catch((error) => {
-            console.error('WASD Games | ERROR Retrieving Platforms.', error)
-          })
-        this.loadGenres(this.gameDetails.genres)
-          .then(() => {
-            this.gameGenres = this.gameDetails.genres.map((id) => {
-              return this.genres.filter(all => (all.id === id))[0]
+            .catch((error) => {
+              console.error('WASD Games | ERROR Retrieving Platforms.', error)
             })
-            this.genresLoading = false
-          })
-          .catch((error) => {
-            console.error('WASD Games | ERROR Retrieving Genres.', error)
-          })
+        }
+        if ('genres' in game) {
+          this.loadGenres(this.gameDetails.genres)
+            .then(() => {
+              this.gameGenres = this.gameDetails.genres.map((id) => {
+                return this.genres.filter(all => (all.id === id))[0]
+              })
+              this.genresLoading = false
+            })
+            .catch((error) => {
+              console.error('WASD Games | ERROR Retrieving Genres.', error)
+            })
+        }
+      },
+
+      setGamePrice (data) {
+        this.gamePrice = data
+      },
+
+      getGamePrice (num) {
+        return num.slice(0, -2) + ',' + num.slice(-2)
       },
 
       getExternalWebsiteIcon (category) {

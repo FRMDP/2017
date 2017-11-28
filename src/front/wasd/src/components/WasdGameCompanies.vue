@@ -7,11 +7,18 @@
         </div>
       </div>
     </div>
+    <div class="row justify-center">
+      <q-field>
+        <q-input v-model="searchString" />
+      </q-field>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <q-btn color="secondary" icon="search" @click.prevent="searchCompany">Search</q-btn>
+    </div>
     <hr>
     <div class="row justify-center">
       <div class="col-12" style="max-width: 1800px">
         <div class="row justify-center">
-          <div class="col-12">
+          <div class="col-12" v-if="!searching">
             <q-infinite-scroll
               :handler="loadMore"
             >
@@ -37,6 +44,34 @@
               </div>
             </q-infinite-scroll>
           </div>
+          <div class="col-12" v-if="searching">
+            <div class="row md-gutter justify-center items-start content-start" v-if="searchResults.length">
+              <div
+                v-for="(company, index) in searchResults"
+                :data="company"
+                :key="company.id"
+                v-if="'name' in company"
+                class="col-xs-12 col-sm-6 col-md-4"
+              >
+                <div class="row justify-center">
+                  <div class="col-12">
+                      <span>
+                        <router-link :to="{ name: 'company', params: { id: company.id }}" color="green">{{ company.name }}</router-link>
+                      </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row md-gutter justify-center items-start content-start" v-else>
+              <div class="row justify-center">
+                <div class="col-12" style="max-width: 1800px">
+                  <div class="row justify-center">
+                    <h4 class="text-primary">Not Found!</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -51,7 +86,9 @@
     QParallax,
     QSpinnerDots,
     QInfiniteScroll,
-    Ripple
+    Ripple,
+    QField,
+    QInput
   } from 'quasar'
 
   import igdb from './../api/igdb'
@@ -69,13 +106,19 @@
       QBtn,
       QParallax,
       QSpinnerDots,
-      QInfiniteScroll
+      QInfiniteScroll,
+      QField,
+      QInput
     },
 
     data () {
       return {
         gameCompanies: [],
-        gameCompaniesLoaded: false
+        gameCompaniesLoaded: false,
+        searchString: '',
+        searchResults: [],
+        searchResultsLoaded: false,
+        searching: false
       }
     },
 
@@ -104,6 +147,23 @@
       setGameCompanies (gameCompanies) {
         this.gameCompanies = gameCompanies
         this.gameCompaniesLoaded = true
+      },
+
+      setGameCompaniesSearchResults (gameCompanies) {
+        this.searchResults = gameCompanies
+        this.searchResultsLoaded = true
+        this.searching = true
+      },
+
+      searchCompany () {
+        this.searchResultsLoaded = false
+        igdb.searchCompany(this.searchString)
+          .then((response) => {
+            this.setGameCompaniesSearchResults(response.data)
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       },
 
       loadMore: function (index, done) {

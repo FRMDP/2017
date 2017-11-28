@@ -8,9 +8,17 @@
       </div>
     </div>
     <div class="row justify-center">
+      <q-field>
+        <q-input v-model="searchString" />
+      </q-field>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <q-btn color="secondary" icon="search" @click.prevent="searchEngine">Search</q-btn>
+    </div>
+    <hr>
+    <div class="row justify-center">
       <div class="col-12" style="max-width: 1800px">
         <div class="row justify-center">
-          <div class="col-12">
+          <div class="col-12" v-if="!searching">
             <q-infinite-scroll
               :handler="loadMore"
             >
@@ -47,6 +55,45 @@
               </div>
             </q-infinite-scroll>
           </div>
+          <div class="col-12" v-if="searching">
+            <div class="row md-gutter justify-center items-start content-start" v-if="searchResults.length">
+              <div
+                v-for="(engine, index) in searchResults"
+                :data="engine"
+                :key="engine.id"
+                v-if="'name' in engine"
+                class="col-xs-12 col-sm-6 col-md-4"
+              >
+                <div class="row justify-center engine-element" @click="$router.push({ name: 'engine', params: { id: engine.id }})">
+                  <div class="col-2">
+                    <q-parallax
+                      :src="('logo' in engine) ? engine.logo.url : 'http://via.placeholder.com/90x90'"
+                      :height="90"
+                      :speed="0"
+                    >
+                      <div slot="loading">
+                        <q-spinner-dots color="green"/>
+                      </div>
+                    </q-parallax>
+                  </div>
+                  <div class="col-10 relative-position" v-ripple>
+                      <span class="absolute-center">
+                        <router-link :to="{ name: 'engine', params: { id: engine.id }}" color="green">{{ engine.name }}</router-link>
+                      </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row md-gutter justify-center items-start content-start" v-else>
+              <div class="row justify-center">
+                <div class="col-12" style="max-width: 1800px">
+                  <div class="row justify-center">
+                    <h4 class="text-primary">Not Found!</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -61,7 +108,9 @@
     QParallax,
     QSpinnerDots,
     QInfiniteScroll,
-    Ripple
+    Ripple,
+    QField,
+    QInput
   } from 'quasar'
 
   import igdb from './../api/igdb'
@@ -79,13 +128,19 @@
       QBtn,
       QParallax,
       QSpinnerDots,
-      QInfiniteScroll
+      QInfiniteScroll,
+      QField,
+      QInput
     },
 
     data () {
       return {
         gameEngines: [],
-        gameEnginesLoaded: false
+        gameEnginesLoaded: false,
+        searchString: '',
+        searchResults: [],
+        searchResultsLoaded: false,
+        searching: false
       }
     },
 
@@ -114,6 +169,23 @@
       setGameEngines (gameEngineList) {
         this.gameEngines = gameEngineList
         this.gameEnginesLoaded = true
+      },
+
+      setGameEnginesSearchResults (engine) {
+        this.searchResults = engine
+        this.searchResultsLoaded = true
+        this.searching = true
+      },
+
+      searchEngine () {
+        this.searchResultsLoaded = false
+        igdb.searchGameEngine(this.searchString)
+          .then((response) => {
+            this.setGameEnginesSearchResults(response.data)
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       },
 
       loadMore: function (index, done) {

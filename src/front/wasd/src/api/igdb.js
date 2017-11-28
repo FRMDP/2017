@@ -321,5 +321,39 @@ export default {
 
       timeout: TIMEOUT
     })
+  },
+
+  searchCompany (name) {
+    return axios({
+      baseURL: ENDPOINT,
+
+      url: '/companies/?search=' + name + '&fields=*',
+
+      method: 'get',
+
+      headers: {
+        'user-key': API_KEY,
+        'Accept': 'application/json'
+      },
+
+      timeout: TIMEOUT
+    })
+  },
+
+  searchGameEngine (name) {
+    return axios({
+      baseURL: ENDPOINT,
+
+      url: '/game_engines/?search=' + name + '&fields=*',
+
+      method: 'get',
+
+      headers: {
+        'user-key': API_KEY,
+        'Accept': 'application/json'
+      },
+
+      timeout: TIMEOUT
+    })
   }
 }

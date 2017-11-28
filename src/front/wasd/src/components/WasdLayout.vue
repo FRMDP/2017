@@ -11,9 +11,9 @@
           Know Your Games
         </span>
       </q-toolbar-title>
-      <q-btn flat flat round medium @click="$router.push('/login')">
+      <!--<q-btn flat flat round medium @click="$router.push('/login')">
         <q-item-main label="Login"/>
-      </q-btn>
+      </q-btn>-->
     </q-toolbar>
 
 

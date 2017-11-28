@@ -52,6 +52,13 @@ module.exports = {
         pathRewrite: {
           '^/igdb': ''
         }
+      },
+      '/steam_appdetails': {
+        target: 'http://store.steampowered.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/steam_appdetails': ''
+        }
       }
     }
   }

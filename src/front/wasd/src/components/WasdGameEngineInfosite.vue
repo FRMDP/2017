@@ -51,7 +51,7 @@
             </dl>
           </div>
         </div>
-        <hr>
+        <hr style="margin-bottom: 32px; margin-top: 32px;">
         <wasd-navigation-buttons></wasd-navigation-buttons>
       </div>
     </div>

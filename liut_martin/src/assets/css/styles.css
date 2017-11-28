@@ -1,0 +1,228 @@
+* {
+	margin            : 0;
+	padding           : 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing   : border-box;
+	box-sizing        : border-box;
+	color: rgba(1, 1, 1, .7);
+}
+
+a {
+	text-decoration: none;
+}
+
+ul li {
+	list-style: none;
+}
+
+body {
+	font-family: 'Roboto';
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7d7e7d+0,0e0e0e+100;Black+3D */
+	background: rgb(125,126,125); /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover, rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%); /* FF3.6-15 */
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: radial-gradient(ellipse at center, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+h1, h2, h3 {
+	text-align: center;
+	margin-bottom: 20px;
+	font-weight: 200;
+}
+
+footer {
+	position   : relative;
+	bottom     : 0;
+	left       : 0;
+	width      : 100%;
+	border-top : 1px solid #dfe4ed;
+	text-align : center;
+	padding    : 5px !important; 
+	height     : auto !important;
+	font-weight: 300;
+	font-size: 0.8em;
+	background-color: rgba(1, 1, 1, .2);
+}
+
+footer label { color: rgba(255, 255, 255, .7); }
+
+.logo {
+  font-size: 72px;
+  font-weight: 400;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sheet {
+	border: 1px solid #e6e6e6;
+	border-radius: 10px;
+	padding: 20px;
+	min-height: 80vh;
+	box-shadow: 0px 0px 40px 0px rgba(255, 255, 255, .4);
+}
+
+.el-col {
+	background-color: #fff;
+}
+
+.el-header {
+	padding: 0px;
+}
+
+.el-menu {
+	background-color: rgba(1, 1, 1, .2);
+}
+
+.el-menu--horizontal {
+	border-bottom: solid 0.5px rgba(255, 255, 255, .5);
+}
+
+.el-menu--horizontal>.el-menu-item.is-active, .el-menu--horizontal>.el-submenu.is-active .el-submenu__title {
+	color: #409EFF;
+}
+
+.el-menu--horizontal .el-menu-item:focus, .el-menu--horizontal .el-menu-item:hover {
+	background-color: rgba(255, 255, 255, .25);
+	color: rgba(255, 255, 255, .7);
+}
+
+.card {
+	border: 1px solid #ccc;
+	border-radius: 7px;
+	padding: 20px;
+	margin-bottom: 5px;
+	min-height: 320px;
+	max-height: 320px;
+}
+
+
+.panel {
+	border: 1px solid #ebebeb;
+	border-radius: 3px;
+	padding: 20px;
+	height: 100vh;
+	overflow: auto;
+}
+
+.el-card {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	display: inline-block;
+	margin: 5px;
+	width: 96%;
+	font-size: 0.9em;
+	/*
+	min-height y max-height lo habia puesto porque algunos proyectos venían sin foto
+	o a veces con más contenido que otros y quedaba todo desparejo. Despues lo comenté
+	porque a la hora de hacerlo responsive no se veían bien las "cards"
+
+	min-height: 370px;
+	max-height: 370px;*/
+}
+
+.el-card .el-card__body {
+	padding: 0;
+}
+
+.el-card .card-body {
+	padding: 14px;
+}
+
+.div {
+	height: 1px;
+	margin: 7px auto;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#aeaeae+0,d9d9d9+100&1+0,0+100 */
+	background: -moz-radial-gradient(center, ellipse cover, rgba(174,174,174,1) 0%, rgba(217,217,217,0) 100%); /* FF3.6-15 */
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(174,174,174,1) 0%,rgba(217,217,217,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: radial-gradient(ellipse at center, rgba(174,174,174,1) 0%,rgba(217,217,217,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aeaeae', endColorstr='#00d9d9d9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.el-card .el-card__body p {
+	display: inline-block;
+	margin-right: 10px;
+	text-align: center;
+}
+
+.el-card .img_cover {
+	width: 100%
+}
+
+.el-card .panel-footer {
+	text-align: center;
+	color: grey;
+}
+
+.project-name {
+	height: 40px;
+	display: block;
+	color: rgba(1, 1, 1, .7)
+}
+
+.img_perfil {
+	border-radius: 50% !important;
+	overflow: hidden;
+}
+
+.display_name {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+
+.el-row {
+	margin-bottom: 20px;
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.carousel-img {
+	width: 100%;
+}
+
+.clearfix h2 {
+	margin: 0;
+}
+
+.ulFields li { 
+	display: inline-block; 
+	color: rgba(1, 1, 1, .4);
+}
+
+@media screen and (max-width: 768px){ 
+	.logo {
+		font-size: 50px;
+	}
+	
+	.el-menu-demo {
+		position: absolute;
+		width: 100%;
+	}
+
+	.el-menu-demo .el-menu-item {
+		width: 50%;
+		text-align: center;
+	}
+
+	.el-main {
+		margin-top: 50px;
+	}
+
+	.el-form-item__label {
+		display: none;
+	}
+
+	.el-textarea__inner {
+		width: 100%;
+	}
+
+	.el-form-item__content { margin-left: 0px !important; }
+
+	h1 { font-size: 20px; }
+
+	.div { display: none; }
+}

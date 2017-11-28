@@ -4,13 +4,13 @@
       <div class="mx-auto">
         <form>
           <div class="form-group">
-            <label for="latitude">Latitude</label>
+            <label for="latitude" class="customColorFont">Latitude</label>
             <input type="number" step="any" class="form-control" id="latitude" v-model="latitude"
                    aria-describedby="latitude"
                    placeholder="Enter city latitude">
           </div>
           <div class="form-group">
-            <label for="longitude">Longitude</label>
+            <label for="longitude" class="customColorFont">Longitude</label>
             <input type="number" step="any" class="form-control" id="longitude" v-model="longitude"
                    placeholder="Enter city longitude">
           </div>

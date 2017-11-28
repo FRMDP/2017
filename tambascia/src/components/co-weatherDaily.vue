@@ -16,7 +16,7 @@
       </div>
       <div v-else>
         <div class="col-md-12">
-          <h3 class="changeMarginButton text-center customColorFont">{{ forecastData[0].daily.summary}}</h3>
+          <h3 class="changeMarginButton text-center customColorFont">{{ forecastData[0]? forecastData[0].daily.summary : []}}</h3>
           <table class="table table-hover customMarginTop customBackColorTable">
             <thead>
             <tr class="table-info">

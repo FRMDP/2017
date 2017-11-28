@@ -72,11 +72,13 @@
         </div>
         <div class="row">
           <div class="col-md-6 text-center">
-            <router-link class="btn btn-outline-primary buttonRight changeMarginButton centerButton" :to="{ name: 'forecastDaily'}">Daily
+            <router-link class="btn btn-outline-primary buttonRight changeMarginButton centerButton"
+                         :to="{ name: 'forecastDaily'}">Daily
             </router-link>
           </div>
           <div class="col-md-6 text-center">
-            <router-link class="btn btn-outline-primary changeMarginButton buttonRight centerButton" :to="{ name: 'forecastHourly'}">Hourly
+            <router-link class="btn btn-outline-primary changeMarginButton buttonRight centerButton"
+                         :to="{ name: 'forecastHourly'}">Hourly
             </router-link>
           </div>
         </div>
@@ -89,6 +91,7 @@
 <script>
   import weatherService from '../services/weatherService';
   import coFooter from './co-footer.vue';
+
   export default {
     name: 'myWeather',
     data() {
@@ -104,11 +107,13 @@
       getLocation(position) {
         this.loading = true;
         this.forecastData = weatherService.getMyWeather(position);
-        this.loading = false;
+        setTimeout(() => {
+          this.loading = false;
+        })
       },
       validateNameOfCity(badCityName) {
         let newName = null;
-        if(badCityName!= null  || badCityName!= undefined){
+        if (badCityName != null || badCityName != undefined) {
           let idx = badCityName.indexOf("/");
           let idxZ = badCityName.indexOf("_");
           let replacement = "-";
@@ -133,9 +138,11 @@
   .topFixFixed {
     margin-top: 68px;
   }
+
   .customMarginTop {
     margin: 13px;
   }
+
   .changeMarginButton {
     margin-top: 10px;
   }
@@ -149,6 +156,7 @@
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
   }
+
   .customColorFont {
     color: #999999;
   }
@@ -170,11 +178,13 @@
       transform: rotate(360deg);
     }
   }
+
   .changeFont {
     font-family: 'Roboto', sans-serif;
   }
-  .customBackColorTable{
-    background-color: rgba( 255,255,255, 0.7);
+
+  .customBackColorTable {
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
 </style>

@@ -2,25 +2,30 @@
   <div class="container-fluid topFixFixed changeFont">
     <div class="row justify-content-center">
       <div class="col-md-12" v-if="articles === null || articles === undefined">
-        <div class="alert alert-danger" role="alert" >
+        <div class="alert alert-danger" role="alert">
           <h4 class="alert-heading">Do oh!</h4>
           <p>There was a problem while loading news, please try later</p>
           <hr>
           <router-link :to="{ name: 'ppalEn'}">Go home</router-link>
         </div>
       </div>
-      <div  v-else v-for="actualArticle in (articles[0] ? articles[0].sources : [])">
-        <div  class="col-md-4">
+      <div v-else v-for="actualArticle in (articles[0] ? articles[0].sources : [])">
+        <div class="col-md-4">
           <div class="card">
             <div class="card-header cardTitle">
-                <h5 class="customFont" v-if=(!dataIsNull(actualArticle.country))>{{validateCountryAb(actualArticle.country)}}</h5>
+              <h5 class="customFont" v-if=(!dataIsNull(actualArticle.country))>
+                {{validateCountryAb(actualArticle.country)}}</h5>
             </div>
             <div class="card-body">
-              <p class="card-text" v-if=(!dataIsNull(actualArticle.description))>{{actualArticle.description.substring(0, 100)}}</p>
-              <p class="card-text" v-if=(!dataIsNull(actualArticle.name))><small class="text-muted">{{actualArticle.name}}</small></p>
+              <p class="card-text" v-if=(!dataIsNull(actualArticle.description))>
+                {{actualArticle.description.substring(0, 100)}}</p>
+              <p class="card-text" v-if=(!dataIsNull(actualArticle.name))>
+                <small class="text-muted">{{actualArticle.name}}</small>
+              </p>
             </div>
             <div class="card-footer">
-              <a v-if=(!dataIsNull(actualArticle.url)) :href="actualArticle.url" class="btn btn-outline-primary buttonRight buttonLeft" role="button">Show More</a>
+              <a v-if=(!dataIsNull(actualArticle.url)) :href="actualArticle.url"
+                 class="btn btn-outline-primary buttonRight buttonLeft" role="button">Show More</a>
             </div>
           </div>
         </div>
@@ -33,30 +38,33 @@
 <script>
   import articleService from '../services/articlesService';
   import navigation from './co-navigationEn.vue';
+
   export default {
     name: 'categoriesEn',
     data() {
       return {
-        articles: {}
+        articles: {},
+        loading: false
       }
     },
     methods: {
-      dataIsNull(data){
+      dataIsNull(data) {
         let itIs = false;
-        if(data=== null || data === undefined){
+        if (data === null || data === undefined) {
           itIs = true;
         }
         return itIs;
       },
-      resetArticles(){
+      resetArticles() {
         this.articles = null;
       },
       getCategoryNews() {
         this.resetArticles();
+        this.loading = true;
         return articleService.getArticlesByCategory(this.id);
       },
-      validateCountryAb(countryAb){
-        switch(countryAb) {
+      validateCountryAb(countryAb) {
+        switch (countryAb) {
           case "ar":
             return "Argentina";
           case "au":
@@ -121,6 +129,7 @@
     },
     created() {
       this.resetArticles();
+      this.loading = true;
       this.articles = this.getCategoryNews(this.id);
     }
   }
@@ -131,15 +140,18 @@
     margin-top: 68px;
   }
 
-  body{
+  body {
     overflow: auto;
   }
+
   .buttonLeft {
-    margin-left:73px;
+    margin-left: 73px;
   }
-  .cardTitle{
+
+  .cardTitle {
     text-align: center;
   }
+
   .card {
     width: 20rem;
     margin: 10px;
@@ -149,7 +161,7 @@
     font-family: 'Roboto', sans-serif;
   }
 
-  .customFont{
+  .customFont {
     font-weight: 300;
   }
 

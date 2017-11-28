@@ -73,7 +73,9 @@
       getLocation(position) {
         this.loading = true;
         this.forecastData = weatherService.getMyWeather(position);
-        this.loading = false;
+        setTimeout(() => {
+          this.loading = false;
+        })
       },
       MonthAsString(monthIndex) {
         var d = new Date();
@@ -157,8 +159,9 @@
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
   }
-  .customBackColorTable{
-    background-color: rgba( 255,255,255, 0.7);
+
+  .customBackColorTable {
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
   @-webkit-keyframes spin {

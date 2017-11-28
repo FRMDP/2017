@@ -14,34 +14,36 @@
   import navigation from '@/components/co-navigationEn.vue';
   import sources from '@/components/co-sourcesEn.vue';
   import coFooter from '@/components/co-footer.vue';
-    export default {
-        name: 'En',
-        data() {
-            return {
-              showSide: false,
-            }
-        },
-        methods: {
-          showSideBar(){
-            this.showSide = !this.showSide;
-          },
-          changeSource(source){
-            this.$run('setArticles', source);
-          }
-        },
-      components: {
-        navigation,
-        sources,
-        coFooter
+
+  export default {
+    name: 'En',
+    data() {
+      return {
+        showSide: false,
       }
+    },
+    methods: {
+      showSideBar() {
+        this.showSide = !this.showSide;
+      },
+      changeSource(source) {
+        this.$run('setArticles', source);
+      }
+    },
+    components: {
+      navigation,
+      sources,
+      coFooter
     }
+  }
 </script>
 
 <style scoped>
-  .fixAll{
+  .fixAll {
     margin: 0;
     height: 100%;
   }
+
   .toggled {
     padding-left: 250px;
     transition: padding 0.5s;

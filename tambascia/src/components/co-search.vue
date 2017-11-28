@@ -90,7 +90,7 @@
         config: {
           altFormat: "F j, Y",
           altInput: true,
-          maxDate:"today"
+          maxDate: "today"
         }
       }
     },
@@ -101,12 +101,16 @@
       sendSearch() {
         this.loading = true;
         this.articles = articleService.searchInTheAPI(this.filterSearch);
-        this.loading = false;
+        setTimeout(() => {
+          this.loading = false;
+        })
       },
       sendSearchAndFilter() {
         this.loading = true;
         this.articles = articleService.searchInTheAPIByDate(this.filterSearch, this.dateFrom, this.dateTo);
-        this.loading = false;
+        setTimeout(() => {
+          this.loading = false;
+        })
       },
       checkFilterSearch() {
         let isFull = false;

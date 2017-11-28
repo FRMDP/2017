@@ -27,6 +27,7 @@
   .changeFont {
     font-family: 'Roboto', sans-serif;
   }
+
   html {
     height: 100%;
   }
@@ -70,6 +71,7 @@
   .buttons {
     margin: 30px;
   }
+
   .buttons a.button {
     font-weight: 700;
     border: 2px solid #EE4B5E;
@@ -81,6 +83,7 @@
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
   }
+
   .buttons a.button:hover {
     background-color: #EE4B5E;
     color: white;

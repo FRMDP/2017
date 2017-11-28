@@ -12,14 +12,16 @@
     <div v-else v-for="(actualArticle, index) in (getArticles? getArticles.articles : [])" :key="index">
       <div class="col-md-4">
         <div class="card">
-          <img class="card-img-top" v-if=(!dataIsNull(actualArticle.urlToImage)) :src="actualArticle.urlToImage" alt="Image of the article">
+          <img class="card-img-top" v-if=(!dataIsNull(actualArticle.urlToImage)) :src="actualArticle.urlToImage"
+               alt="Image of the article">
           <div class="card-header" v-if=(!dataIsNull(actualArticle.title))>
-            <h5 >{{actualArticle.title.substring(0, 30)}}</h5>
+            <h5>{{actualArticle.title.substring(0, 30)}}</h5>
           </div>
           <div class="card-body">
-            <p class="card-text" v-if=(!dataIsNull(actualArticle.description))>{{actualArticle.description.substring(0, 200)}}</p>
+            <p class="card-text" v-if=(!dataIsNull(actualArticle.description))>
+              {{actualArticle.description.substring(0, 200)}}</p>
             <p class="card-text" v-if="(validateDate(actualArticle.publishedAt))!= null ">
-              <small  class="text-muted">Published at: {{validateDate(actualArticle.publishedAt)}}</small>
+              <small class="text-muted">Published at: {{validateDate(actualArticle.publishedAt)}}</small>
             </p>
           </div>
           <div class="card-footer">
@@ -34,8 +36,8 @@
 <script>
   import articleService from '../services/articlesService';
   import sources from './co-sourcesEn.vue';
-  import  articles from '../store/modules/articles/index.js';
-  import { mapGetters } from 'vuex';
+  import articles from '../store/modules/articles/index.js';
+  import {mapGetters} from 'vuex';
 
   export default {
     name: 'allArticlesEn',
@@ -53,9 +55,9 @@
       ])
     },
     methods: {
-      dataIsNull(data){
+      dataIsNull(data) {
         let itIs = false;
-        if(data=== null || data === undefined){
+        if (data === null || data === undefined) {
           itIs = true;
         }
         return itIs;
@@ -63,11 +65,13 @@
       changeSource(source) {
         this.loading = true;
         this.articles = articleService.getArticlesBySource(source);
-        this.loading = false;
+        setTimeout(() => {
+          this.loading = false;
+        })
       },
       validateDate(badDate) {
         let newDate = null;
-        if(badDate!= null  || badDate!= undefined){
+        if (badDate != null || badDate != undefined) {
           let idx = badDate.indexOf("T");
           let idxZ = badDate.indexOf("Z");
           let replacement = "-";
@@ -79,9 +83,11 @@
       }
     },
     created() {
-      this.loading  = true;
+      this.loading = true;
       this.$run('setArticles', "espn");
-      this.loading = false;
+      setTimeout(() => {
+        this.loading = false;
+      })
     }
   }
 </script>
@@ -116,6 +122,7 @@
     margin-left: 30px;
     margin-right: 30px;
   }
+
   .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
@@ -127,13 +134,21 @@
   }
 
   @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
   }
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
 </style>

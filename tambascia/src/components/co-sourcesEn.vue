@@ -24,6 +24,7 @@
 
 <script>
   import articleService from '../services/articlesService';
+
   export default {
     name: 'sources',
     props: ['show'],
@@ -40,10 +41,12 @@
         this.$emit('changeSource', data);
       },
     },
-    created(){
+    created() {
       this.loading = true;
       this.articlesSource = articleService.getAllSourcesEnglish();
-      this.loading = false;
+      setTimeout(() => {
+        this.loading = false;
+      })
     }
   }
 </script>
@@ -53,6 +56,7 @@
   body {
     overflow-x: hidden;
   }
+
   .changeFont {
     font-family: 'Roboto', sans-serif;
   }
@@ -82,7 +86,7 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    &.show{
+    &.show {
       left: 250px !important;
       -webkit-transition: all 0.5s ease;
       -moz-transition: all 0.5s ease;
@@ -105,7 +109,6 @@
     position: absolute;
     margin-right: -250px;
   }
-
 
   /* Sidebar Styles */
 
@@ -134,6 +137,7 @@
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
   }
+
   .sidebar-nav li.active a {
     text-decoration: none;
     color: #fff;
@@ -144,22 +148,22 @@
     text-decoration: none;
   }
 
-  .sidebar-nav>.sidebar-brand {
+  .sidebar-nav > .sidebar-brand {
     height: 65px;
     font-size: 18px;
     line-height: 60px;
   }
 
-  .sidebar-nav>.sidebar-brand a {
+  .sidebar-nav > .sidebar-brand a {
     color: #999999;
   }
 
-  .sidebar-nav>.sidebar-brand a:hover {
+  .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
     background: none;
   }
 
-  @media(min-width:768px) {
+  @media(min-width: 768px) {
     #wrapper {
       padding-left: 0;
     }
@@ -189,13 +193,21 @@
     }
 
     @-webkit-keyframes spin {
-      0% { -webkit-transform: rotate(0deg); }
-      100% { -webkit-transform: rotate(360deg); }
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
   }
 </style>

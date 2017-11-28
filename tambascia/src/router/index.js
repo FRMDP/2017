@@ -25,7 +25,7 @@ export default new Router({
       path: '/en/',
       name: 'En',
       component: En,
-      redirect: { name: 'ppalEn' },
+      redirect: {name: 'ppalEn'},
       children: [
         {
           path: 'ppal',

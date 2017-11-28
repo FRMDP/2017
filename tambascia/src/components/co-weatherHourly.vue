@@ -49,11 +49,13 @@
         </div>
         <div class="row">
           <div class="col-md-6 text-center">
-            <router-link class="btn btn-outline-primary buttonRight changeMarginButton centerButton" :to="{ name: 'myWeather'}">Today
+            <router-link class="btn btn-outline-primary buttonRight changeMarginButton centerButton"
+                         :to="{ name: 'myWeather'}">Today
             </router-link>
           </div>
           <div class="col-md-6 text-center">
-            <router-link class="btn btn-outline-primary changeMarginButton buttonRight centerButton" :to="{ name: 'forecastDaily'}">Daily
+            <router-link class="btn btn-outline-primary changeMarginButton buttonRight centerButton"
+                         :to="{ name: 'forecastDaily'}">Daily
             </router-link>
           </div>
         </div>
@@ -64,37 +66,41 @@
 
 <script>
   import weatherService from '../services/weatherService';
-    export default {
-        name: 'forecastHourly',
-      data() {
-        return {
-          forecastData: {},
-          loading: false
-        }
-      },
-      methods: {
-        getLocation(position) {
-          this.loading = true;
-          this.forecastData = weatherService.getMyWeather(position);
+
+  export default {
+    name: 'forecastHourly',
+    data() {
+      return {
+        forecastData: {},
+        loading: false
+      }
+    },
+    methods: {
+      getLocation(position) {
+        this.loading = true;
+        this.forecastData = weatherService.getMyWeather(position);
+        setTimeout(() => {
           this.loading = false;
-        },
+        })
       },
-      created() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(this.getLocation);
-        } else {
-          alert("Geolocation is not supported by this browser.");
-        }
+    },
+    created() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.getLocation);
+      } else {
+        alert("Geolocation is not supported by this browser.");
       }
     }
+  }
 </script>
 
 <style>
   .changeFont {
     font-family: 'Roboto', sans-serif;
   }
-  .customBackColorTable{
-    background-color: rgba( 255,255,255, 0.7);
+
+  .customBackColorTable {
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
   .topFixFixed {
@@ -104,9 +110,11 @@
   .customMarginTop {
     margin: 13px;
   }
+
   .changeMarginButton {
     margin-top: 10px;
   }
+
   .customColorFont {
     color: #999999;
   }

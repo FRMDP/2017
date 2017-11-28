@@ -4,6 +4,8 @@
     <div v-if='!error'>
     <b-row>
       <b-col>
+        <h1><label>Search the circuits</label></h1>
+        <br>
           <b-dropdown id="ddown-buttons" text="Circuits" class="m-2">
             <div v-for='circuit in circuits'>
               <b-dropdown-item-button @click='showCircuit(circuit.circuitName)'>{{circuit.circuitName}}</b-dropdown-item-button>
@@ -39,7 +41,7 @@
       </b-row>
       </div>
       <div v-else>
-        <label>SOME ARE WRONG</label>
+        <label>Something's wrong</label>
       </div>
   </div>
 </template>
@@ -62,6 +64,7 @@
     methods:{
       getCircuits(){
         this.loading = true;
+        this.error = false;
         this.$http.get('http://ergast.com/api/f1/circuits.json?limit=73')
         .then((response) => {
           this.circuits = response.data.MRData.CircuitTable.Circuits;
@@ -104,5 +107,9 @@
   }
 </script>
 <style>
-
+label{
+  color:rgb(233, 148, 58);
+  font-style:italic;
+  font-weight: bold;
+}
 </style>

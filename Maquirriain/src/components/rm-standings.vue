@@ -3,7 +3,9 @@
     <b-row>
       <b-col>
         <br>
-        <label>Since 1950 to 2017 </label>
+        <h1><label>Search the standings of the history of F1</label></h1>
+        <br>
+        <label>From 1950 to 2017 </label>
     <b-form-input id="exampleInput1"
                   type="number" v-model="season"
                   placeholder='Please set the season'
@@ -32,7 +34,7 @@
   </b-card>
 </div>
 <div v-else>
-  <label>SOME ARE WRONG</label>
+  <label>Something's wrong</label>
 </div>
   </b-col>
   <b-col>
@@ -84,6 +86,7 @@
       },
       getAllInformationApiStandings(){
         this.loading = true;
+        this.error = false;
         this.teams = [];
         this.drivers = [];
         this.$http.all([this.getDrivers(),this.getTeam()])

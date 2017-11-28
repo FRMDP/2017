@@ -2,7 +2,9 @@
     <div >
 
     </br>
-        <label>Since 1950 to 2017</label>
+        <h1><label>Search the schedule of the history of F1</label></h1>
+        <br>
+        <label>From 1950 to 2017</label>
 
         <b-form-input  id="exampleInput1"
                       type="text" v-model="date"
@@ -39,7 +41,7 @@
         </div>
       </div>
       <div v-else>
-        <label>SOME ARE WRONG</label>
+        <label>Something's wrong</label>
       </div>
 
 
@@ -79,6 +81,7 @@
       search(){
         this.calendar = [];
         this.loading = true;
+        this.error = false;
         this.$http.get("http://ergast.com/api/f1/"+this.date+".json?callback=")
         .then((response) => {
           const aux = response.data.MRData.RaceTable.Races;

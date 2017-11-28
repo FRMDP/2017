@@ -1,13 +1,15 @@
 <template>
   <div>
     </br>
-    <label>Since 1950 to 2017 </label>
+    <h1><label>Search the results of the history of F1</label></h1>
+    <br>
+    <label>From 1950 to 2017 </label>
     <b-form-input id="exampleInput1"
                   type="number" v-model="season"
                   placeholder='Please set the season'
     ></b-form-input>
     <br>
-    <label>The stage from 1 to 20 </label>
+    <label>The stage (from 1 to 20) </label>
     <b-form-input id="exampleInput1"
                   type="number" v-model="stage"
                   placeholder='Please set the stage'
@@ -35,7 +37,7 @@
     </div>
   </div>
   <div v-else>
-    <label>SOME ARE WRONG</label>
+    <label>Something's wrong</label>
   </div>
   </div>
 </template>
@@ -80,6 +82,7 @@
       methods:{
         searchResults(){
           this.loading = true;
+          this.error = false;
           this.$http.get('http://ergast.com/api/f1/'+this.season+'/'+this.stage+'/results.json')
           .then((response) => {
 

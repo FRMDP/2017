@@ -3,6 +3,8 @@
     <rm-spinner v-if='loading'></rm-spinner>
     <b-row>
       <b-col>
+        <h1><label>Search the Teams</label></h1>
+        <br>
       <b-dropdown id="ddown-buttons" text="F1 Teams" class="m-2">
         <div v-for='team in teams'>
           <b-dropdown-item-button @click='showTeam(team.name)'>{{team.name}}</b-dropdown-item-button>
@@ -32,7 +34,7 @@
       </div>
     </div>
     <div v-else>
-      <label>SOME ARE WRONG</label>
+      <label>Something's wrong</label>
     </div>
       </b-col>
     </b-row>
@@ -58,6 +60,7 @@
     methods:{
       getTeams(){
         this.loading = true;
+        this.error = false;
         this.$http.get('http://ergast.com/api/f1/constructors.json?limit=208')
         .then((response) => {
           this.teams = response.data.MRData.ConstructorTable.Constructors;
@@ -101,5 +104,9 @@
   }
 </script>
 <style>
-
+label{
+  color:rgb(233, 148, 58);
+  font-style:italic;
+  font-weight: bold;
+}
 </style>

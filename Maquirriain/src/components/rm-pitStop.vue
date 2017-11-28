@@ -2,12 +2,14 @@
    <div>
      <b-row>
        <b-col>
+         <h1><label>Search the pit stops</label></h1>
+         <br>
          <label>Since 2011 to 2017 </label>
          <b-form-input id="exampleInput1"
                        type="number" v-model="season"
                        placeholder='Please set the season'
          ></b-form-input>
-        <label>from 1 to 20</label>
+        <label>The stage (from 1 to 20)</label>
          <b-form-input id="exampleInput1"
                        type="number" v-model="stage"
                        placeholder='Please set the stage'
@@ -53,7 +55,7 @@
         </div>
       </div>
       <div v-else>
-        <label>SOME ARE WRONG</label>
+        <label>Something's wrong</label>
       </div>
       </b-col>
     </b-row>
@@ -88,7 +90,7 @@
         this.circuit = '';
         this.date = '';
         this.time = '';
-        //this.times = [];
+        this.error = false;
         this.loading = true;
         this.$http.get("http://ergast.com/api/f1/"+this.season+"/"+this.stage+"/pitstops.json?limit=150")
         .then((response) => {

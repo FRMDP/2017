@@ -3,7 +3,9 @@
      <b-row>
        <b-col>
        </br>
-           <label>Since 1950 to 2017 </label>
+       <h1><label>Search all the drivers of F1</label></h1>
+       <br>
+           <label>From 1950 to 2017 </label>
            <br>
      <b-form-input id="exampleInput1"
                    type="number" v-model="season"
@@ -42,7 +44,7 @@
     </div>
 
     <div v-else>
-      <label>SOME ARE WRONG</label>
+      <label>Something's wrong</label>
     </div>
     </b-col>
     </b-row>
@@ -80,6 +82,7 @@
       getDrivers(){
         this.drivers = [];
         this.loading = true;
+        this.error = false;
         this.$http.get('http://ergast.com/api/f1/'+this.season+'/drivers.json?limit=60')
         .then((response) => {
           const aux = response.data.MRData.DriverTable.Drivers;
@@ -104,6 +107,7 @@
         })
         .catch((error) => {
           this.loading = false;
+          this.error = true;
           console.log(error);
         })
       },

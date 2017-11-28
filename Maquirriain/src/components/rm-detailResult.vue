@@ -46,7 +46,7 @@
 </div>
 </div>
 <div v-else>
-  <label>SOME ARE WRONG</label>
+  <label>Something's wrong</label>
 </div>
 
   </div>
@@ -83,6 +83,7 @@
     methods:{
       searchPhotografy(name){
         this.loading = true;
+        this.error = false;
         this.$http.get("https://www.googleapis.com/customsearch/v1?key=AIzaSyCESbb8aksvTXgiGEaTZ4Ev9Mw2lOCpI40&cx=008826416416088798084:ria9zrnc1gk&q="+name)
         .then((response) => {
           if(response.data.items[0].pagemap.cse_image){

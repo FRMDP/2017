@@ -3,6 +3,8 @@
      <b-row>
          <div align-h="center" v-if="!nickB">
     			<b-col>
+            <h1><label>RaceChat</label></h1>
+            <br>
     				<label>Choose your nick</label>
             <b-form-input id="exampleInput1"
                           type="text"
@@ -10,11 +12,13 @@
                           placeholder='Please set your nick'
                           @keyup.enter="setNick"
               ></b-form-input>
+              <br>
             <b-button type="submit" :disabled='!checkInPut' variant="primary" @click='setNick' >Save Nick</b-button>
     			</b-col>
     		</div>
           <b-col cols="8" md="10" lg="10" v-else>
               <br>
+              <h1><label>RaceChat</label></h1>
               <br>
               <div class='chat'>
                 <div v-for='message in messages'>

@@ -3,19 +3,21 @@
      <b-row>
        <b-col>
          <br>
-         <label>Since 1996 to 2017 </label>
+         <h1><label>Search the time laps</label></h1>
+         <br>
+         <label>From 1996 to 2017 </label>
          <b-form-input id="exampleInput1"
                        type="number" v-model="season"
                        placeholder='Please set the season'
          ></b-form-input>
 
-         <label>from 1 to 20</label>
+         <label>The stage (from 1 to 20)</label>
          <b-form-input id="exampleInput1"
                        type="number" v-model="stage"
                        placeholder='Please set the stage'
          ></b-form-input>
 
-         <label>from 1 to 70</label>
+         <label>The laps (from 1 to 70)</label>
          <b-form-input id="exampleInput1"
                        type="number" v-model="lap"
                        placeholder='Please set the lap'
@@ -57,7 +59,7 @@
       </div>
     </div>
     <div v-else>
-      <label>SOME ARE WRONG</label>
+      <label>Something's wrong</label>
     </div>
       </b-col>
     </b-row>
@@ -90,6 +92,7 @@
     },
     methods:{
         searchLap(){
+          this.error = false;
           this.circuit = '';
           this.date = '';
           this.time = '';

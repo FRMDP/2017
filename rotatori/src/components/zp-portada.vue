@@ -13,17 +13,28 @@
                 <img src="/img/recital2.jpg" alt="">
             </md-board>
         </md-boards>
+        <div class="comments">
+            <zp-comments></zp-comments>
+        </div>
+    </div>
     </div>
 </template>
 <script>
+import zpComments from "./zp-comments.vue";
 export default {
-  
+    components: {
+        zpComments,
+    }
 }
 </script>
 <style scoped>
 img{
     display:block;
     margin:auto;
+}
+.comments{
+    height: 300px;
+	width: 95%;
 }
 </style>
 

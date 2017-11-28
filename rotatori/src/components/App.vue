@@ -3,8 +3,8 @@
         <md-toolbar class="md-dense" id="toolbar">
             <md-button md-menu-trigger class="md-icon-button" @click="toggleLeftSidenav"><md-icon>menu</md-icon></md-button>
             <md-button style="flex: 1" @click="$router.push({name:'index'})">MusicPack</md-button>
-            <h4 class="md-title alRight" v-if="isLogin.name">Bienvenido, {{ isLogin.name }}</h4>
-            <md-button class="md-icon-button" v-if="isLogin.name" @click="logout">
+            <h4 class="md-title alRight" v-if="isLogin != ''">Bienvenido, {{ isLogin }}</h4>
+            <md-button class="md-icon-button" v-if="isLogin != ''" @click="logout">
                 <md-icon>close</md-icon>
             </md-button>
             <div class="alRight" v-else>
@@ -22,8 +22,9 @@
             <md-button class="butWid" @click="routeGo('index')">Volver</md-button>
             <md-button class="butWid" @click="routeGo('search')" >Buscar Canciones</md-button>
             <md-button class="butWid" @click="routeGo('searchArtist')">Buscar Artistas</md-button>
-            <md-button class="butWid" v-if="isLogin.name" @click="routeGo('myList')">Mi Track List</md-button>
-            <md-button class="butWid" >Ayuda</md-button>
+            <md-button class="butWid" v-if="isLogin != ''" @click="routeGo('myList')">Mi Track List</md-button>
+            <md-button class="butWid" v-if="isLogin != ''" @click="routeGo('profile')">Mis datos</md-button>
+            <md-button class="butWid" @click="routeGo('term')">Términos y Condiciones</md-button>
         </md-sidenav>
         <md-sidenav class="md-right" ref="rightSidenav">
             <md-toolbar>
@@ -41,7 +42,6 @@
         <transition name="slide-fade">
             <router-view class="relative element hei"></router-view>
         </transition>
-       
     </div>
 </template>
 
@@ -118,9 +118,9 @@ import zpRegister from "./zp-register.vue";
         },
         created(){
             this.getCountries();
-            this.$users.putFirstUser();
+            //this.$users.putFirstUser(); utilizado para ya tener un usario
             if(this.$session.has('login')){
-                this.$store.commit('putUser', this.$session.get('login'));
+                this.$store.commit('putUser', this.$session.get('login').name);
             }
         }
     }

@@ -58,7 +58,7 @@ export default {
                 userL.pass = '#@€€¬€¬@#~@|@#';
                 this.$session.start();
                 this.$session.set('login', userL);
-                this.$store.commit('putUser', userL);
+                this.$store.commit('putUser', userL.name);
                 this.clearFields();
                 this.toggleRightSidenav();
             }else{

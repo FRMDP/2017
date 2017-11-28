@@ -36,11 +36,6 @@ export default {
             agregado: false,
         }
     },
-    computed: {
-    },
-    watch: {
-
-    },
     methods: {
         ruteGo(){
             const st = this.track.title.replace(/\s/g, "%20");

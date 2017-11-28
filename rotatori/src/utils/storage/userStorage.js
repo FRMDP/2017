@@ -32,5 +32,18 @@ export default {
         if(localStorage.getItem('users') == null){
             localStorage.setItem('users', JSON.stringify(def));
         }
+    },
+    getUserById(userId){
+        const allUser = this.getAllUsers();
+        return allUser.find(u => u.id == userId) || {};
+    },
+    changeInfo(user){
+        const allUser = this.getAllUsers();
+        allUser.forEach(u => {
+            if(u.id == user.id){
+                u = user;
+            }
+        });
+        localStorage.setItem('users', JSON.stringify(allUser));
     }
 }

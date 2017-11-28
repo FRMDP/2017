@@ -51,7 +51,7 @@ export default {
                 this.$session.start();
                 userL.pass = '@$%&"·$%&&%'
                 this.$session.set('login', userL);
-                this.$store.commit('putUser', userL);
+                this.$store.commit('putUser', userL.name);
                 this.clearField();
                 this.toggleRightSidenav();
             }else{

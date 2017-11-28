@@ -75,22 +75,21 @@ export default {
     },
     methods: {
         getPromises(){
-            this.pbar = true;
             let st = this.$apiRoutes.getRoutes(this.endpoint, {name: this.search, value: this.name},{name: 'pageSize', value: '100'});
             this.$http.get(st)
                 .then(response =>{
-                    this.countries = this.$store.getters.getCountries;
-                    const result = response.data.message.header.available;
+                    this.countries = this.$store.getters.getCountries; //En el create no siempre me cargaba los paises
+                    const result = response.data.message.header.available; //obtengo el total de resultados
                     const array = response.data.message.body.artist_list;
-                    this.artist = this.cast(array);
-                    let pages = Math.trunc(result / 100);
+                    this.artist = this.cast(array); //casteo la primer pagina de 100 resultados
+                    let pages = Math.trunc(result / 100); //como la API pagina los reusltados, obtengo la cantidad de páginas para los get
                     if(result%100 != 0 || result < 100){
                         pages++;
                     }
                     let prms = [];
-                    for(let i = 2; i<=pages && i < 10; i++){
+                    for(let i = 2; i <= pages && i < 10; i++){//pasando las 10 paginas, por la cantidad de resultados empieza a fallar el filtro
                         let st = this.$apiRoutes.getRoutes(this.endpoint, {name: this.search, value: this.name}, {name: 'pageSize', value: '100'}, {name: 'page', value: i});
-                        prms.push(this.$http.get(st));
+                        prms.push(this.$http.get(st)); //obtengo todas las paginas de resultados
                     }
                     if(prms){
                         Promise.all(prms)

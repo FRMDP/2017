@@ -9,7 +9,7 @@ export default new Vuex.Store({
         array:[],
         backPathSearch: '',
         countries: [],
-        user: {},
+        user: '',
     },
     mutations: {
         putTypeSearch(state, text){
@@ -31,7 +31,7 @@ export default new Vuex.Store({
             state.user = user;
         },
         clearUser(state){
-            state.user = {};
+            state.user = '';
         }
     },
     getters: {

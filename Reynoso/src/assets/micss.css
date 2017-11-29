@@ -1,0 +1,92 @@
+
+.wrapper {
+  padding-left: 1em;
+  padding-right: 1em;
+  margin: auto;
+  display: block;
+  width: 275px;
+}
+
+.cssload-loader {
+  width: 69px;
+  height: 69px;
+  border-radius: 50%;
+  margin: 4em;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+}
+
+.cssload-loader {
+  width: 69px;
+  height: 69px;
+  border-radius: 50%;
+  margin: 4em;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  background-color: darkorange;
+}
+.cssload-loader,
+.cssload-loader:before,
+.cssload-loader:after {
+  animation: 1.15s infinite ease-in-out;
+  -o-animation: 1.15s infinite ease-in-out;
+  -ms-animation: 1.15s infinite ease-in-out;
+  -webkit-animation: 1.15s infinite ease-in-out;
+  -moz-animation: 1.15s infinite ease-in-out;
+}
+.cssload-loader:before,
+.cssload-loader:after {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cssload-loader:before,
+.cssload-loader:after {
+  content: "";
+}
+
+.cssload-loader {
+  animation: cssload-animation 1.15s infinite linear;
+  -o-animation: cssload-animation 1.15s infinite linear;
+  -ms-animation: cssload-animation 1.15s infinite linear;
+  -webkit-animation: cssload-animation 1.15s infinite linear;
+  -moz-animation: cssload-animation 1.15s infinite linear;
+}
+
+
+
+@keyframes cssload-animation {
+  0% {	 transform: rotate(0deg); border-radius: 50%; }
+  50% {	transform: rotate(90deg); border-radius: 0%; }
+  100% { transform: rotate(180deg); border-radius: 50%; }
+}
+
+@-o-keyframes cssload-animation {
+  0% {	 -o-transform: rotate(0deg); border-radius: 50%; }
+  50% {	-o-transform: rotate(90deg); border-radius: 0%; }
+  100% { -o-transform: rotate(180deg); border-radius: 50%; }
+}
+
+@-ms-keyframes cssload-animation {
+  0% {	 -ms-transform: rotate(0deg); border-radius: 50%; }
+  50% {	-ms-transform: rotate(90deg); border-radius: 0%; }
+  100% { -ms-transform: rotate(180deg); border-radius: 50%; }
+}
+
+@-webkit-keyframes cssload-animation {
+  0% {	 -webkit-transform: rotate(0deg); border-radius: 50%; }
+  50% {	-webkit-transform: rotate(90deg); border-radius: 0%; }
+  100% { -webkit-transform: rotate(180deg); border-radius: 50%; }
+}
+
+@-moz-keyframes cssload-animation {
+  0% {	 -moz-transform: rotate(0deg); border-radius: 50%; }
+  50% {	-moz-transform: rotate(90deg); border-radius: 0%; }
+  100% { -moz-transform: rotate(180deg); border-radius: 50%; }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "websockets",
+  "version": "0.1.0",
+  "description": "Santiago Blanc - TP #6 Avanzada 2",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket.io": "^2.0.4"
+  }
+}

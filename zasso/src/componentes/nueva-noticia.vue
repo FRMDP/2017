@@ -1,0 +1,135 @@
+<template>
+<div class="noticia">
+  <div class="titulo">
+    <h1 class="title" id="title">
+       Redacción
+     </h1>
+  </div>
+  <div class="contenedor">
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field is-narrow">
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select v-model="New.reporter">
+                    <option selected disabled value="">Seleccione reportero</option>
+                    <option v-for="repos in listarepos" :value="repos._links.self.href">{{ repos.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <p class="control is-expanded has-icons-left">
+            <input class="input-redaccion" type="text" placeholder="Aqui escriba titulo de la Noticia" v-model="New.title">
+            <span class="icon is-small is-left">
+            <i class="fa fa-user"></i>
+          </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <textarea id="contenido" class="textarea-redaccion" placeholder="Aqui escriba el contenido de la Noticia" v-model="New.body"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field is-narrow">
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select v-model="New.category">
+                    <option selected disabled value="">Seleccione Categoria</option>
+                    <option v-for="cat in listacats" :value="cat._links.self.href">{{ cat.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="button" :disabled="!formOk" type="submit" @click.prevent="guardaNoticia">Subir Noticia</button>
+    <div v-show="mensaje=='guardado'" class="modal">
+      <div class="modal-content">
+        <button class="delete" @click="cerrarMensaje"></button>
+        <p>Noticia publicada</p>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<script>
+import storageService from '../services/storageService';
+import objNoticia from '../utils/objNoticia';
+export default {
+  name: 'nuevaNoticia',
+  data() {
+    return {
+      New: {
+        id: '',
+        title: '',
+        body: '',
+        category: '',
+        reporter: '',
+        date: ''
+      },
+      Noticia:'',
+      mensaje: false,
+      reporters: [],
+      categories: []
+    }
+  },
+  methods: {
+    guardaNoticia() {
+      const nowDate = new Date();
+      this.New.date = nowDate.getFullYear() + '-' + (nowDate.getMonth() + 1) + '-' + nowDate.getDate();
+      this.creaNoticia();
+      storageService.cargarNoticia(this.Noticia)
+        .then((response) => {
+          this.mensaje = 'guardado';
+        });
+    },
+    creaNoticia(){
+      this.Noticia.setTitle(this.New.title);
+      this.Noticia.setBody(this.New.body);
+      this.Noticia.setDate(this.New.date);
+      this.Noticia.setReporter(this.New.reporter);
+      this.Noticia.setCategory(this.New.category);
+    },
+    cerrarMensaje() {
+      this.mensaje = false;
+      this.$router.push('/news');
+    }
+  },
+
+  computed: {
+    listarepos() {
+      return this.reporters;
+    },
+    listacats() {
+      return this.categories;
+    },
+    formOk() {
+      return this.New.reporter && this.New.title && this.New.body && this.New.category;
+    }
+  },
+  created() {
+    storageService.traerCategorias()
+      .then((response) => {
+        this.categories = response.data._embedded.categories;
+      });
+    storageService.traerReporteros()
+      .then((response) => {
+        this.reporters = response.data._embedded.reporters;
+      });
+      this.Noticia = objNoticia.Noticia();
+  }
+}
+</script>

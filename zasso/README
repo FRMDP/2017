@@ -1,0 +1,2 @@
+Tincho el patron que use fue el revealing module
+El .js del objeto a encapsular (que seria noticia) esta en src/utils y es implementado tanto al crear una noticia como al ver una noticia puntual.

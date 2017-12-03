@@ -1,0 +1,11 @@
+{
+  "name": "factory_method",
+  "version": "1.0.0",
+  "description": "Un breve ejemplo de como implementar FactoryMethod, basado en archivos docx, xls y ppt que implementar la interfaz Document",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "Martin Liut",
+  "license": "ISC"
+}
